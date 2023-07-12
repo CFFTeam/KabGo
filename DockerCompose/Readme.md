@@ -1,0 +1,72 @@
+# Cấu trúc thư mục
+Các thư mục cấu hình codebase của các phân hệ nằm ngoài 1 cấp so với cấp thư mục của **"docker-compose.yml"** hay **"Readme.md"** ( **e.g: ../** ) 
+- Thư mục client chứa các phân hệ Client: Admin, Call Center.
+- Thư mục servers chứa các phân hệ API: Auth, Customer, Driver, Admin, Call Center.
+
+**Chi tiết**:
+- khi clone master phải clone branch master và branch docker-compose cùng 1 cấp với nhau.
+
+**Ví dụ cấu trúc cây:**
+- DockerCompose
+- clients
+- servers
+
+# Hướng dẫn sử dụng
+## Cài đặt các hosts cần thiết (Chỉ chạy lần đầu)
+Windows: 
+- Truy cập vào folder **"hosts/Windows"** chạy file add-entry-hosts.bat với quyền **Administrator**.
+
+MacOS:
+- Mở terminal tại thư mục chứa file **"docker-compose.yml"** sau đó sử dụng lệnh truy cập vào folder **"hosts/MacOS"** chạy file add-entry-hosts.sh với quyền **super user**.
+
+```shell
+chmod +x ./hosts/MacOS/add-entry-hosts.sh
+sudo ./hosts/MacOS/add-entry-hosts.sh
+```
+
+Linux:
+- Mở terminal tại thư mục chứa file **"docker-compose.yml"** sau đó sử dụng lệnh truy cập vào folder **"hosts/Linux"** chạy file add-entry-hosts.sh với quyền **super user**.
+
+```shell
+chmod +x ./hosts/Linux/add-entry-hosts.sh
+sudo ./hosts/Linux/add-entry-hosts.sh
+```
+
+#
+## Build docker compose (Chỉ chạy lần đầu).
+
+Windows: 
+```bash
+docker-compose up --build
+```
+
+MacOS và Linux:
+```shell
+sudo docker-compose up --build
+```
+#
+## Run docker (Ở những lần sau)
+Windows: 
+```bash
+docker-compose up
+```
+
+MacOS và Linux:
+```shell
+sudo docker-compose up
+```
+
+#
+## Nếu muốn clean để build lại docker
+
+Windows: 
+```bash
+docker system prune -a
+```
+
+MacOS và Linux: 
+```bash
+sudo docker system prune -a
+```
+
+Thực hiện build lại docker.

@@ -1,0 +1,163 @@
+version: "3"
+
+networks:
+  nw-api-auth: 
+    driver: bridge
+  nw-api-driver: 
+    driver: bridge
+  nw-api-customer:
+    driver: bridge
+  nw-api-admin:
+    driver: bridge
+  nw-api-call-center:
+    driver: bridge
+  nw-admin:
+    driver: bridge
+  nw-call-center:
+    driver: bridge
+
+services:
+  nginx: 
+    build: 
+      context: ./nginx
+    networks:
+      - nw-api-auth
+      - nw-api-driver
+      - nw-api-customer
+      - nw-api-admin
+      - nw-api-call-center
+      - nw-admin
+      - nw-call-center
+    hostname: nginx
+    container_name: kabgo-nginx-proxy
+    ports: 
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx
+    depends_on:
+      - api-auth
+      - api-driver
+      - api-customer
+      - api-admin
+      - api-call-center
+      - admin
+      - call-center
+
+  api-auth: 
+    build: 
+      context: ../servers/auth
+    networks:
+      - nw-api-auth
+    hostname: api.auth.kabgo.local
+    container_name: kabgo-auth
+    ports: 
+      - "4100:4100"
+    volumes:
+      - ../servers/auth:/usr/src/app
+    environment:
+      FORCE_COLOR: 1
+      DEBUG_COLORS: "true"
+      TERM: xterm-256color
+      COLORTERM: truecolor
+  
+  api-driver: 
+    build: 
+      context: ../servers/driver
+    networks:
+      - nw-api-driver
+    hostname: api.driver.kabgo.local
+    container_name: kabgo-driver
+    ports: 
+      - "4200:4200"
+    volumes:
+      - ../servers/driver:/usr/src/app
+    environment:
+      FORCE_COLOR: 1
+      DEBUG_COLORS: "true"
+      TERM: xterm-256color
+      COLORTERM: truecolor
+
+  api-customer: 
+    build: 
+      context: ../servers/customer
+    networks:
+      - nw-api-customer
+    hostname: api.customer.kabgo.local
+    container_name: kabgo-customer
+    ports: 
+      - "4300:4300"
+    volumes:
+      - ../servers/customer:/usr/src/app
+    environment:
+      FORCE_COLOR: 1
+      DEBUG_COLORS: "true"
+      TERM: xterm-256color
+      COLORTERM: truecolor
+  
+  api-admin: 
+    build: 
+      context: ../servers/admin
+    networks:
+      - nw-api-admin
+    hostname: api.admin.kabgo.local
+    container_name: kabgo-admin
+    ports: 
+      - "4400:4400"
+    volumes:
+      - ../servers/admin:/usr/src/app
+    environment:
+      FORCE_COLOR: 1
+      DEBUG_COLORS: "true"
+      TERM: xterm-256color
+      COLORTERM: truecolor
+
+  api-call-center: 
+    build: 
+      context: ../servers/call-center
+    networks:
+      - nw-api-call-center
+    hostname: api.call-center.kabgo.local
+    container_name: kabgo-call-center
+    ports: 
+      - "4500:4500"
+    volumes:
+      - ../servers/call-center:/usr/src/app
+    environment:
+      FORCE_COLOR: 1
+      DEBUG_COLORS: "true"
+      TERM: xterm-256color
+      COLORTERM: truecolor
+
+  admin: 
+    build: 
+      context: ../clients/admin
+    networks:
+      - nw-admin
+    hostname: admin.kabgo.local
+    container_name: kabgo-admin-client
+    ports: 
+      - "4410:4410"
+    volumes:
+      - ../clients/admin:/usr/src/app
+    environment:
+      FORCE_COLOR: 1
+      DEBUG_COLORS: "true"
+      TERM: xterm-256color
+      COLORTERM: truecolor
+
+  call-center: 
+    build: 
+      context: ../clients/call-center
+    networks:
+      - nw-call-center
+    hostname: call-center.kabgo.local
+    container_name: kabgo-call-center-client
+    ports: 
+      - "4510:4510"
+    volumes:
+      - ../clients/call-center:/usr/src/app
+    environment:
+      FORCE_COLOR: 1
+      DEBUG_COLORS: "true"
+      TERM: xterm-256color
+      COLORTERM: truecolor
