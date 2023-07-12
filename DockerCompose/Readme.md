@@ -1,5 +1,4 @@
 ## LƯU Ý KHI SỬ DỤNG DOCKER COMPOSE VOLUME CẦN PHẢI VÀO TỪNG FOLDER CLIENTS, SERVERS VÀ INSTALL PACKAGES NPM HAY NPM INSTALL ĐỂ CÓ THỂ CHẠY.
-#
 # Cấu trúc thư mục
 Các thư mục cấu hình codebase của các phân hệ nằm ngoài 1 cấp tại thư mục KabGo so với cấp thư mục của **"docker-compose.yml"** hay **"Readme.md"** ( **e.g: ../KabGo/** ) 
 - Thư mục client chứa các phân hệ Client: Admin, Call Center.
