@@ -1,5 +1,5 @@
 # Cấu trúc thư mục
-Các thư mục cấu hình codebase của các phân hệ nằm ngoài 1 cấp tại thư mục workspaces so với cấp thư mục của **"docker-compose.yml"** hay **"Readme.md"** ( **e.g: ../workspaces/** ) 
+Các thư mục cấu hình codebase của các phân hệ nằm ngoài 1 cấp tại thư mục KabGo so với cấp thư mục của **"docker-compose.yml"** hay **"Readme.md"** ( **e.g: ../KabGo/** ) 
 - Thư mục client chứa các phân hệ Client: Admin, Call Center.
 - Thư mục servers chứa các phân hệ API: Auth, Customer, Driver, Admin, Call Center.
 
@@ -8,8 +8,8 @@ Các thư mục cấu hình codebase của các phân hệ nằm ngoài 1 cấp 
 
 **Ví dụ cấu trúc cây:**
 - DockerCompose
-- workspaces/clients
-- workspaces/servers
+- KabGo/clients
+- KabGo/servers
 
 # Hướng dẫn sử dụng
 ## Cài đặt các hosts cần thiết (Chỉ chạy lần đầu)

@@ -45,7 +45,7 @@ services:
 
   api-auth: 
     build: 
-      context: ../servers/auth
+      context: ../KabGo/servers/auth
     networks:
       - nw-api-auth
     hostname: api.auth.kabgo.local
@@ -53,7 +53,7 @@ services:
     ports: 
       - "4100:4100"
     volumes:
-      - ../servers/auth:/usr/src/app
+      - ../KabGo/servers/auth:/usr/src/app
     environment:
       FORCE_COLOR: 1
       DEBUG_COLORS: "true"
@@ -62,7 +62,7 @@ services:
   
   api-driver: 
     build: 
-      context: ../servers/driver
+      context: ../KabGo/servers/driver
     networks:
       - nw-api-driver
     hostname: api.driver.kabgo.local
@@ -70,7 +70,7 @@ services:
     ports: 
       - "4200:4200"
     volumes:
-      - ../servers/driver:/usr/src/app
+      - ../KabGo/servers/driver:/usr/src/app
     environment:
       FORCE_COLOR: 1
       DEBUG_COLORS: "true"
@@ -79,7 +79,7 @@ services:
 
   api-customer: 
     build: 
-      context: ../servers/customer
+      context: ../KabGo/servers/customer
     networks:
       - nw-api-customer
     hostname: api.customer.kabgo.local
@@ -87,7 +87,7 @@ services:
     ports: 
       - "4300:4300"
     volumes:
-      - ../servers/customer:/usr/src/app
+      - ../KabGo/servers/customer:/usr/src/app
     environment:
       FORCE_COLOR: 1
       DEBUG_COLORS: "true"
@@ -96,7 +96,7 @@ services:
   
   api-admin: 
     build: 
-      context: ../servers/admin
+      context: ../KabGo/servers/admin
     networks:
       - nw-api-admin
     hostname: api.admin.kabgo.local
@@ -104,7 +104,7 @@ services:
     ports: 
       - "4400:4400"
     volumes:
-      - ../servers/admin:/usr/src/app
+      - ../KabGo/servers/admin:/usr/src/app
     environment:
       FORCE_COLOR: 1
       DEBUG_COLORS: "true"
@@ -113,7 +113,7 @@ services:
 
   api-call-center: 
     build: 
-      context: ../servers/call-center
+      context: ../KabGo/servers/call-center
     networks:
       - nw-api-call-center
     hostname: api.call-center.kabgo.local
@@ -121,7 +121,7 @@ services:
     ports: 
       - "4500:4500"
     volumes:
-      - ../servers/call-center:/usr/src/app
+      - ../KabGo/servers/call-center:/usr/src/app
     environment:
       FORCE_COLOR: 1
       DEBUG_COLORS: "true"
@@ -130,7 +130,7 @@ services:
 
   admin: 
     build: 
-      context: ../clients/admin
+      context: ../KabGo/clients/admin
     networks:
       - nw-admin
     hostname: admin.kabgo.local
@@ -138,7 +138,7 @@ services:
     ports: 
       - "4410:4410"
     volumes:
-      - ../clients/admin:/usr/src/app
+      - ../KabGo/clients/admin:/usr/src/app
     environment:
       FORCE_COLOR: 1
       DEBUG_COLORS: "true"
@@ -147,7 +147,7 @@ services:
 
   call-center: 
     build: 
-      context: ../clients/call-center
+      context: ../KabGo/clients/call-center
     networks:
       - nw-call-center
     hostname: call-center.kabgo.local
@@ -155,7 +155,7 @@ services:
     ports: 
       - "4510:4510"
     volumes:
-      - ../clients/call-center:/usr/src/app
+      - ../KabGo/clients/call-center:/usr/src/app
     environment:
       FORCE_COLOR: 1
       DEBUG_COLORS: "true"
