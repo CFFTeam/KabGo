@@ -1,0 +1,2 @@
+[API.Customer][Wed, 12 Jul 2023 16:59:01 GMT] GET 200 /status 55 - 1.503 ms
+[API.Customer][Wed, 12 Jul 2023 16:59:01 GMT] GET 404 /favicon.ico 150 - 1.351 ms

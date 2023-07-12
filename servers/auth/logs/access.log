@@ -9,3 +9,5 @@
 [API.Authentication][Wed, 12 Jul 2023 16:05:42 GMT] GET 404 / 139 - 3.393 ms
 [API.Authentication][Wed, 12 Jul 2023 16:05:46 GMT] GET 404 /login 144 - 0.449 ms
 [API.Authentication][Wed, 12 Jul 2023 16:05:51 GMT] GET 200 /user/login 10 - 1.801 ms
+[API.Authentication][Wed, 12 Jul 2023 16:58:34 GMT] GET 200 /status 55 - 1.623 ms
+[API.Authentication][Wed, 12 Jul 2023 16:58:39 GMT] GET 304 /status - - 0.425 ms
