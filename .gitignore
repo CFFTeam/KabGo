@@ -1,0 +1,6 @@
+workspaces/*
+workspaces/
+workspaces
+./workspaces/*
+./workspaces/
+./workspaces
