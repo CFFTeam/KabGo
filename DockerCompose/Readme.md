@@ -1,16 +1,19 @@
+# LƯU Ý KHI SỬ DỤNG DOCKER COMPOSE VOLUME CẦN PHẢI VÀO TỪNG FOLDER CLIENTS, SERVERS VÀ INSTALL PACKAGES NPM HAY NPM INSTALL ĐỂ CÓ THỂ CHẠY.
+#
 # Cấu trúc thư mục
 Các thư mục cấu hình codebase của các phân hệ nằm ngoài 1 cấp tại thư mục KabGo so với cấp thư mục của **"docker-compose.yml"** hay **"Readme.md"** ( **e.g: ../KabGo/** ) 
 - Thư mục client chứa các phân hệ Client: Admin, Call Center.
 - Thư mục servers chứa các phân hệ API: Auth, Customer, Driver, Admin, Call Center.
 
 **Chi tiết**:
-- khi clone master phải clone branch master và branch docker-compose cùng 1 cấp với nhau.
+- khi clone phải clone branch master nằm trong folder KabGo của branch docker-composes.
+- Hay Clone branch docker-composes trước rồi vào folder KabGo của branch docker-composes (nơi chứa thư mục DockerCompose) rồi clone tiếp branch master.
 
 **Ví dụ cấu trúc cây:**
 - DockerCompose
 - KabGo/clients
 - KabGo/servers
-
+#
 # Hướng dẫn sử dụng
 ## Cài đặt các hosts cần thiết (Chỉ chạy lần đầu)
 Windows: 
