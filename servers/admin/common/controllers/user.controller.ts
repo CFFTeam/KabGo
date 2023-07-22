@@ -8,7 +8,6 @@ class UserController implements Controller {
     constructor() {
         this.router.get('/login', this.login)
         this.router.get('/logout', this.logout);
-        this.router.get('/getdata', this.getData);
 
     }
 
