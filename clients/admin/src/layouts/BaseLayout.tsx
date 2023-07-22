@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Navbar from '@components/Navbar';
 import Footer from '@components/Footer';
 
-const BaseLayout = () => {
+const BaseLayout: React.FC = () => {
     return <React.Fragment>
         <Navbar />
         <Outlet />

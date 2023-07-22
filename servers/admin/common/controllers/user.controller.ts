@@ -6,13 +6,21 @@ class UserController implements Controller {
     router: Router = Router();
 
     constructor() {
-        this.router.get('/login', (req, res, next) => {
-            res.send('Login page');
-            next();
-        });
+        this.router.get('/login', this.login)
+        this.router.get('/logout', this.logout);
+        this.router.get('/getdata', this.getData);
+
     }
 
     private login = (req: Request, res: Response, next: NextFunction) => {
+        next();
+    };
+
+    private logout = (req: Request, res: Response, next: NextFunction) => {
+        next();
+    };
+
+    private getData = (req: Request, res: Response, next: NextFunction) => {
         next();
     };
 }

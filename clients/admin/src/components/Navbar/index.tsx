@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
     return (
         <nav>
-            Navbar
+            <b>Navbar</b>
         </nav>
     );
 }

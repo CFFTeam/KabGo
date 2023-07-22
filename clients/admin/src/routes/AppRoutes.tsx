@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import BaseLayout from "@layouts/BaseLayout";
 
-const AppRoutes = () => {
+const AppRoutes: React.FC = () => {
     return (
         <Routes>
             <Route element={<BaseLayout />}>
