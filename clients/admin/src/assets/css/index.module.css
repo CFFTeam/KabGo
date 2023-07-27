@@ -1,0 +1,16 @@
+.base-layout-container{
+    display: flex;
+}
+
+.content-container{
+    width: 100%;
+    background: #F9F9F9;
+}
+
+/* .test path{
+    fill: black;
+}
+
+.test{
+    font-size: 5rem;
+} */
