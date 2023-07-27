@@ -4,7 +4,8 @@
 
 .content-container{
     width: 100%;
-    background: #F9F9F9;
+    background: pink;
+    padding: 1rem 2rem;
 }
 
 /* .test path{
