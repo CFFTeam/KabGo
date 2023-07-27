@@ -1,0 +1,48 @@
+.dashboard-container{
+    margin-top: 1.5rem ;
+}
+
+.category-container{
+    width: 100%;
+    height: 14rem;
+    background: white;
+    border-radius: 0.8rem;
+    display: flex;
+    gap: 2.5rem;
+    padding: 0 2.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.category{
+    width: 25%;
+    height: 80%;
+    background: #6445C2;
+    border-radius: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+}
+
+.category-info{
+    text-align: left;
+    margin-top: 0.2rem;
+}
+
+.category-name{
+    font-size: 3.2rem;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.category-role{
+    font-size: 1.4rem;
+    color: #F3F3F3;
+    padding-top: 0.4rem;
+}
+
+.category-img{
+    margin-top: 0.5rem;
+}
+
