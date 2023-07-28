@@ -1,13 +1,19 @@
 import React from "react";
 import styles from "../../assets/css/dashboard.module.css";
-import { ReactComponent as User } from "../../assets/svg/Dashboard/user.svg";
-import { ReactComponent as Driver } from "../../assets/svg/Dashboard/driver.svg";
-import { ReactComponent as Trip } from "../../assets/svg/Dashboard/trip.svg";
-import { ReactComponent as CanceledTrip } from "../../assets/svg/Dashboard/canceledtrip.svg";
 import Category from "./Category";
-
+import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
+import { dashboardActions } from "@store/dashboard";
+import { useEffect } from "react";
+// import axios from 'axios'
 
 const Dashboard: React.FC = () => {
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    //axios.get<datatype>(...)
+    const statistics: number[] = [2.152, 1.135, 618, 83]
+    dispatch(dashboardActions.updateCategoryData(statistics))
+  }, []);
+
   return (
     <div className={styles["dashboard-container"]}>
       <Category />

@@ -21,8 +21,8 @@
     border-radius: 0.8rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 4rem;
+    justify-content: space-between;
+    padding: 0 4.5rem;
 }
 
 .category-info{
@@ -40,9 +40,10 @@
     font-size: 1.4rem;
     color: #F3F3F3;
     padding-top: 0.4rem;
+    font-weight: 600;
 }
 
 .category-img{
-    margin-top: 0.5rem;
+    margin-top: 1rem;
 }
 
