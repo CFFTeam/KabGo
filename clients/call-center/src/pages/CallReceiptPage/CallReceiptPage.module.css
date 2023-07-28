@@ -1,9 +1,13 @@
 .container {
-    position: fixed;
     background-color: #262626;
-    height: 100%;
     width: 100%;
 }
+
+.container > .body-content {
+    margin-top: 4rem;
+}
+
+
 .container > .heading {
     display: flex;
     flex-direction: column;
@@ -16,4 +20,15 @@
     color: #F86C1D;
     font-size: 2.4rem;
     font-weight: bold;
+}
+
+.container > .body-content > .call-receipt-and-most-visited-address {
+    display: flex;
+    gap: 3.6rem;
+}
+
+
+.container > .body-content > .latest-booking {
+    margin-top: 4rem;
+    margin-left: 4rem;
 }

@@ -1,5 +1,8 @@
 import styles from './CallReceiptPage.module.css';
 import {ReactComponent as Logo} from '@assets/svg/CallReceipt/logo.svg';
+import CallReceiptForm from "@components/CallReceipt/CallReceiptForm/CallReceiptForm";
+import MostVisitedAddressForm from '@components/CallReceipt/MostVisitedAddressForm/MostVisitedAddressForm';
+import LatestBookingForm from "@components/CallReceipt/LatestBookingForm/LatestBookingForm";
 
 const CallReceiptPage: React.FC = () => {
     return <div className={styles["container"]}>
@@ -9,6 +12,15 @@ const CallReceiptPage: React.FC = () => {
             </span>
             <div className={styles["logo"]}>
                 <Logo/>
+            </div>
+        </div>
+        <div className={styles["body-content"]}>
+            <div className={styles["call-receipt-and-most-visited-address"]}>
+                <CallReceiptForm/>
+                <MostVisitedAddressForm/>
+            </div>
+            <div className={styles["latest-booking"]}>
+                <LatestBookingForm/>
             </div>
         </div>
     </div>
