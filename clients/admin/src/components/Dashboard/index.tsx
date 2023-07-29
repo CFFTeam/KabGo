@@ -1,11 +1,14 @@
 import React from "react";
 import styles from "../../assets/css/dashboard.module.css";
 import Category from "./Category";
+import Chart from"./Chart";
+import Tasklist from "./Tasklist";
+import TopKPI from "./TopKPI";
+import BoardMeeting from "./BoardMeeting";
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import { dashboardActions } from "@store/dashboard";
 import { useEffect } from "react";
 import axios from "axios";
-import toast, { Toaster } from 'react-hot-toast';
 
 const Dashboard: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +21,14 @@ const Dashboard: React.FC = () => {
   return (
     <div className={styles["dashboard-container"]}>
       <Category />
-      <Toaster position="top-right"/>
+      <div className={styles["middle-container"]}>
+        <Chart />
+        <Tasklist />
+      </div>
+      <div className={styles["last-container"]}>
+        <TopKPI />
+        <BoardMeeting />
+      </div>
     </div>
   );
 };

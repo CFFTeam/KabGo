@@ -6,20 +6,20 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const Category: React.FC = () => {
   const categoryData = useAppSelector((state) => state.dashboard.categoryData);
-  const notify = () => {
-    toast.success('Tạo tài khoản thành công', {
-      style: {
-        border: '2px solid #28a745',
-        padding: '10px',
-      },
-    });
-    toast.error('Tạo tài khoản thất bại', {
-      style: {
-        border: '2px solid #dc3545',
-        padding: '10px',
-      },
-    });
-  };
+  // const notify = () => {
+  //   toast.success('Tạo tài khoản thành công', {
+  //     style: {
+  //       border: '2px solid #28a745',
+  //       padding: '10px',
+  //     },
+  //   });
+  //   toast.error('Tạo tài khoản thất bại', {
+  //     style: {
+  //       border: '2px solid #dc3545',
+  //       padding: '10px',
+  //     },
+  //   });
+  // };
   return (
     <div className={styles["category-container"]}>
       {/* <BeatLoader color="#F86C1D" margin={2}  size={12} speedMultiplier={0.5} /> */}
