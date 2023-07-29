@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "@components/Navbar";
 import Sidebar from "@components/Sidebar";
 import styles from "../assets/css/layout.module.css";
+import { ToastContainer } from "react-toastify";
 
 const BaseLayout: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const BaseLayout: React.FC = () => {
         <Navbar />
         <Outlet />
       </div>
+      <ToastContainer />
     </div>
   );
 };

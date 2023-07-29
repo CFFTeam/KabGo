@@ -4,19 +4,21 @@ import Category from "./Category";
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import { dashboardActions } from "@store/dashboard";
 import { useEffect } from "react";
-// import axios from 'axios'
+import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Dashboard: React.FC = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   useEffect(() => {
     //axios.get<datatype>(...)
-    const statistics: number[] = [2.152, 1.135, 618, 83]
-    dispatch(dashboardActions.updateCategoryData(statistics))
+    const statistics: number[] = [2.152, 1.135, 618, 83];
+    dispatch(dashboardActions.updateCategoryData(statistics));
   }, []);
 
   return (
     <div className={styles["dashboard-container"]}>
       <Category />
+      <Toaster position="top-right"/>
     </div>
   );
 };
