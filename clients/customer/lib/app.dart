@@ -1,3 +1,4 @@
+import 'package:customer_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -5,11 +6,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Center(
-        child: Text('Customer App!'),
-      ),
+      home: HomeScreen(),
     );
   }
 }

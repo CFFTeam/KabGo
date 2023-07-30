@@ -7,12 +7,12 @@ import Red from "../assets/svg/Dashboard/red.svg";
 import Purple from "../assets/svg/Dashboard/purple.svg";
 import Green from "../assets/svg/Dashboard/green.svg";
 import Yellow from "../assets/svg/Dashboard/yellow.svg";
-import KhangImg from "../assets/svg/Dashboard/khangimg.svg"
-import KhangMedal from "../assets/svg/Dashboard/khangmedal.svg"
-import KhoaImg from "../assets/svg/Dashboard/khoaimg.svg"
-import KhoaMedal from "../assets/svg/Dashboard/khoamedal.svg"
-import MinhImg from "../assets/svg/Dashboard/minhimg.svg"
-import MinhMedal from "../assets/svg/Dashboard/minhmedal.svg"
+import KhangImg from "../assets/svg/Dashboard/khangimg.svg";
+import KhangMedal from "../assets/svg/Dashboard/khangmedal.svg";
+import KhoaImg from "../assets/svg/Dashboard/khoaimg.svg";
+import KhoaMedal from "../assets/svg/Dashboard/khoamedal.svg";
+import MinhImg from "../assets/svg/Dashboard/minhimg.svg";
+import MinhMedal from "../assets/svg/Dashboard/minhmedal.svg";
 import { log } from "console";
 interface CategoryData {
   number: number;
@@ -21,7 +21,7 @@ interface CategoryData {
   color: string;
 }
 
-interface TasklistChild{
+interface TasklistChild {
   name: string;
   date: string;
   img: string;
@@ -29,10 +29,10 @@ interface TasklistChild{
 }
 interface TasklistData {
   numberOfTasks: number;
-  tasklistChild: TasklistChild[]
+  tasklistChild: TasklistChild[];
 }
 
-interface TopKpiData{
+interface TopKpiData {
   img: string;
   name: string;
   role: string;
@@ -73,34 +73,34 @@ const initialDashboardState: initialDashboardState = {
     },
   ],
 
-  tasklistData:{
+  tasklistData: {
     numberOfTasks: 4,
     tasklistChild: [
       {
         name: "Thống kê doanh thu",
         date: "02 / 07 - 22h30",
         img: Purple,
-        check: false
+        check: false,
       },
       {
         name: "Thêm task mới",
         date: "03 / 07 - 23h59",
         img: Green,
-        check: false
+        check: false,
       },
       {
         name: "Kiểm tra hóa đơn",
         date: "04 / 07 - 23h59",
         img: Yellow,
-        check: false
+        check: false,
       },
       {
         name: "Thống kê số giờ làm việc",
         date: "05 / 07 - 23h59",
         img: Red,
-        check: false
+        check: false,
       },
-    ]
+    ],
   },
 
   topKpiData: [
@@ -108,21 +108,21 @@ const initialDashboardState: initialDashboardState = {
       img: KhangImg,
       name: "Đinh Nguyễn Duy Khang",
       role: "Task Manager",
-      medal: KhangMedal
+      medal: KhangMedal,
     },
     {
       img: KhoaImg,
       name: "Nguyễn Thoại Đăng Khoa",
       role: "Income Manager",
-      medal: KhoaMedal
+      medal: KhoaMedal,
     },
     {
       img: MinhImg,
       name: "Nguyễn Đức Minh",
       role: "IT Manager",
-      medal: MinhMedal
-    }
-  ]
+      medal: MinhMedal,
+    },
+  ],
 };
 
 const dashboardSlice = createSlice({
@@ -130,18 +130,24 @@ const dashboardSlice = createSlice({
   initialState: initialDashboardState,
   reducers: {
     updateCategoryData(state, action: PayloadAction<number[]>) {
-      for(let i=0; i<state.categoryData.length; i++){
+      for (let i = 0; i < state.categoryData.length; i++) {
         state.categoryData[i].number = action.payload[i];
       }
     },
     updateTasklistData(state, action: PayloadAction<number>) {
-      state.tasklistData.tasklistChild[action.payload].check = !state.tasklistData.tasklistChild[action.payload].check;
-      if(state.tasklistData.tasklistChild[action.payload].check){
-        state.tasklistData.tasklistChild.push(state.tasklistData.tasklistChild.splice(action.payload, 1)[0]);
-      }else{
-        state.tasklistData.tasklistChild.unshift(state.tasklistData.tasklistChild.splice(action.payload, 1)[0]);
+      state.tasklistData.tasklistChild[action.payload].check =
+        !state.tasklistData.tasklistChild[action.payload].check;
+      if (state.tasklistData.tasklistChild[action.payload].check) {
+        state.tasklistData.tasklistChild.push(
+          state.tasklistData.tasklistChild.splice(action.payload, 1)[0]
+        );
+      } else {
+        state.tasklistData.tasklistChild.unshift(
+          state.tasklistData.tasklistChild.splice(action.payload, 1)[0]
+        );
       }
-      state.tasklistData.numberOfTasks=state.tasklistData.tasklistChild.filter(data => !data.check).length;
+      state.tasklistData.numberOfTasks =
+        state.tasklistData.tasklistChild.filter((data) => !data.check).length;
     },
   },
 });
