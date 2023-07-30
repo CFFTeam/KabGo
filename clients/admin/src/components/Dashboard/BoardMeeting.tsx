@@ -6,7 +6,6 @@ import toast, { Toaster } from "react-hot-toast";
 import { ReactComponent as InfoBoardMeeting } from "../../assets/svg/Dashboard/infoboardmeeting.svg";
 import { ReactComponent as BoardMeetingActive } from "../../assets/svg/Dashboard/boardmeetingactive.svg";
 
-
 const BoardMeeting: React.FC = () => {
   //   const categoryData = useAppSelector((state) => state.dashboard.categoryData);
 
@@ -17,12 +16,15 @@ const BoardMeeting: React.FC = () => {
         <InfoBoardMeeting />
       </div>
       <div className={styles["boardmeeting-time"]}>
-        <span className={styles["boardmeeting-time-bold"]}>8h30 AM </span> - T.6 Ngày 14 tháng 07
+        <span className={styles["boardmeeting-time-bold"]}>8h30 AM </span> - T.6
+        Ngày 14 tháng 07
       </div>
       <div className={styles["boardmeeting-active"]}>
         <BoardMeetingActive />
       </div>
-      <div className={styles["boardmeeting-content"]}>Bạn được mời tham dự buổi họp hội đồng sắp đến qua Google Meet.</div>
+      <div className={styles["boardmeeting-content"]}>
+        Bạn được mời tham dự buổi họp hội đồng sắp đến qua Google Meet.
+      </div>
     </div>
   );
 };

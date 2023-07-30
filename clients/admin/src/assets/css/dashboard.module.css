@@ -177,6 +177,14 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 0.3rem;
+    position: relative;
+}
+
+.content-title-checkbox{
+    width: 2.4rem;
+    height: 2.4rem;
+    background:aqua;
+    border: 1px solid #F86C1D;
 }
 
 .content-title-text{
@@ -203,8 +211,13 @@
     margin-top: 1.5rem;
 }
 
-.tick:hover circle{
+.tasklist-tick:hover circle{
     fill: #F86C1D;
+    cursor: pointer;
+}
+
+.tasklist-untick:hover circle{
+    fill: #fae8df;
     cursor: pointer;
 }
 

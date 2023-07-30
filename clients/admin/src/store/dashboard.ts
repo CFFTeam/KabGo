@@ -13,6 +13,7 @@ import KhoaImg from "../assets/svg/Dashboard/khoaimg.svg"
 import KhoaMedal from "../assets/svg/Dashboard/khoamedal.svg"
 import MinhImg from "../assets/svg/Dashboard/minhimg.svg"
 import MinhMedal from "../assets/svg/Dashboard/minhmedal.svg"
+import { log } from "console";
 interface CategoryData {
   number: number;
   name: string;
@@ -20,10 +21,15 @@ interface CategoryData {
   color: string;
 }
 
-interface TasklistData {
+interface TasklistChild{
   name: string;
   date: string;
   img: string;
+  check: boolean;
+}
+interface TasklistData {
+  numberOfTasks: number;
+  tasklistChild: TasklistChild[]
 }
 
 interface TopKpiData{
@@ -35,7 +41,7 @@ interface TopKpiData{
 
 interface initialDashboardState {
   categoryData: CategoryData[];
-  tasklistData: TasklistData[];
+  tasklistData: TasklistData;
   topKpiData: TopKpiData[];
 }
 
@@ -67,28 +73,35 @@ const initialDashboardState: initialDashboardState = {
     },
   ],
 
-  tasklistData:[
-    {
-      name: "Thống kê doanh thu",
-      date: "02 / 07 - 22h30",
-      img: Purple
-    },
-    {
-      name: "Thêm task mới",
-      date: "03 / 07 - 23h59",
-      img: Green
-    },
-    {
-      name: "Kiểm tra hóa đơn",
-      date: "04 / 07 - 23h59",
-      img: Yellow
-    },
-    {
-      name: "Thống kê số giờ làm việc",
-      date: "05 / 07 - 23h59",
-      img: Red
-    },
-  ],
+  tasklistData:{
+    numberOfTasks: 4,
+    tasklistChild: [
+      {
+        name: "Thống kê doanh thu",
+        date: "02 / 07 - 22h30",
+        img: Purple,
+        check: false
+      },
+      {
+        name: "Thêm task mới",
+        date: "03 / 07 - 23h59",
+        img: Green,
+        check: false
+      },
+      {
+        name: "Kiểm tra hóa đơn",
+        date: "04 / 07 - 23h59",
+        img: Yellow,
+        check: false
+      },
+      {
+        name: "Thống kê số giờ làm việc",
+        date: "05 / 07 - 23h59",
+        img: Red,
+        check: false
+      },
+    ]
+  },
 
   topKpiData: [
     {
@@ -120,6 +133,15 @@ const dashboardSlice = createSlice({
       for(let i=0; i<state.categoryData.length; i++){
         state.categoryData[i].number = action.payload[i];
       }
+    },
+    updateTasklistData(state, action: PayloadAction<number>) {
+      state.tasklistData.tasklistChild[action.payload].check = !state.tasklistData.tasklistChild[action.payload].check;
+      if(state.tasklistData.tasklistChild[action.payload].check){
+        state.tasklistData.tasklistChild.push(state.tasklistData.tasklistChild.splice(action.payload, 1)[0]);
+      }else{
+        state.tasklistData.tasklistChild.unshift(state.tasklistData.tasklistChild.splice(action.payload, 1)[0]);
+      }
+      state.tasklistData.numberOfTasks=state.tasklistData.tasklistChild.filter(data => !data.check).length;
     },
   },
 });
