@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "725272202247",
+    "project_id": "kabgorelease",
+    "storage_bucket": "kabgorelease.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:725272202247:android:e31a2068000ab941fbaea2",
+        "android_client_info": {
+          "package_name": "com.example.driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "725272202247-j59mkh77facksubia3na3dbuhu02u4q8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD3djO1oPAntyXAU4sfRt4VtmTEngz9hUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "725272202247-db4krra847di0r5k5kqkgttjtm2p9p6l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
