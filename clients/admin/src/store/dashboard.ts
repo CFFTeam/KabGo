@@ -7,7 +7,12 @@ import Red from "../assets/svg/Dashboard/red.svg";
 import Purple from "../assets/svg/Dashboard/purple.svg";
 import Green from "../assets/svg/Dashboard/green.svg";
 import Yellow from "../assets/svg/Dashboard/yellow.svg";
-
+import KhangImg from "../assets/svg/Dashboard/khangimg.svg"
+import KhangMedal from "../assets/svg/Dashboard/khangmedal.svg"
+import KhoaImg from "../assets/svg/Dashboard/khoaimg.svg"
+import KhoaMedal from "../assets/svg/Dashboard/khoamedal.svg"
+import MinhImg from "../assets/svg/Dashboard/minhimg.svg"
+import MinhMedal from "../assets/svg/Dashboard/minhmedal.svg"
 interface CategoryData {
   number: number;
   name: string;
@@ -21,9 +26,17 @@ interface TasklistData {
   img: string;
 }
 
+interface TopKpiData{
+  img: string;
+  name: string;
+  role: string;
+  medal: string;
+}
+
 interface initialDashboardState {
   categoryData: CategoryData[];
   tasklistData: TasklistData[];
+  topKpiData: TopKpiData[];
 }
 
 const initialDashboardState: initialDashboardState = {
@@ -75,6 +88,27 @@ const initialDashboardState: initialDashboardState = {
       date: "05 / 07 - 23h59",
       img: Red
     },
+  ],
+
+  topKpiData: [
+    {
+      img: KhangImg,
+      name: "Đinh Nguyễn Duy Khang",
+      role: "Task Manager",
+      medal: KhangMedal
+    },
+    {
+      img: KhoaImg,
+      name: "Nguyễn Thoại Đăng Khoa",
+      role: "Income Manager",
+      medal: KhoaMedal
+    },
+    {
+      img: MinhImg,
+      name: "Nguyễn Đức Minh",
+      role: "IT Manager",
+      medal: MinhMedal
+    }
   ]
 };
 

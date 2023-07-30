@@ -14,7 +14,7 @@ const Tasklist: React.FC = () => {
       <div className={styles["number-tasks"]}>4 tasks</div>
       <div className={styles["tasks-container"]}>
         {tasklistData.map((data, index) => (
-          <div className={styles["tasks"]}>
+          <div className={styles["tasks"]} key={index}>
             <img src={data.img} />
             <div className={styles["content"]}>
               <div className={styles["content-title"]}>

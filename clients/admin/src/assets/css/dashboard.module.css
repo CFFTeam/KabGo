@@ -212,6 +212,47 @@
     background: white;
     border-radius: 0.8rem;
     border: 1px solid #F0F0F0;
+    padding: 2rem 3rem;
+}
+
+.topkpi-title{
+    font-size: 2rem;
+    font-weight: 600;
+    color: #434343;
+}
+
+.topkpi-content-container{
+    height: 60%;
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.topkpi-content{
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.15rem;
+}
+
+.topkpi-name-role-container{
+    margin: 0;
+}
+
+.topkpi-name{
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: black;
+    margin-top: 0.25rem;
+}
+
+.topkpi-role{
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #818181;
+    margin-top: 0.55rem;
 }
 
 .boardmeeting-container{
