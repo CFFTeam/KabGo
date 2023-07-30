@@ -1,4 +1,7 @@
 import styles from './CallReceiptForm.module.css';
+import {ReactComponent as SunIcon} from "@assets/svg/CallReceipt/sun.svg";
+import {ReactComponent as MoonIcon} from "@assets/svg/CallReceipt/moon.svg";
+
 
 const CallReceiptForm: React.FC = () => {
     return <form className={styles["call-receipt-form"]}>
@@ -53,7 +56,7 @@ const CallReceiptForm: React.FC = () => {
                             Hẹn giờ (chỉ dành cho KH VIP)
                         </span>
                     </label>
-                    <div className = {styles["pick-up-time"]} style = {{display: 'flex', gap: "1rem", backgroundColor: "red"}}>
+                    <div className = {styles["pick-up-time"]} style = {{display: 'flex', gap: "1rem"}}>
                         <input placeholder = "HH" style = {{fontFamily: 'Montserrat', width: "6.5rem", borderRadius: "8px", border: "1px solid #ced4da", backgroundColor: '#e9ecef', height: "1rem", padding: "1.8rem", outline: 'none'}}>
                         </input>
                         <span style = {{fontWeight: 600, fontSize: "2.5rem"}}>
@@ -61,6 +64,15 @@ const CallReceiptForm: React.FC = () => {
                         </span>
                         <input placeholder = "MM" style = {{fontFamily: 'Montserrat', width: "8rem", borderRadius: "8px", border: "1px solid #ced4da", backgroundColor: '#e9ecef', height: "1rem", padding: "1.8rem", outline: 'none'}}>
                         </input>
+
+                        <input id = "hidden-check-box" className="hidden-check-box" type = "checkbox" hidden>
+                        </input>
+                        <label htmlFor = "hidden-check-box" className={styles["day-night-toggle-btn"]} >
+                            <span className={styles["circle"]}>
+                            </span>
+                           <SunIcon className = {styles["sun-icon"]}/>
+                           <MoonIcon className = {styles["moon-icon"]}/>
+                        </label>
                     </div>
                     
                 </div>

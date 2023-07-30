@@ -12,7 +12,7 @@ const CallReceiptPage: React.FC = () => {
             </span>
             <div className={styles["logo"]}>
                 <Logo/>
-            </div>
+            </div>≠
         </div>
         <div className={styles["body-content"]}>
             <div className={styles["call-receipt-and-most-visited-address"]}>

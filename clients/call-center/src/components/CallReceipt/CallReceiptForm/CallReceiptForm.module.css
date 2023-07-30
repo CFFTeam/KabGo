@@ -104,7 +104,6 @@ form.call-receipt-form  > div.form-body > div.forward-btn {
     height: 2rem;
     margin-top: -1rem;
     display: block;
-    background-color: black;
     text-align: center;
 }
 
@@ -126,4 +125,79 @@ form.call-receipt-form  > div.form-body > div.forward-btn > button:hover {
     color: #E67700;
     background-color: #fff;
     cursor: pointer;
+}
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > label.day-night-toggle-btn {
+    background-color: aqua;
+}
+
+/* default effect */
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > label.day-night-toggle-btn > span.circle {
+    right: 0;
+    margin-right: 0.6rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > label.day-night-toggle-btn > .sun-icon {
+    margin-left: 0.6rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 2.8rem;
+    display: block;
+}
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > label.day-night-toggle-btn > .moon-icon {
+    right: 0;
+    margin-right: 0.2rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+    height: 3rem;
+}
+
+
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > label.day-night-toggle-btn {
+    background-color: #F76707;
+    margin-left: 1rem;
+    width: 10rem;
+    border-radius: 24px;
+    position: relative;
+    cursor: pointer;
+}
+
+
+/* toggle when clicking */
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[type="checkbox"]:checked + label.day-night-toggle-btn {
+    background-color: #364FC7;
+    width: 15rem;
+}
+
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[type="checkbox"]:checked + label.day-night-toggle-btn > span.circle{
+    left: 0;
+    margin-left: 0.6rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    background-color: #fff;
+    display: block;
+}
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[type="checkbox"]:checked + label.day-night-toggle-btn > .moon-icon {
+   display: block;
 }
