@@ -126,7 +126,7 @@
 
 .chart-revenue{
     height: 65%;
-    border-bottom: 1px solid #ECECEC;
+    border-top: 1px solid #ECECEC;
     padding: 0.5rem 3rem;
 }
 
@@ -193,6 +193,7 @@
 .time-title-text{
     font-size: 1.2rem;
     color: #5A5A5A;
+
 }
 
 .last-container{
@@ -234,7 +235,7 @@
     height: 100%;
     align-items: center;
     justify-content: space-between;
-    gap: 1.15rem;
+    gap: 1.05rem;
 }
 
 .topkpi-name-role-container{
@@ -257,7 +258,39 @@
 
 .boardmeeting-container{
     width: 30% ;
-    background: white;
+    background: #000000;
     border-radius: 0.8rem;
     border: 1px solid #F0F0F0;
+    padding: 1.5rem 2rem;
+    color: white;
+}
+
+.boardmeeting-title-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.boardmeeting-title{
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.boardmeeting-time{
+    font-size: 1.4rem;
+    margin-top: 1.5rem;
+}
+
+.boardmeeting-time-bold{
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+.boardmeeting-active{
+    text-align: right;
+}
+
+.boardmeeting-content{
+    font-size: 1.3rem;
+    width: 80%;
 }

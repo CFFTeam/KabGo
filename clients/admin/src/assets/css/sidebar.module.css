@@ -1,5 +1,5 @@
 .sidebar-container{
     background: #FCFCFC;
-    height: 100vh;
+    min-height: 100%;
     width: 20%;
 }
