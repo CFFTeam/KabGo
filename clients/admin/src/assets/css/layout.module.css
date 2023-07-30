@@ -1,0 +1,17 @@
+.base-layout-container{
+    display: flex;
+}
+
+.content-container{
+    width: 100%;
+    background: pink;
+    padding: 1rem 2rem;
+}
+
+/* .test path{
+    fill: black;
+}
+
+.test{
+    font-size: 5rem;
+} */
