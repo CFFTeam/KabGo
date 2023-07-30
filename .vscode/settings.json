@@ -1,0 +1,5 @@
+{
+    "cmake.sourceDirectory": "/home/wming/Documents/CFF/KabGo/KabGo/clients/admin/node_modules/react-native/ReactAndroid/cmake-utils/default-app-setup",
+    "cmake.configureOnOpen": false,
+    "java.configuration.updateBuildConfiguration": "interactive"
+}
