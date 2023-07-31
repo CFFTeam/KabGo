@@ -1,13 +1,13 @@
 form.most-visited-address-form {
     align-self: flex-start;
     width: 60rem;
-    background-color: aqua;
 }
 
 form.most-visited-address-form > div.form-heading {
     height: 4.6rem;
     background-color: #E67700;
     position: relative;
+    border-radius: 8px 8px 0px 0px;
 }
 
 form.most-visited-address-form > div.form-heading > span.title {  
@@ -23,13 +23,11 @@ form.most-visited-address-form > div.form-heading > span.title {
 
 form.most-visited-address-form > table.table-list {
     background-color: white;
-    height: 30rem;
     width: 100%;
     border-collapse: collapse;
 }
 
 form.most-visited-address-form > table.table-list > thead.table-heading {
-    /* background-color: red; */
     height: 4rem;
     font-size: 1.4rem;
     font-weight: 400;
@@ -52,6 +50,11 @@ form.most-visited-address-form > table.table-list > tbody > tr > td {
 
 form.most-visited-address-form > table.table-list > tbody > tr > td:first-child {
     padding-left: 1rem;
+}
+
+
+form.most-visited-address-form > table.table-list > tbody > tr {
+    height: 5.6rem;
 }
 
 form.most-visited-address-form > table.table-list > tbody > tr:hover {
