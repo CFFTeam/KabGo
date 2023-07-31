@@ -1,16 +1,16 @@
-form.latest-booking-form {
+table.latest-booking-form {
     width: 98%;
     height: 80rem;
     background-color: aqua;
 }
 
-form.latest-booking-form > div.form-heading {
+table.latest-booking-form > div.form-heading {
     height: 4.6rem;
     background-color: #E67700;
     position: relative;
 }
 
-form.latest-booking-form > div.form-heading > span.title {
+table.latest-booking-form > div.form-heading > span.title {
     position: absolute;
     top: 50%;
     left: 50%;
