@@ -10,9 +10,9 @@ const CallReceiptPage: React.FC = () => {
             <span className={styles["title"]}>
                 Powered by
             </span>
-            <div className={styles["logo"]}>
-                <Logo/>
-            </div>≠
+            <div className={styles["logo-section"]}>
+                <Logo className={styles["logo"]}/>
+            </div>
         </div>
         <div className={styles["body-content"]}>
             <div className={styles["call-receipt-and-most-visited-address"]}>
