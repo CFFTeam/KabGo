@@ -18,8 +18,6 @@ class Authentication {
 
     try {
       await FirebaseAuth.instance.signInWithCredential(credential);
-
-      print("123");
     } on FirebaseAuthException catch (e) {
       // ignore: use_build_context_synchronously
       await showDialog(
