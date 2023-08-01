@@ -2,7 +2,6 @@ import 'package:driver/providers/auth_provider.dart';
 import 'package:driver/widgets/carousel/carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../firebase/auth/google_sign_in.dart';
 import '../../widgets/button/button.dart';
 import 'styles.dart';
 

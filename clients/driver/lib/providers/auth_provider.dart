@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/auth_model.dart';
 
-final authenticationProvider = Provider<Authentication>((ref) => Authentication());
+final authenticationProvider = Provider.autoDispose<Authentication>((ref) => Authentication());
 
 final authProvider = StreamProvider<User?>((ref) {
   ref.watch(appNotifierProvider).whenData((value) => FirebaseAuth.instance.authStateChanges());
