@@ -1,0 +1,22 @@
+table.latest-booking-form {
+    width: 98%;
+    height: 80rem;
+    background-color: aqua;
+}
+
+table.latest-booking-form > div.form-heading {
+    height: 4.6rem;
+    background-color: #E67700;
+    position: relative;
+}
+
+table.latest-booking-form > div.form-heading > span.title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-transform: uppercase;
+    color: white;
+    font-size: 2.2rem;
+    font-weight: 600;
+}
