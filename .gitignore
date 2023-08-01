@@ -6,7 +6,7 @@ lerna-debug.log*
 access.log*
 error.log*
 activity.log*
-
+.DS_Store
 servers/**/*.log
 ./servers/**/*.log
 /servers/**/*.log
