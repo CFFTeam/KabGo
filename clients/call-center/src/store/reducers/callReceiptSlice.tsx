@@ -1,45 +1,52 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 
 interface BookingInformation {
-    name: String,
-    phoneNumber: String,
-    carType: String,
-    scheduledBookingTime: String,
-    departureAddress: String,
-    arrivalAddress: String,
-    note: String,
+    name: string,
+    phoneNumber: string,
+    vehicleType: string,
+    scheduledBookingTime_HH: string,
+    scheduledBookingTime_MM: string,
+    departureAddress: string,
+    arrivalAddress: string,
+    note: string,
 }
 
 interface MostVisitedAddressList {
-    address: String,
+    address: string,
     frequency: number
 }
 
 interface LatestBookingData {
-    bookingTime: String,
-    departureAddress: String,
-    arrivalAddress: String,
-    vehicleType: String,
+    bookingTime: string,
+    departureAddress: string,
+    arrivalAddress: string,
+    vehicleType: string,
 }
 
+
+// define the type of call receipt state
 interface callReceiptState {
     bookingInformation: BookingInformation,
     mostVisitedAddresses: MostVisitedAddressList[],
     latestBookingData: LatestBookingData[],
+    // mostVisitedAddress: string,
 }
+
 
 const initialCallReceiptState: callReceiptState = {
     bookingInformation: {
         name: '',
         phoneNumber: '',
-        carType: '',
-        scheduledBookingTime: '',
+        vehicleType: '',
+        scheduledBookingTime_HH: '',
+        scheduledBookingTime_MM: '',
         departureAddress: '',
         arrivalAddress: '',
         note: '',
     },
     mostVisitedAddresses: [],
     latestBookingData: [],
+    // mostVisitedAddress: 'Huynh Dinh hai'
 }
 
 const callReceiptSlice = createSlice({
@@ -49,6 +56,9 @@ const callReceiptSlice = createSlice({
         updateBookingInformation: (state, action: PayloadAction<BookingInformation>) => {
             state.bookingInformation = action.payload;
         },
+        // setMostVisitedAddress: (state, action: PayloadAction<string>) => {
+        //     state.mostVisitedAddress = action.payload;
+        // }
     },
 })
 

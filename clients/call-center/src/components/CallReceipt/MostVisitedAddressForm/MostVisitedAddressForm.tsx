@@ -6,7 +6,7 @@ import {useAppDispatch, useAppSelector} from "@hooks/ReduxHooks";
 import {callReceiptActions} from "@store/reducers/callReceiptSlice";
 
 interface MostVisitedAddressList {
-    address: String,
+    address: string,
     frequency: number
 }
 
@@ -36,21 +36,14 @@ const mostVisitedAddresses: MostVisitedAddressList[] = [
 const MostVisitedAddressForm: React.FC = () => {
     const dispatch = useAppDispatch();
     const bookingInformation = useAppSelector((state) => state.callReceipt.bookingInformation);
-    const [stringTestingRedux, setStringTestingRedux] = useState<string>('');
 
-    console.log('bookingInformation: ', bookingInformation);
-    const handleRowClick = (): void  => {
-        console.log('clicking detected');
+    const handleRowClick = (address: string): void  => {
+        // handle something
         dispatch(callReceiptActions.updateBookingInformation({
-            name: '',
-            phoneNumber: '',
-            carType: '',
-            scheduledBookingTime: '',
-            departureAddress: "Khoa bin nef",
-            arrivalAddress: '',
-            note: '',
+            ...bookingInformation,
+            arrivalAddress: address,
         }))
-    }
+    }   
 
 
     return <form className={styles["most-visited-address-form"]}>
@@ -79,7 +72,7 @@ const MostVisitedAddressForm: React.FC = () => {
             <tbody>
                 {
                     mostVisitedAddresses.map((el, index) => 
-                        <tr style = {{backgroundColor: "#FBF9FA", cursor: "pointer"}} onClick = {handleRowClick} key = {index}>
+                        <tr style = {{backgroundColor: "#FBF9FA", cursor: "pointer"}} onClick = {() => handleRowClick(el.address)} key = {index}>
                             <td>
                                 <div style = {{display: "flex", gap: "1rem", marginTop: '0.3rem'}}>
                                     <span>
