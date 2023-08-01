@@ -2,6 +2,47 @@ import styles from './LatestBookingForm.module.css';
 import {ReactComponent as LocationIcon} from "@assets/svg/CallReceipt/location.svg";
 import {ReactComponent as PickUpIcon} from "@assets/svg/CallReceipt/pick-up.svg";
 
+interface LatestBookingData {
+    bookingTime: String,
+    departureAddress: String,
+    arrivalAddress: String,
+    vehicleType: String
+}
+
+const latestBookingData: LatestBookingData[] = [
+    {
+        bookingTime: "07:30 - 31/7/2023",
+        departureAddress: "22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh",
+        arrivalAddress: "22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh",
+        vehicleType: "Ô tô (7-9 chỗ)"
+    },
+    {
+        bookingTime: "07:30 - 31/7/2023",
+        departureAddress: "22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh",
+        arrivalAddress: "22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh",
+        vehicleType: "Ô tô (2-4 chỗ)"
+    },
+    {
+        bookingTime: "07:30 - 31/7/2023",
+        departureAddress: "22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh",
+        arrivalAddress: "22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh",
+        vehicleType: "Xe máy (1 chỗ)"
+    },
+    {
+        bookingTime: "07:30 - 31/7/2023",
+        departureAddress: "22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh",
+        arrivalAddress: "22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh",
+        vehicleType: "Xe tay ga (1 chỗ)"
+    },
+
+    {
+        bookingTime: "07:30 - 31/7/2023",
+        departureAddress: "22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh",
+        arrivalAddress: "22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh",
+        vehicleType: "Ô tô (7-9 chỗ)"
+    },
+]
+
 
 const LatestBookingForm: React.FC = () => {
     return <form className={styles["latest-booking-form"]}>
@@ -39,62 +80,14 @@ const LatestBookingForm: React.FC = () => {
             </thead>
             
             <tbody>
-                <tr style = {{backgroundColor: "#FBF9FA", cursor: "pointer"}}>
-                    <td>07:30 - 21/7/2023</td>
-                    <td>22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh</td>
-                    <td>22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh</td>
-                    <td>Ô tô (7-9 chỗ)</td>
-                </tr>
-
-                <tr style = {{backgroundColor: "#FBF9FA", cursor: "pointer"}}>
-                    <td>07:30 - 21/7/2023</td>
-                    <td>22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh</td>
-                    <td>22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh</td>
-                    <td>Ô tô (7-9 chỗ)</td>
-                </tr>
-
-                <tr style = {{backgroundColor: "#FBF9FA", cursor: "pointer"}}>
-                    <td>07:30 - 21/7/2023</td>
-                    <td>22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh</td>
-                    <td>22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh</td>
-                    <td>Xe máy (1 chỗ)</td>
-                </tr>
-
-                <tr style = {{backgroundColor: "#FBF9FA", cursor: "pointer"}}>
-                    <td>07:30 - 21/7/2023</td>
-                    <td>22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh</td>
-                    <td>22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh</td>
-                    <td>Xe tay ga (1 chỗ)</td>
-                </tr>
-
-                <tr style = {{backgroundColor: "#FBF9FA", cursor: "pointer"}}>
-                    <td>07:30 - 21/7/2023</td>
-                    <td>22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh</td>
-                    <td>22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh</td>
-                    <td>Ô tô (7-9 chỗ)</td>
-                </tr>
-                {/*
-                <tr style = {{backgroundColor: "#FBF9FA", cursor: "pointer"}}>
-                    <td>07:30 - 21/7/2023</td>
-                    <td>22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh</td>
-                    <td>22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh</td>
-                    <td>O to (7-9 cho)</td>
-                </tr>
-
-                <tr style = {{backgroundColor: "#FBF9FA", cursor: "pointer"}}>
-                    <td>07:30 - 21/7/2023</td>
-                    <td>22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh</td>
-                    <td>22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh</td>
-                    <td>O to (7-9 cho)</td>
-                </tr>
-
-                <tr style = {{backgroundColor: "#FBF9FA", cursor: "pointer"}}>
-                    <td>07:30 - 21/7/2023</td>
-                    <td>22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh</td>
-                    <td>22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh</td>
-                    <td>O to (7-9 cho)</td>
-                </tr> */}
-
+                {latestBookingData.map((el, index) => 
+                    <tr style = {{backgroundColor: "#FBF9FA", cursor: "pointer"}} key = {index}>
+                        <td>{el.bookingTime}</td>
+                        <td>{el.departureAddress}</td>
+                        <td>{el.arrivalAddress}</td>
+                        <td>{el.vehicleType}</td>
+                    </tr>
+                )}
             </tbody>
         </table>
     </form>
