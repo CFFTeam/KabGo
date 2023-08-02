@@ -1,5 +1,73 @@
 import styles from "./CallReceiptTable.module.css";
 import {ReactComponent as SearchIcon} from "@assets/svg/CallReceiptHandler/search-icn.svg";
+import {ReactComponent as CancelIcon} from "@assets/svg/CallReceiptHandler/cancel-icn.svg";
+
+interface CallReceiptData {
+    id: string,
+    phoneNumber: string,
+    date: string,
+    time: string,
+    vehicleType: string,
+    status: string,
+    arrivalAddress: string,
+}
+
+const callReceiptData: CallReceiptData[] = [
+    {   
+        id: '1',
+        phoneNumber: "090386151",
+        date: "31/7/2023",
+        time: "07:30 AM",
+        vehicleType: "Ô tô (7-9 chỗ)",
+        status: "Chờ xử lý",
+        arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
+    }, 
+    {   
+        id: '2',
+        phoneNumber: "090386151",
+        date: "31/7/2023",
+        time: "07:30 AM",
+        vehicleType: "Ô tô (7-9 chỗ)",
+        status: "Đã hủy",
+        arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
+    }, 
+    {   
+        id: '3',
+        phoneNumber: "090386151",
+        date: "31/7/2023",
+        time: "07:30 AM",
+        vehicleType: "Ô tô (7-9 chỗ)",
+        status: "Chờ xử lý",
+        arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
+    }, 
+    {   
+        id: '4',
+        phoneNumber: "090386151",
+        date: "31/7/2023",
+        time: "07:30 AM",
+        vehicleType: "Ô tô (7-9 chỗ)",
+        status: "Đã hủy",
+        arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
+    }, 
+    {   
+        id: '5',
+        phoneNumber: "090386151",
+        date: "31/7/2023",
+        time: "07:30 AM",
+        vehicleType: "Ô tô (7-9 chỗ)",
+        status: "Chờ xử lý",
+        arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
+    }, 
+    {   
+        id: '6',
+        phoneNumber: "090386151",
+        date: "31/7/2023",
+        time: "07:30 AM",
+        vehicleType: "Ô tô (7-9 chỗ)",
+        status: "Đã hủy",
+        arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
+    }, 
+]
 
 const CallReceiptTable: React.FC = () => {
     return <div className={styles["call-receipt-table"]}>
@@ -34,7 +102,7 @@ const CallReceiptTable: React.FC = () => {
                         <th className = {styles["vehicle-type"]}>
                             <select>
                                 <option value = "Loại xe đặt">
-                                    Loại xe đặt
+                                    Loại xe khách đặt
                                 </option>
                                 <option value = "Ô tô (7-9 chỗ)">
                                     Ô tô (7-9 chỗ)
@@ -70,28 +138,53 @@ const CallReceiptTable: React.FC = () => {
                     </tr>
                 </thead>     
                 <tbody className = {styles["table-content"]}>
-                    <td className ={styles["client"]}>0903861515</td>
-                    <td className = {styles["date-time"]}>
+                    {/* <tr>
+                        <td className ={styles["client"]}>0903861515</td>
+                        <td className = {styles["date-time"]}>
                         07:30 - 31/7/2023
-                        {/* <span className={styles["departure-time"]}>
-                            07:30 
-                        </span>
-                        <span className={styles["date"]}>
-                            31/7/2023
-                        </span> */}
-                    </td>
-                    <td className = {styles["vehicle-type"]} style = {{textAlign: "center"}}>
-                        Ô tô (7-9 chỗ)
-                    </td>
-                    <td className = {styles["status"]}>
-                        Chờ xử lý
-                    </td>
-                    <td className = {styles["arrival-address"]}>
-                        45 Trần Hưng Đạo, quận 5, TP. Hồ Chí Minh
-                    </td>
-                    <td className = {styles["button"]}>
-                        Delete button
-                    </td>
+                        </td>
+                        <td className = {styles["vehicle-type"]} style = {{textAlign: "center"}}>
+                            Ô tô (7-9 chỗ)
+                        </td>
+                        <td className = {`${styles["status"]} ${styles["bold"]} ${styles["orange-txt"]}`}>
+                            Chờ xử lý
+                        </td>
+                        <td className = {styles["arrival-address"]}>
+                            45 Trần Hưng Đạo, quận 5, TP. Hồ Chí Minh
+                        </td>
+                        <td className = {styles["button"]}>
+                            <button className={styles["cancel-btn"]}>
+                                <CancelIcon className = {styles["cancel-icn"]} />
+                            </button>
+                        </td>
+                    </tr> */}
+                    {
+                        callReceiptData.map((el, index) => 
+                            <tr key ={el.id}>
+                                <td className ={styles["client"]}>0903861515</td>
+                                <td className = {styles["date-time"]}>
+                                {el.time} - {el.date}
+                                </td>
+                                <td className = {styles["vehicle-type"]} style = {{textAlign: "center"}}>
+                                    {el.vehicleType}
+                                </td>
+                                <td className = {el.status === 'Chờ xử lý' ? `${styles["bold"]} ${styles["orange-txt"]}` : `${styles["bold"]} ${styles["black-txt"]}`}>
+                                    {el.status}
+                                </td>
+                                <td className = {styles["arrival-address"]}>
+                                    45 Trần Hưng Đạo, quận 5, TP. Hồ Chí Minh
+                                </td>
+                                {el.status === "Chờ xử lý" ? 
+                                 <td className = {styles["button"]}>
+                                    <button className={styles["cancel-btn"]}>
+                                        <CancelIcon className = {styles["cancel-icn"]} />
+                                    </button>
+                                 </td> : <td></td>
+                                }
+                               
+                        </tr>
+                        )
+                    }
                 </tbody>           
         </table>
     </div>

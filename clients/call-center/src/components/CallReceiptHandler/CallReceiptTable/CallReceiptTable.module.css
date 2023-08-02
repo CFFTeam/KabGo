@@ -1,6 +1,5 @@
 div.call-receipt-table {
     margin-top: 2rem;
-    box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
     border-radius: 8px 8px 0px 0px;
     border-top: 1px solid #F3F4F5;
 }
@@ -47,8 +46,9 @@ div.call-receipt-table > div.table-title > div.search-tool > input:placeholder-s
 }
 
 div.call-receipt-table > table.table-view {
+    margin-top: 1rem;
     color: #fff;
-    background-color: red;
+    border-collapse: collapse;
     width: 100%;
 }
 
@@ -62,28 +62,72 @@ div.call-receipt-table > table.table-view > thead.table-heading select {
     font-family: 'Montserrat';
     background-color: black;
     font-weight: 600;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     border: none;
+    outline: none;
 }
+
 
 div.call-receipt-table > table.table-view > thead.table-heading > tr > th {
     font-weight: 600;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
 }
 
 
-div.call-receipt-table > table.table-view > tbody > td {
+div.call-receipt-table > table.table-view > tbody.table-content > tr > td {
     text-align: center;
-    font-size: 1.8rem;
-    padding: 1rem;
+    font-size: 1.6rem;
+    border-bottom: 1px solid black;
 }
 
-div.call-receipt-table > table.table-view > tbody > td:nth-last-child(2) {
+div.call-receipt-table > table.table-view > tbody.table-content > tr {
+    margin-top: 2rem;
+    height: 5.6rem;
+    background-color: #FBF9FA;
+    color: #000;
+    cursor: pointer;
+    outline: none;
+}
+
+div.call-receipt-table > table.table-view > tbody.table-content tr:hover {
+    background-color: #CED4DA;
+}
+
+
+div.call-receipt-table > table.table-view > tbody.table-content > tr > td:nth-last-child(2) {
     max-width: 45rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
-div.call-receipt-table > table.table-view > tbody > td:last-child {
+
+div.call-receipt-table > table.table-view > tbody.table-content > tr > td:last-child {
     width: 2%;
+    text-align: center;
+}
+
+
+div.call-receipt-table > table.table-view > tbody.table-content > tr > td:last-child > button {
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+div.call-receipt-table > table.table-view > tbody.table-content > tr > td > button > .cancel-icn {
+    font-size: 1.8em;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+
+.bold {
+    font-weight: 700;
+}
+
+.orange-txt {
+    color: #FF5C00;
+}
+
+.black-txt {
+    color: #495057;
 }
