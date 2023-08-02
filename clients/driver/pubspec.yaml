@@ -53,6 +53,7 @@ dependencies:
   google_sign_in: ^6.1.4
   flutter_spinkit: ^5.2.0
   flutter_launcher_icons: ^0.13.1
+  font_awesome_flutter: ^10.5.0
 
 dev_dependencies:
   flutter_test:
@@ -88,6 +89,8 @@ flutter:
     - lib/assets/images/
     - lib/assets/images/welcomes/
     - lib/assets/images/auths/
+    - lib/assets/map/
+    - lib/assets/icons/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
