@@ -1,0 +1,6 @@
+div.sidebar {
+    position: sticky;
+    width: 20%;
+    height: 75rem;
+    background-color: aqua;
+}

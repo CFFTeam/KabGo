@@ -1,0 +1,89 @@
+div.call-receipt-table {
+    margin-top: 2rem;
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.2);
+    border-radius: 8px 8px 0px 0px;
+    border-top: 1px solid #F3F4F5;
+}
+
+div.call-receipt-table > div.table-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+div.call-receipt-table > div.table-title > span {
+    display: inline-block;
+    font-size: 2.4rem;
+    font-weight: 600;
+    padding: 2rem;
+}
+
+div.call-receipt-table > div.table-title > div.search-tool {
+    position: relative;
+}
+
+div.call-receipt-table > div.table-title > div.search-tool > .search-icn {
+    position: absolute;
+    top: 50%;
+    font-size: 2rem;
+    margin-left: 1rem;
+    transform: translateY(-50%);
+}
+
+div.call-receipt-table > div.table-title > div.search-tool > input {
+    outline: none;
+    font-family: 'Montserrat';
+    height: 4rem;
+    margin-right: 2rem;
+    background-color: #F3F4F5;
+    border-radius: 16px;
+    border: 1px solid #dee2e6;
+    padding: 2rem;
+    padding-left: 4rem;
+}
+
+div.call-receipt-table > div.table-title > div.search-tool > input:placeholder-shown {
+    font-family: 'Montserrat';
+}
+
+div.call-receipt-table > table.table-view {
+    color: #fff;
+    background-color: red;
+    width: 100%;
+}
+
+div.call-receipt-table > table.table-view > thead.table-heading {
+    background-color: black;
+    height: 5rem;
+}
+
+div.call-receipt-table > table.table-view > thead.table-heading select {
+    color: #fff;
+    font-family: 'Montserrat';
+    background-color: black;
+    font-weight: 600;
+    font-size: 1.8rem;
+    border: none;
+}
+
+div.call-receipt-table > table.table-view > thead.table-heading > tr > th {
+    font-weight: 600;
+    font-size: 1.8rem;
+}
+
+
+div.call-receipt-table > table.table-view > tbody > td {
+    text-align: center;
+    font-size: 1.8rem;
+    padding: 1rem;
+}
+
+div.call-receipt-table > table.table-view > tbody > td:nth-last-child(2) {
+    max-width: 45rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+div.call-receipt-table > table.table-view > tbody > td:last-child {
+    width: 2%;
+}

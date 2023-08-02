@@ -1,0 +1,5 @@
+div.layout-division {
+    display: flex;
+    gap: 4rem;
+    background-color: black;
+}
