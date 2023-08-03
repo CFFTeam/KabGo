@@ -1,5 +1,39 @@
 .sidebar-container{
     background: #FCFCFC;
     min-height: 100%;
-    width: 20%;
+    width: 22%;
+}
+
+.logo{
+    margin: 3.5rem 4.5rem 2.5rem 4.5rem;
+}
+
+.main-menu-title{
+    font-size: 1.2rem;
+    color: #878787;
+    font-weight: 500;
+    padding-left: 2rem;
+}
+
+.main-menu-container{
+    width: 100%;
+    height: 50%;
+    background: pink;
+    /* padding-left: 3.5rem; */
+    font-size: 1.5rem;
+    color: #545454;
+    font-weight: 500;
+    padding-top: 2rem;
+}
+
+.el-container{
+    display: flex;
+    margin-bottom: 2rem;
+    background: white;
+    height: 5rem;
+    align-items: center;
+}
+
+.test fill{
+    background-image: orange;
 }
