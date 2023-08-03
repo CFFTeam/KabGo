@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import { sidebarActions } from "@store/reducers/sidebarSlice";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { ReactComponent as FooterKabgo } from "../../assets/svg/Sidebar/footerlogo.svg";
+import { ReactComponent as FooterKabgo } from "@assets/svg/Sidebar/footerLogo.svg";
 
 const Sidebar: React.FC = () => {
   const dispatch = useAppDispatch();

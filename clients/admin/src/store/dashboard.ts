@@ -39,13 +39,13 @@ interface TopKpiData {
   medal: string;
 }
 
-interface initialDashboardState {
+interface InitialDashboardState {
   categoryData: CategoryData[];
   tasklistData: TasklistData;
   topKpiData: TopKpiData[];
 }
 
-const initialDashboardState: initialDashboardState = {
+const initialDashboardState: InitialDashboardState = {
   categoryData: [
     {
       number: 0,
@@ -71,6 +71,7 @@ const initialDashboardState: initialDashboardState = {
       img: CanceledTrip,
       color: "#F93232",
     },
+    
   ],
 
   tasklistData: {
