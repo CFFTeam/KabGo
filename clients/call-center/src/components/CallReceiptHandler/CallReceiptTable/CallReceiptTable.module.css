@@ -1,7 +1,8 @@
 div.call-receipt-table {
-    margin-top: 2rem;
+    margin-top: 4.5rem;
     border-radius: 8px 8px 0px 0px;
     border-top: 1px solid #F3F4F5;
+    box-shadow: 3px 3px 12px rgba(0,0,0,0.2);
 }
 
 div.call-receipt-table > div.table-title {
@@ -77,13 +78,14 @@ div.call-receipt-table > table.table-view > thead.table-heading > tr > th {
 div.call-receipt-table > table.table-view > tbody.table-content > tr > td {
     text-align: center;
     font-size: 1.6rem;
-    border-bottom: 1px solid black;
+    /* border-bottom: 1px solid black; */
 }
 
 div.call-receipt-table > table.table-view > tbody.table-content > tr {
     margin-top: 2rem;
     height: 5.6rem;
     background-color: #FBF9FA;
+    border-bottom: 1px solid black;
     color: #000;
     cursor: pointer;
     outline: none;
@@ -91,6 +93,10 @@ div.call-receipt-table > table.table-view > tbody.table-content > tr {
 
 div.call-receipt-table > table.table-view > tbody.table-content tr:hover {
     background-color: #CED4DA;
+}
+
+div.call-receipt-table > table.table-view > tbody.table-content > tr:last-child {
+    border-bottom: 0px;
 }
 
 

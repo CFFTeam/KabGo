@@ -2,5 +2,6 @@ div.layout-division {
     display: flex;
     height: 100vh;
     gap: 4rem;
-    background-color: black;
+    /* background-color: black; */
+    background-color: white;
 }
