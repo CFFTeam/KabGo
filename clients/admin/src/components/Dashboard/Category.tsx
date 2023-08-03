@@ -6,6 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const Category: React.FC = () => {
   const categoryData = useAppSelector((state) => state.dashboard.categoryData);
+    
   // const notify = () => {
   //   toast.success('Tạo tài khoản thành công', {
   //     style: {
