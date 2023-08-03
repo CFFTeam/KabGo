@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./sidebar.module.css";
-import { ReactComponent as Kabgo } from "../../assets/svg/Sidebar/kabgo.svg";
+import { ReactComponent as KabGoIcon } from "../../assets/svg/Sidebar/kabgoLogo.svg";
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import { sidebarActions } from "@store/reducers/sidebarSlice";
 import { NavLink } from "react-router-dom";
@@ -18,11 +18,11 @@ const Sidebar: React.FC = () => {
   }
   return (
     <div className={styles["sidebar-container"]}>
-      <Kabgo className={styles["logo"]} />  
+      <KabGoIcon className={styles["logo"]} />  
       <div className={styles["sidebar-title"]}>Main Menu</div>
       <div className={styles["sidebar-sub-container"]}>
         {mainMenuData.map((data, index) => (
-            <NavLink to="/" onClick={()=>onChangeActive([index, "main-menu"])} className={`${styles["sidebar-el-container"]} ${data.active ? styles["change-border-color"] : ''}`} key={index}>
+            <NavLink to= {data.link} onClick={()=>onChangeActive([index, "main-menu"])} className={`${styles["sidebar-el-container"]} ${data.active ? styles["change-border-color"] : ''}`} key={index}>
               <div className={styles["sidebar-img"]}> <img src={data.active ? data.imgFill : data.img} /></div>
               <div className={`${styles["sidebar-content-arrow"]} ${data.active ? styles["change-text-color"] : ''}`}>{data.name}</div>
             </NavLink>
@@ -33,7 +33,7 @@ const Sidebar: React.FC = () => {
       <div className={styles["preferences-title"]}>Doanh Nghiệp</div>
       <div className={styles["sidebar-sub-container"]}>
         {preferenceData.map((data, index) => (
-            <NavLink to="/" onClick={()=>onChangeActive([index, "business-section"])} className={`${styles["sidebar-el-container"]} ${data.active ? styles["change-border-color"] : ''}`} key={index}>
+            <NavLink to={data.link} onClick={()=>onChangeActive([index, "business-section"])} className={`${styles["sidebar-el-container"]} ${data.active ? styles["change-border-color"] : ''}`} key={index}>
               <div className={styles["sidebar-img"]}> <img src={data.active ? data.imgFill : data.img} /></div>
               <div className={`${styles["sidebar-content-arrow"]} ${data.active ? styles["change-text-color"] : ''}`}>{data.name}</div>
             </NavLink>

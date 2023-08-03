@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import statisticIcon from "@assets/svg/Sidebar/statisticIcon.svg";
 import dashboardIcon from "@assets/svg/Sidebar/dashboardIcon.svg";
 import carBookingIcon from "@assets/svg/Sidebar/carBookingIcon.svg";
-import reportIcon from "@assets/svg/Sidebar/report.svg";
+import reportIcon from "@assets/svg/Sidebar/reportIcon.svg";
 import teamMemberIcon from "@assets/svg/Sidebar/teamMemberIcon.svg";
 import contactIcon from "@assets/svg/Sidebar/contactIcon.svg";
 import feedbackIcon from "@assets/svg/Sidebar/feedbackIcon.svg";
@@ -11,7 +11,7 @@ import feedbackIcon from "@assets/svg/Sidebar/feedbackIcon.svg";
 import statisticIconFill from "@assets/svg/Sidebar/statisticIconFill.svg";
 import dashboardIconFill from "@assets/svg/Sidebar/dashboardIconFill.svg";
 import carBookingIconFill from "@assets/svg/Sidebar/carBookingIconFill.svg";
-import reportIconFill from "@assets/svg/Sidebar/reportFill.svg";
+import reportIconFill from "@assets/svg/Sidebar/reportIconFill.svg";
 import teamMemberIconFill from "@assets/svg/Sidebar/teamMemberIconFill.svg";
 import contactIconFill from "@assets/svg/Sidebar/contactIconFill.svg";
 import feedbackIconFill from "@assets/svg/Sidebar/feedbackIconFill.svg";
@@ -24,6 +24,7 @@ interface MainMenuData {
   name: string;
   imgFill: string;
   active: boolean;
+  link: string;
 }
 
 interface PreferencesData {
@@ -31,6 +32,7 @@ interface PreferencesData {
   name: string;
   imgFill: string;
   active: boolean;
+  link: string;
 }
 
 interface InitialSidebarState {
@@ -44,25 +46,29 @@ const initialSidebarState: InitialSidebarState = {
         img: dashboardIcon,
         name: "Dashboard",
         imgFill: dashboardIconFill,
-        active: false
+        active: false,
+        link: '/dashboard'
     },
     {
         img: carBookingIcon,
         name: "Xử lý điều phối",
         imgFill: carBookingIconFill,
-        active: true
+        active: true,
+        link: '/call-receipt-handle'
     },
     {
         img: statisticIcon,
         name: "Thống kê",
         imgFill: statisticIconFill,
-        active: false
+        active: false,
+        link: '/statistic'
     },
     {
         img: reportIcon,
         name: "Báo cáo",
         imgFill: reportIconFill,
-        active: false
+        active: false,
+        link: '/report'
     },
   ],
   preferencesData: [
@@ -70,19 +76,23 @@ const initialSidebarState: InitialSidebarState = {
         img: teamMemberIcon,
         name: "Thành viên",
         imgFill: teamMemberIconFill,
-        active: false
+        active: false,
+        link: '/team-member'
     },
     {
         img: contactIcon,
         name: "Liên hệ",
         imgFill: contactIconFill,
-        active: false
+        active: false,
+        link: '/contact'
+
     },
     {
         img: feedbackIcon,
         name: "Đánh giá",
         imgFill: feedbackIconFill,
-        active: false
+        active: false,
+        link: '/feedback'
     },
   ]
 };

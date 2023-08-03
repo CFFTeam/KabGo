@@ -9,6 +9,7 @@ const AppRoutes = () => {
         <Routes>
             <Route element={<CallReceiptHandlerLayout />}>
                 <Route path="/" element={<CallReceiptHandlerPage/>} />
+                <Route path="/call-receipt-handle" element={<CallReceiptHandlerPage/>} />
             </Route>
             <Route path="/call-receipt" element={<CallReceiptPage/>} />
             <Route>
