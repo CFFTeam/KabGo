@@ -1,11 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore } from "@reduxjs/toolkit";
 
-import dashboardReducer from './dashboard';
+import DashboardReducer from "./dashboard";
+import SidebarReducer from "./sidebar";
 
 const store = configureStore({
-  reducer: { dashboard: dashboardReducer },
+  reducer: { dashboard: DashboardReducer, sidebar: SidebarReducer },
 });
 
 export default store;
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
