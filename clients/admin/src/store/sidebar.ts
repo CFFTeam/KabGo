@@ -7,13 +7,22 @@ import Invoice from "../assets/svg/Sidebar/invoice.svg";
 import Service from "../assets/svg/Sidebar/service.svg";
 import Vehicle from "../assets/svg/Sidebar/vehicle.svg";
 import Admin from "../assets/svg/Sidebar/admin.svg";
+
+import CustomerFill from "../assets/svg/Sidebar/customerfill.svg";
+import DriverFill from "../assets/svg/Sidebar/driverfill.svg";
+import DashboardFill from "../assets/svg/Sidebar/dashboardfill.svg";
+import InvoiceFill from "../assets/svg/Sidebar/invoicefill.svg";
+import ServiceFill from "../assets/svg/Sidebar/servicefill.svg";
+import VehicleFill from "../assets/svg/Sidebar/vehiclefill.svg";
+import AdminFill from "../assets/svg/Sidebar/adminfill.svg";
+
 import React, {FC, ReactElement} from "react";
 import { ReactNode } from "react";
 
 interface MainMenuData {
   img: any;
   name: string;
-  arrow: boolean;
+  imgFill: string;
   active: boolean;
 }
 
@@ -22,47 +31,47 @@ interface InitialSidebarState {
 }
 
 const initialSidebarState: InitialSidebarState = {
-    mainMenuData: [
+  mainMenuData: [
     {
         img: Dashboard,
         name: "Dashboard",
-        arrow: false,
+        imgFill: DashboardFill,
         active: true
     },
     {
         img: Admin,
         name: "Admin",
-        arrow: true,
+        imgFill: AdminFill,
         active: false
     },
     {
         img: Driver,
         name: "Tài xế",
-        arrow: true,
+        imgFill: DriverFill,
         active: false
     },
     {
         img: Customer,
         name: "Khách Hàng",
-        arrow: true,
+        imgFill: CustomerFill,
         active: false
     },
     {
         img: Service,
-        name: "Service <br> Phương Tiện",
-        arrow: false,
+        name: "Dịch vụ",
+        imgFill: ServiceFill,
         active: false
     },
     {
         img: Vehicle,
         name: "Loại Phương Tiện",
-        arrow: false,
+        imgFill: VehicleFill,
         active: false
     },
     {
         img: Invoice,
         name: "Hóa Đơn",
-        arrow: true,
+        imgFill: InvoiceFill,
         active: false
     },
   ],
@@ -72,11 +81,10 @@ const sidebarSlice = createSlice({
   name: "sidebar",
   initialState: initialSidebarState,
   reducers: {
-    // updateCategoryData(state, action: PayloadAction<number[]>) {
-    //   for (let i = 0; i < state.categoryData.length; i++) {
-    //     state.categoryData[i].number = action.payload[i];
-    //   }
-    // },
+    updateActive(state, action: PayloadAction<number>) {
+      state.mainMenuData.map((data) => data.active = false);
+      state.mainMenuData[action.payload].active = true;
+    },
     // updateTasklistData(state, action: PayloadAction<number>) {
     //   state.tasklistData.tasklistChild[action.payload].check =
     //     !state.tasklistData.tasklistChild[action.payload].check;
