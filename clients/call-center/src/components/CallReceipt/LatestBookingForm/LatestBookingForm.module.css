@@ -1,13 +1,12 @@
 form.latest-booking-form {
     width: 98%;
-    height: 80rem;
-    background-color: aqua;
 }
 
 form.latest-booking-form > div.form-heading {
     height: 4.6rem;
     background-color: #E67700;
     position: relative;
+    border-radius: 8px 8px 0px 0px;
 }
 
 form.latest-booking-form > div.form-heading > span.title {
@@ -19,4 +18,33 @@ form.latest-booking-form > div.form-heading > span.title {
     color: white;
     font-size: 2.2rem;
     font-weight: 600;
+}
+
+form.latest-booking-form > table.table-list {
+    background-color: white;
+    width: 100%;
+    border-collapse: collapse;
+    max-height: 30rem;
+}
+
+form.latest-booking-form > table.table-list > thead.table-heading {
+    font-size: 1.4rem;
+    font-weight: 400;
+    border-bottom: 1.6px solid black;
+    height: 5rem;
+
+}
+
+form.latest-booking-form > table.table-list > tbody > tr > td {
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+form.latest-booking-form > table.table-list > tbody > tr {
+    height: 5.6rem;
+}
+
+form.latest-booking-form > table.table-list > tbody > tr:hover {
+    background-color: #CED4DA !important;
+    cursor: pointer;
 }

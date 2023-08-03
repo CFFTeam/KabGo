@@ -1,16 +1,16 @@
 form.most-visited-address-form {
-    width: 55rem;
-    height: 40rem;
-    background-color: aqua;
+    align-self: flex-start;
+    width: 60rem;
 }
 
 form.most-visited-address-form > div.form-heading {
     height: 4.6rem;
     background-color: #E67700;
     position: relative;
+    border-radius: 8px 8px 0px 0px;
 }
 
-form.most-visited-address-form > div.form-heading > span.title {
+form.most-visited-address-form > div.form-heading > span.title {  
     position: absolute;
     top: 50%;
     left: 50%;
@@ -19,4 +19,45 @@ form.most-visited-address-form > div.form-heading > span.title {
     color: white;
     font-size: 2.2rem;
     font-weight: 600;
+}
+
+form.most-visited-address-form > table.table-list {
+    background-color: white;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+form.most-visited-address-form > table.table-list > thead.table-heading {
+    height: 4rem;
+    font-size: 1.4rem;
+    font-weight: 400;
+    border-bottom: 1.6px solid black;
+}
+
+form.most-visited-address-form > table.table-list > thead.table-heading > tr > th:first-child {
+    width: 80%;
+}
+
+
+form.most-visited-address-form > table.table-list > tbody {
+    font-size: 1.6rem;
+}
+
+form.most-visited-address-form > table.table-list > tbody > tr > td {
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+form.most-visited-address-form > table.table-list > tbody > tr > td:first-child {
+    padding-left: 1rem;
+}
+
+
+form.most-visited-address-form > table.table-list > tbody > tr {
+    height: 5.6rem;
+}
+
+form.most-visited-address-form > table.table-list > tbody > tr:hover {
+    background-color: #CED4DA !important;
+    cursor: pointer;
 }

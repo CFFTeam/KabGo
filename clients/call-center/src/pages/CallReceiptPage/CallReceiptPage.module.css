@@ -17,6 +17,7 @@
     gap: 2.4rem;
     justify-content: center;
 }
+
 .container > .heading > .title {
     display: inline-block;
     margin-top: 2rem;
@@ -25,13 +26,18 @@
     font-weight: bold;
 }
 
+.container > .heading > .logo-section > .logo {
+    font-size: 4em;
+}
+
 .container > .body-content > .call-receipt-and-most-visited-address {
     display: flex;
-    gap: 3.6rem;
+    gap: 2.4rem;
 }
 
 
 .container > .body-content > .latest-booking {
     display: block;
     margin-left: 4rem;
+    margin-bottom: 20rem;
 }
