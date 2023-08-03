@@ -13,7 +13,7 @@ class App extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       routerConfig: router,
       theme: ThemeData(
-        fontFamilyFallback: const <String>['Montserrat', 'Roboto', 'Arial', 'sans-serif']
+        fontFamilyFallback: const <String>['Montserrat', 'Roboto', 'Arial', 'sans-serif'],
       ),
     );
   }
