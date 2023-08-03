@@ -1,9 +1,12 @@
 import {configureStore} from "@reduxjs/toolkit";
 import callReceiptReducer from "./reducers/callReceiptSlice";
+import sidebarReducer from "./reducers/sidebarSlice";
+import { setDefaultHandler } from "workbox-routing";
 
 export const store = configureStore({
     reducer: {
-        callReceipt: callReceiptReducer
+        callReceipt: callReceiptReducer,
+        sidebar: sidebarReducer
     }
 });
 
