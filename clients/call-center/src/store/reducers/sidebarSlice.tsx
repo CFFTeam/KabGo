@@ -1,28 +1,20 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-// import Admin from "../assets/svg/Sidebar/admin.svg";
-import Customer from "../assets/svg/Sidebar/customer.svg";
-import Driver from "../assets/svg/Sidebar/driver.svg";
-import Dashboard from "../assets/svg/Sidebar/dashboard.svg";
-import Invoice from "../assets/svg/Sidebar/invoice.svg";
-import Service from "../assets/svg/Sidebar/service.svg";
-import Vehicle from "../assets/svg/Sidebar/vehicle.svg";
-import Admin from "../assets/svg/Sidebar/admin.svg";
 
-import CustomerFill from "../assets/svg/Sidebar/customerfill.svg";
-import DriverFill from "../assets/svg/Sidebar/driverfill.svg";
-import DashboardFill from "../assets/svg/Sidebar/dashboardfill.svg";
-import InvoiceFill from "../assets/svg/Sidebar/invoicefill.svg";
-import ServiceFill from "../assets/svg/Sidebar/servicefill.svg";
-import VehicleFill from "../assets/svg/Sidebar/vehiclefill.svg";
-import AdminFill from "../assets/svg/Sidebar/adminfill.svg";
+import statisticIcon from "@assets/svg/Sidebar/statisticIcon.svg";
+import dashboardIcon from "@assets/svg/Sidebar/dashboardIcon.svg";
+import carBookingIcon from "@assets/svg/Sidebar/carBookingIcon.svg";
+import reportIcon from "@assets/svg/Sidebar/report.svg";
+import teamMemberIcon from "@assets/svg/Sidebar/teamMemberIcon.svg";
+import contactIcon from "@assets/svg/Sidebar/contactIcon.svg";
+import feedbackIcon from "@assets/svg/Sidebar/feedbackIcon.svg";
 
-import Setting from "../assets/svg/Sidebar/setting.svg";
-import Map from "../assets/svg/Sidebar/map.svg";
-import Theme from "../assets/svg/Sidebar/theme.svg";
-
-import SettingFill from "../assets/svg/Sidebar/settingfill.svg";
-import MapFill from "../assets/svg/Sidebar/mapfill.svg";
-import ThemeFill from "../assets/svg/Sidebar/themefill.svg";
+import statisticIconFill from "@assets/svg/Sidebar/statisticIconFill.svg";
+import dashboardIconFill from "@assets/svg/Sidebar/dashboardIconFill.svg";
+import carBookingIconFill from "@assets/svg/Sidebar/carBookingIconFill.svg";
+import reportIconFill from "@assets/svg/Sidebar/reportFill.svg";
+import teamMemberIconFill from "@assets/svg/Sidebar/teamMemberIconFill.svg";
+import contactIconFill from "@assets/svg/Sidebar/contactIconFill.svg";
+import feedbackIconFill from "@assets/svg/Sidebar/feedbackIconFill.svg";
 
 import React, {FC, ReactElement} from "react";
 import { ReactNode } from "react";
@@ -49,65 +41,47 @@ interface InitialSidebarState {
 const initialSidebarState: InitialSidebarState = {
   mainMenuData: [
     {
-        img: Dashboard,
+        img: dashboardIcon,
         name: "Dashboard",
-        imgFill: DashboardFill,
+        imgFill: dashboardIconFill,
+        active: false
+    },
+    {
+        img: carBookingIcon,
+        name: "Xử lý điều phối",
+        imgFill: carBookingIconFill,
         active: true
     },
     {
-        img: Admin,
-        name: "Admin",
-        imgFill: AdminFill,
+        img: statisticIcon,
+        name: "Thống kê",
+        imgFill: statisticIconFill,
         active: false
     },
     {
-        img: Driver,
-        name: "Tài xế",
-        imgFill: DriverFill,
-        active: false
-    },
-    {
-        img: Customer,
-        name: "Khách Hàng",
-        imgFill: CustomerFill,
-        active: false
-    },
-    {
-        img: Service,
-        name: "Dịch vụ",
-        imgFill: ServiceFill,
-        active: false
-    },
-    {
-        img: Vehicle,
-        name: "Loại Phương Tiện",
-        imgFill: VehicleFill,
-        active: false
-    },
-    {
-        img: Invoice,
-        name: "Hóa Đơn",
-        imgFill: InvoiceFill,
+        img: reportIcon,
+        name: "Báo cáo",
+        imgFill: reportIconFill,
         active: false
     },
   ],
   preferencesData: [
     {
-        img: Setting,
-        name: "Cài Đặt",
-        imgFill: SettingFill,
+        img: teamMemberIcon,
+        name: "Thành viên",
+        imgFill: teamMemberIconFill,
         active: false
     },
     {
-        img: Map,
-        name: "Theme Bản Đồ",
-        imgFill: MapFill,
+        img: contactIcon,
+        name: "Liên hệ",
+        imgFill: contactIconFill,
         active: false
     },
     {
-        img: Theme,
-        name: "Dark Mode",
-        imgFill: ThemeFill,
+        img: feedbackIcon,
+        name: "Đánh giá",
+        imgFill: feedbackIconFill,
         active: false
     },
   ]
@@ -117,32 +91,13 @@ const sidebarSlice = createSlice({
   name: "sidebar",
   initialState: initialSidebarState,
   reducers: {
-    updateActive(state, action: PayloadAction<number[]>) {
+    updateActive(state, action: PayloadAction<any[]>) {
       state.mainMenuData.map((data) => data.active = false);
       state.preferencesData.map((data) => data.active = false);
-      action.payload[1]===1 ?
+      action.payload[1]=== "main-menu" ?
         state.mainMenuData[action.payload[0]].active = true:
         state.preferencesData[action.payload[0]].active = true;
     },
-    // updatePreferenceActive(state, action: PayloadAction<number>) {
-      // state.preferencesData.map((data) => data.active = false);
-    //   state.preferencesData[action.payload].active = true;
-    // },
-    // updateTasklistData(state, action: PayloadAction<number>) {
-    //   state.tasklistData.tasklistChild[action.payload].check =
-    //     !state.tasklistData.tasklistChild[action.payload].check;
-    //   if (state.tasklistData.tasklistChild[action.payload].check) {
-    //     state.tasklistData.tasklistChild.push(
-    //       state.tasklistData.tasklistChild.splice(action.payload, 1)[0]
-    //     );
-    //   } else {
-    //     state.tasklistData.tasklistChild.unshift(
-    //       state.tasklistData.tasklistChild.splice(action.payload, 1)[0]
-    //     );
-    //   }
-    //   state.tasklistData.numberOfTasks =
-    //     state.tasklistData.tasklistChild.filter((data) => !data.check).length;
-    // },
   },
 });
 

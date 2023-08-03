@@ -1,7 +1,7 @@
 .sidebar-container{
     background: #FCFCFC;
     min-height: 100%;
-    width: 22%;
+    width: 18%;
     position: relative;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .sidebar-img{
-    width: 18%;
+    width: 20%;
 }
 
 .sidebar-content-arrow{

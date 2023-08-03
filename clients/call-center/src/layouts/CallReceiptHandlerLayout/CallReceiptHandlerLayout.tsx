@@ -5,7 +5,7 @@ import Footer from '@components/Footer';
 import Sidebar from '@components/Sidebar';
 import styles from "./CallReceiptHandlerLayout.module.css";
 
-const CallReceiptHandlerLayout = () => {
+const CallReceiptHandlerLayout: React.FC = () => {
     return <React.Fragment>
         <Navbar/>
         <div className={styles["layout-division"]}>

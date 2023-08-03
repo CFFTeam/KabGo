@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../assets/css/sidebar.module.css";
+import styles from "./sidebar.module.css";
 import { ReactComponent as Kabgo } from "../../assets/svg/Sidebar/kabgo.svg";
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import { sidebarActions } from "@store/reducers/sidebarSlice";
@@ -13,7 +13,7 @@ const Sidebar: React.FC = () => {
   const mainMenuData = useAppSelector((state) => state.sidebar.mainMenuData);
   const preferenceData = useAppSelector((state) => state.sidebar.preferencesData);
 
-  const onChangeActive = (para: number[]) => {
+  const onChangeActive = (para: any[]) => {
       dispatch(sidebarActions.updateActive([para[0], para[1]]));
   }
   return (
@@ -22,7 +22,7 @@ const Sidebar: React.FC = () => {
       <div className={styles["sidebar-title"]}>Main Menu</div>
       <div className={styles["sidebar-sub-container"]}>
         {mainMenuData.map((data, index) => (
-            <NavLink to="/" onClick={()=>onChangeActive([index, 1])} className={`${styles["sidebar-el-container"]} ${data.active ? styles["change-border-color"] : ''}`} key={index}>
+            <NavLink to="/" onClick={()=>onChangeActive([index, "main-menu"])} className={`${styles["sidebar-el-container"]} ${data.active ? styles["change-border-color"] : ''}`} key={index}>
               <div className={styles["sidebar-img"]}> <img src={data.active ? data.imgFill : data.img} /></div>
               <div className={`${styles["sidebar-content-arrow"]} ${data.active ? styles["change-text-color"] : ''}`}>{data.name}</div>
             </NavLink>
@@ -30,10 +30,10 @@ const Sidebar: React.FC = () => {
         )}  
       </div>
 
-      <div className={styles["preferences-title"]}>Preferences</div>
+      <div className={styles["preferences-title"]}>Doanh Nghiệp</div>
       <div className={styles["sidebar-sub-container"]}>
         {preferenceData.map((data, index) => (
-            <NavLink to="/" onClick={()=>onChangeActive([index, 2])} className={`${styles["sidebar-el-container"]} ${data.active ? styles["change-border-color"] : ''}`} key={index}>
+            <NavLink to="/" onClick={()=>onChangeActive([index, "business-section"])} className={`${styles["sidebar-el-container"]} ${data.active ? styles["change-border-color"] : ''}`} key={index}>
               <div className={styles["sidebar-img"]}> <img src={data.active ? data.imgFill : data.img} /></div>
               <div className={`${styles["sidebar-content-arrow"]} ${data.active ? styles["change-text-color"] : ''}`}>{data.name}</div>
             </NavLink>
