@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../assets/css/sidebar.module.css";
+import styles from "./sidebar.module.css";
 import { ReactComponent as Kabgo } from "../../assets/svg/Sidebar/kabgo.svg";
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import { sidebarActions } from "@store/sidebar";

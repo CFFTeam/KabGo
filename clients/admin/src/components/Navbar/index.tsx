@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../assets/css/navbar.module.css";
+import styles from "./navbar.module.css";
 import { ReactComponent as OpenClose } from "../../assets/svg/Navbar/closeopen.svg";
 import { ReactComponent as GoBack } from "../../assets/svg/Navbar/goback.svg";
 import { ReactComponent as Reload } from "../../assets/svg/Navbar/reload.svg";
