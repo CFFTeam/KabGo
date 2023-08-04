@@ -16,6 +16,14 @@ import ServiceFill from "../assets/svg/Sidebar/servicefill.svg";
 import VehicleFill from "../assets/svg/Sidebar/vehiclefill.svg";
 import AdminFill from "../assets/svg/Sidebar/adminfill.svg";
 
+import Setting from "../assets/svg/Sidebar/setting.svg";
+import Map from "../assets/svg/Sidebar/map.svg";
+import Theme from "../assets/svg/Sidebar/theme.svg";
+
+import SettingFill from "../assets/svg/Sidebar/settingfill.svg";
+import MapFill from "../assets/svg/Sidebar/mapfill.svg";
+import ThemeFill from "../assets/svg/Sidebar/themefill.svg";
+
 import React, {FC, ReactElement} from "react";
 import { ReactNode } from "react";
 
@@ -26,8 +34,16 @@ interface MainMenuData {
   active: boolean;
 }
 
+interface PreferencesData {
+  img: any;
+  name: string;
+  imgFill: string;
+  active: boolean;
+}
+
 interface InitialSidebarState {
   mainMenuData: MainMenuData[];
+  preferencesData: PreferencesData[]
 }
 
 const initialSidebarState: InitialSidebarState = {
@@ -75,31 +91,39 @@ const initialSidebarState: InitialSidebarState = {
         active: false
     },
   ],
+  preferencesData: [
+    {
+        img: Setting,
+        name: "Cài Đặt",
+        imgFill: SettingFill,
+        active: false
+    },
+    {
+        img: Map,
+        name: "Theme Bản Đồ",
+        imgFill: MapFill,
+        active: false
+    },
+    {
+        img: Theme,
+        name: "Dark Mode",
+        imgFill: ThemeFill,
+        active: false
+    },
+  ]
 };
 
 const sidebarSlice = createSlice({
   name: "sidebar",
   initialState: initialSidebarState,
   reducers: {
-    updateActive(state, action: PayloadAction<number>) {
+    updateActive(state, action: PayloadAction<number[]>) {
       state.mainMenuData.map((data) => data.active = false);
-      state.mainMenuData[action.payload].active = true;
+      state.preferencesData.map((data) => data.active = false);
+      action.payload[1]===1 ?
+        state.mainMenuData[action.payload[0]].active = true:
+        state.preferencesData[action.payload[0]].active = true;
     },
-    // updateTasklistData(state, action: PayloadAction<number>) {
-    //   state.tasklistData.tasklistChild[action.payload].check =
-    //     !state.tasklistData.tasklistChild[action.payload].check;
-    //   if (state.tasklistData.tasklistChild[action.payload].check) {
-    //     state.tasklistData.tasklistChild.push(
-    //       state.tasklistData.tasklistChild.splice(action.payload, 1)[0]
-    //     );
-    //   } else {
-    //     state.tasklistData.tasklistChild.unshift(
-    //       state.tasklistData.tasklistChild.splice(action.payload, 1)[0]
-    //     );
-    //   }
-    //   state.tasklistData.numberOfTasks =
-    //     state.tasklistData.tasklistChild.filter((data) => !data.check).length;
-    // },
   },
 });
 

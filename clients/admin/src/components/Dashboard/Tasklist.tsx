@@ -13,7 +13,10 @@ const Tasklist: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const onChangeClickState = (index: number) => {
-    dispatch(dashboardActions.updateTasklistData(index));
+    dispatch(dashboardActions.updateTasklistState(index));
+    setTimeout(function() {
+      dispatch(dashboardActions.updateTasklistPosition(index));
+    }, 1000);
   }
 
   return (
