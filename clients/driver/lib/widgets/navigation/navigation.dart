@@ -17,6 +17,7 @@ class CNavigationItem extends StatelessWidget {
     required this.activeColor,
     this.isActive,
     this.textColor,
+    required this.canGo,
   }) : super(key: key);
 
   final VoidCallback onPressed;
@@ -31,6 +32,7 @@ class CNavigationItem extends StatelessWidget {
   final Color activeColor;
   final Color? textColor;
   final bool? isActive;
+  final bool canGo;
 
   @override
   Widget build(BuildContext context) {
@@ -61,35 +63,24 @@ class CNavigationItem extends StatelessWidget {
   }
 }
 
-class CNavigation extends StatefulWidget {
+class CNavigation extends StatelessWidget {
   final List<CNavigationItem> items;
+  final String initialSelection;
 
-  const CNavigation({Key? key, required this.items}) : super(key: key);
+  const CNavigation({Key? key, required this.items, required this.initialSelection}) : super(key: key);
 
-  @override
-  State<CNavigation> createState() => _CNavigationState();
-}
-
-class _CNavigationState extends State<CNavigation> {
-  late String _selectedButton = "";
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedButton = widget.items[0].label;
-  }
+  static String? _selectedButton;
 
   @override
   Widget build(BuildContext context) {
+    _selectedButton ??= initialSelection;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: widget.items.map((e) => CNavigationItem(
+      children: items.map((e) => CNavigationItem(
         onPressed: () {
-          if (_selectedButton != e.label) {
-            setState(() {
-              _selectedButton = e.label;
-            });
-
+          if (_selectedButton != e.label && e.canGo == true) {
+            _selectedButton = e.label;
             e.onPressed();
           }
         },
@@ -102,6 +93,7 @@ class _CNavigationState extends State<CNavigation> {
         gap: e.gap,
         label: e.label,
         activeColor: e.activeColor,
+        canGo: e.canGo,
         isActive: _selectedButton == e.label ? true : false,
         textColor: e.textColor)
       ).toList(),

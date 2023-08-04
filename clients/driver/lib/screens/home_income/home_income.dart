@@ -114,7 +114,7 @@ class _HomeIncomeState extends ConsumerState<HomeIncome> {
                 children: <Widget>[
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(5)

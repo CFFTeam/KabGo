@@ -39,13 +39,13 @@ interface TopKpiData {
   medal: string;
 }
 
-interface initialDashboardState {
+interface InitialDashboardState {
   categoryData: CategoryData[];
   tasklistData: TasklistData;
   topKpiData: TopKpiData[];
 }
 
-const initialDashboardState: initialDashboardState = {
+const initialDashboardState: InitialDashboardState = {
   categoryData: [
     {
       number: 0,
@@ -134,9 +134,11 @@ const dashboardSlice = createSlice({
         state.categoryData[i].number = action.payload[i];
       }
     },
-    updateTasklistData(state, action: PayloadAction<number>) {
-      state.tasklistData.tasklistChild[action.payload].check =
-        !state.tasklistData.tasklistChild[action.payload].check;
+    updateTasklistState(state, action: PayloadAction<number>) {
+      state.tasklistData.tasklistChild[action.payload].check = !state.tasklistData.tasklistChild[action.payload].check;
+      state.tasklistData.numberOfTasks = state.tasklistData.tasklistChild.filter((data) => !data.check).length;
+    },
+    updateTasklistPosition(state, action: PayloadAction<number>){
       if (state.tasklistData.tasklistChild[action.payload].check) {
         state.tasklistData.tasklistChild.push(
           state.tasklistData.tasklistChild.splice(action.payload, 1)[0]
@@ -146,9 +148,7 @@ const dashboardSlice = createSlice({
           state.tasklistData.tasklistChild.splice(action.payload, 1)[0]
         );
       }
-      state.tasklistData.numberOfTasks =
-        state.tasklistData.tasklistChild.filter((data) => !data.check).length;
-    },
+    }
   },
 });
 

@@ -1,11 +1,14 @@
 import React from "react";
-import styles from "../../assets/css/dashboard.module.css";
+import styles from "./dashboard.module.css";
 import { useAppDispatch, useAppSelector } from "../../hooks/ReduxHooks";
 import BeatLoader from "react-spinners/BeatLoader";
 import toast, { Toaster } from "react-hot-toast";
 import { ReactComponent as Info } from "../../assets/svg/Dashboard/info.svg";
+import { ReactComponent as RevenueSignature } from "../../assets/svg/Dashboard/revenuesign.svg";
 
-const Chart: React.FC = () => {
+import LineGraph from "./LineGraph";
+
+const ChartComponent: React.FC = () => {
   //   const categoryData = useAppSelector((state) => state.dashboard.categoryData);
 
   return (
@@ -17,7 +20,7 @@ const Chart: React.FC = () => {
         <div className={styles["el-title"]}>Time line</div>
         <div className={styles["el-title"]}>Giờ làm</div>
       </div>
-      <div className={styles["chart-content"]}>
+      <div className={styles["chart-content"]}> 
         <div className={styles["total-revenue"]}>
           <div className={styles["title-info"]}>
             <div className={styles["title"]}>TỔNG DOANH THU HÀNG THÁNG</div>
@@ -27,11 +30,12 @@ const Chart: React.FC = () => {
           <div className={styles["currency"]}>VNĐ</div>
         </div>
         <div className={styles["chart-revenue"]}>
-            chart
+          <LineGraph />
+          <RevenueSignature className={styles["revenue-sign"]} />
         </div>
       </div>
     </div>
   );
 };
 
-export default Chart;
+export default ChartComponent;

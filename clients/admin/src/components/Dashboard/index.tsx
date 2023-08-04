@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../assets/css/dashboard.module.css";
+import styles from "./dashboard.module.css";
 import Category from "./Category";
 import Chart from"./Chart";
 import Tasklist from "./Tasklist";

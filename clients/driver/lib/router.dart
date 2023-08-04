@@ -1,10 +1,12 @@
 import 'package:driver/providers/auth_provider.dart';
+import 'package:driver/screens/customer_request/customer_request.dart';
 import 'package:driver/screens/home_dashboard/home_dashboard.dart';
 import 'package:driver/screens/home_income/home_income.dart';
 import 'package:driver/screens/home_screen/index.dart';
 import 'package:driver/screens/home_wallet/home_wallet.dart';
 import 'package:driver/screens/splash_screen/index.dart';
 import 'package:driver/screens/welcome_screen/index.dart';
+import 'package:driver/widgets/driver_panel/driver_panel.dart';
 import 'package:driver/widgets/home_panel/home_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,15 +14,17 @@ import 'package:go_router/go_router.dart';
 
 import 'animations/animation.dart';
 
-final _key = GlobalKey<NavigatorState>();
-final _shellkey = GlobalKey<NavigatorState>();
-final _shellStatusKey = GlobalKey<NavigatorState>();
+final _key = GlobalKey<NavigatorState>(debugLabel: 'Main Navigator');
+final _shellkey = GlobalKey<NavigatorState>(debugLabel: 'Shell Navigator');
+final _shellStatusKey = GlobalKey<NavigatorState>(debugLabel: 'Shell Status Navigator');
+final _shellDriverKey = GlobalKey<NavigatorState>(debugLabel: 'Shell Driver Navigator');
 
 final routerProvider = Provider<GoRouter>((ref) {
   // final appState = ref.watch(appNotifierProvider);
   final authState = ref.watch(authProvider);
 
   return GoRouter(
+    debugLogDiagnostics: true,
       navigatorKey: _key,
       initialLocation: SplashScreen.path,
       routes: [
@@ -38,7 +42,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                 buildPageWithDefaultTransition<void>(
                     context: context,
                     key: state.pageKey,
-                    transitionDuration: const Duration(milliseconds: 1150),
+                    transitionDuration: const Duration(milliseconds: 800),
                     child: const WelcomeScreen())),
         ShellRoute(
             navigatorKey: _shellkey,
@@ -47,15 +51,16 @@ final routerProvider = Provider<GoRouter>((ref) {
                     context: context,
                     key: state.pageKey,
                     child: HomeScreen(child: child),
-                    transitionDuration: const Duration(milliseconds: 1150)),
+                    transitionDuration: const Duration(milliseconds: 800)),
             routes: [
               ShellRoute(
                   navigatorKey: _shellStatusKey,
                   parentNavigatorKey: _shellkey,
-                  pageBuilder: (context, state, child) => NoTransitionPage(
+                  pageBuilder: (context, state, child) => buildPageWithSlideUpTransition(
+                        context: context,
                         key: state.pageKey,
                         child: HomePanel(child: child),
-                        // transitionDuration: const Duration(milliseconds: 1150)
+                        transitionDuration: const Duration(milliseconds: 400)
                       ),
                   routes: [
                     GoRoute(
@@ -71,6 +76,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                                   const Duration(milliseconds: 800)),
                       routes: [
                         GoRoute(
+                          parentNavigatorKey: _shellStatusKey,
                           name: HomeWallet.name,
                           path: HomeWallet.path,
                           pageBuilder: (context, state) =>
@@ -83,6 +89,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                               ),
                           routes: [
                             GoRoute(
+                              parentNavigatorKey: _shellStatusKey,
                               name: HomeIncome.name,
                               path: HomeIncome.path,
                               pageBuilder: (context, state) =>
@@ -96,6 +103,28 @@ final routerProvider = Provider<GoRouter>((ref) {
                           ]
                         ),
                       ]
+                    ),
+                  ]),
+              ShellRoute(
+                  navigatorKey: _shellDriverKey,
+                  parentNavigatorKey: _shellkey,
+                  pageBuilder: (context, state, child) => buildPageWithSlideUpTransition(
+                    context: context,
+                    key: state.pageKey,
+                    child: DriverPanel(child: child),
+                    transitionDuration: const Duration(milliseconds: 300)
+                  ),
+                  routes: [
+                    GoRoute(
+                      parentNavigatorKey: _shellDriverKey,
+                      name: CustomerRequest.name,
+                      path: CustomerRequest.path,
+                      pageBuilder: (context, state) => NoTransitionPage(
+                          // context: context,
+                          key: state.pageKey,
+                          child: const CustomerRequest(),
+                          // transitionDuration: const Duration(milliseconds: 800)
+                      ),
                     ),
                   ])
             ])

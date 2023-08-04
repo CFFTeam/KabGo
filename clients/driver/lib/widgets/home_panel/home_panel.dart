@@ -1,6 +1,10 @@
+import 'package:driver/providers/connection_provider.dart';
+import 'package:driver/providers/socket_provider.dart';
+import 'package:driver/screens/customer_request/customer_request.dart';
 import 'package:driver/widgets/icon_button/icon_button.dart';
 import 'package:driver/widgets/navigation/navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math' as math;
 
@@ -8,23 +12,41 @@ import 'package:go_router/go_router.dart';
 
 import 'styles.dart';
 
-class HomePanel extends StatefulWidget {
+class HomePanel extends ConsumerStatefulWidget {
   const HomePanel({Key? key, required this.child}) : super(key: key);
-
-  static const String name = 'HomeScreen';
-  static const String path = '/home';
 
   final Widget child;
 
   @override
-  State<HomePanel> createState() => _HomePanelState();
+  ConsumerState<HomePanel> createState() => _HomePanelState();
 }
 
-class _HomePanelState extends State<HomePanel> {
-  late bool _active = false;
+class _HomePanelState extends ConsumerState<HomePanel> {
+  static bool isFuture = false;
+
+  @override
+  void dispose() {
+    isFuture = false;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final socketNotifier = ref.read(socketClientProvider.notifier);
+    final bool active = ref.watch(socketClientProvider);
+
+    if (active == true) {
+      final customerRequest = ref.watch(customerRequestProvider);
+
+      if (customerRequest != "") {
+        Future.delayed(const Duration(milliseconds: 500), () {
+          WidgetsBinding.instance.addPostFrameCallback((_) =>
+            context.go(CustomerRequest.path)
+          );
+        });
+      }
+    }
+
     return Container(
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -56,34 +78,29 @@ class _HomePanelState extends State<HomePanel> {
                       padding: const EdgeInsets.all(10),
                       foregroundColor: const Color(0xFF6A6A6A)),
                   Expanded(
-                      child: Text(
-                          _active ? 'Đang hoạt động' : 'Không hoạt động',
-                          style: _active
+                      child: Text(active ? 'Đang hoạt động' : 'Không hoạt động',
+                          style: active
                               ? ThemeText.statusActiveText
                               : ThemeText.statusText,
                           textAlign: TextAlign.center)),
                   CIconButton(
-                    onPressed: () {
-                      setState(() {
-                        _active = !_active;
-                      });
-                    },
+                    onPressed: socketNotifier.toggle,
                     icon: Icon(FontAwesomeIcons.powerOff,
-                        color: _active == true
+                        color: active == true
                             ? const Color(0xFFF86C1D)
                             : const Color(0xFF6A6A6A),
                         size: 19),
                     padding: const EdgeInsets.all(12),
                     borderSide: BorderSide(
-                      color: _active == true
+                      color: active == true
                           ? const Color(0xFFFFB393)
                           : const Color(0xFFEDEDED),
                       width: 1,
                     ),
-                    backgroundColor: _active == true
+                    backgroundColor: active == true
                         ? const Color(0xFFFFF4EF)
                         : const Color(0xFFEDEDED),
-                    foregroundColor: _active == true
+                    foregroundColor: active == true
                         ? const Color(0xFFFFF4EF)
                         : const Color(0xFF6A6A6A),
                     elevation: 0,
@@ -92,7 +109,7 @@ class _HomePanelState extends State<HomePanel> {
               ),
             ),
             Expanded(child: widget.child),
-            CNavigation(items: [
+            CNavigation(initialSelection: 'Trang chủ', items: [
               CNavigationItem(
                 onPressed: () {
                   context.go('/');
@@ -105,6 +122,7 @@ class _HomePanelState extends State<HomePanel> {
                 textColor: const Color(0xFF6A6A6A),
                 foregroundColor: const Color(0xFF6A6A6A),
                 activeColor: const Color(0xFFF86C1D),
+                canGo: !active,
               ),
               CNavigationItem(
                 onPressed: () {
@@ -118,6 +136,7 @@ class _HomePanelState extends State<HomePanel> {
                 textColor: const Color(0xFF6A6A6A),
                 foregroundColor: const Color(0xFF6A6A6A),
                 activeColor: const Color(0xFFF86C1D),
+                canGo: !active,
               ),
               CNavigationItem(
                 onPressed: () {
@@ -131,6 +150,7 @@ class _HomePanelState extends State<HomePanel> {
                 textColor: const Color(0xFF6A6A6A),
                 foregroundColor: const Color(0xFF6A6A6A),
                 activeColor: const Color(0xFFF86C1D),
+                canGo: !active,
               ),
               CNavigationItem(
                 onPressed: () {},
@@ -142,6 +162,7 @@ class _HomePanelState extends State<HomePanel> {
                 textColor: const Color(0xFF6A6A6A),
                 foregroundColor: const Color(0xFF6A6A6A),
                 activeColor: const Color(0xFFF86C1D),
+                canGo: !active,
               ),
             ]),
           ],

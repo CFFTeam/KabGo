@@ -1,0 +1,7 @@
+.nav-bar {
+    position: fixed;
+    width: 85%;
+    right: 0;
+    height: 8rem;
+    background-color: red;
+}

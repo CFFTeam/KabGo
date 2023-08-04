@@ -1,0 +1,14 @@
+div.main-content {
+    margin-top: 12rem;
+    width: 100%;   
+    margin-left: -1rem; 
+    height: 50rem;
+    /* background-color: black; */
+}   
+
+div.main-content > span.title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    border-bottom: 4px solid #F86C1D;
+    text-transform: uppercase;
+}
