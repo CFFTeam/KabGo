@@ -12,7 +12,7 @@
     padding: 0 2.5rem;
     align-items: center;
     justify-content: center;
-    border: 1px solid #F0F0F0;
+    border: 2px solid #F0F0F0;
 }
 
 .category{
@@ -63,7 +63,7 @@
 .chart-title{
     height: 13%;
     border-radius: 0.8rem;
-    border: 1px solid #F0F0F0;
+    border: 2px solid #F0F0F0;
     display: flex;
     align-items: center;
     padding-left: 3rem;
@@ -89,7 +89,7 @@
     height: 85%;
     background: white;
     border-radius: 0.8rem;
-    border: 1px solid #F0F0F0;
+    border: 2px solid #F0F0F0;
 }
 
 .total-revenue{
@@ -126,7 +126,7 @@
 
 .chart-revenue{
     height: 65%;
-    border-top: 1px solid #ECECEC;
+    border-top: 2px solid #ECECEC;
     padding: 0.5rem 3rem;
 }
 
@@ -164,7 +164,7 @@
     padding: 1rem;
     border-radius: 0.8rem;
     background: #FAFAFA;
-    border: 1px solid #F6F6F6;
+    border: 2px solid #F6F6F6;
 }
 
 .content{
@@ -184,7 +184,7 @@
     width: 2.4rem;
     height: 2.4rem;
     background:aqua;
-    border: 1px solid #F86C1D;
+    border: 2px solid #F86C1D;
 }
 
 .content-title-text{
@@ -225,7 +225,7 @@
     width: 70% ;
     background: white;
     border-radius: 0.8rem;
-    border: 1px solid #F0F0F0;
+    border: 2px solid #F0F0F0;
     padding: 2rem 3rem;
 }
 
@@ -273,7 +273,7 @@
     width: 30% ;
     background: #000000;
     border-radius: 0.8rem;
-    border: 1px solid #F0F0F0;
+    border: 2px solid #F0F0F0;
     padding: 1.5rem 2rem;
     color: white;
 }
