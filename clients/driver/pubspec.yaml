@@ -55,6 +55,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   font_awesome_flutter: ^10.5.0
   circular_countdown_timer: ^0.2.3
+  socket_io_client: ^2.0.3+1
 
 dev_dependencies:
   flutter_test:
