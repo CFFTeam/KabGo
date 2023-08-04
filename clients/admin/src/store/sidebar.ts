@@ -124,25 +124,6 @@ const sidebarSlice = createSlice({
         state.mainMenuData[action.payload[0]].active = true:
         state.preferencesData[action.payload[0]].active = true;
     },
-    // updatePreferenceActive(state, action: PayloadAction<number>) {
-      // state.preferencesData.map((data) => data.active = false);
-    //   state.preferencesData[action.payload].active = true;
-    // },
-    // updateTasklistData(state, action: PayloadAction<number>) {
-    //   state.tasklistData.tasklistChild[action.payload].check =
-    //     !state.tasklistData.tasklistChild[action.payload].check;
-    //   if (state.tasklistData.tasklistChild[action.payload].check) {
-    //     state.tasklistData.tasklistChild.push(
-    //       state.tasklistData.tasklistChild.splice(action.payload, 1)[0]
-    //     );
-    //   } else {
-    //     state.tasklistData.tasklistChild.unshift(
-    //       state.tasklistData.tasklistChild.splice(action.payload, 1)[0]
-    //     );
-    //   }
-    //   state.tasklistData.numberOfTasks =
-    //     state.tasklistData.tasklistChild.filter((data) => !data.check).length;
-    // },
   },
 });
 

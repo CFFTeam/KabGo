@@ -12,7 +12,6 @@ const Sidebar: React.FC = () => {
   const navigate = useNavigate();
   const mainMenuData = useAppSelector((state) => state.sidebar.mainMenuData);
   const preferenceData = useAppSelector((state) => state.sidebar.preferencesData);
-
   const onChangeActive = (para: number[]) => {
       dispatch(sidebarActions.updateActive([para[0], para[1]]));
   }
