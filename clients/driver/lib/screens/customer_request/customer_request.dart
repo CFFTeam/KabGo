@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
+import '../../providers/connection_provider.dart';
 import 'styles.dart';
 
 class CustomerRequest extends ConsumerStatefulWidget {
@@ -20,6 +21,8 @@ class CustomerRequest extends ConsumerStatefulWidget {
 class _CustomerRequestState extends ConsumerState<CustomerRequest> {
   @override
   Widget build(BuildContext context) {
+    final customerRequestNotifier = ref.read(customerRequestProvider.notifier);
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
       decoration: const BoxDecoration(
@@ -188,6 +191,7 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
             Expanded(
                 child: ElevatedButton(
               onPressed: () {
+                customerRequestNotifier.cancelRequest();
                 context.go(HomeDashboard.path);
               },
               style: ThemeButton.cancelButton,
@@ -230,6 +234,7 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                           isReverseAnimation: false,
                           autoStart: true,
                           onComplete: () {
+                            customerRequestNotifier.cancelRequest();
                             context.go(HomeDashboard.path);
                           },
                           timeFormatterFunction: (defaultFormatterFunction, duration) {
