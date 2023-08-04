@@ -16,39 +16,6 @@ const GuestInfo: React.FC = () => {
     const departureAddressRef = useRef<HTMLInputElement>(null);
     const arrivalAddressRef = useRef<HTMLInputElement>(null);
     const noteRef = useRef<HTMLTextAreaElement>(null);
-
-    // const handleFormSubmit = (event: React.FormEvent) => {
-    //     event.preventDefault();
-    //     const formData: BookingInformation = {
-    //         name: nameRef.current?.value || '',
-    //         phoneNumber: phoneNumberRef.current?.value || '',
-    //         vehicleType: vehicleTypeRef.current?.value || '',
-    //         scheduledBookingTime_HH: scheduledBookingTime_HH_Ref.current?.value || '',
-    //         scheduledBookingTime_MM: scheduledBookingTime_MM_Ref.current?.value || '',
-    //         departureAddress: departureAddressRef.current?.value || '',
-    //         arrivalAddress: arrivalAddressRef.current?.value || '',
-    //         note: noteRef.current?.value || '',
-    //     }
-    //     dispatch(callReceiptActions.updateBookingInformation(formData));
-    // }
-    // // helper functions - real-time tracking input value from user 
-    // const handleArrivalAddressInputChange = () => {
-    //     if (arrivalAddressRef.current) {
-    //         dispatch(callReceiptActions.updateBookingInformation({
-    //             ...bookingInformation,
-    //             arrivalAddress: arrivalAddressRef.current.value
-    //         }));
-    //     }
-    // }
-
-    // const handleDepartureAddressInputChange = () => {
-    //     if (departureAddressRef.current) {
-    //         dispatch(callReceiptActions.updateBookingInformation({
-    //             ...bookingInformation,
-    //             departureAddress: departureAddressRef.current.value
-    //         }));
-    //     }
-    // }
      
     return <div className={styles["wrapper"]}>
         <form className={styles["call-receipt-form"]}>
@@ -100,7 +67,7 @@ const GuestInfo: React.FC = () => {
                     <div className={styles["input"]}>
                         <label htmlFor="guest-scheduled-call" style = {{display: "flex", gap: "1rem"}}>
                             <span className={styles["title"]}>
-                                Hẹn giờ (chỉ dành cho KH VIP)
+                                Thời gian khách đặt xe
                             </span>
                         </label>
                         <div className = {styles["pick-up-time"]} style = {{display: 'flex', gap: "1rem"}}>
@@ -122,28 +89,6 @@ const GuestInfo: React.FC = () => {
                             </label>
                         </div>
                         
-                    </div>
-                    <div className={styles["input"]}>
-                        <label htmlFor="pick-up-place" style = {{display: "flex", gap: "1rem"}}>
-                            <span className={styles["title"]}>
-                                Điểm đón 
-                            </span>
-                            <span style = {{color: 'red', fontWeight: 600}}>
-                                (*)
-                            </span>
-                        </label>
-                        <input ref = {departureAddressRef}  type = "text" name = "pick-up-place" placeholder = "Nhập điểm đón" className = {styles["pick-up-place"]}/>
-                    </div>
-                    <div className={styles["input"]}>
-                        <label htmlFor="arrival-place" style = {{display: "flex", gap: "1rem"}}>
-                            <span className={styles["title"]}>
-                                Điểm đến 
-                            </span>
-                            <span style = {{color: 'red', fontWeight: 600}}>
-                                (*)
-                            </span>
-                        </label>
-                        <input ref = {arrivalAddressRef} type = "text" name = "arrival-place" placeholder = "Nhập điểm đến" className = {styles["arrival-place"]}/>
                     </div>
                     <div className = {`${styles.input} ${styles["stretched-all"]}`}>
                         <label htmlFor="guest-note" style = {{display: "flex", gap: "1rem"}}>

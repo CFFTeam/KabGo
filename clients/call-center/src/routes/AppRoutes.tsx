@@ -12,6 +12,12 @@ const AppRoutes = () => {
                 <Route path="/" element={<CallReceiptHandlerPage/>} />
                 <Route path="/call-receipt-handle" element={<CallReceiptHandlerPage/>} />
                 <Route path = "/booking-page" element = {<BookingPage/>}/>
+                <Route path = "/dashboard" element = {<CallReceiptHandlerPage/>}/>
+                <Route path = "/statistic" element = {<CallReceiptHandlerPage/>}/>
+                <Route path = "/report" element = {<CallReceiptHandlerPage/>}/>
+                <Route path = "/team-member" element = {<CallReceiptHandlerPage/>}/>
+                <Route path = "/feedback" element = {<CallReceiptHandlerPage/>}/>
+                <Route path = "/contact" element = {<CallReceiptHandlerPage/>}/>
             </Route>
             <Route path="/call-receipt" element={<CallReceiptPage/>} />
             <Route>

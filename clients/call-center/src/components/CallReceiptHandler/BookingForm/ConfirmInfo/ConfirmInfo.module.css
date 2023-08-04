@@ -1,0 +1,96 @@
+div.wrapper {
+    display: block;
+    width: 100%;
+    text-align: center;
+    /* background-color: blue; */
+}
+
+form.call-receipt-form {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    display: inline-block;
+    width: 85rem;
+    height: 51rem;
+    background-color: white;
+    border-radius: 8px;
+    border: 1.4px solid #ADB5BD;
+    border-top: none;
+    box-shadow: 3px 3px 12px rgba(0,0,0,0.2);
+}
+
+form.call-receipt-form > div.form-heading {
+    height: 4.6rem;
+    background-color: #E67700;
+    position: relative;
+    border-radius: 8px 8px 0px 0px;
+}
+
+form.call-receipt-form > div.form-heading > span.title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-transform: uppercase;
+    color: white;
+    font-size: 2.2rem;
+    font-weight: 600;
+}
+
+form.call-receipt-form > div.guest_info_section-title,
+form.call-receipt-form > div.details_info_section-title {
+    background-color: #F6F6F6;
+    padding: 1.6rem;
+    text-align: left;
+    height: 4rem;
+    width: 100%;
+    position: relative;
+    border-bottom: 1.4px solid #ADB5BD;
+}
+
+form.call-receipt-form > div.details_info_section-title {
+    border-top: 1.4px solid #ADB5BD
+}
+
+form.call-receipt-form > div.guest_info_section-title > span.text,
+form.call-receipt-form > div.details_info_section-title > span.text {
+    font-size: 2.2rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 500;
+}
+
+form.call-receipt-form > div.guest_info_section-content {
+    font-size: 1.6rem;
+    /* background-color: aqua; */
+    height: 18rem;
+    padding: 1.6rem;
+}
+
+form.call-receipt-form > div.guest_info_section-content div {
+    margin-left: 1rem;
+    margin-top: 1.2rem;
+    display: flex;
+    /* background-color: oldlace; */
+}
+
+form.call-receipt-form > div.guest_info_section-content div span {
+    font-size: 1.7rem;
+}
+
+form.call-receipt-form > div.guest_info_section-content div.guest_name {
+    gap: 11rem; 
+}
+
+form.call-receipt-form > div.guest_info_section-content div.guest_phone_number {
+    gap: 5.6rem;
+
+}
+
+form.call-receipt-form > div.guest_info_section-content div.guest_vehicle_booking_type {
+    gap: 7.6rem;
+}
+
+form.call-receipt-form > div.guest_info_section-content div.guest_note {
+    gap: 10.3rem;
+}
