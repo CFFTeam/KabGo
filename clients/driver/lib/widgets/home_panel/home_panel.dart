@@ -22,11 +22,8 @@ class HomePanel extends ConsumerStatefulWidget {
 }
 
 class _HomePanelState extends ConsumerState<HomePanel> {
-  static bool isFuture = false;
-
   @override
   void dispose() {
-    isFuture = false;
     super.dispose();
   }
 
@@ -36,14 +33,18 @@ class _HomePanelState extends ConsumerState<HomePanel> {
     final bool active = ref.watch(socketClientProvider);
 
     if (active == true) {
-      final customerRequest = ref.watch(customerRequestProvider);
+      final customerRequestNotifier =
+          ref.read(customerRequestProvider.notifier);
+      if (customerRequestNotifier.status == RequestStatus.waiting) {
+        final customerRequest = ref.watch(customerRequestProvider);
 
-      if (customerRequest != "") {
-        Future.delayed(const Duration(milliseconds: 500), () {
-          WidgetsBinding.instance.addPostFrameCallback((_) =>
-            context.go(CustomerRequest.path)
-          );
-        });
+        if (customerRequest.hasValue()) {
+          Future.delayed(const Duration(milliseconds: 500), () {
+            if (active == true) {
+              WidgetsBinding.instance.addPostFrameCallback((_) => context.go(CustomerRequest.path));
+            }
+          });
+        }
       }
     }
 

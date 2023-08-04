@@ -4,6 +4,10 @@ class LocationPostion {
 
   LocationPostion({required this.latitude, required this.longitude});
 
+  bool hasValue() {
+    return latitude != 0 && longitude != 0;
+  }
+
   factory LocationPostion.fromJson(Map<String, dynamic> json) {
     return LocationPostion(
       latitude: json['latitude'],
