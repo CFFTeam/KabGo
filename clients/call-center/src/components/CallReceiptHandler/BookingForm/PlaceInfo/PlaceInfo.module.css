@@ -45,7 +45,7 @@ form.call-receipt-form > div.form-body {
 
 form.call-receipt-form > div.form-body > div.flex-container {
     width: 100%;
-    gap: 20rem;
+    gap: 2rem;
     display: flex;
     /* background-color: red; */
 }
@@ -55,14 +55,14 @@ form.call-receipt-form > div.form-body > div.flex-container div.input {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 70%;
+    width: 80%;
 }
 
 form.call-receipt-form > div.form-body  > div.flex-container > div.input > label > span.title {
     font-size: 1.6rem;
 }
 
-form.call-receipt-form > div.form-body > div.flex-container  > div.input > input,
+form.call-receipt-form > div.form-body > div.flex-container  > div.input input,
 form.call-receipt-form > div.form-body  > div.flex-container > div.input > select {
     font-family: 'Montserrat';
     height: 1rem;
@@ -71,6 +71,11 @@ form.call-receipt-form > div.form-body  > div.flex-container > div.input > selec
     border-radius: 8px;
     background-color: #e9ecef;
     border: 1px solid #ced4da;
+}
+
+form.call-receipt-form > div.form-body > div.flex-container  > div.input input.arrival-address-inp,
+form.call-receipt-form > div.form-body > div.flex-container  > div.input input.departure-address-inp {
+    width: 100%;
 }
 
 form.call-receipt-form > div.form-body > div.flex-container  > div.input > input:placeholder-shown {
@@ -114,8 +119,16 @@ form.call-receipt-form  > div.form-body > div.forward-btn > button:hover {
 
 form.call-receipt-form > div.form-body > div.geo-map {
     margin-top: 3rem;
-    background-color: red;
+    /* background-color: red; */
     height: 40rem;
     width: 100%;
 }
 
+
+.pac-container {
+    font-family: 'Montserrat' !important;
+}
+
+.pac-item-query {
+    font-family: 'Montserrat';
+}

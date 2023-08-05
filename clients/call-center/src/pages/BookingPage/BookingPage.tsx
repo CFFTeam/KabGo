@@ -9,8 +9,8 @@ const BookingPage: React.FC = () => {
             Thông tin đặt xe
         </span> */}
         {/* <GuestInfo/> */}
-        {/* <PlaceInfo/> */}
-        <ConfirmInfo/>
+        <PlaceInfo/>    
+        {/* <ConfirmInfo/> */}
         <br />
         <br />
         <br />
