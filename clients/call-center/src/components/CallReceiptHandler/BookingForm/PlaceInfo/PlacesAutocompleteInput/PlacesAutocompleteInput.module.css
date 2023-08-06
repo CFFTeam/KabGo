@@ -1,11 +1,13 @@
 div.places-complete-input {
-    background-color: black;
+    /* background-color: black; */
     position: relative;
 }
 
 div.places-complete-input > input {
     width: 100%;
     font-size: 1.4rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 div.places-complete-input > input:placeholder-shown {
@@ -17,17 +19,15 @@ div.places-complete-input > div.suggestion-list {
     position: absolute;
     z-index: 99999;
     width: 100%;
+    box-shadow: 3px 3px 24px rgba(0,0,0,0.2);
 }
 
-div.places-complete-input > div.suggestion-list > li {
-    display: block;
-    font-size: 1.3rem !important;
+div.places-complete-input > div.suggestion-list  li {
     list-style: none;
-    background-color: #e9ecef;
-    font-size: 1.5rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: flex;
+    /* align-items: center; */
+    gap: 0.6rem;
+    background-color: #f1f3f5;
     padding: 1rem;
     border-bottom: 1px solid #ADB5BD;
     cursor: pointer;
@@ -38,6 +38,18 @@ div.places-complete-input > div.suggestion-list > li:last-child {
 }
 
 
-div.places-complete-input > div.suggestion-list > li:hover {
+div.places-complete-input > div.suggestion-list  li:hover {
     background-color: #CED4DA
+}
+
+
+div.places-complete-input > div.suggestion-list  li span.description {
+    font-size: 1.4rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.active {
+    background-color: #CED4DA !important;
 }
