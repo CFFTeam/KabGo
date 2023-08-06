@@ -8,8 +8,20 @@ import { ReactComponent as Notification } from "../../assets/svg/Navbar/notifica
 import { ReactComponent as Setting } from "../../assets/svg/Navbar/setting.svg";
 import { ReactComponent as Logout } from "../../assets/svg/Navbar/logout.svg";
 import { ReactComponent as Profile } from "../../assets/svg/Navbar/profile.svg";
+import {useNavigate} from "react-router-dom"
 
 const Navbar: React.FC = () => {
+  const navigate = useNavigate();
+  let navbarTitle: string = 'Dashboard';
+  const urlData: string[] = ['/admin', '/driver', '/customer', '/service', '/vehicle', '/invoice', '/admin/create'];
+  const titleData: string[] = ['Admin', 'Tài xế', 'Khách Hàng', 'Service Phương Tiện', 'Loại Phương Tiện', 'Hóa Đơn', 'Thêm quản lý'];
+
+  for( let i: number=0; i<urlData.length; i++){
+    if(window.location.pathname === urlData[i]){
+      navbarTitle = titleData[i];
+    }
+  }
+
   return (
     <nav className={styles["nav-container"]}>
       <div className={styles["content-container-openclose"]}>
@@ -19,9 +31,9 @@ const Navbar: React.FC = () => {
       </div>
       <div className={styles["title-container"]}>
         <div className={styles["sub-title"]}>
-          <GoBack className={styles["custome-svg"]} />
-          <Reload className={styles["custome-svg"]} />
-          <div className={styles["title"]}>Dashboard</div>
+          <GoBack className={styles["custome-svg"]} onClick={()=>navigate(-1)}/>
+          <Reload className={styles["custome-svg"]} onClick={()=>navigate(0)}/>
+          <div className={styles["title"]}>{navbarTitle}</div>
         </div>
         <div className={styles["sub-option"]}>
           <User className={styles["custome-svg"]} />

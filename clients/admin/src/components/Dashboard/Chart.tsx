@@ -8,12 +8,20 @@ import { ReactComponent as RevenueSignature } from "../../assets/svg/Dashboard/r
 
 import LineGraph from "./LineGraph";
 import { dashboardActions } from "@store/dashboard";
+import { useEffect } from "react";
 
-const ChartComponent: React.FC = () => {
+const Chart: React.FC = () => {
   const dispatch = useAppDispatch();
+  const chartData = useAppSelector((state) => state.dashboard.chartData);
+  let sumRevenue: string = chartData.yLabels
+    .reduce((partialSum, a) => partialSum + a, 0)
+    .toLocaleString("it-IT", { style: "currency", currency: "VND" });
+  sumRevenue = sumRevenue.slice(0, sumRevenue.length - 3);
   const getRevenue = [1000000, 4000000, 1000000, 12000000, 6000000, 8000000, 1000000];
   // const getRevenue = [1200000, 5000000, 100000, 1260000, 100000, 900000, 4500000];
-  dispatch(dashboardActions.updateRevenue(getRevenue));
+  useEffect(() => {
+    dispatch(dashboardActions.updateRevenue(getRevenue));
+  }, []);
 
   return (
     <div className={styles["chart-container"]}>
@@ -24,13 +32,13 @@ const ChartComponent: React.FC = () => {
         <div className={styles["el-title"]}>Time line</div>
         <div className={styles["el-title"]}>Giờ làm</div>
       </div>
-      <div className={styles["chart-content"]}> 
+      <div className={styles["chart-content"]}>
         <div className={styles["total-revenue"]}>
           <div className={styles["title-info"]}>
             <div className={styles["title"]}>TỔNG DOANH THU HÀNG THÁNG</div>
             <Info />
           </div>
-          <div className={styles["revenue"]}>30.453.000</div>
+          <div className={styles["revenue"]}>{sumRevenue}</div>
           <div className={styles["currency"]}>VNĐ</div>
         </div>
         <div className={styles["chart-revenue"]}>
@@ -42,4 +50,4 @@ const ChartComponent: React.FC = () => {
   );
 };
 
-export default ChartComponent;
+export default Chart;

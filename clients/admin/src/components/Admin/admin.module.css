@@ -1,0 +1,103 @@
+.header-container{
+    height: 8.5rem;
+    width: 100%;
+    margin: 1.5rem 0;
+    display: flex;
+    gap: 2rem;
+}
+
+.manage-container{
+    width: 55%;
+    border: 2px solid #F0F0F0;
+    border-radius: 0.6rem;
+    display: flex;
+    align-items: center;
+    padding: 0 3rem;
+    gap: 3rem;
+    background: white;
+}
+
+.create-container{
+    width: 48%;
+    border: 2px solid #F0F0F0;
+    border-radius: 0.6rem;
+    align-items: center;
+    display: flex;
+    padding: 0 2rem;
+    gap: 2rem;
+    background: white;
+}
+
+.each-manage-container{
+    width: 30%;
+    height: 65%;
+    border-radius: 0.6rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding-left: 2rem;
+}
+
+.each-manage-container:hover{
+    background: #F6F6F6;
+    cursor: pointer;
+}
+
+.manage-background{
+    background: #F6F6F6;
+}
+
+.manage-header-content{
+    font-size: 1.4rem;
+    color: #3C3C3C;
+    font-weight: 500;
+}
+
+.each-create-container{
+    width: 28%;
+    height: 65%;
+    border-radius: 0.6rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding-left: 2rem;
+    border: 2px solid #F0F0F0;
+}
+
+.each-create-container:hover{
+    background: #F6F6F6;
+    cursor: pointer;
+}
+
+.create-header-content{
+    font-size: 1.6rem;
+    color: #3C3C3C;
+    font-weight: 600;
+}
+
+.create-button-container{
+    width: 40%;
+    height: 65%;
+    border-radius: 0.6rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    background: #E17644;
+    padding: 0 2.5rem;
+}
+
+.create-button-container:hover{
+    background: #f77e46;
+    cursor: pointer;
+}
+
+.create-button-header-content{
+    font-size: 1.6rem;
+    color: white;
+    font-weight: 600;
+}
+
+.table-content-container{
+    height: 66.5rem;
+
+}
