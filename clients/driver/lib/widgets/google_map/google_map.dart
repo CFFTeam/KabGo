@@ -1,12 +1,19 @@
 import 'dart:async';
 import 'dart:typed_data';
 
+import 'package:dio/dio.dart';
+import 'package:driver/data/direction_repository.dart';
+import 'package:driver/models/location.dart';
+import 'package:driver/providers/socket_provider.dart';
 import 'package:driver/widgets/icon_button/icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../../models/direction_model.dart';
+import '../../providers/connection_provider.dart';
 
 class KGoogleMap extends ConsumerStatefulWidget {
   const KGoogleMap({Key? key}) : super(key: key);
@@ -27,6 +34,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
 
   Set<Circle> _circles = {};
   Set<Marker> _markers = {};
+
+  Directions? _info;
 
   Set<Circle> _createCircle(String? id, LatLng latLng,
       {double radius = 50, bool vector = true}) {
@@ -170,6 +179,60 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
 
   @override
   Widget build(BuildContext context) {
+    final bool active = ref.read(socketClientProvider);
+
+    if (active) {
+      final customerRequestNotifier =
+          ref.read(customerRequestProvider.notifier);
+      final customerRequest = ref.read(customerRequestProvider);
+
+      if (customerRequest.hasValue()) {
+        if (customerRequestNotifier.status == RequestStatus.accepted) {
+          final LocationPostion customerLocation = customerRequest.booking.from;
+          final LocationPostion destinationLocation =
+              customerRequest.booking.to;
+
+          if (_info == null) {
+            DirectionRepository(dio: Dio())
+                .getDirection(
+                    origin: LatLng(
+                        customerLocation.latitude, customerLocation.longitude),
+                    destination: LatLng(destinationLocation.latitude,
+                        destinationLocation.longitude))
+                .then((value) {
+              _info = value;
+              if (value != null) {
+                _mapController.animateCamera(
+                    CameraUpdate.newLatLngBounds(value.bounds, 100.0));
+              }
+            });
+          }
+
+          setState(() {
+            _markers = {
+              _markers.first,
+              Marker(
+                  markerId: const MarkerId('customer_location'),
+                  position: LatLng(
+                      customerLocation.latitude, customerLocation.longitude),
+                  infoWindow: const InfoWindow(title: 'Vị trí khách hàng'),
+                  anchor: const Offset(0.5, 0.5),
+                  icon: BitmapDescriptor.defaultMarkerWithHue(
+                      BitmapDescriptor.hueOrange)),
+              Marker(
+                  markerId: const MarkerId('destination_location'),
+                  position: LatLng(destinationLocation.latitude,
+                      destinationLocation.longitude),
+                  infoWindow: const InfoWindow(title: 'Điểm đến  khách hàng'),
+                  anchor: const Offset(0.5, 0.5),
+                  icon: BitmapDescriptor.defaultMarkerWithHue(
+                      BitmapDescriptor.hueOrange)),
+            };
+          });
+        }
+      }
+    }
+
     return Stack(children: <Widget>[
       GoogleMap(
         myLocationButtonEnabled: false,
@@ -178,9 +241,19 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         zoomGesturesEnabled: true,
         onMapCreated: _onMapCreated,
         initialCameraPosition: _cameraPosition,
-        trafficEnabled: true,
         markers: _markers,
         circles: _circles,
+        polylines: {
+          if (_info != null)
+            Polyline(
+              polylineId: const PolylineId('customer_direction'),
+              color: Colors.blue,
+              width: 5,
+              points: _info!.polylinePoints
+                  .map((e) => LatLng(e.latitude, e.longitude))
+                  .toList()
+            )
+        },
       ),
       Align(
           alignment: Alignment.bottomRight,

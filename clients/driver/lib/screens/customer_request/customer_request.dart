@@ -22,6 +22,7 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
   @override
   Widget build(BuildContext context) {
     final customerRequestNotifier = ref.read(customerRequestProvider.notifier);
+    final customerRequest = ref.read(customerRequestProvider);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
@@ -47,8 +48,8 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                child: const Image(
-                  image: AssetImage('lib/assets/test/avatar.png'),
+                child: Image(
+                  image: AssetImage(customerRequest.customer.avatar),
                   width: 60,
                   height: 60,
                 ),
@@ -62,32 +63,34 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                       children: <Widget>[
                         SizedBox(
                             width: MediaQuery.of(context).size.width - 270,
-                            child: const Text('Maximilliam hjkahsdkjsad',
+                            child: Text(customerRequest.customer.name,
                                 style: ThemeText.customerName,
                                 overflow: TextOverflow.ellipsis)),
-                        const Row(
+                        Row(
                           children: <Widget>[
                             Image(
-                                image: AssetImage('lib/assets/icons/gold.png'),
+                                image: AssetImage(
+                                    'lib/assets/icons/${customerRequest.customer.rankType}.png'),
                                 width: 20),
-                            SizedBox(width: 10),
-                            Text('Hạng vàng', style: ThemeText.ranking),
+                            const SizedBox(width: 10),
+                            Text(customerRequest.customer.rankTitle, style: ThemeText.ranking),
                           ],
                         )
                       ],
                     ),
                     const SizedBox(height: 13),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        Text('ZaloPay', style: ThemeText.bookingDetails),
-                        Text('Khuyến mãi', style: ThemeText.bookingDetails),
-                        Text('Xe Oto con', style: ThemeText.bookingDetails)
+                        Text(customerRequest.booking.paymentMethod, style: ThemeText.bookingDetails),
+                        if (customerRequest.booking.promotion) const Text('Khuyến mãi', style: ThemeText.bookingDetails),
+                        Text(customerRequest.booking.vehicle, style: ThemeText.bookingDetails),
+                        if (!customerRequest.booking.promotion) const SizedBox(width: 60),
                       ],
                     )
                   ],
                 ),
-              )
+              ) 
             ],
           ),
           const Row(
@@ -162,7 +165,7 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      const SizedBox(height: 15), 
+                      const SizedBox(height: 15),
                       Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 12, horizontal: 16),
@@ -205,48 +208,52 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        customerRequestNotifier.acceptRequest();
+                        context.go(HomeDashboard.path);
+                      },
                       style: ThemeButton.acceptButton,
-                      child: const Text('CHẤP NHẬN', style: ThemeText.acceptButtonText),
+                      child: const Text('CHẤP NHẬN',
+                          style: ThemeText.acceptButtonText),
                     ),
                   ),
                   Positioned(
                     right: 16,
-                    child: Builder(
-                      builder: (context) {
-                        return CircularCountDownTimer(
-                          width: 24,
-                          height: 24,
-                          duration: 10,
-                          initialDuration: 0,
-                          ringColor: const Color.fromRGBO(255, 255, 255, .8),
-                          fillColor: const Color.fromRGBO(94, 169, 68, .7),
-                          backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-                          strokeWidth: 10.0,
-                          strokeCap: StrokeCap.square,
-                          textStyle: const TextStyle(
-                            fontSize: 12,
-                            color: Color(0xFFF86C1D),
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textFormat: CountdownTextFormat.S,
-                          isReverse: true,
-                          isReverseAnimation: false,
-                          autoStart: true,
-                          onComplete: () {
-                            customerRequestNotifier.cancelRequest();
-                            context.go(HomeDashboard.path);
-                          },
-                          timeFormatterFunction: (defaultFormatterFunction, duration) {
-                            if (duration.inSeconds == 0) {
-                              return "0";
-                            } else {
-                              return Function.apply(defaultFormatterFunction, [duration]);
-                            }
-                          },
-                        );
-                      }
-                    ),
+                    child: Builder(builder: (context) {
+                      return CircularCountDownTimer(
+                        width: 24,
+                        height: 24,
+                        duration: 10,
+                        initialDuration: 0,
+                        ringColor: const Color.fromRGBO(255, 255, 255, .8),
+                        fillColor: const Color.fromRGBO(94, 169, 68, .7),
+                        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
+                        strokeWidth: 10.0,
+                        strokeCap: StrokeCap.square,
+                        textStyle: const TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFFF86C1D),
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textFormat: CountdownTextFormat.S,
+                        isReverse: true,
+                        isReverseAnimation: false,
+                        autoStart: true,
+                        onComplete: () {
+                          customerRequestNotifier.cancelRequest();
+                          context.go(HomeDashboard.path);
+                        },
+                        timeFormatterFunction:
+                            (defaultFormatterFunction, duration) {
+                          if (duration.inSeconds == 0) {
+                            return "0";
+                          } else {
+                            return Function.apply(
+                                defaultFormatterFunction, [duration]);
+                          }
+                        },
+                      );
+                    }),
                   )
                 ],
               ),

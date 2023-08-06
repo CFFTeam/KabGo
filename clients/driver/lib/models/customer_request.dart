@@ -1,30 +1,29 @@
+import 'package:driver/models/booking.dart';
 import 'package:driver/models/customer.dart';
-import 'package:driver/models/location.dart';
 
 class CustomerRequest {
-  final LocationPostion customerLocation;
-  final LocationPostion destinationLocation;
-
   final Customer customer;
+  final Booking booking;
 
   CustomerRequest({
-    required this.customerLocation,
-    required this.destinationLocation,
     required this.customer,
+    required this.booking,
   });
+
+  bool hasValue() {
+    return customer.hasValue() && booking.hasValue();
+  }
 
   factory CustomerRequest.fromJson(Map<String, dynamic> json) {
     return CustomerRequest(
-      customerLocation: LocationPostion.fromJson(json['customerLocation']),
-      destinationLocation: LocationPostion.fromJson(json['destinationLocation']),
+      booking: Booking.fromJson(json['booking']),
       customer: Customer.fromJson(json['customer']),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'customerLocation': customerLocation.toJson(),
-      'destinationLocation': destinationLocation.toJson(),
+      'booking': booking.toJson(),
       'customer': customer.toJson(),
     };
   }

@@ -33,7 +33,30 @@ io.on('connection', (socket: Socket) => {
 
     console.log('Client connected');
 
-    setTimeout(() => socket.emit('welcome', 'Welcome to the server'), 3000);
+    const customerRequest = {
+        customer: {
+            name: 'Maximilliam',
+            phone: '0123456789',
+            avatar: 'lib/assets/test/avatar.png',
+            rankType: 'gold',
+            rankTitle: 'Hạng vàng'
+        },
+        booking: {
+            from: {
+                latitude: 10.739409785339353,
+                longitude: 106.65454734297383
+            },
+            to: {
+                latitude: 10.762711311339077,
+                longitude: 106.68230473890691
+            },
+            paymentMethod: 'ZaloPay',
+            promotion: false,
+            vehicle: 'Xe Oto con'
+        }
+    };
+
+    setTimeout(() => socket.emit('welcome', JSON.stringify(customerRequest)), 3000);
     
     socket.on('disconnect', () => {
         console.log('Client disconnected');
