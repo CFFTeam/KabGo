@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./dashboard.module.css";
-
+import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,9 +11,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-
 import { Line } from "react-chartjs-2";
-// import faker from "faker";
 
 ChartJS.register(
   CategoryScale,
@@ -27,50 +25,43 @@ ChartJS.register(
 
 ChartJS.defaults.font.family = "Montserrat";
 
-const labels = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-];
-
-export const data = {
-  labels,
-  datasets: [
-    {
-      data: [1000000, 4000000, 1000000, 11000000, 6000000, 8000000, 1000000],
-      borderColor: "#F86C1D",
-      backgroundColor: "#FFFFFF",
-      pointBackgroundColor: "#F86C1D",
-      borderWidth: 2,
-      pointRadius: 2,   
-    },
-  ],
-};
-
-export const options = {
-  responsive: true,
-  maintainAspectRatio: false,
+const LineGraph: React.FC = () => {
+  const chartData = useAppSelector((state) => state.dashboard.chartData);
+  const labels: string[] = chartData.xLabels;
+  const yLabels: number[] = chartData.yLabels;
+  const stepRevenue: number = Math.max(...chartData.yLabels) / 4;
+  const maxRevenue: number = Math.min(15000000, Math.max(...chartData.yLabels) + stepRevenue); 
+  const data = {
+    labels,
+    datasets: [
+      {
+        data: yLabels,
+        borderColor: "#F86C1D",
+        backgroundColor: "#FFFFFF",
+        pointBackgroundColor: "#F86C1D",
+        borderWidth: 2,
+        pointRadius: 2,
+      },
+    ],
+  };
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: false,
       },
     },
-  scales: {
-    y: {
-      suggestedMin: 0,
-      suggestedMax: 15000000,
-      ticks: {
-        stepSize: 3000000,
+    scales: {
+      y: {
+        suggestedMin: 0,
+        suggestedMax: maxRevenue,
+        ticks: {
+          stepSize: stepRevenue,
+        },
       },
     },
-  },
-};
-
-const LineGraph: React.FC = () => {
+  };
   return <Line data={data} options={options} />;
 };
 
