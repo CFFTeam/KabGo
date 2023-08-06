@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "@components/Navbar";
 import Sidebar from "@components/Sidebar";
-import styles from "../assets/css/layout.module.css";
+import styles from "./layout.module.css";
 import toast, { Toaster } from 'react-hot-toast';
 
 const BaseLayout: React.FC = () => {

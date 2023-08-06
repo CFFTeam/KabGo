@@ -7,9 +7,13 @@ import { ReactComponent as Info } from "../../assets/svg/Dashboard/info.svg";
 import { ReactComponent as RevenueSignature } from "../../assets/svg/Dashboard/revenuesign.svg";
 
 import LineGraph from "./LineGraph";
+import { dashboardActions } from "@store/dashboard";
 
 const ChartComponent: React.FC = () => {
-  //   const categoryData = useAppSelector((state) => state.dashboard.categoryData);
+  const dispatch = useAppDispatch();
+  const getRevenue = [1000000, 4000000, 1000000, 12000000, 6000000, 8000000, 1000000];
+  // const getRevenue = [1200000, 5000000, 100000, 1260000, 100000, 900000, 4500000];
+  dispatch(dashboardActions.updateRevenue(getRevenue));
 
   return (
     <div className={styles["chart-container"]}>

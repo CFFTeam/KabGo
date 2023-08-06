@@ -21,6 +21,10 @@ interface CategoryData {
   color: string;
 }
 
+interface ChartData {
+  xLabels: string[];
+  yLabels: number[];
+}
 interface TasklistChild {
   name: string;
   date: string;
@@ -43,6 +47,7 @@ interface InitialDashboardState {
   categoryData: CategoryData[];
   tasklistData: TasklistData;
   topKpiData: TopKpiData[];
+  chartData: ChartData;
 }
 
 const initialDashboardState: InitialDashboardState = {
@@ -72,6 +77,11 @@ const initialDashboardState: InitialDashboardState = {
       color: "#F93232",
     },
   ],
+
+  chartData: {
+    xLabels: ["March", "April", "May", "June", "July", "August", "September"],
+    yLabels: [],
+  },
 
   tasklistData: {
     numberOfTasks: 4,
@@ -135,10 +145,12 @@ const dashboardSlice = createSlice({
       }
     },
     updateTasklistState(state, action: PayloadAction<number>) {
-      state.tasklistData.tasklistChild[action.payload].check = !state.tasklistData.tasklistChild[action.payload].check;
-      state.tasklistData.numberOfTasks = state.tasklistData.tasklistChild.filter((data) => !data.check).length;
+      state.tasklistData.tasklistChild[action.payload].check =
+        !state.tasklistData.tasklistChild[action.payload].check;
+      state.tasklistData.numberOfTasks =
+        state.tasklistData.tasklistChild.filter((data) => !data.check).length;
     },
-    updateTasklistPosition(state, action: PayloadAction<number>){
+    updateTasklistPosition(state, action: PayloadAction<number>) {
       if (state.tasklistData.tasklistChild[action.payload].check) {
         state.tasklistData.tasklistChild.push(
           state.tasklistData.tasklistChild.splice(action.payload, 1)[0]
@@ -148,6 +160,9 @@ const dashboardSlice = createSlice({
           state.tasklistData.tasklistChild.splice(action.payload, 1)[0]
         );
       }
+    },
+    updateRevenue(state, action: PayloadAction<number[]>){
+      state.chartData.yLabels = [...action.payload];
     }
   },
 });
