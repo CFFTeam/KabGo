@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:customer_app/models/route_model.dart';
 import 'package:customer_app/providers/mapProvider.dart';
 import 'package:customer_app/providers/routeProvider.dart';
@@ -6,9 +8,9 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import '../functions/calculateDistance.dart';
 import '../functions/determinePosition.dart';
 import '../functions/getBytesFromAsset.dart';
+import '../functions/networkUtility.dart';
 import '../models/location_model.dart';
 import '../providers/arrivalLocationProvider.dart';
 import '../providers/departureLocationProvider.dart';
@@ -45,10 +47,14 @@ class _MyMapState extends ConsumerState<MyMap> {
         .setDepartureLocation(currentLocationModel);
   }
 
-  void getDeparture() async {
+  void getDeparture(bool animationCamera) async {
     LocationModel locationModel = ref.read(departureLocationProvider);
     if (locationModel.placeId != null) {
-      departureLocation = await locationModel.getLocation();
+      if (locationModel.postion == null) {
+        departureLocation = await locationModel.getLocation();
+      } else {
+        departureLocation = locationModel.postion;
+      }
     } else {
       LocationModel currentLocationModel = await determinePosition();
       departureLocation = currentLocationModel.postion;
@@ -71,14 +77,25 @@ class _MyMapState extends ConsumerState<MyMap> {
         ),
       ),
     );
-    googleMapController.animateCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(
-            target: LatLng(
-                departureLocation!.latitude, departureLocation!.longitude),
-            zoom: 16.5),
-      ),
-    );
+    if (animationCamera) {
+      googleMapController.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+              target: LatLng(
+                  departureLocation!.latitude, departureLocation!.longitude),
+              zoom: 16.5),
+        ),
+      );
+    } else {
+      googleMapController.moveCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+              target: LatLng(
+                  departureLocation!.latitude, departureLocation!.longitude),
+              zoom: 16.5),
+        ),
+      );
+    }
 
     setState(() {});
   }
@@ -103,7 +120,12 @@ class _MyMapState extends ConsumerState<MyMap> {
 
   void drawRoute() async {
     LocationModel arrival = ref.watch(arrivalLocationProvider);
-    arrivalLocation = await arrival.getLocation();
+    if (arrival.postion == null) {
+      arrivalLocation = await arrival.getLocation();
+    } else {
+      arrivalLocation = arrival.postion;
+    }
+
     if (markers.isEmpty) {
       markers.add(
         Marker(
@@ -129,37 +151,37 @@ class _MyMapState extends ConsumerState<MyMap> {
         ),
       ),
     );
+
+    Uri uri = Uri.https('maps.googleapis.com', 'maps/api/directions/json', {
+      'key': APIKey,
+      'origin':
+          '${departureLocation!.latitude},${departureLocation!.longitude}',
+      'destination':
+          '${arrivalLocation!.latitude},${arrivalLocation!.longitude}',
+    });
+
+    String? response = await NetworkUtility.fetchUrl(uri);
+    final parsed = json.decode(response!).cast<String, dynamic>();
+
     PolylinePoints polylinePoints = PolylinePoints();
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      APIKey,
-      PointLatLng(departureLocation!.latitude, departureLocation!.longitude),
-      PointLatLng(arrivalLocation!.latitude, arrivalLocation!.longitude),
-    );
-    // print(result);
-    if (result.points.isNotEmpty) {
+    List<PointLatLng> result = polylinePoints.decodePolyline(
+        parsed['routes'][0]['overview_polyline']['points'] as String);
+    if (result.isNotEmpty) {
       polylineCoordinates.clear();
-      result.points.forEach(
+      result.forEach(
         (PointLatLng point) {
           polylineCoordinates.add(LatLng(point.latitude, point.longitude));
         },
       );
     }
-    double totalDistance = 0;
-    for (var i = 0; i < polylineCoordinates.length - 1; i++) {
-      totalDistance += calculateDistance(
-          polylineCoordinates[i].latitude,
-          polylineCoordinates[i].longitude,
-          polylineCoordinates[i + 1].latitude,
-          polylineCoordinates[i + 1].longitude);
-    }
+
     setState(() {
-      distance = double.parse(totalDistance.toStringAsFixed(1));
-      travelTime = double.parse(((distance / 28) * 60).toStringAsFixed(0));
       ref.read(routeProvider.notifier).setRoute(RouteModel(
           departureLocation: LocationModel(),
           arrivalLocation: LocationModel(),
-          time: travelTime,
-          distance: totalDistance));
+          time: parsed['routes'][0]['legs'][0]['duration']['text'] as String,
+          distance:
+              parsed['routes'][0]['legs'][0]['distance']['text'] as String));
       Polyline polyline = Polyline(
         polylineId: const PolylineId("poly"),
         points: polylineCoordinates,
@@ -190,6 +212,32 @@ class _MyMapState extends ConsumerState<MyMap> {
             southwest: LatLng(minLat, minLong),
             northeast: LatLng(maxLat, maxLong)),
         70));
+  }
+
+  void findDriver() async {
+    departureLocation = ref.read(departureLocationProvider).postion;
+
+    markers.clear();
+    markers.add(
+      Marker(
+        markerId: const MarkerId('departureLocation'),
+        position:
+            LatLng(departureLocation!.latitude, departureLocation!.longitude),
+        icon: BitmapDescriptor.fromBytes(
+          await getBytesFromAsset('assets/my_location.png', 250),
+        ),
+      ),
+    );
+    googleMapController.moveCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+            target: LatLng(
+                departureLocation!.latitude, departureLocation!.longitude),
+            zoom: 16.5),
+      ),
+    );
+
+    setState(() {});
   }
 
   String? action;
@@ -228,7 +276,7 @@ class _MyMapState extends ConsumerState<MyMap> {
             mapPaddingBottom = 360;
             polylineList.clear();
             polylineCoordinates.clear();
-            getDeparture();
+            getDeparture(true);
           } else if (next == 'DRAW_ROUTE') {
             // mapPaddingBottom = 320;
             mapPaddingBottom = 360;
@@ -240,7 +288,7 @@ class _MyMapState extends ConsumerState<MyMap> {
             polylineCoordinates.clear();
             markers.clear();
             mapPaddingBottom = 80;
-            getDeparture();
+            findDriver();
           }
         });
         return Container(
