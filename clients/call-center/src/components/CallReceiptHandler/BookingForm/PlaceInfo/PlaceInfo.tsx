@@ -4,20 +4,59 @@ import {ReactComponent as PickUpIcon} from '@assets/svg/CallReceipt/pick-up.svg'
 import {ReactComponent as LocationIcon} from '@assets/svg/CallReceipt/location.svg';
 import { GoogleMap, Marker, Autocomplete, DirectionsRenderer, useJsApiLoader, useLoadScript } from '@react-google-maps/api';
 import usePlacesAutocomplete, {getGeocode, getLatLng} from "use-places-autocomplete";
-import PlacesAutocomplete from "./PlacesAutocomplete/PlacesAutocomplete";
+import PlacesAutocompleteInput from "./PlacesAutocompleteInput/PlacesAutocompleteInput";
+import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
+import mapStyles from "@assets/googleMapStyles/map.json";
+
+interface originLatLng {
+    lat: number;
+    lng: number;
+}
+
+interface destinationLatLng {
+    lat: number;
+    lng: number;
+}
 
 const center = {
     lat: 37.7749295,
     lng: -122.4194155
 }
 
+// const google = window.google; 
+
+
 let originAutocomplete: any  = {};
 let destinationAutocomplete: any  = {};
 
+// used for map style
+const options = {
+    styles: mapStyles,
+    zoomControl: false,
+    streetViewControl: false,
+    mapTypeControl: false,
+    fullscreenControl: false,
+}
 
-const google = window.google; 
+const polylineOptions = {
+    polylineOptions: {
+        strokeColor: '#FFA500', // Orange color
+        strokeOpacity: 1,
+        strokeWeight: 4,      // Thickness of the line
+      },
+}
+
+
 
 const PlaceInfo: React.FC = () => {
+
+    const dispatch = useAppDispatch();
+    const { originLatLng: originLatLngGlobal, destinationLatLng: destinationLatLngGlobal} 
+    = useAppSelector((state) => state.callReceiptHandler);
+
+    console.log('originLatLngGlobal', originLatLngGlobal);
+    console.log('destinationLatLngGlobal', destinationLatLngGlobal);
+
     const [isMapLoaded, setIsMapsLoaded] = useState(false);
 
     const {isLoaded} = useJsApiLoader({
@@ -85,32 +124,37 @@ const PlaceInfo: React.FC = () => {
     const [directionsResponse, setDirectionsResponse] = useState<any>(null);
     const [distanctace, setDistance] = useState<any>('');
     const [duration, setDuration] = useState<any>('');
+   
 
     const calculateRoute = async () => {
-        console.log('origin-ref: ', originRef);
-        console.log('destination-ref: ', destinationRef);
-        console.log('originLatLng: ',originLatLng);
-        console.log('arrivalLatLng: ', arrivalLatLng);
-
-        setTimeout(async () => {
-            if (originRef.current?.value === '' || destinationRef.current?.value === '') {
-                return;
-            }
+        console.log('isLoaded: ', isLoaded);
+        console.log("window.google.maps: ", window.google.maps);
+        // console.log('google.maps: ', google.maps);
+        if (window.google.maps) {
+           const directionService = new window.google.maps.DirectionsService();
+            // if (originRef.current?.value === '' || destinationRef.current?.value === '') {
+            //     return;
+            // }
             // eslint-disable-next-line no-undef
-            const directionService = new google.maps.DirectionsService();
+            console.log('google: ', window.google);
     
-            const results  = await directionService.route({
-                origin: originRef.current?.value as string,
-                destination: destinationRef.current?.value as string,
-                travelMode: google.maps.TravelMode.DRIVING
+            // const results  = await directionService.route({
+            //     origin: originRef.current?.value as string,
+            //     destination: destinationRef.current?.value as string,
+            //     travelMode: google.maps.TravelMode.DRIVING
+            // })
+
+            const results = await directionService.route({
+                origin: new window.google.maps.LatLng(originLatLngGlobal.lat, originLatLngGlobal.lng),
+                destination: new window.google.maps.LatLng(destinationLatLngGlobal.lat, destinationLatLngGlobal.lng), 
+                travelMode: window.google.maps.TravelMode.DRIVING
             })
-    
             setDirectionsResponse(results);
             setDistance(results.routes[0].legs[0].distance?.text);
             setDuration(results.routes[0].legs[0].duration?.text);
-        }, 3000);
-
+        }
     }
+
 
     const clearRoute = () => {
         setDirectionsResponse(null);
@@ -167,9 +211,10 @@ const PlaceInfo: React.FC = () => {
                             }            
                         </div>  */}
 
-                        <PlacesAutocomplete/>
+                        <PlacesAutocompleteInput inputStyle = "origin"/>
 
                     </div>
+
                     <div className={styles["input"]}>
                         <label htmlFor="arrival-address" style = {{display: "flex", gap: "1rem"}}>
                             <span className={styles["title"]}>
@@ -180,29 +225,29 @@ const PlaceInfo: React.FC = () => {
                             </span>
                         </label>
                         {/* eslint-disable-next-line no-undef */}
-                        <Autocomplete onLoad={(autocomplete) => (destinationAutocomplete = autocomplete)}
+                        {/* <Autocomplete onLoad={(autocomplete) => (destinationAutocomplete = autocomplete)}
                         onPlaceChanged={() => handleArrivalPlaceChange(destinationAutocomplete.getPlace())} >
                             <input ref = {destinationRef} name = "arrival-address" placeholder = "Nhập địa chỉ đến..." type = "text"  className = {styles["arrival-address-inp"]}/>
-                        </Autocomplete>
+                        </Autocomplete> */}
+
+                        <PlacesAutocompleteInput inputStyle = "destination"/>
+
                     </div>
-                    <div className={styles[""]}>
-                        <button className={styles[""]} onClick = {calculateRoute} type = "button">
-                            Calculate route
+
+                    <div className={styles["location-btn"]}>
+                        <button  type = "button" onClick = {calculateRoute}>
+                            Định vị
                         </button>
                     </div>
+
                 </div>
                 {/* Google Map box */}
                 <div className={styles["geo-map"]}>
                     {/* Display markers, or directions */}
                    <GoogleMap center = {center} mapContainerStyle = {{width: '100%', height: '100%'}} zoom = {15} 
-                   options = {{
-                    zoomControl: false,
-                    streetViewControl: false,
-                    mapTypeControl: false,
-                    fullscreenControl: false
-                }}>
+                   options = {options}>
                     <Marker position = {center} />
-                    {directionsResponse && <DirectionsRenderer directions = {directionsResponse} />}
+                    {directionsResponse && <DirectionsRenderer directions = {directionsResponse} options = {polylineOptions}/>}
                     </GoogleMap> 
                 </div>
             <div className={styles["forward-btn"]}>

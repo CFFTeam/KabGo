@@ -10,7 +10,7 @@ form.call-receipt-form {
     margin-top: 4rem;
     margin-bottom: 4rem;
     display: inline-block;
-    width: 85rem;
+    width: 94rem;
     /* height: 50rem; */
     /* background-color: white; */
     background-color: aqua;
@@ -45,7 +45,7 @@ form.call-receipt-form > div.form-body {
 
 form.call-receipt-form > div.form-body > div.flex-container {
     width: 100%;
-    gap: 2rem;
+    gap: 5rem;
     display: flex;
     /* background-color: red; */
 }
@@ -87,6 +87,29 @@ form.call-receipt-form > div.form-body > div.flex-container > div.input > input.
     width: 120%;
 }
 
+
+form.call-receipt-form > div.form-body > div.flex-container > div.location-btn {
+    /* background-color: red; */
+    margin-top: 3rem;
+    width: 30rem;
+}
+
+form.call-receipt-form > div.form-body > div.flex-container > div.location-btn > button {
+    background-color: #E67700;
+    border: 2.4px solid #E67700;
+    border-radius: 12px;
+    color: #fff;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    padding: 0.8rem;
+}
+
+form.call-receipt-form > div.form-body > div.flex-container > div.location-btn > button:hover {
+    background-color: white;
+    color: #E67700;
+}
 
 
 

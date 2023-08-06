@@ -1,0 +1,43 @@
+div.places-complete-input {
+    background-color: black;
+    position: relative;
+}
+
+div.places-complete-input > input {
+    width: 100%;
+    font-size: 1.4rem;
+}
+
+div.places-complete-input > input:placeholder-shown {
+    font-size: 1.4rem;
+}
+
+div.places-complete-input > div.suggestion-list {
+    margin-top:0.2rem;
+    position: absolute;
+    z-index: 99999;
+    width: 100%;
+}
+
+div.places-complete-input > div.suggestion-list > li {
+    display: block;
+    font-size: 1.3rem !important;
+    list-style: none;
+    background-color: #e9ecef;
+    font-size: 1.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 1rem;
+    border-bottom: 1px solid #ADB5BD;
+    cursor: pointer;
+}
+
+div.places-complete-input > div.suggestion-list > li:last-child {
+    border-bottom: none;
+}
+
+
+div.places-complete-input > div.suggestion-list > li:hover {
+    background-color: #CED4DA
+}
