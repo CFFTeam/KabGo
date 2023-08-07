@@ -1,4 +1,5 @@
 import 'package:driver/providers/connection_provider.dart';
+import 'package:driver/providers/socket_provider.dart';
 import 'package:driver/screens/customer_request/customer_request.dart';
 import 'package:driver/widgets/icon_button/icon_button.dart';
 import 'package:driver/widgets/navigation/navigation.dart';
@@ -21,24 +22,30 @@ class HomePanel extends ConsumerStatefulWidget {
 }
 
 class _HomePanelState extends ConsumerState<HomePanel> {
-  static bool isFuture = false;
-
   @override
   void dispose() {
-    isFuture = false;
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final socketNotifier = ref.read(socketProvider.notifier);
-    bool active = ref.watch(socketProvider);
+    final socketNotifier = ref.read(socketClientProvider.notifier);
+    final bool active = ref.watch(socketClientProvider);
 
-    if (active == true && isFuture == false) {
-      Future.delayed(const Duration(milliseconds: 2000), () {
-        context.go(CustomerRequest.path);
-      });
-      isFuture = true;
+    if (active == true) {
+      final customerRequestNotifier =
+          ref.read(customerRequestProvider.notifier);
+      if (customerRequestNotifier.status == RequestStatus.waiting) {
+        final customerRequest = ref.watch(customerRequestProvider);
+
+        if (customerRequest.hasValue()) {
+          Future.delayed(const Duration(milliseconds: 500), () {
+            if (active == true) {
+              WidgetsBinding.instance.addPostFrameCallback((_) => context.go(CustomerRequest.path));
+            }
+          });
+        }
+      }
     }
 
     return Container(
@@ -103,9 +110,7 @@ class _HomePanelState extends ConsumerState<HomePanel> {
               ),
             ),
             Expanded(child: widget.child),
-            CNavigation(
-              initialSelection: 'Trang chủ',
-              items: [
+            CNavigation(initialSelection: 'Trang chủ', items: [
               CNavigationItem(
                 onPressed: () {
                   context.go('/');
