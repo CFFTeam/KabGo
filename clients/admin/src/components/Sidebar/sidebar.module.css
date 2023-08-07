@@ -1,21 +1,23 @@
 .sidebar-container{
     background: #FCFCFC;
     min-height: 100%;
-    width: 22%;
+    width: 20%;
+    position: relative;
+    border-right: 2px solid #F2F2F2;
 }
 
 .logo{
     margin: 3.5rem 4.5rem 2.5rem 4.5rem;
 }
 
-.main-menu-title{
+.sidebar-title{
     font-size: 1.2rem;
     color: #878787;
     font-weight: 500;
     padding-left: 2rem;
 }
 
-.main-menu-container{
+.sidebar-sub-container{
     width: 100%;
     font-size: 1.5rem;
     color: #545454;
@@ -23,9 +25,9 @@
     padding-top: 1.5rem;
 }
 
-.main-menu-el-container{
+.sidebar-el-container{
     display: flex;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     height: 5rem;
     align-items: center;
     padding-left: 3rem;
@@ -36,18 +38,18 @@
     border-left: 0.8rem solid #FCFCFC;
 }
 
-.main-menu-el-container:hover{
+.sidebar-el-container:hover{
     background: #FFF4EF;
     border: 1px solid #FFB393;
     border-left: 0.8rem solid #F86C1D;
     border-radius: 0 0.5rem 0.5rem 0;
 }
 
-.main-menu-img{
+.sidebar-img{
     width: 18%;
 }
 
-.main-menu-content-arrow{
+.sidebar-content-arrow{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -71,5 +73,14 @@
     color: #878787;
     font-weight: 500;
     padding-left: 2rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
+}
+
+.sidebar-footer-logo{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: absolute;
+    bottom: 2rem;
+
 }

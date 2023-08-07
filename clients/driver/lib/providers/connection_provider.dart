@@ -1,23 +1,61 @@
+import 'dart:convert';
+
+import 'package:driver/models/booking.dart';
+import 'package:driver/models/customer.dart';
+import 'package:driver/models/customer_request.dart';
+import 'package:driver/models/location.dart';
+import 'package:driver/providers/socket_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-const String fake_data = "{\"customerLocation\": {\"latitude\": 10.739409785339353,\"longitude\": 106.65454734297383},\"destinationLocation\": {\"latitude\": 10.762711311339077,\"longitude\": 106.68230473890691},\"customer\": {\"name\": \"Maximilliam\",\"phone\": \"0123456789\"}}";
+abstract class RequestStatus {
+  static int waiting = 0;
+  static int accepted = 1;
+  static int comming = 2;
+  static int ready = 3;
+  static int ongoing = 4;
+}
 
-class SocketConnection extends StateNotifier<bool> {
-  SocketConnection() : super(false);
+class CustomerRequestNotifier extends StateNotifier<CustomerRequest> {
+  final SocketClient _socket;
 
-  void toggle() {
-    state = !state;
+  int status = RequestStatus.waiting;
+
+  CustomerRequestNotifier(this._socket)
+      : super(CustomerRequest(
+            customer: Customer(
+                name: "", phone: "", avatar: "", rankType: "", rankTitle: ""),
+            booking: Booking(
+                from: LocationPostion(latitude: 0, longitude: 0),
+                to: LocationPostion(latitude: 0, longitude: 0),
+                paymentMethod: "",
+                promotion: false,
+                vehicle: ""))) {
+    _socket.subscribe('welcome', (data) {
+      print('server say: ${jsonDecode(data)}');
+
+      state = CustomerRequest.fromJson(jsonDecode(data));
+    });
   }
 
-  void connect() {
-    state = true;
+  void acceptRequest() {
+    status = RequestStatus.accepted;
   }
 
-  void disconnect() {
-    state = false;
+  void cancelRequest() {
+    status = RequestStatus.waiting;
+
+    state = CustomerRequest(
+        customer: Customer(
+            name: "", phone: "", avatar: "", rankType: "", rankTitle: ""),
+        booking: Booking(
+            from: LocationPostion(latitude: 0, longitude: 0),
+            to: LocationPostion(latitude: 0, longitude: 0),
+            paymentMethod: "",
+            promotion: false,
+            vehicle: ""));
   }
 }
 
-final socketProvider = StateNotifierProvider<SocketConnection, bool>(
-  (ref) => SocketConnection(),
-);
+final customerRequestProvider =
+    StateNotifierProvider<CustomerRequestNotifier, CustomerRequest>((ref) =>
+        CustomerRequestNotifier(ref.read(socketClientProvider.notifier)));
