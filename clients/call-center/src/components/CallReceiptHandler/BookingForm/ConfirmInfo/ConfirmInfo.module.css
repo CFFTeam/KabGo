@@ -1,0 +1,201 @@
+div.wrapper {
+    display: block;
+    width: 100%;
+    text-align: center;
+    /* background-color: blue; */
+}
+
+form.call-receipt-form {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    display: inline-block;
+    width: 85rem;
+    background-color: white;
+    border-radius: 8px;
+    border: 1.4px solid #ADB5BD;
+    border-top: none;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+    padding-bottom: 2rem;
+}
+
+form.call-receipt-form > div.form-heading {
+    height: 4.6rem;
+    background-color: #E67700;
+    position: relative;
+    border-radius: 8px 8px 0px 0px;
+}
+
+form.call-receipt-form > div.form-heading > span.title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-transform: uppercase;
+    color: white;
+    font-size: 2.2rem;
+    font-weight: 600;
+}
+
+form.call-receipt-form > div.guest_info_section-title,
+form.call-receipt-form > div.details_info_section-title {
+    background-color: #F6F6F6;
+    padding: 1.6rem;
+    text-align: left;
+    height: 4rem;
+    width: 100%;
+    position: relative;
+    border-bottom: 1.4px solid #ADB5BD;
+}
+
+form.call-receipt-form > div.details_info_section-title {
+    border-top: 1.4px solid #ADB5BD
+}
+
+form.call-receipt-form > div.guest_info_section-title > span.text,
+form.call-receipt-form > div.details_info_section-title > span.text {
+    font-size: 2.2rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 600;
+}
+
+form.call-receipt-form > div.guest_info_section-content,
+form.call-receipt-form > div.details_info_section-content {
+    padding: 1.6rem;
+    font-size: 1.6rem;
+    height: 18rem;
+    padding: 1.6rem;
+}
+
+form.call-receipt-form > div.guest_info_section-content div span.title,  
+form.call-receipt-form > div.details_info_section-content > div  div span.title {
+    font-weight: 600;
+}
+
+form.call-receipt-form > div.guest_info_section-content div {
+    margin-left: 1rem;
+    margin-top: 1.2rem;
+    display: flex;
+    /* background-color: oldlace; */
+}
+
+form.call-receipt-form > div.guest_info_section-content div span,
+form.call-receipt-form > div.details_info_section-content div span {
+    margin-right: 1rem;
+    font-size: 1.7rem;
+}
+
+form.call-receipt-form > div.guest_info_section-content div.guest_name {
+    gap: 11rem; 
+}
+
+form.call-receipt-form > div.guest_info_section-content div.guest_phone_number {
+    gap: 5.6rem;
+
+}
+
+form.call-receipt-form > div.guest_info_section-content div.guest_vehicle_booking_type {
+    gap: 7.6rem;
+}
+
+form.call-receipt-form > div.guest_info_section-content div.guest_note {
+    gap: 10.3rem;
+}
+
+form.call-receipt-form > div.details_info_section-content > div {
+    display: flex;
+    align-items: center;
+    /* background-color: oldlace; */
+}
+
+form.call-receipt-form > div.details_info_section-content > div div.title {
+    display: flex;
+    align-items: center;
+}
+
+form.call-receipt-form > div.details_info_section-content > div > span {
+    font-weight: 400;
+}
+
+form.call-receipt-form > div.details_info_section-content > div.departure-address {
+    gap: 15rem;
+}
+
+form.call-receipt-form > div.details_info_section-content > div.arrival-address {
+    margin-top: 1rem;
+    gap: 15rem;
+}
+
+form.call-receipt-form > div.details_info_section-content > div.arrival-address > div.title {
+    gap: 0.4rem;
+}
+
+form.call-receipt-form > div.details_info_section-content > div.scheduled-time {
+    margin-top: 1rem;
+    gap: 4.8rem;
+}
+
+
+form.call-receipt-form > div.details_info_section-content > div.scheduled-time  > span.text {
+    color: #F86C1D;
+    font-weight: 500;
+}
+
+form.call-receipt-form > div.total_price-section {
+    margin-top: -3rem;
+    height: 10rem;
+    width: 100%;
+    border-top: 1.4px solid #ADB5BD;
+    background-color: #F6F6F6;
+    border-bottom: 1.4px solid #ADB5BD;
+}
+
+form.call-receipt-form > div.total_price-section > div.title {
+    /* background-color: red; */
+    text-align: right;
+    padding: 0.8rem;
+    margin-right: 2rem;
+    font-size: 2.4rem; 
+}
+
+form.call-receipt-form > div.total_price-section > div.price-text {
+    /* background-color: red; */
+    margin-top: -1rem;
+    text-align: right;
+    padding: 0.8rem;
+    margin-right: 2rem;
+    font-size: 2.4rem; 
+    color: #E67700;
+    font-weight: 600;
+}
+
+/* button section */
+
+form.call-receipt-form > div.btn-section {
+    margin: 0.8rem 0rem;
+    display: flex;
+    justify-content: center;
+    gap: 10rem;
+}
+
+form.call-receipt-form > div.btn-section > button {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 2rem;
+    padding: 0.6rem;
+    width: 28rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    background-color: #E67700;
+    border: 2.4px solid #E67700;
+    border-radius: 24px;
+    color: white;
+    text-transform: uppercase;
+}
+
+form.call-receipt-form > div.btn-section > button:hover {
+    transition: all 0.2s ease-in-out;
+    color: #E67700;
+    background-color: #fff;
+    cursor: pointer;
+}

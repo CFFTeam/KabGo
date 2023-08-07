@@ -29,6 +29,7 @@ import { ReactNode } from "react";
 
 interface MainMenuData {
   img: any;
+  url: string;
   name: string;
   imgFill: string;
   active: boolean;
@@ -36,6 +37,7 @@ interface MainMenuData {
 
 interface PreferencesData {
   img: any;
+  url: string;
   name: string;
   imgFill: string;
   active: boolean;
@@ -50,42 +52,49 @@ const initialSidebarState: InitialSidebarState = {
   mainMenuData: [
     {
         img: Dashboard,
+        url: "/",
         name: "Dashboard",
         imgFill: DashboardFill,
         active: true
     },
     {
         img: Admin,
+        url: "/admin",
         name: "Admin",
         imgFill: AdminFill,
         active: false
     },
     {
         img: Driver,
+        url: "/driver",
         name: "Tài xế",
         imgFill: DriverFill,
         active: false
     },
     {
         img: Customer,
+        url: "/customer",
         name: "Khách Hàng",
         imgFill: CustomerFill,
         active: false
     },
     {
         img: Service,
+        url: "/service",
         name: "Dịch vụ",
         imgFill: ServiceFill,
         active: false
     },
     {
         img: Vehicle,
+        url: "/vehicle",
         name: "Loại Phương Tiện",
         imgFill: VehicleFill,
         active: false
     },
     {
         img: Invoice,
+        url: "/invoice",
         name: "Hóa Đơn",
         imgFill: InvoiceFill,
         active: false
@@ -94,18 +103,21 @@ const initialSidebarState: InitialSidebarState = {
   preferencesData: [
     {
         img: Setting,
+        url: "/",
         name: "Cài Đặt",
         imgFill: SettingFill,
         active: false
     },
     {
         img: Map,
+        url: "/",
         name: "Theme Bản Đồ",
         imgFill: MapFill,
         active: false
     },
     {
         img: Theme,
+        url: "/",
         name: "Dark Mode",
         imgFill: ThemeFill,
         active: false

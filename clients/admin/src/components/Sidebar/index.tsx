@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./sidebar.module.css";
 import { ReactComponent as Kabgo } from "../../assets/svg/Sidebar/kabgo.svg";
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
@@ -15,13 +15,26 @@ const Sidebar: React.FC = () => {
   const onChangeActive = (para: number[]) => {
       dispatch(sidebarActions.updateActive([para[0], para[1]]));
   }
+  const urlData: string[] = ['admin', 'driver', 'customer', 'service', 'vehicle', 'invoice'];
+  useEffect(()=>{
+    for( let i: number = 0; i<urlData.length; i++){
+      if(window.location.pathname==='/'){
+        dispatch(sidebarActions.updateActive([0, 1]));
+        break;
+      }
+      else if(window.location.pathname.includes(urlData[i])){
+        dispatch(sidebarActions.updateActive([i+1, 1]));
+        break;
+      }
+    }
+  }, [window.location.pathname]);
   return (
     <div className={styles["sidebar-container"]}>
       <Kabgo className={styles["logo"]} />  
       <div className={styles["sidebar-title"]}>Main Menu</div>
       <div className={styles["sidebar-sub-container"]}>
         {mainMenuData.map((data, index) => (
-            <NavLink to="/" onClick={()=>onChangeActive([index, 1])} className={`${styles["sidebar-el-container"]} ${data.active ? styles["change-border-color"] : ''}`} key={index}>
+            <NavLink to={data.url} onClick={()=>onChangeActive([index, 1])} className={`${styles["sidebar-el-container"]} ${data.active ? styles["change-border-color"] : ''}`} key={index}>
               <div className={styles["sidebar-img"]}> <img src={data.active ? data.imgFill : data.img} /></div>
               <div className={`${styles["sidebar-content-arrow"]} ${data.active ? styles["change-text-color"] : ''}`}>{data.name}</div>
             </NavLink>
@@ -32,7 +45,7 @@ const Sidebar: React.FC = () => {
       <div className={styles["preferences-title"]}>Preferences</div>
       <div className={styles["sidebar-sub-container"]}>
         {preferenceData.map((data, index) => (
-            <NavLink to="/" onClick={()=>onChangeActive([index, 2])} className={`${styles["sidebar-el-container"]} ${data.active ? styles["change-border-color"] : ''}`} key={index}>
+            <NavLink to={data.url} onClick={()=>onChangeActive([index, 2])} className={`${styles["sidebar-el-container"]} ${data.active ? styles["change-border-color"] : ''}`} key={index}>
               <div className={styles["sidebar-img"]}> <img src={data.active ? data.imgFill : data.img} /></div>
               <div className={`${styles["sidebar-content-arrow"]} ${data.active ? styles["change-text-color"] : ''}`}>{data.name}</div>
             </NavLink>
