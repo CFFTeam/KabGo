@@ -2,10 +2,32 @@ import styles from "./ConfirmInfo.module.css";
 import {ReactComponent as PickUpIcon} from "@assets/svg/CallReceipt/pick-up.svg";
 import {ReactComponent as LocationIcon} from "@assets/svg/CallReceipt/location.svg";
 import {ReactComponent as ClockIcon} from "@assets/svg/CallReceiptHandler/clock-icn.svg";
+import { useAppSelector, useAppDispatch } from "@hooks/ReduxHooks";
+import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSlice";
 
 const ConfirmInfo: React.FC = () => {
+    const dispatch = useAppDispatch();
+    const processSteps = useAppSelector((state) => state.callReceiptHandler.processSteps);  
+
+
+    const handleBackward = () => {
+        dispatch(callReceiptHandlerActions.updateProcessSteps({
+            ...processSteps,
+            stepTwo: true,
+            stepThree: false,
+        }));
+    }
+
+    const handleCoordinate = () => { 
+        dispatch(callReceiptHandlerActions.updateProcessSteps({
+            ...processSteps,
+            stepThree: false,
+            stepOne: true,
+        }));
+    }
+
     return <div className={styles["wrapper"]}>
-         <form className={styles["call-receipt-form"]}>
+         <form className={styles["confirm-form"]}>
 
             <div className={styles["form-heading"]}>
                     <span className={styles["title"]}>
@@ -114,10 +136,10 @@ const ConfirmInfo: React.FC = () => {
             </div>
 
             <div className={styles["btn-section"]}>
-                <button className={styles[""]}>
+                <button type = 'button' onClick = {handleBackward}>
                     Quay lại
                 </button>
-                <button type = 'submit' >
+                <button type = 'button' onClick = {handleCoordinate}>
                     Điều phối 
                 </button>
             </div>

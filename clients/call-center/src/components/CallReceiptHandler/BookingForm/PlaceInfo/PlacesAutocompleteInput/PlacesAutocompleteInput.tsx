@@ -23,6 +23,7 @@ const PlacesAutocomplete = (props: PlacesAutocompleteProps) => {
     } = usePlacesAutocomplete();
 
     const dispatch = useAppDispatch();
+    const bookingAddress = useAppSelector((state) => state.callReceiptHandler.bookingAddress);
 
     // used to track index of item in suggestions list
     const [activeIndex, setActiveIndex] = useState<number>(-1);
@@ -41,12 +42,22 @@ const PlacesAutocomplete = (props: PlacesAutocompleteProps) => {
                 lat: lat,
                 lng: lng
             }))
+
+            dispatch(callReceiptHandlerActions.updateBookingAddress({
+                ...bookingAddress,
+                origin: address
+            }))
         }
         
         else if (props.inputStyle === 'destination') {
             dispatch(callReceiptHandlerActions.updateDestinationGeolocation({
                 lat: lat,
                 lng: lng
+            }))
+
+            dispatch(callReceiptHandlerActions.updateBookingAddress({
+                ...bookingAddress,
+                destination: address
             }))
         }
     };

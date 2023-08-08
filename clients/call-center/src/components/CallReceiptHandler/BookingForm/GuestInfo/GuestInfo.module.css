@@ -120,8 +120,8 @@ form.call-receipt-form  > div.form-body > div.forward-btn {
 form.call-receipt-form  > div.form-body > div.forward-btn > button {
     font-family: 'Montserrat', sans-serif;
     margin-top: 1rem;
-    padding: 1rem;
-    width: 30rem;
+    padding: 0.6rem;
+    width: 28rem;
     font-size: 1.8rem;
     font-weight: 600;
     background-color: #E67700;

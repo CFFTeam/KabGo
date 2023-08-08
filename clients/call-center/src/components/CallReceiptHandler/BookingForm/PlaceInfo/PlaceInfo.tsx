@@ -4,6 +4,7 @@ import {ReactComponent as PickUpIcon} from '@assets/svg/CallReceipt/pick-up.svg'
 import {ReactComponent as LocationIcon} from '@assets/svg/CallReceipt/location.svg';
 import { GoogleMap, Marker, Autocomplete, DirectionsRenderer, useJsApiLoader, InfoWindow } from '@react-google-maps/api';
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
+import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSlice";
 import PlacesAutocompleteInput from "./PlacesAutocompleteInput/PlacesAutocompleteInput";
 import originMarkerIcon from "@assets/svg/CallReceiptHandler/origin-point-icn.svg";
 import destinationMarkerIcon from "@assets/svg/CallReceiptHandler/des-point-icn.svg";
@@ -44,6 +45,8 @@ const markerOptions = {
 // React PlaceInfo Component
 const PlaceInfo: React.FC = () => {
     const dispatch = useAppDispatch();
+    const processSteps = useAppSelector((state) => state.callReceiptHandler.processSteps);
+
     // used for detecting of specific marker when hovering
 
     const [hoveredMarker, setHoveredMarker] = useState<string>('');
@@ -79,6 +82,23 @@ const PlaceInfo: React.FC = () => {
             setDistance(results.routes[0].legs[0].distance?.text);
             setDuration(results.routes[0].legs[0].duration?.text);
         }
+    }
+
+    // handle button click
+    const handleForward = () => {
+        dispatch(callReceiptHandlerActions.updateProcessSteps({
+            ...processSteps,
+            stepThree: true,
+            stepTwo: false,
+        }))
+    }
+
+    const handleBackward = () => {
+        dispatch(callReceiptHandlerActions.updateProcessSteps({
+            ...processSteps,
+            stepOne: true,
+            stepTwo: false,
+        }))
     }
 
 
@@ -182,10 +202,10 @@ const PlaceInfo: React.FC = () => {
                     </GoogleMap> 
                 </div>
                 <div className={styles["forward-btn"]}>
-                    <button className={styles[""]}>
+                    <button type = 'button'  onClick = {handleBackward}>
                         Quay lại
                     </button>
-                    <button type = 'submit' >
+                    <button type = 'button' onClick = {handleForward}>
                         Tiếp tục
                     </button>
                 </div>
