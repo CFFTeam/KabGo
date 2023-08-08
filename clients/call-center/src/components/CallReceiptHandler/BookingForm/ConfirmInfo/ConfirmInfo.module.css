@@ -256,8 +256,12 @@ div.wrapper > div.successful-form > div.content {
     margin: 1.6rem;
     text-align: left;
     line-height: 2.4rem;
-    font-size: 1.6rem;
+    font-size: 3rem;
     /* background-color: red; */
+}
+
+div.wrapper > div.successful-form > div.content > div.text {
+    font-size: 1.6rem;
 }
 
 

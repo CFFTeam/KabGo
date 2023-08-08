@@ -5,7 +5,7 @@ import {ReactComponent as LocationIcon} from '@assets/svg/CallReceipt/location.s
 import { GoogleMap, Marker, Autocomplete, DirectionsRenderer, useJsApiLoader, InfoWindow } from '@react-google-maps/api';
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSlice";
-import PlacesAutocompleteInput from "./PlacesAutocompleteInput/PlacesAutocompleteInput";
+import PlacesAutocompleteInput from "../../../PlacesAutocompleteInput/PlacesAutocompleteInput";
 import originMarkerIcon from "@assets/svg/CallReceiptHandler/origin-point-icn.svg";
 import destinationMarkerIcon from "@assets/svg/CallReceiptHandler/des-point-icn.svg";
 import mapStyles from "@assets/googleMapStyles/map.json";
@@ -128,7 +128,7 @@ const PlaceInfo: React.FC = () => {
                                     Điểm đón
                                 </span>
                             </label>
-                            <PlacesAutocompleteInput inputStyle = "origin"/>
+                            <PlacesAutocompleteInput inputStyle = "origin" role = "call-receipt-handler"/>
                         </div>
 
                         <div className={styles["input"]}>
@@ -140,7 +140,7 @@ const PlaceInfo: React.FC = () => {
                                 Điểm đến
                                 </span>
                             </label>
-                            <PlacesAutocompleteInput inputStyle = "destination"/>
+                            <PlacesAutocompleteInput inputStyle = "destination" role = "call-receipt-handler"/>
                         </div>
 
                         <div className={styles["location-btn"]}>

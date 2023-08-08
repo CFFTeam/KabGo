@@ -14,8 +14,6 @@ const GuestInfo: React.FC = () => {
     const vehicleTypeRef = useRef<HTMLSelectElement>(null);
     const scheduledBookingTime_HH_Ref = useRef<HTMLInputElement>(null);
     const scheduledBookingTime_MM_Ref = useRef<HTMLInputElement>(null);
-    const departureAddressRef = useRef<HTMLInputElement>(null);
-    const arrivalAddressRef = useRef<HTMLInputElement>(null);
     const noteRef = useRef<HTMLTextAreaElement>(null);
 
     const handleForward = () => {
