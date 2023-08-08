@@ -10,10 +10,10 @@ import axios from "axios";
 const Admin: React.FC = () => {
   const dispatch = useAppDispatch();
   return (
-    <div>
+    <React.Fragment>
       <Role />
       <TableContent />
-    </div>
+    </React.Fragment>
   );
 };
 
