@@ -10,9 +10,10 @@ const BookingPage: React.FC = () => {
         {/* <span className={styles["title"]}>
             Thông tin đặt xe
         </span> */}
-        {processSteps.stepOne && <GuestInfo/>}
+        {/* {processSteps.stepOne && <GuestInfo/>}
         {processSteps.stepTwo &&  <PlaceInfo/>}   
-        {processSteps.stepThree && <ConfirmInfo/>}
+        {processSteps.stepThree && <ConfirmInfo/>} */}
+        <ConfirmInfo/>
         <br />
         <br />
         <br />

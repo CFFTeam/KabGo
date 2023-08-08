@@ -199,3 +199,92 @@ form.confirm-form > div.btn-section > button:hover {
     background-color: #fff;
     cursor: pointer;
 }
+
+div.wrapper > div.loading-form,
+div.wrapper > div.successful-form {
+    z-index: 3;
+    position: fixed;
+    width: 60rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+div.wrapper > div.loading-form {
+    height: 20rem;
+}
+
+div.wrapper > div.loading-form  > div.content {
+    display: flex;
+    gap: 3rem;
+    /* background-color: red; */
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+div.wrapper > div.loading-form  > div.content > span.text {
+    font-weight: 600;
+    font-size: 2.4rem;
+    color: #F86C1D;
+}
+
+div.wrapper > div.successful-form > div.title {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    gap: 1.4rem;
+    /* background-color: red; */
+} 
+
+div.wrapper > div.successful-form > div.title > span.icon > .checked-icon {
+    font-size: 5.5rem;
+}
+
+div.wrapper > div.successful-form > div.title > span.text {
+    font-size: 3rem;
+    font-weight: 600;
+    color: #247835;
+     text-transform: uppercase;
+}
+
+
+div.wrapper > div.successful-form > div.content {
+    margin: 1.6rem;
+    text-align: left;
+    line-height: 2.4rem;
+    font-size: 1.6rem;
+    /* background-color: red; */
+}
+
+
+div.wrapper > div.successful-form > div.back-to-home-btn {
+    /* background-color: red; */
+    text-align: center;
+}
+
+div.wrapper > div.successful-form > div.back-to-home-btn > button {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 0.6rem;
+    width: 28rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    background-color: #E67700;
+    border: 2.4px solid #E67700;
+    border-radius: 24px;
+    color: white;
+    text-transform: uppercase;
+}
+
+
+div.wrapper > div.successful-form > div.back-to-home-btn > button:hover {
+    transition: all 0.2s ease-in-out;
+    color: #E67700;
+    background-color: #fff;
+    cursor: pointer;
+}
