@@ -41,6 +41,11 @@ form.call-receipt-form > div.form-body > div.input {
     width: 80%;
 }
 
+/* scheduled time input section */
+form.call-receipt-form > div.form-body > div.input:nth-child(4) {
+    width: 70%;
+}
+
 form.call-receipt-form > div.form-body  > div.input > label > span.title {
     font-size: 1.8rem;
 }

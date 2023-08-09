@@ -1,7 +1,115 @@
 .nav-bar {
     position: fixed;
-    width: 85%;
+    width: 80.5%;
     right: 0;
     height: 8rem;
-    background-color: red;
+    /* background-color: oldlace; */
+    border: 2px solid #F0F0F0;
+    border-radius: 8px;
+    margin: 1rem;
+}
+
+nav.nav-bar > span.dock-option {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    /* background-color: aqua; */
+    margin-left: 2rem;
+}
+
+nav.nav-bar > span.dock-option > .dock-icn {
+    font-size: 3.6rem;    
+}
+
+nav.nav-bar > div.navigate-section {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    /* background-color: red; */
+    left: 6%;
+    border-left: 2px solid #D9D9D9;
+    padding: 0.4rem;
+    padding-left: 1.6rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+nav.nav-bar > div.navigate-section > span.text {
+    color: #515151;
+    font-weight: 600;
+    font-size: 2.2rem;
+    margin-top: -.4rem;
+    margin-left: 1rem;
+}
+
+nav.nav-bar > div.navigate-section > span.backward-section > .backward-icn {
+    font-size: 4rem;
+    cursor: pointer;
+}
+
+nav.nav-bar > div.navigate-section > span.reload-section > .reload-icn {
+    font-size: 4rem;
+    cursor: pointer;
+}
+
+nav.nav-bar > div.option-section {
+    position: absolute;
+    right: 20%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 1.4rem;
+    /* background-color: red; */
+}
+
+nav.nav-bar > div.option-section > span > .profile-icn,
+nav.nav-bar > div.option-section > span > .notification-icn,
+nav.nav-bar > div.option-section > span > .setting-icn,
+nav.nav-bar > div.option-section > span > .logout-icn {
+    font-size: 3.2rem;
+    cursor: pointer;
+}
+
+
+nav.nav-bar > div.authenticate-section {
+    position: absolute;
+    right: 1.4%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 1.4rem;
+    /* background-color: red; */
+    align-items: center;
+}
+
+nav.nav-bar > div.authenticate-section > div.info {
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    text-align: right;
+    border-left: 2px solid #D9D9D9;
+    padding: 0.7rem;
+    padding-left: 2.4rem;
+    /* background-color: brown; */
+}
+
+nav.nav-bar > div.authenticate-section > div.info > span.name {
+    font-weight: 600;
+}
+
+nav.nav-bar > div.authenticate-section > div.info > span.role {
+    font-size: 1.3rem;
+    color: #818181;
+    font-weight: 600;
+}
+
+nav.nav-bar > div.authenticate-section > span.avatar {
+    width: 50px;
+    height: 50px;
+    background-color: aqua;
+    border-radius: 50%;
+    background-image: url("../../assets/images/Khoa.jpg");
+    background-size: cover;
+    border: 2px solid #383838;
 }

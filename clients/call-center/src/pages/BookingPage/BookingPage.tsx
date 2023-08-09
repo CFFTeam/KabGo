@@ -7,9 +7,6 @@ import { useAppSelector } from "@hooks/ReduxHooks";
 const BookingPage: React.FC = () => {
     const processSteps = useAppSelector((state) => state.callReceiptHandler.processSteps);
     return <div className={styles["main-content"]}>
-        {/* <span className={styles["title"]}>
-            Thông tin đặt xe
-        </span> */}
         {processSteps.stepOne && <GuestInfo/>}
         {processSteps.stepTwo &&  <PlaceInfo/>}   
         {processSteps.stepThree && <ConfirmInfo/>}
@@ -17,7 +14,6 @@ const BookingPage: React.FC = () => {
         <br />
         <br />
         <br />
-      {/* <CallReceiptTable/> */}
     </div>
 }
 
