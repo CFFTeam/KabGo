@@ -1,11 +1,53 @@
 import styles from "./ConfirmInfo.module.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {ReactComponent as PickUpIcon} from "@assets/svg/CallReceipt/pick-up.svg";
 import {ReactComponent as LocationIcon} from "@assets/svg/CallReceipt/location.svg";
 import {ReactComponent as ClockIcon} from "@assets/svg/CallReceiptHandler/clock-icn.svg";
+import {ReactComponent as CheckedIcon} from "@assets/svg/CallReceiptHandler/chcked-icn.svg";
+import { useAppSelector, useAppDispatch } from "@hooks/ReduxHooks";
+import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSlice";
+import Overlay from "@components/Overlay/Overlay";
+import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 
 const ConfirmInfo: React.FC = () => {
+    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
+    const processSteps = useAppSelector((state) => state.callReceiptHandler.processSteps);  
+    const [isHandled, setIsHandled] = useState<boolean>(false);
+    const [isFinished, setIsFinished] = useState<boolean>(false);
+
+    // handle button clicking
+    const handleBackward = () => {
+        dispatch(callReceiptHandlerActions.updateProcessSteps({
+            ...processSteps,
+            stepTwo: true,
+            stepThree: false,
+        }));
+    }
+
+    const handleForward = () => { 
+        setIsHandled(true);
+        setTimeout(() => {
+            setIsHandled(false);
+            setIsFinished(true);
+        }, 2500)
+        // dispatch(callReceiptHandlerActions.updateProcessSteps({
+        //     ...processSteps,
+        //     stepThree: false,
+        //     stepOne: true,
+        // }));
+    }
+
+    const handleClosingOverlay = () => {
+        setIsHandled(false);
+        setIsFinished(false);
+    }
+
+    // const handleCo
+
     return <div className={styles["wrapper"]}>
-         <form className={styles["call-receipt-form"]}>
+         <form className={styles["confirm-form"]}>
 
             <div className={styles["form-heading"]}>
                     <span className={styles["title"]}>
@@ -114,15 +156,59 @@ const ConfirmInfo: React.FC = () => {
             </div>
 
             <div className={styles["btn-section"]}>
-                <button className={styles[""]}>
+                <button type = 'button' onClick = {handleBackward}>
                     Quay lại
                 </button>
-                <button type = 'submit' >
+                <button type = 'button' onClick = {handleForward}>
                     Điều phối 
                 </button>
             </div>
          </form>
-    </div>
+
+        {/* when clicking coordinate button => overlay appears */}
+        {isHandled && 
+            <>
+                <Overlay onCloseOverlay={handleClosingOverlay}/>
+                <div className={styles["loading-form"]}>
+                    <div className={styles["content"]}>
+                        <LoadingSpinner/>
+                        <span className={styles["text"]}>
+                            Đang xử lý, vui lòng chờ đợi...
+                        </span>
+                    </div>
+                </div>
+            </>
+        }
+
+
+        {isFinished && 
+            <>
+                <Overlay onCloseOverlay={handleClosingOverlay}/>
+                <div className={styles["successful-form"]}>
+                    <div className={styles["title"]}>
+                        <span className={styles["icon"]}>
+                            <CheckedIcon className={styles["checked-icon"]}/>
+                        </span>
+                        <span className={styles["text"]}>
+                            Thành công
+                        </span>
+                    </div>
+                    <div className={styles["content"]}>
+                       <div className={styles["text"]}>
+                       Hệ thống đã ghi nhận cuốc xe. Thông tin sẽ được chuyển đến các bác tài trong giây lát. Với cuốc xe có hẹn giờ, hệ thống sẽ tự động đặt khi đến giờ yêu cầu (có thể chỉnh sửa ở Dashboard)
+                       </div>
+                    </div>
+                    <div className={styles["back-to-home-btn"]}>
+                        <button type = "button" onClick = {() => navigate('/')}>
+                            Trang chủ
+                        </button>
+                    </div>
+                </div>
+            </>
+        }
+
+      
+    </div>  
 }
 
 export default ConfirmInfo;

@@ -4,6 +4,8 @@ import {ReactComponent as MoonIcon} from "@assets/svg/CallReceipt/moon.svg";
 import {useState, useRef} from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks/ReduxHooks';
 import {callReceiptActions} from "@store/reducers/callReceiptSlice";
+import { GoogleMap, Marker, Autocomplete, DirectionsRenderer, useJsApiLoader, InfoWindow } from '@react-google-maps/api';
+import PlacesAutocomplete from '@components/PlacesAutocompleteInput/PlacesAutocompleteInput';
 
 
 interface BookingInformation {
@@ -19,19 +21,23 @@ interface BookingInformation {
 
 
 const CallReceiptForm: React.FC = () => {  
+    // calling Google map API service
+    const {isLoaded} = useJsApiLoader({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY as string,
+        libraries: ['places'],
+        language: 'vi',
+        region: 'vn',
+    })
+
     const dispatch = useAppDispatch();
     const bookingInformation = useAppSelector((state) => state.callReceipt.bookingInformation);
     // const mostVisitedAddress: string  = useAppSelector((state) => state.callReceipt.mostVisitedAddress);
-
-    console.log("bookingInformation: ", bookingInformation);
 
     const nameRef = useRef<HTMLInputElement>(null);
     const phoneNumberRef = useRef<HTMLInputElement>(null);
     const vehicleTypeRef = useRef<HTMLSelectElement>(null);
     const scheduledBookingTime_HH_Ref = useRef<HTMLInputElement>(null);
     const scheduledBookingTime_MM_Ref = useRef<HTMLInputElement>(null);
-    const departureAddressRef = useRef<HTMLInputElement>(null);
-    const arrivalAddressRef = useRef<HTMLInputElement>(null);
     const noteRef = useRef<HTMLTextAreaElement>(null);
 
     const handleFormSubmit = (event: React.FormEvent) => {
@@ -42,32 +48,20 @@ const CallReceiptForm: React.FC = () => {
             vehicleType: vehicleTypeRef.current?.value || '',
             scheduledBookingTime_HH: scheduledBookingTime_HH_Ref.current?.value || '',
             scheduledBookingTime_MM: scheduledBookingTime_MM_Ref.current?.value || '',
-            departureAddress: departureAddressRef.current?.value || '',
-            arrivalAddress: arrivalAddressRef.current?.value || '',
+            departureAddress: bookingInformation.departureAddress || '', // must not be empty (set from PlacesAutocompleteInput)
+            arrivalAddress: bookingInformation.arrivalAddress || '',  // must not be empty (set from PlacesAutocompleteInput)
             note: noteRef.current?.value || '',
         }
         dispatch(callReceiptActions.updateBookingInformation(formData));
     }
-    // helper functions - real-time tracking input value from user 
-    const handleArrivalAddressInputChange = () => {
-        if (arrivalAddressRef.current) {
-            dispatch(callReceiptActions.updateBookingInformation({
-                ...bookingInformation,
-                arrivalAddress: arrivalAddressRef.current.value
-            }));
-        }
+
+    // return JSX code
+    // if the google map API is not finished
+    if (!isLoaded) {
+        return <></>
     }
 
-    const handleDepartureAddressInputChange = () => {
-        if (departureAddressRef.current) {
-            dispatch(callReceiptActions.updateBookingInformation({
-                ...bookingInformation,
-                departureAddress: departureAddressRef.current.value
-            }));
-        }
-    }
-
-
+    // if the google map API is finished
     return <form className={styles["call-receipt-form"]} onSubmit = {handleFormSubmit} >
         <div className={styles["form-heading"]}>
             <span className={styles["title"]}>
@@ -149,7 +143,7 @@ const CallReceiptForm: React.FC = () => {
                             (*)
                         </span>
                     </label>
-                    <input ref = {departureAddressRef} value = {bookingInformation.departureAddress} onChange = {handleDepartureAddressInputChange} type = "text" name = "pick-up-place" placeholder = "Nhập điểm đón" className = {styles["pick-up-place"]}/>
+                    <PlacesAutocomplete inputStyle = "origin" role = "call-receipt"/>
                 </div>
                 <div className={styles["input"]}>
                     <label htmlFor="arrival-place" style = {{display: "flex", gap: "1rem"}}>
@@ -160,7 +154,8 @@ const CallReceiptForm: React.FC = () => {
                             (*)
                         </span>
                     </label>
-                    <input ref = {arrivalAddressRef} value = {bookingInformation.arrivalAddress} onChange = {handleArrivalAddressInputChange} type = "text" name = "arrival-place" placeholder = "Nhập điểm đến" className = {styles["arrival-place"]}/>
+                    <PlacesAutocomplete inputStyle = "destination" role = "call-receipt"/>
+                    {/* <input ref = {arrivalAddressRef} value = {bookingInformation.arrivalAddress} onChange = {handleArrivalAddressInputChange} type = "text" name = "arrival-place" placeholder = "Nhập điểm đến" className = {styles["arrival-place"]}/> */}
                 </div>
                 <div className = {`${styles.input} ${styles["stretched-all"]}`}>
                     <label htmlFor="guest-note" style = {{display: "flex", gap: "1rem"}}>

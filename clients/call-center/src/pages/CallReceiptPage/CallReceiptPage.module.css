@@ -38,6 +38,7 @@
 
 .container > .body-content > .latest-booking {
     display: block;
+    margin-top: -6rem;
     margin-left: 4rem;
     margin-bottom: 20rem;
 }
