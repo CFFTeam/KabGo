@@ -15,6 +15,8 @@ networks:
     driver: bridge
   nw-call-center:
     driver: bridge
+  nw-rabbitmq:
+    driver: bridge
 
 services:
   nginx: 
@@ -28,6 +30,7 @@ services:
       - nw-api-call-center
       - nw-admin
       - nw-call-center
+      - nw-rabbitmq
     hostname: nginx
     container_name: kabgo-nginx-proxy
     ports: 
@@ -42,6 +45,7 @@ services:
       - api-call-center
       - admin
       - call-center
+      - rabbitmq
 
   api-auth: 
     build: 
@@ -76,6 +80,8 @@ services:
       DEBUG_COLORS: "true"
       TERM: xterm-256color
       COLORTERM: truecolor
+    depends_on: 
+      - rabbitmq
 
   api-customer: 
     build: 
@@ -161,3 +167,53 @@ services:
       DEBUG_COLORS: "true"
       TERM: xterm-256color
       COLORTERM: truecolor
+      
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'kabgo-rabbitmq'
+    hostname: 'rabbitmq.kabgo.local'
+    networks:
+      - nw-rabbitmq
+    ports:
+        - "5672:5672"
+        - "15672:15672"
+    environment:
+      FORCE_COLOR: 1
+      DEBUG_COLORS: "true"
+      TERM: xterm-256color
+      COLORTERM: truecolor
+
+  # zookeeper:
+  #   image: 'zookeeper'
+  #   restart: always
+  #   hostname: zookeeper
+  #   container_name: kabgo-zookeeper
+  #   ports:
+  #     - 2181:2181
+  #   environment:
+  #     - ALLOW_ANONYMOUS_LOGIN=yes
+  #     - FORCE_COLOR=1
+  #     - DEBUG_COLORS="true"
+  #     - TERM=xterm-256color
+  #     - COLORTERM=truecolor
+
+  # kafka:
+  #   image: 'bitnami/kafka'
+  #   hostname: kafka.kabgo.local
+  #   container_name: kabgo-kafka
+  #   ports:
+  #     - '9092:9092'
+  #   environment:
+  #     - KAFKA_CFG_BROKER_ID=1
+  #     - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+  #     - KAFKA_CFG_LISTENERS=PLAINTEXT://localhost:9092
+  #     - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+  #     - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT
+  #     - ALLOW_PLAINTEXT_LISTENER=yes
+  #     - KAFKA_CFG_ALLOW_EVERYONE_IF_NO_ACL_FOUND=true
+  #     - FORCE_COLOR=1
+  #     - DEBUG_COLORS="true"
+  #     - TERM=xterm-256color
+  #     - COLORTERM=truecolor
+  #   depends_on: 
+  #     - zookeeper

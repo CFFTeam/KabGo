@@ -8,10 +8,12 @@ set "host_name_auth_api=api.auth.kabgo.local"
 set "host_name_driver_api=api.driver.kabgo.local"
 set "host_name_customer_api=api.customer.kabgo.local"
 set "host_name_admin_api=api.admin.kabgo.local"
-set "host_name_admin_api=api.call-center.kabgo.local"
+set "host_name_call_center_api=api.call-center.kabgo.local"
 
 set "host_name_admin=admin.kabgo.local"
 set "host_name_call_center=call-center.kabgo.local"
+set "host_name_kafka=kafka.kabgo.local"
+set "host_name_rabbitmq=rabbitmq.kabgo.local"
 
 rem Check if the entries already exist
 findstr /C:"%host_name_admin%" "%hosts_file%" >nul && (
@@ -55,4 +57,16 @@ findstr /C:"%host_name_call_center_api%" "%hosts_file%" >nul && (
 ) || (
     echo %ip_address% %host_name_call_center_api% >> "%hosts_file%"
     echo New entry "%host_name_call_center_api%" added to the hosts file.
+)
+findstr /C:"%host_name_kafka%" "%hosts_file%" >nul && (
+    echo Entry "%host_name_kafka%" already exists in the hosts file.
+) || (
+    echo %ip_address% %host_name_kafka% >> "%hosts_file%"
+    echo New entry "%host_name_kafka%" added to the hosts file.
+)
+findstr /C:"%host_name_kafka%" "%hosts_file%" >nul && (
+    echo Entry "%host_name_kafka%" already exists in the hosts file.
+) || (
+    echo %ip_address% %host_name_rabbitmq% >> "%hosts_file%"
+    echo New entry "%host_name_rabbitmq%" added to the hosts file.
 )
