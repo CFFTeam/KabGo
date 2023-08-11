@@ -9,6 +9,8 @@ set "host_name_driver_api=api.driver.kabgo.local"
 set "host_name_customer_api=api.customer.kabgo.local"
 set "host_name_admin_api=api.admin.kabgo.local"
 set "host_name_call_center_api=api.call-center.kabgo.local"
+set "host_name_call_center_api_s2=api.call-center-s2.kabgo.local"
+set "host_name_call_center_api_s3=api.call-center-s3.kabgo.local"
 
 set "host_name_admin=admin.kabgo.local"
 set "host_name_call_center=call-center.kabgo.local"
@@ -57,6 +59,18 @@ findstr /C:"%host_name_call_center_api%" "%hosts_file%" >nul && (
 ) || (
     echo %ip_address% %host_name_call_center_api% >> "%hosts_file%"
     echo New entry "%host_name_call_center_api%" added to the hosts file.
+)
+findstr /C:"%host_name_call_center_api_s2%" "%hosts_file%" >nul && (
+    echo Entry "%host_name_call_center_api_s2%" already exists in the hosts file.
+) || (
+    echo %ip_address% %host_name_call_center_api_s2% >> "%hosts_file%"
+    echo New entry "%host_name_call_center_api_s2%" added to the hosts file.
+)
+findstr /C:"%host_name_call_center_api_s3%" "%hosts_file%" >nul && (
+    echo Entry "%host_name_call_center_api_s3%" already exists in the hosts file.
+) || (
+    echo %ip_address% %host_name_call_center_api_s3% >> "%hosts_file%"
+    echo New entry "%host_name_call_center_api_s3%" added to the hosts file.
 )
 findstr /C:"%host_name_kafka%" "%hosts_file%" >nul && (
     echo Entry "%host_name_kafka%" already exists in the hosts file.

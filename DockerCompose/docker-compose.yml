@@ -11,6 +11,10 @@ networks:
     driver: bridge
   nw-api-call-center:
     driver: bridge
+  nw-api-call-center-s2:
+    driver: bridge
+  nw-api-call-center-s3:
+    driver: bridge
   nw-admin:
     driver: bridge
   nw-call-center:
@@ -28,6 +32,8 @@ services:
       - nw-api-customer
       - nw-api-admin
       - nw-api-call-center
+      - nw-api-call-center-s2
+      - nw-api-call-center-s3
       - nw-admin
       - nw-call-center
       - nw-rabbitmq
@@ -43,6 +49,8 @@ services:
       - api-customer
       - api-admin
       - api-call-center
+      - api-call-center-s2
+      - api-call-center-s3
       - admin
       - call-center
       - rabbitmq
@@ -128,6 +136,40 @@ services:
       - "4500:4500"
     volumes:
       - ../KabGo/servers/call-center:/usr/src/app
+    environment:
+      FORCE_COLOR: 1
+      DEBUG_COLORS: "true"
+      TERM: xterm-256color
+      COLORTERM: truecolor
+
+  api-call-center-s2: 
+    build: 
+      context: ../KabGo/servers/call-center-s2
+    networks:
+      - nw-api-call-center-s2
+    hostname: api.call-center-s2.kabgo.local
+    container_name: kabgo-call-center-s2
+    ports: 
+      - "4501:4501"
+    volumes:
+      - ../KabGo/servers/call-center-s2:/usr/src/app
+    environment:
+      FORCE_COLOR: 1
+      DEBUG_COLORS: "true"
+      TERM: xterm-256color
+      COLORTERM: truecolor
+
+  api-call-center-s3: 
+    build: 
+      context: ../KabGo/servers/call-center-s3
+    networks:
+      - nw-api-call-center-s3
+    hostname: api.call-center-s3.kabgo.local
+    container_name: kabgo-call-center-s3
+    ports: 
+      - "4502:4502"
+    volumes:
+      - ../KabGo/servers/call-center-s3:/usr/src/app
     environment:
       FORCE_COLOR: 1
       DEBUG_COLORS: "true"

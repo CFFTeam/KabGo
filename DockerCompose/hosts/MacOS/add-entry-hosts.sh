@@ -14,6 +14,8 @@ host_name_driver_api="api.driver.kabgo.local"
 host_name_customer_api="api.customer.kabgo.local"
 host_name_admin_api="api.admin.kabgo.local"
 host_name_call_center_api="api.call-center.kabgo.local"
+host_name_call_center_api_s2="api.call-center-s2.kabgo.local"
+host_name_call_center_api_s3="api.call-center-s3.kabgo.local"
 
 # Function to add an entry if it doesn't exist
 add_entry() {
@@ -35,5 +37,7 @@ add_entry "$host_name_driver_api"
 add_entry "$host_name_customer_api"
 add_entry "$host_name_admin_api"
 add_entry "$host_name_call_center_api"
+add_entry "$host_name_call_center_api_s2"
+add_entry "$host_name_call_center_api_s3"
 add_entry "$host_name_kafka"
 add_entry "$host_name_rabbitmq"
