@@ -15,6 +15,8 @@ networks:
     driver: bridge
   nw-api-call-center-s3:
     driver: bridge
+  nw-api-gps-coordinates:
+    driver: bridge
   nw-admin:
     driver: bridge
   nw-call-center:
@@ -34,6 +36,7 @@ services:
       - nw-api-call-center
       - nw-api-call-center-s2
       - nw-api-call-center-s3
+      - nw-api-gps-coordinates
       - nw-admin
       - nw-call-center
       - nw-rabbitmq
@@ -51,6 +54,7 @@ services:
       - api-call-center
       - api-call-center-s2
       - api-call-center-s3
+      - gps-coordinates
       - admin
       - call-center
       - rabbitmq
@@ -170,6 +174,23 @@ services:
       - "4502:4502"
     volumes:
       - ../KabGo/servers/call-center-s3:/usr/src/app
+    environment:
+      FORCE_COLOR: 1
+      DEBUG_COLORS: "true"
+      TERM: xterm-256color
+      COLORTERM: truecolor
+
+  gps-coordinates: 
+    build: 
+      context: ../KabGo/servers/gps-coordinates
+    networks:
+      - nw-api-gps-coordinates
+    hostname: api.gps-coordinates.kabgo.local
+    container_name: gps-coordinates
+    ports: 
+      - "4600:4600"
+    volumes:
+      - ../KabGo/servers/gps-coordinates:/usr/src/app
     environment:
       FORCE_COLOR: 1
       DEBUG_COLORS: "true"
