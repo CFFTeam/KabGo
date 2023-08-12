@@ -9,9 +9,11 @@ import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import { dashboardActions } from "@store/dashboard";
 import { useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     //axios.get<datatype>(...)
     const statistics: number[] = [2.152, 1.135, 618, 83];

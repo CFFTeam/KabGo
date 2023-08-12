@@ -1,0 +1,17 @@
+{
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "endOfLine": "crlf",
+    "insertPragma": false,
+    "singleAttributePerLine": false,
+    "bracketSameLine": false,
+    "printWidth": 120,
+    "proseWrap": "preserve",
+    "quoteProps": "as-needed",
+    "requirePragma": false,
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 4,
+    "trailingComma": "es5",
+    "useTabs": false
+}

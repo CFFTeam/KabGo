@@ -8,16 +8,18 @@ import { ReactComponent as Notification } from "../../assets/svg/Navbar/notifica
 import { ReactComponent as Setting } from "../../assets/svg/Navbar/setting.svg";
 import { ReactComponent as Logout } from "../../assets/svg/Navbar/logout.svg";
 import { ReactComponent as Profile } from "../../assets/svg/Navbar/profile.svg";
-import {useNavigate} from "react-router-dom"
+import {useLocation, useNavigate} from "react-router-dom"
 
 const Navbar: React.FC = () => {
   const navigate = useNavigate();
+  let location = useLocation();
+  
   let navbarTitle: string = 'Dashboard';
   const urlData: string[] = ['/admin', '/driver', '/customer', '/service', '/vehicle', '/invoice', '/admin/create'];
   const titleData: string[] = ['Admin', 'Tài xế', 'Khách Hàng', 'Service Phương Tiện', 'Loại Phương Tiện', 'Hóa Đơn', 'Thêm quản lý'];
 
   for( let i: number=0; i<urlData.length; i++){
-    if(window.location.pathname === urlData[i]){
+    if(location.pathname === urlData[i]){
       navbarTitle = titleData[i];
     }
   }

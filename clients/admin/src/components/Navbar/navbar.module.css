@@ -5,6 +5,8 @@
     border-radius: 0.8rem;
     display: flex;
     border: 2px solid #F2F2F2;
+    /* position: sticky;
+    top: 0; */
 }
 
 .content-container-openclose{
