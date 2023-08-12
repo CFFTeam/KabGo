@@ -3,13 +3,14 @@ import styles from "./sidebar.module.css";
 import { ReactComponent as Kabgo } from "../../assets/svg/Sidebar/kabgo.svg";
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import { sidebarActions } from "@store/sidebar";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as FooterKabgo } from "../../assets/svg/Sidebar/footerlogo.svg";
 
 const Sidebar: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  let location = useLocation();
   const mainMenuData = useAppSelector((state) => state.sidebar.mainMenuData);
   const preferenceData = useAppSelector((state) => state.sidebar.preferencesData);
   const onChangeActive = (para: number[]) => {
@@ -18,16 +19,16 @@ const Sidebar: React.FC = () => {
   const urlData: string[] = ['admin', 'driver', 'customer', 'service', 'vehicle', 'invoice'];
   useEffect(()=>{
     for( let i: number = 0; i<urlData.length; i++){
-      if(window.location.pathname==='/'){
+      if(location.pathname==='/'){
         dispatch(sidebarActions.updateActive([0, 1]));
         break;
       }
-      else if(window.location.pathname.includes(urlData[i])){
+      else if(location.pathname.includes(urlData[i])){
         dispatch(sidebarActions.updateActive([i+1, 1]));
         break;
       }
     }
-  }, [window.location.pathname]);
+  }, [location.pathname]);
   return (
     <div className={styles["sidebar-container"]}>
       <Kabgo className={styles["logo"]} />  

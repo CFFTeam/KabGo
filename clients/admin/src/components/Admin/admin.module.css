@@ -88,7 +88,7 @@
 }
 
 .create-button-container:hover{
-    background: #f77e46;
+    background: #d86936;
     cursor: pointer;
 }
 
@@ -257,21 +257,15 @@ input::placeholder {
     color: black;
     padding: 1.5rem;
     background: #FFEEEA;
+    border: 1px solid #F0F0F0;
     display: flex;
     justify-content: space-between;
   }
 
-.ord-num{
-    width: 6rem;
-}
-
-.staff{
-    width: 31rem;
-}
-
 .dropdown-container-table{
     position: relative;
-    display: inline-block; 
+    display: inline-block;
+    padding: 0;
 }
 
 .dropdown-title-table{
@@ -284,6 +278,7 @@ input::placeholder {
     color: black;
     width: 17rem;
     background: #FFEEEA;
+    padding: 0;
 }
   
   .dropdown-content-table {
@@ -297,7 +292,7 @@ input::placeholder {
   
   .dropdown-content-table div {
     color: black;
-    padding: 1rem 1.5rem;
+    padding: 1rem 0;
     text-decoration: none;
     display: block;
     font-size: 1.5rem;
@@ -323,16 +318,124 @@ input::placeholder {
     padding-top: 0.15rem;
   }
 
+.ord-num{
+    width: 6rem;
+}
+.staff{
+    width: 31rem;
+}
 .email{
-    width: 27rem;
+    width: 30rem;
 }
 .phone{
-    width: 14rem;
+    width: 13rem;
 }
 .time{
-    width: 14rem;
+    width: 12rem;
 }
 .button-container-header{
-    width: 8.5rem;
+    width: 6.5rem;
 }
 
+.table-body-relative-container{
+    position: relative;
+    height: 7rem;
+    width: 100%;
+}
+
+.table-body-container{
+    background: white;
+    border: 1px solid #F0F0F0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    padding: 0 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ord-num-body{
+    width: 6rem;
+    padding-left: 1rem;
+}
+.staff-body{
+    width: 31rem;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+.role-body{
+    width: 17rem
+}
+.email-body{
+    width: 30rem;
+}
+.phone-body{
+    width: 13rem;
+}
+.time-body{
+    width: 12rem;
+}
+.button-container-body{
+    width: 6.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.odd-background{
+    background: #FFF8F6;
+}
+
+.edit-body:hover{
+    cursor: pointer;
+}
+
+.lock-body:hover{
+    cursor: pointer;
+}
+
+.table-lock-container{
+    background: black;
+    opacity: 70%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-lock-title{
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.table-unlock-icon{
+   right: 2.3rem;
+   position: absolute;
+}
+
+.hide-icon{
+    opacity: 0;
+}
+
+.table-sub-content-container{
+    overflow: auto;
+    height: 55rem;
+}
+
+.table-sub-content-container::-webkit-scrollbar {
+    width: 0.5rem; /* width of the scrollbar */
+}
+  
+.table-sub-content-container::-webkit-scrollbar-thumb {
+    background: #FE8248; /* color of the thumb */
+    border-radius: 0.8rem; /* rounded corners of the thumb */
+}
+  
+.table-sub-content-container::-webkit-scrollbar-track {
+    background: #EFEFEF; 
+}
