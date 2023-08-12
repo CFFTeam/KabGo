@@ -1,11 +1,13 @@
 import styles from "./PlacesAutocompleteInput.module.css";
 import { useState } from "react";
 import usePlacesAutocomplete, {getGeocode, getLatLng} from "use-places-autocomplete";
+import { callReceiptActions } from "@store/reducers/callReceiptSlice";
 import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSlice";
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import {ReactComponent as LocationIcon} from "@assets/svg/CallReceipt/location.svg";
 
 interface PlacesAutocompleteProps {
+    role: "call-receipt" | "call-receipt-handler";
     inputStyle: "origin" | "destination";
 }
 
@@ -23,9 +25,15 @@ const PlacesAutocomplete = (props: PlacesAutocompleteProps) => {
     } = usePlacesAutocomplete();
 
     const dispatch = useAppDispatch();
+    // call-receipt-handler role 
+    const bookingAddress = useAppSelector((state) => state.callReceiptHandler.bookingAddress); 
+    // call-receipt role
+    const bookingInformation = useAppSelector((state) => state.callReceipt.bookingInformation);
 
     // used to track index of item in suggestions list
     const [activeIndex, setActiveIndex] = useState<number>(-1);
+
+    console.log('bookingInformation: ', bookingInformation);
 
     // handle when clicking to list item (single address)
     const handleSelect = async (address: string) => {
@@ -34,20 +42,47 @@ const PlacesAutocomplete = (props: PlacesAutocompleteProps) => {
 
         const results = await getGeocode({address});
         const {lat, lng} = await getLatLng(results[0]);
-        
+
         if (props.inputStyle === "origin")
         {
-            dispatch(callReceiptHandlerActions.updateOriginGeolocation({
-                lat: lat,
-                lng: lng
-            }))
+            if (props.role === "call-receipt-handler") {
+                dispatch(callReceiptHandlerActions.updateOriginGeolocation({
+                    lat: lat,
+                    lng: lng
+                }))
+
+                dispatch(callReceiptHandlerActions.updateBookingAddress({
+                    ...bookingAddress,
+                    origin: address
+                }))
+            }
+            else if (props.role === "call-receipt") {
+                dispatch(callReceiptActions.updateBookingInformation({
+                    ...bookingInformation,
+                    departureAddress: address,
+                }));
+            }
         }
         
         else if (props.inputStyle === 'destination') {
-            dispatch(callReceiptHandlerActions.updateDestinationGeolocation({
-                lat: lat,
-                lng: lng
-            }))
+            if (props.role === "call-receipt-handler") {
+                dispatch(callReceiptHandlerActions.updateDestinationGeolocation({
+                    lat: lat,
+                    lng: lng
+                }))
+    
+                dispatch(callReceiptHandlerActions.updateBookingAddress({
+                    ...bookingAddress,
+                    destination: address
+                }))
+            }
+
+            else if (props.role === "call-receipt") {
+                dispatch(callReceiptActions.updateBookingInformation({
+                    ...bookingInformation,
+                    arrivalAddress: address,
+                }));
+            }
         }
     };
 

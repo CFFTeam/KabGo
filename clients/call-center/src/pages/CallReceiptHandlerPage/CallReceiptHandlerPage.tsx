@@ -3,9 +3,6 @@ import CallReceiptTable from "@components/CallReceiptHandler/CallReceiptTable/Ca
 
 const CallReceiptHandlerPage: React.FC = () => {
     return <div className={styles["main-content"]}>
-        <span className={styles["title"]}>
-            Xử lý điều phối
-        </span>
         <CallReceiptTable/>
     </div>
 }

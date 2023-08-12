@@ -5,7 +5,7 @@ div.wrapper {
     /* background-color: blue; */
 }
 
-form.call-receipt-form {
+form.confirm-form {
     margin-top: 4rem;
     margin-bottom: 4rem;
     display: inline-block;
@@ -18,14 +18,14 @@ form.call-receipt-form {
     padding-bottom: 2rem;
 }
 
-form.call-receipt-form > div.form-heading {
+form.confirm-form > div.form-heading {
     height: 4.6rem;
     background-color: #E67700;
     position: relative;
     border-radius: 8px 8px 0px 0px;
 }
 
-form.call-receipt-form > div.form-heading > span.title {
+form.confirm-form > div.form-heading > span.title {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -36,8 +36,8 @@ form.call-receipt-form > div.form-heading > span.title {
     font-weight: 600;
 }
 
-form.call-receipt-form > div.guest_info_section-title,
-form.call-receipt-form > div.details_info_section-title {
+form.confirm-form > div.guest_info_section-title,
+form.confirm-form > div.details_info_section-title {
     background-color: #F6F6F6;
     padding: 1.6rem;
     text-align: left;
@@ -47,12 +47,12 @@ form.call-receipt-form > div.details_info_section-title {
     border-bottom: 1.4px solid #ADB5BD;
 }
 
-form.call-receipt-form > div.details_info_section-title {
+form.confirm-form > div.details_info_section-title {
     border-top: 1.4px solid #ADB5BD
 }
 
-form.call-receipt-form > div.guest_info_section-title > span.text,
-form.call-receipt-form > div.details_info_section-title > span.text {
+form.confirm-form > div.guest_info_section-title > span.text,
+form.confirm-form > div.details_info_section-title > span.text {
     font-size: 2.2rem;
     position: absolute;
     top: 50%;
@@ -60,89 +60,89 @@ form.call-receipt-form > div.details_info_section-title > span.text {
     font-weight: 600;
 }
 
-form.call-receipt-form > div.guest_info_section-content,
-form.call-receipt-form > div.details_info_section-content {
+form.confirm-form > div.guest_info_section-content,
+form.confirm-form > div.details_info_section-content {
     padding: 1.6rem;
     font-size: 1.6rem;
     height: 18rem;
     padding: 1.6rem;
 }
 
-form.call-receipt-form > div.guest_info_section-content div span.title,  
-form.call-receipt-form > div.details_info_section-content > div  div span.title {
+form.confirm-form > div.guest_info_section-content div span.title,  
+form.confirm-form > div.details_info_section-content > div  div span.title {
     font-weight: 600;
 }
 
-form.call-receipt-form > div.guest_info_section-content div {
+form.confirm-form > div.guest_info_section-content div {
     margin-left: 1rem;
     margin-top: 1.2rem;
     display: flex;
     /* background-color: oldlace; */
 }
 
-form.call-receipt-form > div.guest_info_section-content div span,
-form.call-receipt-form > div.details_info_section-content div span {
+form.confirm-form > div.guest_info_section-content div span,
+form.confirm-form > div.details_info_section-content div span {
     margin-right: 1rem;
     font-size: 1.7rem;
 }
 
-form.call-receipt-form > div.guest_info_section-content div.guest_name {
+form.confirm-form > div.guest_info_section-content div.guest_name {
     gap: 11rem; 
 }
 
-form.call-receipt-form > div.guest_info_section-content div.guest_phone_number {
+form.confirm-form > div.guest_info_section-content div.guest_phone_number {
     gap: 5.6rem;
 
 }
 
-form.call-receipt-form > div.guest_info_section-content div.guest_vehicle_booking_type {
+form.confirm-form > div.guest_info_section-content div.guest_vehicle_booking_type {
     gap: 7.6rem;
 }
 
-form.call-receipt-form > div.guest_info_section-content div.guest_note {
+form.confirm-form > div.guest_info_section-content div.guest_note {
     gap: 10.3rem;
 }
 
-form.call-receipt-form > div.details_info_section-content > div {
+form.confirm-form > div.details_info_section-content > div {
     display: flex;
     align-items: center;
     /* background-color: oldlace; */
 }
 
-form.call-receipt-form > div.details_info_section-content > div div.title {
+form.confirm-form > div.details_info_section-content > div div.title {
     display: flex;
     align-items: center;
 }
 
-form.call-receipt-form > div.details_info_section-content > div > span {
+form.confirm-form > div.details_info_section-content > div > span {
     font-weight: 400;
 }
 
-form.call-receipt-form > div.details_info_section-content > div.departure-address {
+form.confirm-form > div.details_info_section-content > div.departure-address {
     gap: 15rem;
 }
 
-form.call-receipt-form > div.details_info_section-content > div.arrival-address {
+form.confirm-form > div.details_info_section-content > div.arrival-address {
     margin-top: 1rem;
     gap: 15rem;
 }
 
-form.call-receipt-form > div.details_info_section-content > div.arrival-address > div.title {
+form.confirm-form > div.details_info_section-content > div.arrival-address > div.title {
     gap: 0.4rem;
 }
 
-form.call-receipt-form > div.details_info_section-content > div.scheduled-time {
+form.confirm-form > div.details_info_section-content > div.scheduled-time {
     margin-top: 1rem;
     gap: 4.8rem;
 }
 
 
-form.call-receipt-form > div.details_info_section-content > div.scheduled-time  > span.text {
+form.confirm-form > div.details_info_section-content > div.scheduled-time  > span.text {
     color: #F86C1D;
     font-weight: 500;
 }
 
-form.call-receipt-form > div.total_price-section {
+form.confirm-form > div.total_price-section {
     margin-top: -3rem;
     height: 10rem;
     width: 100%;
@@ -151,7 +151,7 @@ form.call-receipt-form > div.total_price-section {
     border-bottom: 1.4px solid #ADB5BD;
 }
 
-form.call-receipt-form > div.total_price-section > div.title {
+form.confirm-form > div.total_price-section > div.title {
     /* background-color: red; */
     text-align: right;
     padding: 0.8rem;
@@ -159,7 +159,7 @@ form.call-receipt-form > div.total_price-section > div.title {
     font-size: 2.4rem; 
 }
 
-form.call-receipt-form > div.total_price-section > div.price-text {
+form.confirm-form > div.total_price-section > div.price-text {
     /* background-color: red; */
     margin-top: -1rem;
     text-align: right;
@@ -172,14 +172,14 @@ form.call-receipt-form > div.total_price-section > div.price-text {
 
 /* button section */
 
-form.call-receipt-form > div.btn-section {
+form.confirm-form > div.btn-section {
     margin: 0.8rem 0rem;
     display: flex;
     justify-content: center;
     gap: 10rem;
 }
 
-form.call-receipt-form > div.btn-section > button {
+form.confirm-form > div.btn-section > button {
     font-family: 'Montserrat', sans-serif;
     margin-top: 2rem;
     padding: 0.6rem;
@@ -193,7 +193,100 @@ form.call-receipt-form > div.btn-section > button {
     text-transform: uppercase;
 }
 
-form.call-receipt-form > div.btn-section > button:hover {
+form.confirm-form > div.btn-section > button:hover {
+    transition: all 0.2s ease-in-out;
+    color: #E67700;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+div.wrapper > div.loading-form,
+div.wrapper > div.successful-form {
+    z-index: 3;
+    position: fixed;
+    width: 60rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+div.wrapper > div.loading-form {
+    height: 20rem;
+}
+
+div.wrapper > div.loading-form  > div.content {
+    display: flex;
+    gap: 3rem;
+    /* background-color: red; */
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+div.wrapper > div.loading-form  > div.content > span.text {
+    font-weight: 600;
+    font-size: 2.4rem;
+    color: #F86C1D;
+}
+
+div.wrapper > div.successful-form > div.title {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    gap: 1.4rem;
+    /* background-color: red; */
+} 
+
+div.wrapper > div.successful-form > div.title > span.icon > .checked-icon {
+    font-size: 5.5rem;
+}
+
+div.wrapper > div.successful-form > div.title > span.text {
+    font-size: 3rem;
+    font-weight: 600;
+    color: #247835;
+     text-transform: uppercase;
+}
+
+
+div.wrapper > div.successful-form > div.content {
+    margin: 1.6rem;
+    text-align: left;
+    line-height: 2.4rem;
+    font-size: 3rem;
+    /* background-color: red; */
+}
+
+div.wrapper > div.successful-form > div.content > div.text {
+    font-size: 1.6rem;
+}
+
+
+div.wrapper > div.successful-form > div.back-to-home-btn {
+    /* background-color: red; */
+    text-align: center;
+}
+
+div.wrapper > div.successful-form > div.back-to-home-btn > button {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 0.6rem;
+    width: 28rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    background-color: #E67700;
+    border: 2.4px solid #E67700;
+    border-radius: 24px;
+    color: white;
+    text-transform: uppercase;
+}
+
+
+div.wrapper > div.successful-form > div.back-to-home-btn > button:hover {
     transition: all 0.2s ease-in-out;
     color: #E67700;
     background-color: #fff;

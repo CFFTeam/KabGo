@@ -3,19 +3,26 @@ import {ReactComponent as SunIcon} from "@assets/svg/CallReceipt/sun.svg";
 import {ReactComponent as MoonIcon} from "@assets/svg/CallReceipt/moon.svg";
 import {useState, useRef} from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks/ReduxHooks';
-import {callReceiptActions} from "@store/reducers/callReceiptSlice";
+import {callReceiptHandlerActions} from "@store/reducers/callReceiptHandlerSlice";
 
 const GuestInfo: React.FC = () => {
     const dispatch = useAppDispatch();
+    const processSteps = useAppSelector((state) => state.callReceiptHandler.processSteps);
 
     const nameRef = useRef<HTMLInputElement>(null);
     const phoneNumberRef = useRef<HTMLInputElement>(null);
     const vehicleTypeRef = useRef<HTMLSelectElement>(null);
     const scheduledBookingTime_HH_Ref = useRef<HTMLInputElement>(null);
     const scheduledBookingTime_MM_Ref = useRef<HTMLInputElement>(null);
-    const departureAddressRef = useRef<HTMLInputElement>(null);
-    const arrivalAddressRef = useRef<HTMLInputElement>(null);
     const noteRef = useRef<HTMLTextAreaElement>(null);
+
+    const handleForward = () => {
+        dispatch(callReceiptHandlerActions.updateProcessSteps({
+            ...processSteps,
+            stepOne: false,
+            stepTwo: true,
+        }));
+    }
      
     return <div className={styles["wrapper"]}>
         <form className={styles["call-receipt-form"]}>
@@ -99,7 +106,7 @@ const GuestInfo: React.FC = () => {
                         <textarea ref = {noteRef} name = "guest-note" placeholder = "Nhập ghi chú....." className = {styles["guest-note"]}/>
                     </div>
                 <div className={styles["forward-btn"]}>
-                    <button type = 'submit' >
+                    <button type = 'submit' onClick = {handleForward}>
                         Tiếp tục
                     </button>
                 </div>
