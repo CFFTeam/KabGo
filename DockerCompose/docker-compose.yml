@@ -59,6 +59,21 @@ services:
       - call-center
       - rabbitmq
 
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'kabgo-rabbitmq'
+    hostname: 'rabbitmq.kabgo.local'
+    networks:
+      - nw-rabbitmq
+    ports:
+        - "5672:5672"
+        - "15672:15672"
+    environment:
+      FORCE_COLOR: 1
+      DEBUG_COLORS: "true"
+      TERM: xterm-256color
+      COLORTERM: truecolor
+
   api-auth: 
     build: 
       context: ../KabGo/servers/auth
@@ -225,21 +240,6 @@ services:
       - "4510:4510"
     volumes:
       - ../KabGo/clients/call-center:/usr/src/app
-    environment:
-      FORCE_COLOR: 1
-      DEBUG_COLORS: "true"
-      TERM: xterm-256color
-      COLORTERM: truecolor
-      
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    container_name: 'kabgo-rabbitmq'
-    hostname: 'rabbitmq.kabgo.local'
-    networks:
-      - nw-rabbitmq
-    ports:
-        - "5672:5672"
-        - "15672:15672"
     environment:
       FORCE_COLOR: 1
       DEBUG_COLORS: "true"
