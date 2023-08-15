@@ -334,7 +334,7 @@ input::placeholder {
     width: 12rem;
 }
 .button-container-header{
-    width: 6.5rem;
+    width: 7rem;
 }
 
 .table-body-relative-container{
@@ -428,7 +428,7 @@ input::placeholder {
 }
 
 .table-sub-content-container::-webkit-scrollbar {
-    width: 0.5rem; /* width of the scrollbar */
+    width: 0.4rem; /* width of the scrollbar */
 }
   
 .table-sub-content-container::-webkit-scrollbar-thumb {

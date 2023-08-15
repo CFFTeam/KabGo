@@ -7,7 +7,7 @@ import Customer from "@components/Customer";
 import Service from "@components/Service";
 import Vehicle from "@components/Vehicle";
 import Invoice from "@components/Invoice";
-import CreateAdmin from "@components/CreateAdmin";
+import NewAccount from "@components/NewAccount";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/" element={<Dashboard />} />
         <Route path="/admin">
           <Route index element={<Admin />} />
-          <Route path="create" element={<CreateAdmin />} />
+          <Route path="create" element={<NewAccount />} />
         </Route>
         <Route path="/driver" element={<Customer />} />
         <Route path="/customer" element={<Customer />} />
