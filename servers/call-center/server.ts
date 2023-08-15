@@ -18,6 +18,9 @@ const app = new Application({
     mongoConnection: {
         uri: process.env.MONGO_URI as string,
     },
+    rabbitMQConnection: {
+        uri: process.env.RABBITMQ_URI as string
+    }
 });
 
 const server = app.run(4500);
