@@ -53,7 +53,7 @@ const NewAccount: React.FC = () => {
     for(let i: number=0; i<emptyName.length; i++){
       setTimeout(function() {
         $(`#${emptyName[i]}`).css('border', '');
-      }, 2000);
+      }, 4000);
     }
   }
 
@@ -80,20 +80,33 @@ const NewAccount: React.FC = () => {
           color: 'red',
           fontWeight: '500'
         },
-        duration: 3000
+        duration: 4000
       });
     }
     else{
-      navigate("/admin");
-      toast.success('Tạo tài khoản thành công', {
-        style: {
-          border: '2px solid #28a745',
-          padding: '10px',
-          color: '#28a745',
-          fontWeight: '500'
-        },
-        duration: 3000
-      });
+      if(getFormData.pass !== getFormData.confpass){
+        toast.error('Mật khẩu không trùng khớp', {
+          style: {
+            border: '2px solid red',
+            padding: '10px',
+            color: 'red',
+            fontWeight: '500'
+          },
+          duration: 4000
+        });
+      }
+      else{
+        navigate("/admin");
+        toast.success('Tạo tài khoản thành công', {
+          style: {
+            border: '2px solid #28a745',
+            padding: '10px',
+            color: '#28a745',
+            fontWeight: '500'
+          },
+          duration: 4000
+        });
+      }
     }
   };
 

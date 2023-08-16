@@ -20,6 +20,9 @@ const Admin: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const searchRef = useRef<HTMLInputElement>(null);
+  // useEffect(()=>{
+    
+  // }, []);
 
   const [filterData, setFilterData] = useState<String>("");
   const submitSearch = (event: React.KeyboardEvent) => {
