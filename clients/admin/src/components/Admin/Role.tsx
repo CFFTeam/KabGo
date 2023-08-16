@@ -54,7 +54,7 @@ const Dashboard: React.FC = () => {
           <Import />
           <div className={styles["create-header-content"]}>Import</div>
         </div>
-        <div className={styles["create-button-container"]} onClick={()=>{navigate("/admin/create")}}>
+        <div className={styles["create-button-container"]} onClick={()=>{navigate("./create")}}>
           <Add />
           <div className={styles["create-button-header-content"]} >Thêm quản lý</div>
         </div>

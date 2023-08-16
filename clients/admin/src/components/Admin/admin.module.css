@@ -292,7 +292,7 @@ input::placeholder {
   
   .dropdown-content-table div {
     color: black;
-    padding: 1rem 0;
+    padding: 1rem 1.5rem;
     text-decoration: none;
     display: block;
     font-size: 1.5rem;
@@ -439,3 +439,4 @@ input::placeholder {
 .table-sub-content-container::-webkit-scrollbar-track {
     background: #EFEFEF; 
 }
+
