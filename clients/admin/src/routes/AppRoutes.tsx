@@ -18,8 +18,14 @@ const AppRoutes: React.FC = () => {
           <Route index element={<Admin />} />
           <Route path="create" element={<NewAccount />} />
         </Route>
-        <Route path="/driver" element={<Customer />} />
-        <Route path="/customer" element={<Customer />} />
+        <Route path="/driver">
+          <Route index element={<Driver />} />
+          <Route path="create" element={<NewAccount />} />
+        </Route>
+        <Route path="/customer">
+          <Route index element={<Customer />} />
+          <Route path="create" element={<NewAccount />} />
+        </Route>
         <Route path="/service" element={<Service />} />
         <Route path="/vehicle" element={<Vehicle />} />
         <Route path="/invoice" element={<Invoice />} />

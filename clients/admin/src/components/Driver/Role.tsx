@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "./admin.module.css";
+import styles from "./driver.module.css";
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import { dashboardActions } from "@store/dashboard";
-import { ReactComponent as Employee } from "@assets/svg/Admin/employee.svg";
-import { ReactComponent as Task } from "@assets/svg/Admin/task.svg";
-import { ReactComponent as Gantt } from "@assets/svg/Admin/gantt.svg";
+import { ReactComponent as Moto } from "@assets/svg/Driver/moto.svg";
+import { ReactComponent as Reward } from "@assets/svg/Driver/reward.svg";
+import { ReactComponent as Sub } from "@assets/svg/Driver/sub.svg";
 import { ReactComponent as Export } from "@assets/svg/Admin/export.svg";
 import { ReactComponent as Import } from "@assets/svg/Admin/import.svg";
 import { ReactComponent as Add } from "@assets/svg/Admin/add.svg";
@@ -16,7 +16,7 @@ import axios from "axios";
 const Role: React.FC = () => {
   const dispatch = useAppDispatch();
   const clickHandle = () => {
-    navigate("/admin/create");
+    navigate("/driver/create");
     toast.success('Tạo tài khoản thành công', {
       style: {
         border: '2px solid #28a745',
@@ -31,18 +31,18 @@ const Role: React.FC = () => {
     <div className={styles["header-container"]}>
       <div className={styles["manage-container"]}>
         <div className={`${styles["each-manage-container"]} ${styles["manage-background"]}`}>
-          <Employee />
+          <Moto />
           <div className={styles["manage-header-content"]}>
-            Employee Management
+            Driver Management
           </div>
         </div>
         <div className={styles["each-manage-container"]}>
-          <Task />
-          <div className={styles["manage-header-content"]}>Task Management</div>
+          <Reward />
+          <div className={styles["manage-header-content"]}>Rewards Management</div>
         </div>
         <div className={styles["each-manage-container"]}>
-          <Gantt />
-          <div className={styles["manage-header-content"]}>Gantt Chart</div>
+          <Sub />
+          <div className={styles["manage-header-content"]}>Driver Subscription</div>
         </div>
       </div>
       <div className={styles["create-container"]}>
@@ -56,7 +56,7 @@ const Role: React.FC = () => {
         </div>
         <div className={styles["create-button-container"]} onClick={()=>{navigate("./create")}}>
           <Add />
-          <div className={styles["create-button-header-content"]} >Thêm quản lý</div>
+          <div className={styles["create-button-header-content"]} >Thêm tài xế</div>
         </div>
       </div>
     </div>

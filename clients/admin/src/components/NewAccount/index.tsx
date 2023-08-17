@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import styles from "./newAccount.module.css";
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
-import {useNavigate} from "react-router-dom"
+import {useLocation, useNavigate} from "react-router-dom"
 import { dashboardActions } from "@store/dashboard";
 import { useEffect } from "react";
 import { ReactComponent as Vertical } from "@assets/svg/NewAccount/vertical.svg";
@@ -19,9 +19,11 @@ import toast from "react-hot-toast";
 
 const NewAccount: React.FC = () => {
   const navigate = useNavigate()
+  let location = useLocation();
   const dispatch = useAppDispatch();
   const [gender, setGender] = useState<string>("Giới tính");
   const [autoPass, setAutoPass] = useState<boolean>(false);
+  const [sendType, setSendType] = useState<boolean>(false);
   const nameRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -96,7 +98,7 @@ const NewAccount: React.FC = () => {
         });
       }
       else{
-        navigate("/admin");
+        navigate(location.pathname.substring(0, location.pathname.length-7));
         toast.success('Tạo tài khoản thành công', {
           style: {
             border: '2px solid #28a745',
@@ -122,6 +124,10 @@ const NewAccount: React.FC = () => {
 
   const autoPassHandle = () => {
     setAutoPass((prev) => !prev);
+  };
+
+  const sendTypeHandle = () => {
+    setSendType((prev) => !prev);
   };
 
   return (
@@ -267,13 +273,13 @@ const NewAccount: React.FC = () => {
             </div>
             <div className={styles["sendemail-sms-container"]}>
               <div className={styles["sendemail-container"]}>
-                <Tick />
+                {!sendType ? <Tick onClick={sendTypeHandle}/> : <Untick onClick={sendTypeHandle}/>}
                 <div className={styles["sendemail-title"]}>
                   Gửi mật khẩu qua địa chỉ email
                 </div>
               </div>
               <div className={styles["sms-container"]}>
-                <Untick />
+                {sendType ? <Tick onClick={sendTypeHandle}/> : <Untick onClick={sendTypeHandle}/>}
                 <div className={styles["sms-title"]}>
                   Gửi mật khẩu qua tin nhắn SMS
                 </div>
@@ -289,7 +295,7 @@ const NewAccount: React.FC = () => {
             <div className={styles["choose-ava"]}>Chọn ảnh</div>
           </div>
           <div className={styles["submit-container"]}>
-            <div className={styles["cancel"]}>Hủy bỏ</div>
+            <div className={styles["cancel"]} onClick={()=> navigate(location.pathname.substring(0, location.pathname.length-7))}>Hủy bỏ</div>
             <div className={styles["create"]} onClick={submitSearch}>Tạo tài khoản</div>
           </div>
         </div>

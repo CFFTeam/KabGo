@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import styles from "./admin.module.css";
+import styles from "./customer.module.css";
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import { dashboardActions } from "@store/dashboard";
 import { ReactComponent as SearchIcon } from "@assets/svg/Admin/search.svg";
@@ -39,18 +39,18 @@ const Table: React.FC = () => {
     setFilterData("");
   };
 
-  const role: string[] = [
-    "Administrator",
-    "Task Manager",
-    "Income Manager",
-    "IT Manager",
+  const numberServices: string[] = [
+    "01",
+    "02",
+    "03",
+    "04",
   ];
 
   interface elementTableData {
     fullname: string;
-    role: string;
-    email: string;
+    numServices: string;
     phone: string;
+    account: string;
     active: string;
     lock: boolean;
   }
@@ -58,75 +58,75 @@ const Table: React.FC = () => {
   const arrayElementTableData: elementTableData[] = [
     {
       fullname: "Trần Đàm Gia Huy",
-      role: "Administrator",
-      email: "giahuy2002@gmail.com",
+      numServices: "04",
       phone: "0703350128",
+      account: "200.000đ",
       active: "12/08/2023",
       lock: false,
     },
     {
       fullname: "Đinh Nguyễn Duy Khang",
-      role: "Task Manager",
-      email: "khangduy017@gmail.com",
-      phone: "0976975548",
+      numServices: "04",
+      phone: "0703350128",
+      account: "200.000đ",
       active: "12/08/2023",
       lock: false,
     },
     {
       fullname: "Nguyễn Thoại Đăng Khoa",
-      role: "Income Manager",
-      email: "nguyenthoaidangkhoa@gmail.com",
-      phone: "0903861515",
+      numServices: "04",
+      phone: "0703350128",
+      account: "200.000đ",
       active: "12/08/2023",
       lock: false,
     },
     {
       fullname: "Culi thích code",
-      role: "IT Manager",
-      email: "wgmin.it@outlook.com",
-      phone: "0778568685",
+      numServices: "04",
+      phone: "0703350128",
+      account: "200.000đ",
       active: "12/08/2023",
       lock: false,
     },
     {
       fullname: "Cải xanh",
-      role: "IT Manager",
-      email: "caixanh.it@outlook.com",
-      phone: "0778568685",
+      numServices: "04",
+      phone: "0703350128",
+      account: "200.000đ",
       active: "12/08/2023",
       lock: false,
     },
     {
       fullname: "Cải xanh",
-      role: "IT Manager",
-      email: "caixanh.it@outlook.com",
-      phone: "0778568685",
+      numServices: "04",
+      phone: "0703350128",
+      account: "200.000đ",
       active: "12/08/2023",
       lock: true,
     },
     {
       fullname: "Culi thích code",
-      role: "IT Manager",
-      email: "wgmin.it@outlook.com",
-      phone: "0778568685",
+      numServices: "04",
+      phone: "0703350128",
+      account: "200.000đ",
       active: "12/08/2023",
       lock: false,
     },
     {
       fullname: "Cải xanh",
-      role: "IT Manager",
-      email: "caixanh.it@outlook.com",
-      phone: "0778568685",
+      numServices: "04",
+      phone: "0703350128",
+      account: "200.000đ",
       active: "12/08/2023",
       lock: false,
     },
     {
       fullname: "Cải xanh",
-      role: "IT Manager",
-      email: "caixanh.it@outlook.com",
-      phone: "0778568685",
+      numServices: "04",
+      phone: "0703350128",
+      account: "200.000đ",
       active: "12/08/2023",
-      lock: true,
+      lock: false,
     },
   ];
 
@@ -154,7 +154,7 @@ const Table: React.FC = () => {
           ) : (
             <div className={styles["each-filter-result-container"]}>
               <div className={styles["each-filter-result-title"]}>
-                Chức vụ {filterData}
+                {filterData} Dịch vụ
               </div>
               <CancelIcon
                 className={styles["each-filter-result-icon"]}
@@ -176,22 +176,22 @@ const Table: React.FC = () => {
       {/* Table Header */}
       <div className={styles["table-header-container"]}>
         <div className={styles["ord-num"]}>STT</div>
-        <div className={styles["staff"]}>Nhân viên</div>
+        <div className={styles["staff"]}>Khách hàng</div>
         <div className={styles["dropdown-container-table"]}>
           <button className={styles["dropdown-title-table"]}>
-            <div>Chức vụ</div>
+            <div>Số lượng dịch vụ</div>
             <DownIcon className={styles["dropdown-title-down"]} />
           </button>
           <div className={styles["dropdown-content-table"]}>
-            {role.map((data, index) => (
+            {numberServices.map((data, index) => (
               <div onClick={() => handleFilterData(data)} key={index}>
                 {data}
               </div>
             ))}
           </div>
         </div>
-        <div className={styles["email"]}>Email</div>
         <div className={styles["phone"]}>Số điện thoại</div>
+        <div className={styles["acc"]}>Tài khoản</div>
         <div className={styles["time"]}>Hoạt động</div>
         <div className={styles["button-container-header"]}></div>
       </div>
@@ -209,9 +209,9 @@ const Table: React.FC = () => {
                 <img src={UserAvatar} />
                 <div>{data.fullname}</div>
               </div>
-              <div className={styles["role-body"]}>{data.role}</div>
-              <div className={styles["email-body"]}>{data.email}</div>
+              <div className={styles["role-body"]}>{data.numServices}</div>
               <div className={styles["phone-body"]}>{data.phone}</div>
+              <div className={styles["acc-body"]}>{data.account}</div>
               <div className={styles["time-body"]}>{data.active}</div>
               <div
                 className={`${styles["button-container-body"]} ${
