@@ -1,8 +1,12 @@
 import 'dart:convert';
 
+import 'package:customer_app/functions/setDepartureByPosition.dart';
 import 'package:customer_app/models/route_model.dart';
+import 'package:customer_app/providers/currentLocationProvider.dart';
+import 'package:customer_app/providers/locationPickerInMap.dart';
 import 'package:customer_app/providers/mapProvider.dart';
 import 'package:customer_app/providers/routeProvider.dart';
+import 'package:customer_app/providers/stepProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,6 +31,7 @@ class MyMap extends ConsumerStatefulWidget {
 class _MyMapState extends ConsumerState<MyMap> {
   late GoogleMapController googleMapController;
   static late CameraPosition initialCameraPosition;
+  CameraPosition? cameraPosition;
   String mapTheme = '';
   Set<Marker> markers = {};
   List<LatLng> polylineCoordinates = [];
@@ -38,13 +43,19 @@ class _MyMapState extends ConsumerState<MyMap> {
 
   LatLng? departureLocation;
   LatLng? arrivalLocation;
-  double mapPaddingBottom = 100;
+  double mapPaddingTop = 25;
+  double mapPaddingLeft = 0;
+  double mapPaddingBottom = 0;
+  double mapPaddingRight = 0;
+  double padding = 100;
 
   void getFirstCurrentPosition() async {
-    LocationModel currentLocationModel = await determinePosition();
+    LatLng latLng = await determinePosition();
+    LocationModel currentLocationModel = await setDepartureByPosition(latLng);
     ref
         .read(departureLocationProvider.notifier)
         .setDepartureLocation(currentLocationModel);
+    ref.read(currentLocationProvider.notifier).setCurrentLocation(latLng);
   }
 
   void getDeparture(bool animationCamera) async {
@@ -56,8 +67,9 @@ class _MyMapState extends ConsumerState<MyMap> {
         departureLocation = locationModel.postion;
       }
     } else {
-      LocationModel currentLocationModel = await determinePosition();
-      departureLocation = currentLocationModel.postion;
+      LatLng latLng = await determinePosition();
+      LocationModel currentLocationModel = await setDepartureByPosition(latLng);
+      departureLocation = latLng;
       ref
           .read(departureLocationProvider.notifier)
           .setDepartureLocation(currentLocationModel);
@@ -101,8 +113,10 @@ class _MyMapState extends ConsumerState<MyMap> {
   }
 
   void getCurrentLocation() async {
-    LocationModel currentLocationModel = await determinePosition();
-    currentLocation = currentLocationModel.postion;
+    currentLocation = await determinePosition();
+    ref
+        .read(currentLocationProvider.notifier)
+        .setCurrentLocation(currentLocation!);
     markers.remove(const MarkerId('currentLocation'));
     markers.add(Marker(
       markerId: const MarkerId('currentLocation'),
@@ -119,7 +133,8 @@ class _MyMapState extends ConsumerState<MyMap> {
   }
 
   void drawRoute() async {
-    LocationModel arrival = ref.watch(arrivalLocationProvider);
+    LocationModel arrival = ref.read(arrivalLocationProvider);
+    departureLocation = ref.read(departureLocationProvider).postion;
     if (arrival.postion == null) {
       arrivalLocation = await arrival.getLocation();
     } else {
@@ -240,6 +255,18 @@ class _MyMapState extends ConsumerState<MyMap> {
     setState(() {});
   }
 
+  void moveToPosition() {
+    departureLocation = ref.read(departureLocationProvider).postion;
+    googleMapController.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+            target: LatLng(
+                departureLocation!.latitude, departureLocation!.longitude),
+            zoom: 16.5),
+      ),
+    );
+  }
+
   String? action;
 
   @override
@@ -261,43 +288,67 @@ class _MyMapState extends ConsumerState<MyMap> {
     return Consumer(
       builder: (context, ref, child) {
         ref.listen(mapProvider, (previous, next) {
-          if (next == 'SET_DEFAULT') {
+          if (next == 'GET_CURRENT_LOCATION') {
+            getCurrentLocation();
+            ref.read(mapProvider.notifier).setMapAction('');
+          } else if (next == 'SET_DEFAULT') {
+            ref.read(mapProvider.notifier).setMapAction('');
             setState(() {
-              mapPaddingBottom = 100;
+              padding = 100;
               markers.clear();
               polylineList.clear();
               polylineCoordinates.clear();
             });
-          } else if (next == 'GET_CURRENT_LOCATION') {
-            getCurrentLocation();
+          } else if (next == 'FIND_ARRIVAL_LOCATION') {
             ref.read(mapProvider.notifier).setMapAction('');
-          } else if (next == 'GET_DEPARTURE_LOCATION') {
+            setState(() {
+              padding = 370;
+              markers.clear();
+              polylineList.clear();
+              polylineCoordinates.clear();
+            });
+          } else if (next == 'GET_CURRENT_DEPARTURE_LOCATION') {
             ref.read(mapProvider.notifier).setMapAction('');
-            mapPaddingBottom = 360;
+            polylineList.clear();
+            polylineCoordinates.clear();
+            getDeparture(false);
+          } else if (next == 'GET_NEW_DEPARTURE_LOCATION') {
+            ref.read(mapProvider.notifier).setMapAction('');
+            padding = 370;
             polylineList.clear();
             polylineCoordinates.clear();
             getDeparture(true);
+          } else if (next == 'LOCATION_PICKER') {
+            setState(() {
+              padding = 240;
+              markers.clear();
+              polylineList.clear();
+              polylineCoordinates.clear();
+            });
+            moveToPosition();
           } else if (next == 'DRAW_ROUTE') {
-            // mapPaddingBottom = 320;
-            mapPaddingBottom = 360;
+            padding = 370;
             drawRoute();
           } else if (next == 'CREATE_TRIP') {
-            // getDeparture();
           } else if (next == 'FIND_DRIVER') {
             polylineList.clear();
             polylineCoordinates.clear();
             markers.clear();
-            mapPaddingBottom = 80;
+            padding = 80;
             findDriver();
           }
         });
         return Container(
-          padding: EdgeInsets.only(bottom: mapPaddingBottom),
+          padding: EdgeInsets.only(bottom: padding),
           child: GoogleMap(
+            padding: EdgeInsets.fromLTRB(mapPaddingLeft, mapPaddingTop,
+                mapPaddingRight, mapPaddingBottom),
             onMapCreated: (controller) {
               googleMapController = controller;
               controller.setMapStyle(mapTheme);
             },
+            myLocationButtonEnabled: false,
+            myLocationEnabled: false,
             initialCameraPosition: initialCameraPosition,
             markers: markers,
             zoomControlsEnabled: false,
@@ -308,6 +359,21 @@ class _MyMapState extends ConsumerState<MyMap> {
                 color: const Color.fromARGB(255, 255, 113, 36),
                 width: 8,
               )
+            },
+            onCameraMove: (CameraPosition cameraPositiona) {
+              cameraPosition = cameraPositiona; //when map is dragging
+            },
+            onCameraIdle: () async {
+              if (ref.read(stepProvider) == 'choose_departure_in_map') {
+                LatLng latLng = LatLng(cameraPosition!.target.latitude,
+                    cameraPosition!.target.longitude);
+                LocationModel locationModel =
+                    await setDepartureByPosition(latLng);
+                print(locationModel.structuredFormatting!.mainText);
+                ref
+                    .read(pickerLocationProvider.notifier)
+                    .setPickerLocation(locationModel);
+              }
             },
           ),
         );
