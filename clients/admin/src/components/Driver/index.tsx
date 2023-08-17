@@ -2,16 +2,19 @@ import React from "react";
 import styles from "./driver.module.css";
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import { dashboardActions } from "@store/dashboard";
+import Role from "./Role"
+import TableContent from "./TableContent"
 import { useEffect } from "react";
 import axios from "axios";
 
-const Dashboard: React.FC = () => {
+const Driver: React.FC = () => {
   const dispatch = useAppDispatch();
   return (
-    <div className={styles["a"]}>
-        aaaa
-    </div>
+    <React.Fragment>
+      <Role />
+      <TableContent />
+    </React.Fragment>
   );
 };
 
-export default Dashboard;
+export default Driver;

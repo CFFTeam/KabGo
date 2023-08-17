@@ -1,0 +1,334 @@
+.create-account-container{
+    margin-top: 1.5rem;
+    height: 76.5rem;
+    background: white;
+    border-radius: 0.6rem;
+}
+
+.flex-layout-container{
+    display: flex;
+    height: 100%;   
+    width: 100%;
+}
+
+.info-pass-container{
+    height: 100%;   
+    width: 61%;
+}
+
+.profile-container{
+    height: 100%;
+    width: 39%;
+}
+
+.vertical-svg{
+    margin-top: 7rem;
+}
+
+.info-container{
+    height: 56%;
+    padding: 2.5rem 3rem 1.5rem 3rem;
+}
+
+.info-title{
+    font-size: 2rem;
+    font-weight: 600;
+    color: black;
+}
+
+.name-phone-gender-container{
+    width: 100%;
+    margin-top: 3.5rem;
+    display: flex;
+    gap: 2rem;
+    height: 8rem;
+}
+
+.name-container{
+    width: 45%;
+}
+
+.phone-container{
+    width: 35%;
+}
+
+.gender-container{
+    width: 20%;
+}
+
+.prop-title{
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #5A5A5A;
+}
+
+.input-self{
+    border-radius: 0.6rem;
+    margin-top: 1.5rem;
+    height: 4.5rem;
+    width: 100%;
+    border: 2px solid #F1F1F1;
+    padding-left: 1rem;
+}
+
+.email-role-container{
+    width: 100%;
+    margin-top: 3.5rem;
+    display: flex;
+    gap: 2rem;
+    height: 8rem;
+}
+
+.email-container{
+    width: 68%;
+}
+
+.role-container{
+    width: 32%;
+}
+
+.address-container{
+    width: 100%;
+    margin-top: 3.5rem;
+    display: flex;
+    gap: 2rem;
+    height: 8rem;
+}
+
+.address-only-container{
+    width: 100%;
+}
+
+input[type=text]:focus {
+    outline: none !important;
+    border: 1px solid rgb(66, 62, 61);
+}
+input::placeholder {
+    color: #A9A9A9;
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-family: 'Montserrat';
+}
+
+.dropdown-container{
+    margin-top: 1.5rem;
+    width: 100%;
+    height: 4.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-title{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.8rem;
+    border: 2px solid #F0F0F0;
+    background: white;
+    width: 100%;
+    height: 100%;
+    font-family: 'Montserrat';
+    padding: 0 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #A9A9A9;
+}
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 13.7rem;
+    box-shadow: 0px 0.8px 1.6rem 0rem rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 0.8rem;
+  }
+  
+  .dropdown-content div {
+    color: black;
+    padding: 1rem 1.5rem;
+    text-decoration: none;
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #3C3C3C;
+  }
+  
+  .dropdown-content div:hover {
+    background-color: #f1f1f1
+  }
+  
+  .dropdown-container:hover .dropdown-content {
+    display: block;
+    cursor: pointer;
+  }
+  
+  .dropdown-container:hover .dropdown-title {
+    cursor: pointer;
+  }
+
+  .color-black{
+    color: black;
+}
+
+.horizon-svg{
+    border-top: 1px solid #D9D9D9;
+    margin: 0 3rem;
+}
+
+.pass-container{
+    height: 44%;
+    width: 100%;
+    padding: 2.5rem 3rem;
+}
+
+.pass-title{
+    color: black;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.box-subtitle-container{
+    display: flex;
+    align-items: center;
+    margin-top: 2.5rem;
+    gap: 1rem
+}
+
+.subtitle-container{
+    color: #3C3C3C;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.passenter-conf-container{
+    width: 100%;
+    margin-top: 3.5rem;
+    display: flex;
+    gap: 2rem;
+    height: 8rem;
+}
+
+.passenter-container{
+    width: 50%;
+}
+
+.role-container{
+    width: 50%;
+}
+
+.sendemail-sms-container{
+    width: 100%;
+    margin-top: 3.5rem;
+    display: flex;
+    gap: 2rem;
+    height: 5rem;
+}
+
+.sendemail-container{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sms-container{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sendemail-title{
+    color: black;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.sms-title{
+    color: black;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.sub-pro-container{
+    width: 100%;
+    margin-top: 8rem;
+    text-align: center;
+}
+
+.profile-title{
+    color: black;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.ava-self{
+    margin: 5rem 0;
+}
+
+.choose-ava{
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16.5rem;
+    border: 2px solid #F86C1D;
+    color: #F86C1D;
+    font-size: 1.6rem;
+    font-weight: 600;
+    border-radius: 0.8rem;
+    margin: 0 auto;
+}
+
+.choose-ava:hover{
+    background: #FFF4EF;
+    cursor: pointer;
+}
+
+.submit-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 17rem auto;
+    width: 80%;
+    height: 5rem;
+}
+
+.cancel{
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16.5rem;
+    border: 2px solid #F42525;
+    color: #F42525;
+    font-size: 1.6rem;
+    font-weight: 600;
+    border-radius: 0.8rem;
+    margin: 0 auto;
+}
+
+.cancel:hover{
+    background: #FFEFEF;
+    cursor: pointer;
+}
+
+.create{
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16.5rem;
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 600;
+    border-radius: 0.8rem;
+    margin: 0 auto;
+    background: #F86C1D;
+}
+
+.create:hover{
+    background: #d86936;
+    cursor: pointer;
+}

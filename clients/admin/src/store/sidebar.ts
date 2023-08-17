@@ -80,21 +80,21 @@ const initialSidebarState: InitialSidebarState = {
     },
     {
         img: Service,
-        url: "/service",
+        url: "/",
         name: "Dịch vụ",
         imgFill: ServiceFill,
         active: false
     },
     {
         img: Vehicle,
-        url: "/vehicle",
+        url: "/",
         name: "Loại Phương Tiện",
         imgFill: VehicleFill,
         active: false
     },
     {
         img: Invoice,
-        url: "/invoice",
+        url: "/",
         name: "Hóa Đơn",
         imgFill: InvoiceFill,
         active: false

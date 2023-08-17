@@ -7,31 +7,40 @@ import { Server } from 'http';
 import Controller from './interfaces/controller';
 import ConsoleProxyHandler from '@common/utils/console.proxy';
 import Logger from './utils/logger';
-
-type ApplicationOptions = {
-    controllers: Controller[];
-    mongoConnection: MongoConnection;
-};
+import rabbitmq from './rabbitmq';
 
 type MongoConnection = {
     uri: string;
     options?: mongoose.ConnectOptions;
 };
 
+type RabbitMQConnection = {
+    uri: string;
+};
+
+type ApplicationOptions = {
+    controllers: Controller[];
+    mongoConnection: MongoConnection;
+    rabbitMQConnection: RabbitMQConnection;
+};
+
 class Application {
     private app: express.Application;
     private controllers: Controller[] = [];
     private mongoConnection: MongoConnection;
+    private rabbitMQConnection: RabbitMQConnection;
 
     constructor(options: ApplicationOptions) {
         this.app = express();
         this.controllers = options.controllers;
         this.mongoConnection = options.mongoConnection;
+        this.rabbitMQConnection = options.rabbitMQConnection;
 
         console = new Proxy(console, new ConsoleProxyHandler());
 
         this.setup();
         this.mongoDBConnect(this.mongoConnection.uri, this.mongoConnection.options);
+        this.rabbitMQConnect(this.rabbitMQConnection.uri);
     }
 
     public application() {
@@ -65,7 +74,7 @@ class Application {
         });
     }
 
-    public mongoDBConnect(uri: string, options: mongoose.ConnectOptions = {}): void {
+    private mongoDBConnect(uri: string, options: mongoose.ConnectOptions = {}): void {
         mongoose
             .connect(uri, options)
             .then(() => {
@@ -74,6 +83,10 @@ class Application {
             .catch((error) => {
                 console.log('Could not connect to the database', error);
             });
+    }
+
+    private rabbitMQConnect(uri: string) {
+        rabbitmq.connect(uri);
     }
 
     public run(port: number = 3000, callback: Function = () => {}): Server {
