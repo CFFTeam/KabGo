@@ -34,6 +34,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
 
   Set<Circle> _circles = {};
   Set<Marker> _markers = {};
+  Set<Polyline> _polyline = {};
 
   Directions? _info;
 
@@ -135,7 +136,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
       setState(() {
         _createMarker('my_location',
                 LatLng(_currentPosition.latitude, _currentPosition.longitude))
-            .then((value) => _markers = value);
+            .then((value) => _markers = _markers.map((Marker e) => e.mapsId.value == 'my_location' ? value.first : e).toSet());
 
         _circles = _createCircle('my_location',
             LatLng(_currentPosition.latitude, _currentPosition.longitude),
@@ -200,37 +201,64 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                     destination: LatLng(destinationLocation.latitude,
                         destinationLocation.longitude))
                 .then((value) {
-              _info = value;
               if (value != null) {
+                _info = value;
+
+                _polyline = {
+                  Polyline(
+                      polylineId: const PolylineId('customer_direction'),
+                      color: Colors.orangeAccent,
+                      width: 6,
+                      points: _info!.polylinePoints
+                          .map((e) => LatLng(e.latitude, e.longitude))
+                          .toList())
+                };
+
                 _mapController.animateCamera(
                     CameraUpdate.newLatLngBounds(value.bounds, 100.0));
+
+                DefaultAssetBundle.of(context).load('lib/assets/map/original.png')
+                .then((ByteData byteData) {
+                  setState(() {
+                    _markers = {
+                      _markers.first,
+                      Marker(
+                          markerId: const MarkerId('customer_location'),
+                          position: LatLng(customerLocation.latitude,
+                              customerLocation.longitude),
+                          infoWindow:
+                              const InfoWindow(title: 'Vị trí khách hàng'),
+                          anchor: const Offset(0.5, 0.5),
+                          icon: BitmapDescriptor.fromBytes(byteData.buffer.asUint8List())),
+                      Marker(
+                          markerId: const MarkerId('destination_location'),
+                          position: LatLng(destinationLocation.latitude,
+                              destinationLocation.longitude),
+                          infoWindow:
+                              const InfoWindow(title: 'Điểm đến  khách hàng'),
+                          anchor: const Offset(0.5, 0.5),
+                          icon: BitmapDescriptor.defaultMarkerWithHue(
+                              BitmapDescriptor.hueOrange)),
+                    };
+                  });
+                });
               }
             });
           }
-
-          setState(() {
-            _markers = {
-              _markers.first,
-              Marker(
-                  markerId: const MarkerId('customer_location'),
-                  position: LatLng(
-                      customerLocation.latitude, customerLocation.longitude),
-                  infoWindow: const InfoWindow(title: 'Vị trí khách hàng'),
-                  anchor: const Offset(0.5, 0.5),
-                  icon: BitmapDescriptor.defaultMarkerWithHue(
-                      BitmapDescriptor.hueOrange)),
-              Marker(
-                  markerId: const MarkerId('destination_location'),
-                  position: LatLng(destinationLocation.latitude,
-                      destinationLocation.longitude),
-                  infoWindow: const InfoWindow(title: 'Điểm đến  khách hàng'),
-                  anchor: const Offset(0.5, 0.5),
-                  icon: BitmapDescriptor.defaultMarkerWithHue(
-                      BitmapDescriptor.hueOrange)),
-            };
-          });
         }
       }
+      
+      if (customerRequestNotifier.status == RequestStatus.waiting) {
+        setState(() {
+          _info = null;
+          _polyline.clear();
+        });
+      }
+    } else {
+      setState(() {
+        _info = null;
+        _polyline.clear();
+      });
     }
 
     return Stack(children: <Widget>[
@@ -243,17 +271,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         initialCameraPosition: _cameraPosition,
         markers: _markers,
         circles: _circles,
-        polylines: {
-          if (_info != null)
-            Polyline(
-              polylineId: const PolylineId('customer_direction'),
-              color: Colors.blue,
-              width: 5,
-              points: _info!.polylinePoints
-                  .map((e) => LatLng(e.latitude, e.longitude))
-                  .toList()
-            )
-        },
+        polylines: _polyline,
       ),
       Align(
           alignment: Alignment.bottomRight,

@@ -1,25 +1,23 @@
-import 'package:driver/screens/customer_request/customer_request_accept.dart';
 import 'package:driver/screens/home_dashboard/home_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
 import '../../providers/connection_provider.dart';
 import 'styles.dart';
 
-class CustomerRequest extends ConsumerStatefulWidget {
-  const CustomerRequest({Key? key}) : super(key: key);
+class CustomerRequestAccept extends ConsumerStatefulWidget {
+  const CustomerRequestAccept({Key? key}) : super(key: key);
 
-  static String name = 'CustomerRequest';
-  static String path = '/customer/request';
+  static String name = 'CustomerRequestAccept';
+  static String path = '/customer/request/accept';
 
   @override
-  ConsumerState<CustomerRequest> createState() => _CustomerRequestState();
+  ConsumerState<CustomerRequestAccept> createState() => _CustomerRequestAcceptState();
 }
 
-class _CustomerRequestState extends ConsumerState<CustomerRequest> {
+class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
   @override
   Widget build(BuildContext context) {
     final customerRequestNotifier = ref.read(customerRequestProvider.notifier);
@@ -203,60 +201,13 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
             )),
             const SizedBox(width: 16),
             Expanded(
-              child: Stack(
-                alignment: Alignment.centerRight,
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        customerRequestNotifier.acceptRequest();
-                        context.go(CustomerRequestAccept.path);
-                      },
-                      style: ThemeButton.acceptButton,
-                      child: const Text('CHẤP NHẬN',
-                          style: ThemeText.acceptButtonText),
-                    ),
-                  ),
-                  Positioned(
-                    right: 16,
-                    child: Builder(builder: (context) {
-                      return CircularCountDownTimer(
-                        width: 24,
-                        height: 24,
-                        duration: 10,
-                        initialDuration: 0,
-                        ringColor: const Color.fromRGBO(255, 255, 255, .8),
-                        fillColor: const Color.fromRGBO(94, 169, 68, .7),
-                        backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
-                        strokeWidth: 10.0,
-                        strokeCap: StrokeCap.square,
-                        textStyle: const TextStyle(
-                          fontSize: 12,
-                          color: Color(0xFFF86C1D),
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textFormat: CountdownTextFormat.S,
-                        isReverse: true,
-                        isReverseAnimation: false,
-                        autoStart: true,
-                        onComplete: () {
-                          customerRequestNotifier.cancelRequest();
-                          context.go(HomeDashboard.path);
-                        },
-                        timeFormatterFunction:
-                            (defaultFormatterFunction, duration) {
-                          if (duration.inSeconds == 0) {
-                            return "0";
-                          } else {
-                            return Function.apply(
-                                defaultFormatterFunction, [duration]);
-                          }
-                        },
-                      );
-                    }),
-                  )
-                ],
+              child: ElevatedButton(
+                onPressed: () {
+                },
+                style: ThemeButton.acceptButton2,
+                child: const Center(
+                  child: Text('CHẤP NHẬN', style: ThemeText.acceptButtonText),
+                )
               ),
             ),
           ])

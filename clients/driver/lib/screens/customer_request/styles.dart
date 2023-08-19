@@ -79,4 +79,15 @@ abstract class ThemeButton {
     ),
     elevation: 0,
   );
+  
+  static ButtonStyle acceptButton2 = ElevatedButton.styleFrom(
+    padding: const EdgeInsets.only(left: 18, right: 18, top: 18, bottom: 18),
+    backgroundColor: const Color(0xFF5EA944),
+    foregroundColor: Colors.grey[600],
+    side: const BorderSide(
+      color: Color(0xFF5EA944),
+      width: 2,
+    ),
+    elevation: 0,
+  );
 }
