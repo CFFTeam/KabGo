@@ -14,6 +14,9 @@ Servers:
 - customer-api: http://api.customer.kabgo.local
 - call-center-api: http://api.call-center.kabgo.local
 
+RabbitMQ:
+- rabbit-management: http://rabbitmq.kabgo.local
+
 How to use: In docker-composes branch -> Readme.md
 
 
