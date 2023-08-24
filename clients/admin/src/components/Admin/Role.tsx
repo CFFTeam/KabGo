@@ -15,15 +15,21 @@ import axios from "axios";
 
 const Role: React.FC = () => {
   const dispatch = useAppDispatch();
-  const clickHandle = () => {
+  const clickHandle = async () => {
     navigate("/admin/create");
-    toast.success('Tạo tài khoản thành công', {
-      style: {
-        border: '2px solid #28a745',
-        padding: '10px',
-      },
-      duration: 3000
-    });
+    // await axios.get(`${process.env.REACT_APP_API_URI}/admin/get-data`)
+    // .then(res => {
+    //   console.log('bbbbb')
+    // })
+
+    
+    // toast.success('Tạo tài khoản thành công', {
+    //   style: {
+    //     border: '2px solid #28a745',
+    //     padding: '10px',
+    //   },
+    //   duration: 3000
+    // });
 
   }
   const navigate = useNavigate();
@@ -54,7 +60,7 @@ const Role: React.FC = () => {
           <Import />
           <div className={styles["create-header-content"]}>Import</div>
         </div>
-        <div className={styles["create-button-container"]} onClick={()=>{navigate("./create")}}>
+        <div className={styles["create-button-container"]} onClick={clickHandle}>
           <Add />
           <div className={styles["create-button-header-content"]} >Thêm quản lý</div>
         </div>

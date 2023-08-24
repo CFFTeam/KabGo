@@ -2,16 +2,18 @@ import { NextFunction, Request, Response, Router } from 'express';
 import Controller from '@common/interfaces/controller';
 
 class UserController implements Controller {
-    path: string = '/user';
+    path: string = '/v1/admin';
     router: Router = Router();
 
     constructor() {
-        this.router.get('/login', this.login)
+        this.router.get('/', this.login)
         this.router.get('/logout', this.logout);
+        this.router.get('/get-data', this.getData);
 
     }
 
     private login = (req: Request, res: Response, next: NextFunction) => {
+        
         next();
     };
 
@@ -20,7 +22,7 @@ class UserController implements Controller {
     };
 
     private getData = (req: Request, res: Response, next: NextFunction) => {
-        next();
+        console.log('aaaaaaaaa');
     };
 }
 

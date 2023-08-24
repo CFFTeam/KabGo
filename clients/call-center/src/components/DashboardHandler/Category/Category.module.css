@@ -1,0 +1,48 @@
+
+
+.category-container{
+    width: 100%;
+    height: 14rem;
+    background: white;
+    border-radius: 0.8rem;
+    display: flex;
+    gap: 2.5rem;
+    padding: 0 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #F0F0F0;
+    margin-top: 4rem;
+}
+
+.category{
+    width: 25%;
+    height: 80%;
+    background: #6445C2;
+    border-radius: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4.5rem;
+}
+
+.category-info{
+    text-align: left;
+    margin-top: 0.2rem;
+}
+
+.category-number{
+    font-size: 3.2rem;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.category-name{
+    font-size: 1.4rem;
+    color: #F3F3F3;
+    padding-top: 0.4rem;
+    font-weight: 600;
+}
+
+.category-img{
+    margin-top: 1rem;
+}
