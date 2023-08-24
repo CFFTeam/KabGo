@@ -17,6 +17,7 @@ div.call-receipt-table > div.table-title > span {
     font-size: 2rem;
     font-weight: 600;
     padding: 2rem;
+    /* margin: 2rem 2rem 1rem 2rem; */
 }
 
 div.call-receipt-table > div.table-title > div.search-tool {
@@ -47,19 +48,18 @@ div.call-receipt-table > div.table-title > div.search-tool > input:placeholder-s
     font-family: 'Montserrat';
 }
 
-div.call-receipt-table > table.table-view {
-    margin-top: 1rem;
+div.call-receipt-table > div.table-container-for-scroll > table.table-view { 
     color: #fff;
     border-collapse: collapse;
     width: 100%;
 }
 
-div.call-receipt-table > table.table-view > thead.table-heading {
+div.call-receipt-table > div.table-container-for-scroll > table.table-view > thead.table-heading {
     background-color: black;
     height: 5rem;
 }
 
-div.call-receipt-table > table.table-view > thead.table-heading select {
+div.call-receipt-table > div.table-container-for-scroll > table.table-view > thead.table-heading select {
     color: #fff;
     font-family: 'Montserrat';
     background-color: black;
@@ -70,19 +70,20 @@ div.call-receipt-table > table.table-view > thead.table-heading select {
 }
 
 
-div.call-receipt-table > table.table-view > thead.table-heading > tr > th {
+div.call-receipt-table > div.table-container-for-scroll > table.table-view > thead.table-heading > tr > th {
     font-weight: 600;
     font-size: 1.6rem;
 }
 
 
-div.call-receipt-table > table.table-view > tbody.table-content > tr > td {
+div.call-receipt-table > div.table-container-for-scroll > table.table-view > tbody.table-content > tr > td {
     text-align: center;
     font-size: 1.6rem;
+    /* background: aqua; */
     /* border-bottom: 1px solid black; */
 }
 
-div.call-receipt-table > table.table-view > tbody.table-content > tr {
+div.call-receipt-table > div.table-container-for-scroll > table.table-view > tbody.table-content > tr {
     margin-top: 2rem;
     height: 5.6rem;
     background-color: #FBF9FA;
@@ -92,35 +93,35 @@ div.call-receipt-table > table.table-view > tbody.table-content > tr {
     outline: none;
 }
 
-div.call-receipt-table > table.table-view > tbody.table-content tr:hover {
+div.call-receipt-table > div.table-container-for-scroll > table.table-view > tbody.table-content tr:hover {
     background-color: #CED4DA;
 }
 
-div.call-receipt-table > table.table-view > tbody.table-content > tr:last-child {
+div.call-receipt-table > div.table-container-for-scroll > table.table-view > tbody.table-content > tr:last-child {
     border-bottom: 0px;
 }
 
 
-div.call-receipt-table > table.table-view > tbody.table-content > tr > td:nth-last-child(2) {
+div.call-receipt-table > div.table-container-for-scroll > table.table-view > tbody.table-content > tr > td:nth-last-child(2) {
     max-width: 45rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-div.call-receipt-table > table.table-view > tbody.table-content > tr > td:last-child {
+div.call-receipt-table > div.table-container-for-scroll > table.table-view > tbody.table-content > tr > td:last-child {
     width: 2%;
     text-align: center;
 }
 
 
-div.call-receipt-table > table.table-view > tbody.table-content > tr > td:last-child > button {
+div.call-receipt-table > div.table-container-for-scroll > table.table-view > tbody.table-content > tr > td:last-child > button {
     border: none;
     cursor: pointer;
     background-color: transparent;
 }
 
-div.call-receipt-table > table.table-view > tbody.table-content > tr > td > button > .cancel-icn {
+div.call-receipt-table > div.table-container-for-scroll > table.table-view > tbody.table-content > tr > td > button > .cancel-icn {
     font-size: 1.8em;
     margin-left: 1rem;
     margin-right: 1rem;
@@ -220,3 +221,21 @@ div.call-receipt-table > table.table-view > tbody.table-content > tr > td > butt
   .dropdown-title-down{
     padding-top: 0.15rem;
   }
+  
+  .table-container-for-scroll{
+    height: 43rem;
+    overflow: auto;
+  }
+
+  .table-container-for-scroll::-webkit-scrollbar {
+    width: 0.4rem; /* width of the scrollbar */
+}
+  
+.table-container-for-scroll::-webkit-scrollbar-thumb {
+    background: #b1b7bd; /* color of the thumb */
+    border-radius: 0.8rem; /* rounded corners of the thumb */
+}
+  
+.table-container-for-scroll::-webkit-scrollbar-track {
+    background: #EFEFEF; 
+}
