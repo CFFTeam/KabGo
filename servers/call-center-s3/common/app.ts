@@ -40,7 +40,6 @@ class Application {
 
         this.setup();
         this.mongoDBConnect(this.mongoConnection.uri, this.mongoConnection.options);
-        this.rabbitMQConnect(this.rabbitMQConnection.uri);
     }
 
     public application() {
@@ -85,8 +84,8 @@ class Application {
             });
     }
 
-    private rabbitMQConnect(uri: string) {
-        rabbitmq.connect(uri);
+    private async rabbitMQConnect(uri: string) {
+        await rabbitmq.connect(uri);
     }
 
     public run(port: number = 3000, callback: Function = () => {}): Server {
@@ -94,9 +93,10 @@ class Application {
 
         const availablePort = process.env.PORT ?? port;
 
-        return this.app.listen(availablePort, () => {
+        return this.app.listen(availablePort, async () => {
             console.log(`Server is running on port ${availablePort}`);
 
+            await this.rabbitMQConnect(this.rabbitMQConnection.uri);
             callback();
         });
     }

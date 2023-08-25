@@ -20,9 +20,12 @@ const Table: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const searchRef = useRef<HTMLInputElement>(null);
-  // useEffect(()=>{
-    
-  // }, []);
+  useEffect(()=>{
+    axios.get(`${process.env.REACT_APP_API_URI}/admin`)
+    .then(res => {
+      console.log(res);
+    })
+  }, []);
 
   const [filterData, setFilterData] = useState<String>("");
   const submitSearch = (event: React.KeyboardEvent) => {

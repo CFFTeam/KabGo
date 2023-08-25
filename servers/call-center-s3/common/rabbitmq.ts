@@ -1,4 +1,5 @@
 import amqplib, { Channel, Connection } from 'amqplib';
+import { clearGlobalAppDefaultCred } from 'firebase-admin/lib/app/credential-factory';
 
 class RabbitMQ {
     private static rabbitmq: RabbitMQ;
@@ -8,16 +9,15 @@ class RabbitMQ {
         this.channel = null;
     }
 
-    public connect(uri: string) {
-        amqplib
-            .connect(uri)
-            .then(async (conn: Connection) => this.channel = await conn.createChannel())
-            .then(() => {
-                console.log('Connected to the rabbit mq successfully');
-            })
-            .catch((error) => {
-                console.log('Could not connect to the rabbit mq', error);
-            });
+    public async connect(uri: string) {
+        try {
+            const conn: Connection = await amqplib.connect(uri);
+            this.channel = await conn.createChannel();
+            console.log('Connected to the rabbit mq successfully');
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
 
     public static getInstance(): RabbitMQ {

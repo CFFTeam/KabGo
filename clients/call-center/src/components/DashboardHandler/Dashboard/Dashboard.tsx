@@ -130,10 +130,9 @@ const DashboardTable: React.FC = () => {
       setVehicleData(dataFilter);
       let filterStatus: DashboardData[] = [];
 
-      if (statusData !== "Trạng thái"){
+      if (statusData !== "Trạng thái") {
         filterStatus = initData.filter((data) => data.status === statusData);
-      }
-      else {
+      } else {
         filterStatus = [...initData];
       }
       if (dataFilter === "Loại xe khách đặt") setDashboardData(filterStatus);
@@ -146,10 +145,11 @@ const DashboardTable: React.FC = () => {
       setStatusData(dataFilter);
       let filterVehicle: DashboardData[] = [];
 
-      if (vehicleData !== "Loại xe khách đặt"){ 
-        filterVehicle = initData.filter((data) => data.vehicleType === vehicleData)
-      }
-      else {
+      if (vehicleData !== "Loại xe khách đặt") {
+        filterVehicle = initData.filter(
+          (data) => data.vehicleType === vehicleData
+        );
+      } else {
         filterVehicle = [...initData];
       }
 
