@@ -59,8 +59,8 @@ const initialSidebarState: InitialSidebarState = {
     },
     {
         img: Admin,
-        url: "/admin",
-        name: "Admin",
+        url: "/employee",
+        name: "Nhân viên",
         imgFill: AdminFill,
         active: false
     },

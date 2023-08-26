@@ -8,6 +8,8 @@ export interface Employee {
     dob?: string;
 	address: string;
 	role?: string;
+	active?: string;
+	lock?: boolean;
 }
 
 const employeeSchema = new mongoose.Schema<Employee>({
@@ -17,6 +19,8 @@ const employeeSchema = new mongoose.Schema<Employee>({
 	dob: { type: String },
     address: { type: String },
 	role: { type: String },
+	active: {type: String, default: "26/8/2023" },
+	lock: {type: Boolean, default: false },
 });
 
 

@@ -16,7 +16,6 @@ class EmployeeController implements Controller {
     }
 
     private getEmployee = async (req: Request, res: Response, next: NextFunction) => {
-        console.log('aaaaaaaaaaaaaaaaaaaaaaaa');
         const allEmployee = await employeeModel.find();
         res.json({ success: true, status: 200, data: allEmployee });
     };

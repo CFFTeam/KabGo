@@ -16,7 +16,7 @@ import axios from "axios";
 const Role: React.FC = () => {
   const dispatch = useAppDispatch();
   const clickHandle = async () => {
-    navigate("/admin/create");
+    navigate("./create");
     // await axios.get(`${process.env.REACT_APP_API_URI}/admin/get-data`)
     // .then(res => {
     //   console.log('bbbbb')

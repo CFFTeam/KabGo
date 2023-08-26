@@ -716,3 +716,90 @@
 [API.Admin][Fri, 25 Aug 2023 12:52:21 GMT] aaaaaaaaaaaaaaaaaaaaaaaa 
 [API.Admin][Fri, 25 Aug 2023 12:54:51 GMT] aaaaaaaaaaaaaaaaaaaaaaaa 
 [API.Admin][Fri, 25 Aug 2023 12:55:03 GMT] aaaaaaaaaaaaaaaaaaaaaaaa 
+[API.Admin][Sat, 26 Aug 2023 03:49:21 GMT] Setting up request middleware... 
+[API.Admin][Sat, 26 Aug 2023 03:49:21 GMT] Server is starting... 
+[API.Admin][Sat, 26 Aug 2023 03:49:21 GMT] Server is running on port 4400 
+[API.Admin][Sat, 26 Aug 2023 03:49:21 GMT] Connected to database successfully 
+[API.Admin][Sat, 26 Aug 2023 05:34:31 GMT] aaaaaaaaaaaaaaaaaaaaaaaa 
+[API.Admin][Sat, 26 Aug 2023 05:34:37 GMT] aaaaaaaaaaaaaaaaaaaaaaaa 
+[API.Admin][Sat, 26 Aug 2023 05:34:39 GMT] aaaaaaaaaaaaaaaaaaaaaaaa 
+[API.Admin][Sat, 26 Aug 2023 05:50:27 GMT] aaaaaaaaaaaaaaaaaaaaaaaa 
+[API.Admin][Sat, 26 Aug 2023 05:50:29 GMT] aaaaaaaaaaaaaaaaaaaaaaaa 
+[API.Admin][Sat, 26 Aug 2023 05:55:26 GMT] aaaaaaaaaaaaaaaaaaaaaaaa 
+[API.Admin][Sat, 26 Aug 2023 05:58:59 GMT] Setting up request middleware... 
+[API.Admin][Sat, 26 Aug 2023 05:58:59 GMT] Server is starting... 
+[API.Admin][Sat, 26 Aug 2023 05:58:59 GMT] Server is running on port 4400 
+[API.Admin][Sat, 26 Aug 2023 05:59:00 GMT] Connected to database successfully 
+[API.Admin][Sat, 26 Aug 2023 06:02:47 GMT] {
+  _id: new ObjectId("64e742ed2329d3d684d45f60"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Gia Huy',
+  email: 'yukinohana2002@gmail.com',
+  phonenumber: '0703350128',
+  dob: '2002-12-12',
+  address: '123 Main Street, City',
+  role: 'Administrator'
+},{
+  _id: new ObjectId("64e742ed2329d3d684d45f61"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Khoa Nguyen',
+  email: 'nguyenthoaidangkhoa@gmail.com',
+  phonenumber: '0903861416',
+  dob: '2002-12-12',
+  address: '456 Elm Street, Town',
+  role: 'Coordinator Employee'
+},{
+  _id: new ObjectId("64e742ed2329d3d684d45f62"),
+  avatar: 'https://example.com/avatar3.jpg',
+  name: 'Gia Huy',
+  email: 'yukinohana2002@gmail.com',
+  phonenumber: '0703350128',
+  dob: '2002-12-12',
+  address: '789 Oak Street, Village',
+  role: 'Supervisor Employee'
+},{
+  _id: new ObjectId("64e742ed2329d3d684d45f63"),
+  avatar: 'https://example.com/avatar3.jpg',
+  name: 'Minh Nguyen',
+  email: '20127050@student.hcmus.edu.vn',
+  phonenumber: '0778568685',
+  dob: '1992-02-10',
+  address: '789 Oak Street, Village',
+  role: 'Call Receiption Staff'
+} 
+[API.Admin][Sat, 26 Aug 2023 06:04:25 GMT] Setting up request middleware... 
+[API.Admin][Sat, 26 Aug 2023 06:04:25 GMT] Server is starting... 
+[API.Admin][Sat, 26 Aug 2023 06:04:25 GMT] Server is running on port 4400 
+[API.Admin][Sat, 26 Aug 2023 06:04:26 GMT] Connected to database successfully 
+[API.Admin][Sat, 26 Aug 2023 06:23:58 GMT] Setting up request middleware... 
+[API.Admin][Sat, 26 Aug 2023 06:23:58 GMT] Server is starting... 
+[API.Admin][Sat, 26 Aug 2023 06:23:58 GMT] Server is running on port 4400 
+[API.Admin][Sat, 26 Aug 2023 06:23:59 GMT] Connected to database successfully 
+[API.Admin][Sat, 26 Aug 2023 06:24:07 GMT] Setting up request middleware... 
+[API.Admin][Sat, 26 Aug 2023 06:24:07 GMT] Server is starting... 
+[API.Admin][Sat, 26 Aug 2023 06:24:07 GMT] Server is running on port 4400 
+[API.Admin][Sat, 26 Aug 2023 06:24:08 GMT] Connected to database successfully 
+[API.Admin][Sat, 26 Aug 2023 06:25:04 GMT] Setting up request middleware... 
+[API.Admin][Sat, 26 Aug 2023 06:25:04 GMT] Server is starting... 
+[API.Admin][Sat, 26 Aug 2023 06:25:04 GMT] Server is running on port 4400 
+[API.Admin][Sat, 26 Aug 2023 06:25:05 GMT] Connected to database successfully 
+[API.Admin][Sat, 26 Aug 2023 06:25:10 GMT] Setting up request middleware... 
+[API.Admin][Sat, 26 Aug 2023 06:25:10 GMT] Server is starting... 
+[API.Admin][Sat, 26 Aug 2023 06:25:10 GMT] Server is running on port 4400 
+[API.Admin][Sat, 26 Aug 2023 06:25:11 GMT] Connected to database successfully 
+[API.Admin][Sat, 26 Aug 2023 06:25:18 GMT] Setting up request middleware... 
+[API.Admin][Sat, 26 Aug 2023 06:25:18 GMT] Server is starting... 
+[API.Admin][Sat, 26 Aug 2023 06:25:18 GMT] Server is running on port 4400 
+[API.Admin][Sat, 26 Aug 2023 06:25:18 GMT] Connected to database successfully 
+[API.Admin][Sat, 26 Aug 2023 06:36:45 GMT] Setting up request middleware... 
+[API.Admin][Sat, 26 Aug 2023 06:36:45 GMT] Server is starting... 
+[API.Admin][Sat, 26 Aug 2023 06:36:45 GMT] Server is running on port 4400 
+[API.Admin][Sat, 26 Aug 2023 06:36:46 GMT] Connected to database successfully 
+[API.Admin][Sat, 26 Aug 2023 06:39:31 GMT] Setting up request middleware... 
+[API.Admin][Sat, 26 Aug 2023 06:39:31 GMT] Server is starting... 
+[API.Admin][Sat, 26 Aug 2023 06:39:31 GMT] Server is running on port 4400 
+[API.Admin][Sat, 26 Aug 2023 06:39:32 GMT] Connected to database successfully 
+[API.Admin][Sat, 26 Aug 2023 06:49:40 GMT] Setting up request middleware... 
+[API.Admin][Sat, 26 Aug 2023 06:49:40 GMT] Server is starting... 
+[API.Admin][Sat, 26 Aug 2023 06:49:40 GMT] Server is running on port 4400 
+[API.Admin][Sat, 26 Aug 2023 06:49:41 GMT] Connected to database successfully 

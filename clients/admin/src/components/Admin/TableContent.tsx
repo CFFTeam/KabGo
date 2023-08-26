@@ -20,118 +20,140 @@ const Table: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const searchRef = useRef<HTMLInputElement>(null);
-  useEffect(()=>{
-    axios.get(`${process.env.REACT_APP_API_URI}/admin`)
-    .then(res => {
-      console.log(res);
-    })
+  const [arrayElementTableData, setArrayElementTableData] = useState<elementTableData[]>([]);
+  const [initArrayElementTableData, setInitArrayElementTableData] = useState<elementTableData[]>([]);
+
+  const [role, setRole] = useState<string[]>(["Supervisor"]);
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_API_URI}/admin`).then((res) => {
+      getAllData(res);
+    });
   }, []);
 
   const [filterData, setFilterData] = useState<String>("");
+
   const submitSearch = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
-      console.log("search: ", searchRef.current?.value || null);
+      // console.log("search: ", searchRef.current?.value || null);
     }
+  };
+
+  const getAllData = (res: any) => {
+    const arrayData = res.data.data;
+    let roleData: string[] = [];
+    for (let i = 0; i < arrayData.length; i++) {
+      if (roleData.includes(arrayData[i].role) === false)
+        roleData.push(arrayData[i].role);
+      console.log(roleData);
+    }
+    setInitArrayElementTableData([...arrayData]);
+    setArrayElementTableData([...arrayData]);
+    setRole([...roleData]);
   };
 
   const handleFilterData = (filterDataPara: string) => {
     setFilterData(filterDataPara);
+
+    setArrayElementTableData([
+      ...initArrayElementTableData.filter((data) => 
+        data.role === filterDataPara
+      ),
+    ]);
   };
 
   const handleCancelFilterData = () => {
     setFilterData("");
+    setArrayElementTableData([...initArrayElementTableData]);
   };
 
-  const role: string[] = [
-    "Administrator",
-    "Task Manager",
-    "Income Manager",
-    "IT Manager",
-  ];
+  // const role: string[] = [
+  //   "Administrator",
+  //   "Task Manager",
+  //   "Income Manager",
+  //   "IT Manager",
+  // ];
 
   interface elementTableData {
-    fullname: string;
+    name: string;
     role: string;
     email: string;
-    phone: string;
+    phonenumber: string;
     active: string;
     lock: boolean;
-  }
-
-  const arrayElementTableData: elementTableData[] = [
-    {
-      fullname: "Trần Đàm Gia Huy",
-      role: "Administrator",
-      email: "giahuy2002@gmail.com",
-      phone: "0703350128",
-      active: "12/08/2023",
-      lock: false,
-    },
-    {
-      fullname: "Đinh Nguyễn Duy Khang",
-      role: "Task Manager",
-      email: "khangduy017@gmail.com",
-      phone: "0976975548",
-      active: "12/08/2023",
-      lock: false,
-    },
-    {
-      fullname: "Nguyễn Thoại Đăng Khoa",
-      role: "Income Manager",
-      email: "nguyenthoaidangkhoa@gmail.com",
-      phone: "0903861515",
-      active: "12/08/2023",
-      lock: false,
-    },
-    {
-      fullname: "Culi thích code",
-      role: "IT Manager",
-      email: "wgmin.it@outlook.com",
-      phone: "0778568685",
-      active: "12/08/2023",
-      lock: false,
-    },
-    {
-      fullname: "Cải xanh",
-      role: "IT Manager",
-      email: "caixanh.it@outlook.com",
-      phone: "0778568685",
-      active: "12/08/2023",
-      lock: false,
-    },
-    {
-      fullname: "Cải xanh",
-      role: "IT Manager",
-      email: "caixanh.it@outlook.com",
-      phone: "0778568685",
-      active: "12/08/2023",
-      lock: true,
-    },
-    {
-      fullname: "Culi thích code",
-      role: "IT Manager",
-      email: "wgmin.it@outlook.com",
-      phone: "0778568685",
-      active: "12/08/2023",
-      lock: false,
-    },
-    {
-      fullname: "Cải xanh",
-      role: "IT Manager",
-      email: "caixanh.it@outlook.com",
-      phone: "0778568685",
-      active: "12/08/2023",
-      lock: false,
-    },
-    {
-      fullname: "Cải xanh",
-      role: "IT Manager",
-      email: "caixanh.it@outlook.com",
-      phone: "0778568685",
-      active: "12/08/2023",
-      lock: true,
-    },
-  ];
+  } //   {
+  //     fullname: "Trần Đàm Gia Huy",
+  //     role: "Administrator",
+  //     email: "giahuy2002@gmail.com",
+  //     phone: "0703350128",
+  //     active: "12/08/2023",
+  //     lock: false,
+  //   },
+  //   {
+  //     fullname: "Đinh Nguyễn Duy Khang",
+  //     role: "Task Manager",
+  //     email: "khangduy017@gmail.com",
+  //     phone: "0976975548",
+  //     active: "12/08/2023",
+  //     lock: false,
+  //   },
+  //   {
+  //     fullname: "Nguyễn Thoại Đăng Khoa",
+  //     role: "Income Manager",
+  //     email: "nguyenthoaidangkhoa@gmail.com",
+  //     phone: "0903861515",
+  //     active: "12/08/2023",
+  //     lock: false,
+  //   },
+  //   {
+  //     fullname: "Culi thích code",
+  //     role: "IT Manager",
+  //     email: "wgmin.it@outlook.com",
+  //     phone: "0778568685",
+  //     active: "12/08/2023",
+  //     lock: false,
+  //   },
+  //   {
+  //     fullname: "Cải xanh",
+  //     role: "IT Manager",
+  //     email: "caixanh.it@outlook.com",
+  //     phone: "0778568685",
+  //     active: "12/08/2023",
+  //     lock: false,
+  //   },
+  //   {
+  //     fullname: "Cải xanh",
+  //     role: "IT Manager",
+  //     email: "caixanh.it@outlook.com",
+  //     phone: "0778568685",
+  //     active: "12/08/2023",
+  //     lock: true,
+  //   },
+  //   {
+  //     fullname: "Culi thích code",
+  //     role: "IT Manager",
+  //     email: "wgmin.it@outlook.com",
+  //     phone: "0778568685",
+  //     active: "12/08/2023",
+  //     lock: false,
+  //   },
+  //   {
+  //     fullname: "Cải xanh",
+  //     role: "IT Manager",
+  //     email: "caixanh.it@outlook.com",
+  //     phone: "0778568685",
+  //     active: "12/08/2023",
+  //     lock: false,
+  //   },
+  //   {
+  //     fullname: "Cải xanh",
+  //     role: "IT Manager",
+  //     email: "caixanh.it@outlook.com",
+  //     phone: "0778568685",
+  //     active: "12/08/2023",
+  //     lock: true,
+  //   },
+  // ];
 
   return (
     <div className={styles["table-content-container"]}>
@@ -210,11 +232,11 @@ const Table: React.FC = () => {
               <div className={styles["ord-num-body"]}>{index + 1}</div>
               <div className={styles["staff-body"]}>
                 <img src={UserAvatar} />
-                <div>{data.fullname}</div>
+                <div>{data.name}</div>
               </div>
               <div className={styles["role-body"]}>{data.role}</div>
               <div className={styles["email-body"]}>{data.email}</div>
-              <div className={styles["phone-body"]}>{data.phone}</div>
+              <div className={styles["phone-body"]}>{data.phonenumber}</div>
               <div className={styles["time-body"]}>{data.active}</div>
               <div
                 className={`${styles["button-container-body"]} ${

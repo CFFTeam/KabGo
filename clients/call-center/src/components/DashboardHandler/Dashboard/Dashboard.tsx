@@ -1,8 +1,10 @@
 import styles from "./Dashboard.module.css";
 import { ReactComponent as SearchIcon } from "@assets/svg/CallReceiptHandler/search-icn.svg";
 import { ReactComponent as DownIcon } from "@assets/svg/Dashboard/down.svg";
+import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSlice";
+import io, { Socket } from "socket.io-client";
 import $ from "jquery";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface DashboardData {
   id: string;
@@ -162,6 +164,27 @@ const DashboardTable: React.FC = () => {
     }
     //Hadnle filter
   };
+
+  // const dispatch = useAppDispatch();
+  const [socket, setSocket] = useState<Socket | null>(null);
+
+  // initialize the socket
+  useEffect(() => {
+    const socketInstance = io("http://api.call-center-s3.kabgo.local:4502");
+    setSocket(socketInstance);
+  }, []);
+
+  // get data from socket (2-way communication)
+  useEffect(() => {
+    if (socket) {
+      console.log("Socket initialized");
+      socket.on("Tracking Queue", (message: string) => {
+        const data = JSON.parse(message);
+        console.log("data: ", data);
+      });
+    }
+  }, [socket]);
+
   return (
     <div className={styles["call-receipt-table"]}>
       <div className={styles["table-title"]}>
