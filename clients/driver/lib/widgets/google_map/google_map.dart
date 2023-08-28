@@ -1,9 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:dio/dio.dart';
-import 'package:driver/data/direction_repository.dart';
 import 'package:driver/models/location.dart';
+import 'package:driver/providers/current_location.dart';
 import 'package:driver/providers/socket_provider.dart';
 import 'package:driver/widgets/icon_button/icon_button.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +12,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../models/customer_booking.dart';
 import '../../models/direction_model.dart';
-import '../../providers/connection_provider.dart';
+import '../../models/driver.dart';
+import '../../models/vehicle.dart';
+import '../../providers/customer_request.dart';
+
+import 'dart:math' as math;
 
 class KGoogleMap extends ConsumerStatefulWidget {
   const KGoogleMap({Key? key}) : super(key: key);
@@ -28,13 +33,19 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
   late GoogleMapController _mapController;
   late Position _currentPosition;
 
-  static const LatLng _center = LatLng(10.71526510159502, 106.74306445260049);
+  static bool running = true;
+  static int process = 0;
+
+  static const LatLng _center = LatLng(10.7552928, 106.3655788);
   static const CameraPosition _cameraPosition =
-      CameraPosition(target: _center, zoom: 18, tilt: 0, bearing: 0);
+      CameraPosition(target: _center, zoom: 10, tilt: 0, bearing: 0);
 
   Set<Circle> _circles = {};
   Set<Marker> _markers = {};
   Set<Polyline> _polyline = {};
+
+  late BitmapDescriptor currentLocationIcon;
+  late BitmapDescriptor departureLocationIcon;
 
   Directions? _info;
 
@@ -69,16 +80,13 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
   Future<Set<Marker>> _createMarker(String? id, LatLng latLng) async {
     id ??= 'marker_id_${DateTime.now().millisecondsSinceEpoch}';
 
-    ByteData byteData = await DefaultAssetBundle.of(context)
-        .load('lib/assets/icons/current_location.png');
-
     return {
       Marker(
           markerId: MarkerId(id),
           position: latLng,
           infoWindow: const InfoWindow(title: 'Vị trí của bạn'),
           anchor: const Offset(0.5, 0.5),
-          icon: BitmapDescriptor.fromBytes(byteData.buffer.asUint8List())),
+          icon: currentLocationIcon),
     };
   }
 
@@ -119,24 +127,30 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
     }
 
     return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+        desiredAccuracy: LocationAccuracy.bestForNavigation);
   }
 
   void _moveToCurrent() {
-    _getCurrentLocation().then((value) {
+    ref
+        .read(currentLocationProvider.notifier)
+        .getCurrentLocation()
+        .then((value) {
       _currentPosition = value;
       _mapController.animateCamera(CameraUpdate.newCameraPosition(
           CameraPosition(
               target:
                   LatLng(_currentPosition.latitude, _currentPosition.longitude),
-              zoom: 18,
+              zoom: 17,
               tilt: 0,
               bearing: 0)));
 
       setState(() {
         _createMarker('my_location',
                 LatLng(_currentPosition.latitude, _currentPosition.longitude))
-            .then((value) => _markers = _markers.map((Marker e) => e.mapsId.value == 'my_location' ? value.first : e).toSet());
+            .then((value) => _markers = _markers
+                .map((Marker e) =>
+                    e.mapsId.value == 'my_location' ? value.first : e)
+                .toSet());
 
         _circles = _createCircle('my_location',
             LatLng(_currentPosition.latitude, _currentPosition.longitude),
@@ -147,7 +161,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
 
   void _livePosition() {
     LocationSettings settings = const LocationSettings(
-        accuracy: LocationAccuracy.high, distanceFilter: 0);
+        accuracy: LocationAccuracy.bestForNavigation, distanceFilter: 0);
 
     Geolocator.getPositionStream(locationSettings: settings)
         .listen((Position position) {
@@ -172,92 +186,187 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
     });
   }
 
+  // @override
+  // void dispose() {
+  //   _mapController.dispose();
+  //   super.dispose();
+  // }
+
   @override
-  void dispose() {
-    _mapController.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+
+    DefaultAssetBundle.of(context)
+        .load('lib/assets/icons/current_location.png')
+        .then((ByteData bytes) => currentLocationIcon =
+            BitmapDescriptor.fromBytes(bytes.buffer.asUint8List()));
+
+    DefaultAssetBundle.of(context).load('lib/assets/map/original.png').then(
+        (ByteData bytes) => departureLocationIcon =
+            BitmapDescriptor.fromBytes(bytes.buffer.asUint8List()));
   }
 
   @override
   Widget build(BuildContext context) {
     final bool active = ref.read(socketClientProvider);
 
+    print(
+        "jaslkjdlaskjdlaksjldkjaslkdjaslkdjlsakjdklasdkljsaldkjasjdlaskjdlkasjd");
+
     if (active) {
       final customerRequestNotifier =
           ref.read(customerRequestProvider.notifier);
-      final customerRequest = ref.read(customerRequestProvider);
+      final customerRequest = ref.watch(customerRequestProvider);
 
       if (customerRequest.hasValue()) {
         if (customerRequestNotifier.status == RequestStatus.accepted) {
-          final LocationPostion customerLocation = customerRequest.booking.from;
-          final LocationPostion destinationLocation =
-              customerRequest.booking.to;
+          final LocationPostion customerLocation = LocationPostion(
+              latitude: double.parse(customerRequest
+                  .customer_infor.departure_information.latitude),
+              longitude: double.parse(customerRequest
+                  .customer_infor.departure_information.longitude));
+
+          final LocationPostion destinationLocation = LocationPostion(
+              latitude: double.parse(
+                  customerRequest.customer_infor.arrival_information.latitude),
+              longitude: double.parse(customerRequest
+                  .customer_infor.arrival_information.longitude));
 
           if (_info == null) {
-            DirectionRepository(dio: Dio())
-                .getDirection(
-                    origin: LatLng(
+            _info = customerRequest.direction;
+
+            _mapController.animateCamera(CameraUpdate.newLatLngBounds(
+                customerRequest.direction.bounds, 100.0));
+
+            setState(() {
+              _polyline = {
+                Polyline(
+                    polylineId: const PolylineId('customer_direction'),
+                    color: Colors.orangeAccent,
+                    width: 6,
+                    points: customerRequest.direction.polylinePoints
+                        .map((e) => LatLng(e.latitude, e.longitude))
+                        .toList())
+              };
+
+              _markers = {
+                _markers.first,
+                Marker(
+                    markerId: const MarkerId('customer_location'),
+                    position: LatLng(
                         customerLocation.latitude, customerLocation.longitude),
-                    destination: LatLng(destinationLocation.latitude,
-                        destinationLocation.longitude))
-                .then((value) {
-              if (value != null) {
-                _info = value;
-
-                _polyline = {
-                  Polyline(
-                      polylineId: const PolylineId('customer_direction'),
-                      color: Colors.orangeAccent,
-                      width: 6,
-                      points: _info!.polylinePoints
-                          .map((e) => LatLng(e.latitude, e.longitude))
-                          .toList())
-                };
-
-                _mapController.animateCamera(
-                    CameraUpdate.newLatLngBounds(value.bounds, 100.0));
-
-                DefaultAssetBundle.of(context).load('lib/assets/map/original.png')
-                .then((ByteData byteData) {
-                  setState(() {
-                    _markers = {
-                      _markers.first,
-                      Marker(
-                          markerId: const MarkerId('customer_location'),
-                          position: LatLng(customerLocation.latitude,
-                              customerLocation.longitude),
-                          infoWindow:
-                              const InfoWindow(title: 'Vị trí khách hàng'),
-                          anchor: const Offset(0.5, 0.5),
-                          icon: BitmapDescriptor.fromBytes(byteData.buffer.asUint8List())),
-                      Marker(
-                          markerId: const MarkerId('destination_location'),
-                          position: LatLng(destinationLocation.latitude,
-                              destinationLocation.longitude),
-                          infoWindow:
-                              const InfoWindow(title: 'Điểm đến  khách hàng'),
-                          anchor: const Offset(0.5, 0.5),
-                          icon: BitmapDescriptor.defaultMarkerWithHue(
-                              BitmapDescriptor.hueOrange)),
-                    };
-                  });
-                });
-              }
+                    infoWindow: const InfoWindow(title: 'Vị trí khách hàng'),
+                    anchor: const Offset(0.5, 0.5),
+                    icon: departureLocationIcon),
+                Marker(
+                    markerId: const MarkerId('destination_location'),
+                    position: LatLng(destinationLocation.latitude,
+                        destinationLocation.longitude),
+                    infoWindow: const InfoWindow(title: 'Điểm đến  khách hàng'),
+                    anchor: const Offset(0.5, 0.5),
+                    icon: BitmapDescriptor.defaultMarkerWithHue(
+                        BitmapDescriptor.hueOrange)),
+              };
             });
           }
+          setState(() {
+            _markers = {
+              _markers.first,
+              Marker(
+                  markerId: const MarkerId('customer_location'),
+                  position: LatLng(
+                      customerLocation.latitude, customerLocation.longitude),
+                  infoWindow: const InfoWindow(title: 'Vị trí khách hàng'),
+                  anchor: const Offset(0.5, 0.5),
+                  icon: departureLocationIcon),
+              Marker(
+                  markerId: const MarkerId('destination_location'),
+                  position: LatLng(destinationLocation.latitude,
+                      destinationLocation.longitude),
+                  infoWindow: const InfoWindow(title: 'Điểm đến  khách hàng'),
+                  anchor: const Offset(0.5, 0.5),
+                  icon: BitmapDescriptor.defaultMarkerWithHue(
+                      BitmapDescriptor.hueOrange)),
+            };
+          });
+        }
+
+        if (customerRequestNotifier.status == RequestStatus.comming &&
+            running == true &&
+            _info != null) {
+          Timer.periodic(const Duration(seconds: 3), (timer) {
+            if (_info == null ||
+                customerRequestNotifier.status == RequestStatus.waiting ||
+                process >= _info!.polylinePoints.length - 1) {
+              timer.cancel();
+              return;
+            }
+
+            if (process < _info!.polylinePoints.length - 1) {
+              process++;
+
+              LocationPostion current_location = LocationPostion(
+                  latitude: _info!.polylinePoints[process].latitude,
+                  longitude: _info!.polylinePoints[process].longitude);
+
+              final destinationPosition = LocationPostion(
+                  latitude: _info!.polylinePoints[process - 1].latitude,
+                  longitude: _info!.polylinePoints[process - 1]
+                      .longitude); // Replace with your destination's coordinates
+
+              final bearing = math.atan2(
+                  math.sin(math.pi *
+                      (destinationPosition.longitude -
+                          current_location.longitude) /
+                      180.0),
+                  math.cos(math.pi * current_location.latitude / 180.0) *
+                          math.tan(
+                              math.pi * destinationPosition.latitude / 180.0) -
+                      math.sin(math.pi * current_location.latitude / 180.0) *
+                          math.cos(math.pi *
+                              (destinationPosition.longitude -
+                                  current_location.longitude) /
+                              180.0));
+
+              ref.read(socketClientProvider.notifier).publish(
+                  'driver-moving',
+                  jsonEncode(DriverSubmit(
+                          user_id: customerRequest
+                              .customer_infor.user_information.phonenumber,
+                          driver: Driver(
+                              "https://example.com/avatar0.jpg",
+                              "Nguyễn Đức Minh",
+                              "0778568685",
+                              Vehicle(
+                                  name: "Honda Wave RSX",
+                                  brand: "Honda",
+                                  type: "Xe máy",
+                                  color: "Xanh đen",
+                                  number: "68S164889"),
+                              current_location,
+                              bearing * 180.0 / math.pi,
+                              5.0))
+                      .toJson()));
+            }
+          });
+          running = false;
         }
       }
-      
+
       if (customerRequestNotifier.status == RequestStatus.waiting) {
         setState(() {
           _info = null;
           _polyline.clear();
+          process = 0;
+          running = true;
         });
       }
     } else {
       setState(() {
         _info = null;
         _polyline.clear();
+        process = 0;
+        running = true;
       });
     }
 

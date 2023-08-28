@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../providers/connection_provider.dart';
+import '../../providers/customer_request.dart';
 import 'styles.dart';
 
 class CustomerRequestAccept extends ConsumerStatefulWidget {
@@ -47,8 +47,8 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                child: Image(
-                  image: AssetImage(customerRequest.customer.avatar),
+                child: const Image(
+                  image: AssetImage("lib/assets/test/avatar.png"),
                   width: 60,
                   height: 60,
                 ),
@@ -62,17 +62,18 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                       children: <Widget>[
                         SizedBox(
                             width: MediaQuery.of(context).size.width - 270,
-                            child: Text(customerRequest.customer.name,
+                            child: Text(customerRequest.customer_infor.user_information.name,
                                 style: ThemeText.customerName,
                                 overflow: TextOverflow.ellipsis)),
                         Row(
                           children: <Widget>[
-                            Image(
-                                image: AssetImage(
-                                    'lib/assets/icons/${customerRequest.customer.rankType}.png'),
-                                width: 20),
+                            // Image(
+                            //     image: AssetImage(
+                            //         'lib/assets/icons/${customerRequest.customer_infor.user_information.rank}.png'),
+                            //     width: 20),
+                            const SizedBox(width: 20),
                             const SizedBox(width: 10),
-                            Text(customerRequest.customer.rankTitle, style: ThemeText.ranking),
+                            Text(customerRequest.customer_infor.user_information.rank, style: ThemeText.ranking),
                           ],
                         )
                       ],
@@ -81,10 +82,11 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        Text(customerRequest.booking.paymentMethod, style: ThemeText.bookingDetails),
-                        if (customerRequest.booking.promotion) const Text('Khuyến mãi', style: ThemeText.bookingDetails),
-                        Text(customerRequest.booking.vehicle, style: ThemeText.bookingDetails),
-                        if (!customerRequest.booking.promotion) const SizedBox(width: 60),
+                        Text(customerRequest.customer_infor.user_information.default_payment_method, style: ThemeText.bookingDetails),
+                        // if (customerRequest.customer_infor.user_information.promotion) const Text('Khuyến mãi', style: ThemeText.bookingDetails),
+                        Text(customerRequest.customer_infor.user_information.type, style: ThemeText.bookingDetails),
+                        // if (!customerRequest.customer_infor.user_information.promotion) const SizedBox(width: 60),
+                        const SizedBox(width: 60),
                       ],
                     )
                   ],
@@ -92,36 +94,36 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
               ) 
             ],
           ),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Icon(FontAwesomeIcons.mapPin,
+                  const Icon(FontAwesomeIcons.mapPin,
                       size: 23, color: Color(0xFFF86C1D)),
-                  SizedBox(width: 6),
-                  Text('Cách bạn 2km',
+                  const SizedBox(width: 6),
+                  Text('Cách bạn ${customerRequest.duration_distance}',
                       style: ThemeText.locationDurationDetails),
                 ],
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Icon(FontAwesomeIcons.locationArrow,
+                  const Icon(FontAwesomeIcons.locationArrow,
                       size: 23, color: Color(0xFFF86C1D)),
-                  SizedBox(width: 6),
-                  Text('Lộ trình 16km',
+                  const SizedBox(width: 6),
+                  Text('Lộ trình ${customerRequest.customer_infor.distance}',
                       style: ThemeText.locationDurationDetails),
                 ],
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Icon(FontAwesomeIcons.clock,
+                  const Icon(FontAwesomeIcons.clock,
                       size: 21, color: Color(0xFFF86C1D)),
-                  SizedBox(width: 8),
-                  Text('39 phút', style: ThemeText.locationDurationDetails),
+                  const SizedBox(width: 8),
+                  Text(customerRequest.customer_infor.time, style: ThemeText.locationDurationDetails),
                 ],
               ),
             ],
@@ -158,8 +160,8 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         width: MediaQuery.of(context).size.width - 88,
-                        child: const Text(
-                          '1505 Phạm Thế Hiển, phường 6, quận 8, Thành phố Hồ Chí Minh',
+                        child: Text(
+                          customerRequest.customer_infor.departure_information.address,
                           style: ThemeText.locationDetails,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -177,8 +179,8 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         width: MediaQuery.of(context).size.width - 88,
-                        child: const Text(
-                          '227 Nguyễn Văn Cừ, phường 4, quận 5, Thành phố Hồ Chí Minh',
+                        child: Text(
+                          customerRequest.customer_infor.arrival_information.address,
                           style: ThemeText.locationDetails,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -203,6 +205,8 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
             Expanded(
               child: ElevatedButton(
                 onPressed: () {
+                  customerRequestNotifier.commingRequest();
+                  // context.go(HomeDashboard.path);
                 },
                 style: ThemeButton.acceptButton2,
                 child: const Center(

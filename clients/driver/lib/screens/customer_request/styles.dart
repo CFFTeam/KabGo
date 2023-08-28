@@ -16,14 +16,14 @@ abstract class ThemeText {
 
   static const TextStyle bookingDetails = TextStyle(
     fontFamily: 'Montserrat',
-    fontSize: 13,
+    fontSize: 12,
     color: Color(0xFFF86C1D),
     fontWeight: FontWeight.w600,
   );
 
   static const TextStyle locationDurationDetails = TextStyle(
     fontFamily: 'Montserrat',
-    fontSize: 13,
+    fontSize: 12,
     color: Color(0xFF6A6A6A),
     fontWeight: FontWeight.w500,
     height: 1.45,
@@ -37,7 +37,7 @@ abstract class ThemeText {
   
   static const TextStyle locationDetails = TextStyle(
     fontFamily: 'Montserrat',
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: FontWeight.w500,
     color: Color(0xFF6A6A6A),
   );

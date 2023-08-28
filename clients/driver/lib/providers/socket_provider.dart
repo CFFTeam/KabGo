@@ -1,3 +1,6 @@
+import 'package:driver/models/driver.dart';
+import 'package:driver/models/location.dart';
+import 'package:driver/models/vehicle.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
@@ -14,7 +17,7 @@ class SocketClient extends StateNotifier<bool> {
 
   _createSocket() {
     socket = io(
-      'ws://192.168.2.32:4600/',
+      'ws://192.168.2.18:4600/',
       OptionBuilder()
           .setTransports(['websocket'])
           .disableAutoConnect()
@@ -41,6 +44,12 @@ class SocketClient extends StateNotifier<bool> {
   void subscribe(String event, dynamic Function(dynamic) callback) {
     if (state == true) {
       socket.on(event, callback);
+    }
+  }
+
+  void publish(String event, String json) {
+    if (state == true) {
+      socket.emit(event, json);
     }
   }
 
