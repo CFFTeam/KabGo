@@ -9,7 +9,6 @@ import 'package:driver/screens/home_dashboard/home_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
@@ -32,7 +31,7 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
   @override
   Widget build(BuildContext context) {
     final customerRequestNotifier = ref.read(customerRequestProvider.notifier);
-    final customerRequest = ref.read(customerRequestProvider);
+    final customerRequest = ref.watch(customerRequestProvider);
     final socketManager = ref.read(socketClientProvider.notifier);
     final currentLocation = ref.watch(currentLocationProvider);
 
@@ -237,9 +236,6 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        customerRequestNotifier.acceptRequest();
-                        context.go(CustomerRequestAccept.path);
-
                         socketManager.publish(
                             'driver-accept',
                             jsonEncode(DriverSubmit(
@@ -262,6 +258,9 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                                         currentLocation.heading,
                                         5.0))
                                 .toJson()));
+
+                        customerRequestNotifier.acceptRequest();
+                        context.go(CustomerRequestAccept.path);
                       },
                       style: ThemeButton.acceptButton,
                       child: const Text('CHẤP NHẬN',

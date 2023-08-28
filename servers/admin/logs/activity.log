@@ -471,3 +471,7 @@
 [API.Admin][Sat, 12 Aug 2023 13:30:01 GMT] Server is running on port 4400 
 [API.Admin][Sat, 12 Aug 2023 13:30:01 GMT] Connected to database successfully 
 >>>>>>> master
+[API.Admin][Mon, 28 Aug 2023 14:21:43 GMT] Setting up request middleware... 
+[API.Admin][Mon, 28 Aug 2023 14:21:43 GMT] Server is starting... 
+[API.Admin][Mon, 28 Aug 2023 14:21:43 GMT] Server is running on port 4400 
+[API.Admin][Mon, 28 Aug 2023 14:21:45 GMT] Connected to database successfully 

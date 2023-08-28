@@ -1,6 +1,3 @@
-import 'package:driver/models/driver.dart';
-import 'package:driver/models/location.dart';
-import 'package:driver/models/vehicle.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 

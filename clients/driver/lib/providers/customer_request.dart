@@ -9,7 +9,6 @@ import 'package:driver/models/location.dart';
 import 'package:driver/providers/current_location.dart';
 import 'package:driver/providers/socket_provider.dart';
 import 'package:driver/data/direction_repository.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

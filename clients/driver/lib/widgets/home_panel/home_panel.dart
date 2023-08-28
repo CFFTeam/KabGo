@@ -9,7 +9,6 @@ import 'package:driver/widgets/navigation/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:geolocator/geolocator.dart';
 import 'dart:math' as math;
 
 import 'package:go_router/go_router.dart';

@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Xe máy",
+        "description": "Tối đa chỗ  ngồi",
+        "price": 10000
+    },
+    {
+        "name": "Xe tay ga",
+        "description": "Tối đa chỗ  ngồi",
+        "price": 20000
+    },
+    {
+        "name": "Xe Ô tô con",
+        "description": "Từ 2 - 4 chỗ  ngồi",
+        "price": 40000
+    },
+    {
+        "name": "Xe Ô tô",
+        "description": "Từ 7 - 9 chỗ  ngồi",
+        "price": 80000
+    }
+]

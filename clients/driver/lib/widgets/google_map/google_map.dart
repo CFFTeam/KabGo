@@ -172,6 +172,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
       //         tilt: 0,
       //         bearing: 0)));
 
+      ref.read(currentLocationProvider.notifier).updateLocation(position);
+
       _currentPosition = position;
 
       setState(() {
@@ -186,11 +188,11 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
     });
   }
 
-  // @override
-  // void dispose() {
-  //   _mapController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _mapController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -209,9 +211,6 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
   @override
   Widget build(BuildContext context) {
     final bool active = ref.read(socketClientProvider);
-
-    print(
-        "jaslkjdlaskjdlaksjldkjaslkdjaslkdjlsakjdklasdkljsaldkjasjdlaskjdlkasjd");
 
     if (active) {
       final customerRequestNotifier =
