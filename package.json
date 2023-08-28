@@ -6,5 +6,8 @@
     "axios": "^1.4.0",
     "react-redux": "^8.1.2",
     "redux": "^4.2.1"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.17"
   }
 }

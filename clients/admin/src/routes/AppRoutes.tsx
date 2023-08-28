@@ -7,19 +7,25 @@ import Customer from "@components/Customer";
 import Service from "@components/Service";
 import Vehicle from "@components/Vehicle";
 import Invoice from "@components/Invoice";
-import CreateAdmin from "@components/CreateAdmin";
+import NewAccount from "@components/NewAccount";
 
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
       <Route element={<BaseLayout />}>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/admin">
+        <Route path="/employee">
           <Route index element={<Admin />} />
-          <Route path="create" element={<CreateAdmin />} />
+          <Route path="create" element={<NewAccount />} />
         </Route>
-        <Route path="/driver" element={<Customer />} />
-        <Route path="/customer" element={<Customer />} />
+        <Route path="/driver">
+          <Route index element={<Driver />} />
+          <Route path="create" element={<NewAccount />} />
+        </Route>
+        <Route path="/customer">
+          <Route index element={<Customer />} />
+          <Route path="create" element={<NewAccount />} />
+        </Route>
         <Route path="/service" element={<Service />} />
         <Route path="/vehicle" element={<Vehicle />} />
         <Route path="/invoice" element={<Invoice />} />

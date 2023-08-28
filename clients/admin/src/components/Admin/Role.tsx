@@ -10,10 +10,28 @@ import { ReactComponent as Import } from "@assets/svg/Admin/import.svg";
 import { ReactComponent as Add } from "@assets/svg/Admin/add.svg";
 import { useEffect } from "react";
 import {useNavigate} from "react-router-dom"
+import toast, { Toaster } from 'react-hot-toast';
 import axios from "axios";
 
-const Dashboard: React.FC = () => {
+const Role: React.FC = () => {
   const dispatch = useAppDispatch();
+  const clickHandle = async () => {
+    navigate("./create");
+    // await axios.get(`${process.env.REACT_APP_API_URI}/admin/get-data`)
+    // .then(res => {
+    //   console.log('bbbbb')
+    // })
+
+    
+    // toast.success('Tạo tài khoản thành công', {
+    //   style: {
+    //     border: '2px solid #28a745',
+    //     padding: '10px',
+    //   },
+    //   duration: 3000
+    // });
+
+  }
   const navigate = useNavigate();
   return (
     <div className={styles["header-container"]}>
@@ -42,7 +60,7 @@ const Dashboard: React.FC = () => {
           <Import />
           <div className={styles["create-header-content"]}>Import</div>
         </div>
-        <div className={styles["create-button-container"]} onClick={()=>navigate("/admin/create")}>
+        <div className={styles["create-button-container"]} onClick={clickHandle}>
           <Add />
           <div className={styles["create-button-header-content"]} >Thêm quản lý</div>
         </div>
@@ -51,4 +69,4 @@ const Dashboard: React.FC = () => {
   );
 };
 
-export default Dashboard;
+export default Role;

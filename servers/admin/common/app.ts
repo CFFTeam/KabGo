@@ -7,6 +7,7 @@ import { Server } from 'http';
 import Controller from './interfaces/controller';
 import ConsoleProxyHandler from '@common/utils/console.proxy';
 import Logger from './utils/logger';
+import cors from 'cors';
 
 type ApplicationOptions = {
     controllers: Controller[];
@@ -43,7 +44,7 @@ class Application {
 
         this.app.use(bodyParser.json({ limit: '50mb' }));
         this.app.use(bodyParser.urlencoded({ extended: true }));
-
+        this.app.use(cors());
         this.app.use(
             morgan(
                 `${chalk.blue(

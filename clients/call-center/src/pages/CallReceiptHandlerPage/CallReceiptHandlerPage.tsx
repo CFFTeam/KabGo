@@ -7,4 +7,4 @@ const CallReceiptHandlerPage: React.FC = () => {
     </div>
 }
 
-export default CallReceiptHandlerPage;
+export default CallReceiptHandlerPage;  

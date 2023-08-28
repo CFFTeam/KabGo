@@ -276,7 +276,7 @@ input::placeholder {
     gap: 1rem;
     font-weight: 600;
     color: black;
-    width: 17rem;
+    width: 20rem;
     background: #FFEEEA;
     padding: 0;
 }
@@ -292,13 +292,13 @@ input::placeholder {
   
   .dropdown-content-table div {
     color: black;
-    padding: 1rem 0;
+    padding: 1rem 1.5rem;
     text-decoration: none;
     display: block;
     font-size: 1.5rem;
     font-weight: 500;
     color: #3C3C3C;
-    width: 17rem;
+    width: 20rem;
   }
   
   .dropdown-content-table div:hover {
@@ -322,7 +322,7 @@ input::placeholder {
     width: 6rem;
 }
 .staff{
-    width: 31rem;
+    width: 28rem;
 }
 .email{
     width: 30rem;
@@ -334,7 +334,7 @@ input::placeholder {
     width: 12rem;
 }
 .button-container-header{
-    width: 6.5rem;
+    width: 7rem;
 }
 
 .table-body-relative-container{
@@ -359,13 +359,13 @@ input::placeholder {
     padding-left: 1rem;
 }
 .staff-body{
-    width: 31rem;
+    width: 28rem;
     display: flex;
     gap: 2rem;
     align-items: center;
 }
 .role-body{
-    width: 17rem
+    width: 20rem
 }
 .email-body{
     width: 30rem;
@@ -428,7 +428,7 @@ input::placeholder {
 }
 
 .table-sub-content-container::-webkit-scrollbar {
-    width: 0.5rem; /* width of the scrollbar */
+    width: 0.4rem; /* width of the scrollbar */
 }
   
 .table-sub-content-container::-webkit-scrollbar-thumb {
@@ -439,3 +439,4 @@ input::placeholder {
 .table-sub-content-container::-webkit-scrollbar-track {
     background: #EFEFEF; 
 }
+
