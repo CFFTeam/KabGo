@@ -101,7 +101,7 @@ const server = app.run(4600, () => {
             customerList[id]?.socket.emit('moving driver', JSON.stringify(driverSubmit.driver));
         });
 
-        socket.on('disconnection', () => {
+        socket.on('disconnect', () => {
             const id = socket.phonenumber;
 
             delete driverList[id];
