@@ -803,3 +803,1932 @@
 [API.Admin][Sat, 26 Aug 2023 06:49:40 GMT] Server is starting... 
 [API.Admin][Sat, 26 Aug 2023 06:49:40 GMT] Server is running on port 4400 
 [API.Admin][Sat, 26 Aug 2023 06:49:41 GMT] Connected to database successfully 
+[API.Admin][Sat, 26 Aug 2023 13:16:04 GMT] Setting up request middleware... 
+[API.Admin][Sat, 26 Aug 2023 13:16:04 GMT] Server is starting... 
+[API.Admin][Sat, 26 Aug 2023 13:16:04 GMT] Server is running on port 4400 
+[API.Admin][Sat, 26 Aug 2023 13:16:05 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 06:03:57 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 06:03:57 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 06:03:57 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 06:03:58 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 14:39:52 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 14:39:52 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 14:39:52 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 14:39:53 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 14:56:53 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 14:56:53 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 14:56:53 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 14:56:54 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:02:18 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:02:18 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:02:18 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:02:19 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:04:35 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:04:35 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:04:35 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:04:36 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:04:45 GMT] [object Object] 
+[API.Admin][Thu, 31 Aug 2023 15:05:20 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:05:20 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:05:20 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:05:21 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:05:43 GMT] [object Object] 
+[API.Admin][Thu, 31 Aug 2023 15:07:49 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:07:49 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:07:49 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:07:50 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:08:06 GMT] [object Object] 
+[API.Admin][Thu, 31 Aug 2023 15:18:01 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:18:01 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:18:01 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:18:02 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:18:07 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:18:07 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:18:07 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:18:08 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:19:46 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:19:46 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:19:46 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:19:47 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:21:52 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:21:52 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:21:52 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:21:53 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:21:59 GMT]  
+[API.Admin][Thu, 31 Aug 2023 15:22:53 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:22:53 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:22:53 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:22:54 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:23:05 GMT] {
+  _id: new ObjectId("64e99fffdb83ce30945a0f4d"),
+  name: 'John Doe',
+  email: 'john.doe@example.com',
+  phonenumber: '+1234567890',
+  dob: '01/15/1985',
+  address: '123 Main Street, City, Country',
+  role: 'Supervisor',
+  active: '26/08/2023',
+  lock: false
+} 
+[API.Admin][Thu, 31 Aug 2023 15:23:30 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:23:30 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:23:30 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:23:30 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:24:04 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:24:04 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:24:04 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:24:05 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:24:26 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:24:26 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:24:26 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:24:26 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:24:47 GMT] {
+  _id: new ObjectId("64e99fffdb83ce30945a0f4d"),
+  name: 'John Doe',
+  email: 'john.doe@example.com',
+  phonenumber: '+1234567890',
+  dob: '01/15/1985',
+  address: '123 Main Street, City, Country',
+  role: 'Supervisor',
+  active: '26/08/2023',
+  lock: false
+} 
+[API.Admin][Thu, 31 Aug 2023 15:24:51 GMT]  
+[API.Admin][Thu, 31 Aug 2023 15:26:03 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:26:03 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:26:03 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:26:04 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:27:24 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:27:24 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:27:24 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:27:25 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:27:35 GMT] {
+  _id: new ObjectId("64f0b0175948d1340012355d"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  dob: '10/10/2002',
+  address: null,
+  role: '1',
+  active: '26/8/2023',
+  lock: false,
+  gender: null,
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 15:27:38 GMT]  
+[API.Admin][Thu, 31 Aug 2023 15:32:31 GMT]  
+[API.Admin][Thu, 31 Aug 2023 15:33:27 GMT] {
+  _id: new ObjectId("64f0b28f06c29ecb57e3422a"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  dob: '10/10/2002',
+  address: null,
+  role: '1',
+  active: '26/8/2023',
+  lock: false,
+  gender: null,
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 15:33:30 GMT]  
+[API.Admin][Thu, 31 Aug 2023 15:52:23 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:52:23 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:52:23 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:52:24 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:52:32 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:52:32 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:52:32 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:52:33 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:56:56 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:56:56 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:56:56 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:56:57 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:57:05 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:57:05 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:57:05 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:57:05 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:57:48 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:57:48 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:57:48 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:57:48 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 15:57:50 GMT] 64e99fffdb83ce30945a0f58 
+[API.Admin][Thu, 31 Aug 2023 15:58:09 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 15:58:09 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 15:58:09 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 15:58:10 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 16:02:23 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 16:02:23 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 16:02:23 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 16:02:24 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 16:02:45 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 16:02:45 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 16:02:45 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 16:02:46 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 16:04:39 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 16:04:39 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 16:04:39 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 16:04:40 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 16:04:50 GMT] [object Object] 
+[API.Admin][Thu, 31 Aug 2023 16:05:16 GMT] [object Object] 
+[API.Admin][Thu, 31 Aug 2023 16:08:11 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 16:08:11 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 16:08:11 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 16:08:12 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 16:08:21 GMT] {
+  _id: new ObjectId("64e99fffdb83ce30945a0f58"),
+  name: 'Steven Harris',
+  email: 'steven.harris@example.com',
+  phonenumber: '+1122334455',
+  dob: '11/05/1979',
+  address: '789 Pine Avenue, Village, Country',
+  role: 'Supervisor',
+  active: '26/08/2023',
+  lock: false
+} 
+[API.Admin][Thu, 31 Aug 2023 16:13:18 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 16:13:18 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 16:13:18 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 16:13:19 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 16:14:06 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 16:14:06 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 16:14:06 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 16:14:06 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 16:24:24 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 16:24:24 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 16:24:24 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 16:24:25 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 16:24:31 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 16:24:31 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 16:24:31 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 16:24:32 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 16:24:45 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 16:24:45 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 16:24:45 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 16:24:46 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 16:30:53 GMT]  
+[API.Admin][Thu, 31 Aug 2023 17:04:35 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:04:35 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:04:35 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:04:36 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:04:43 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:04:43 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:04:43 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:04:44 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:05:37 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:05:37 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:05:37 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:05:37 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:14:20 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:14:20 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:14:20 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:14:21 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:14:43 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:14:43 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:14:43 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:14:43 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:14:59 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:14:59 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:14:59 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:14:59 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:15:36 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:15:36 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:15:36 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:15:37 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:16:04 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:16:04 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:16:04 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:16:05 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:16:10 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:16:10 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:16:10 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:16:10 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:16:19 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:16:19 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:16:19 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:16:19 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:17:33 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:17:33 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:17:33 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:17:33 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:17:58 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:17:58 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:17:58 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:17:58 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:18:24 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:18:24 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:18:24 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:18:25 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:18:50 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:18:50 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:18:50 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:18:51 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:20:38 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:20:38 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:20:38 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:20:42 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:20:42 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:20:42 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:20:43 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:21:23 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:21:23 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:21:23 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:21:23 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:21:27 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:21:27 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:21:27 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:21:28 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:21:43 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:21:43 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:21:43 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:21:47 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:21:47 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:21:47 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:21:47 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:22:57 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:22:57 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:22:57 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:22:58 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:26:22 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:26:22 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:26:22 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:26:23 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:26:34 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:26:34 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:26:34 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:26:35 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:26:39 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:26:39 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:26:39 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:26:40 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:26:57 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:26:57 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:26:57 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:26:57 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:27:04 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:27:04 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:27:04 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:27:05 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:27:28 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:27:29 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:27:29 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:27:29 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:30:36 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:30:36 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:30:36 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:30:37 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:34:31 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:34:31 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:34:31 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:34:32 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:34:43 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:34:43 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:34:43 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:34:43 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:35:35 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:35:35 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:35:35 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:35:35 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:37:03 GMT]  
+[API.Admin][Thu, 31 Aug 2023 17:38:14 GMT] {
+  _id: new ObjectId("64f0cfbf10e499dccddf4fab"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  dob: '10/10/2002',
+  address: '1',
+  role: '1',
+  active: '26/8/2023',
+  lock: false,
+  gender: null,
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 17:38:21 GMT] {
+  _id: new ObjectId("64f0cfbf10e499dccddf4fab"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  dob: '10/10/2002',
+  address: '1',
+  role: '1',
+  active: '26/8/2023',
+  lock: false,
+  gender: null,
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 17:38:21 GMT] {
+  _id: new ObjectId("64f0cfbf10e499dccddf4fab"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  dob: '10/10/2002',
+  address: '1',
+  role: '1',
+  active: '26/8/2023',
+  lock: false,
+  gender: null,
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 17:40:49 GMT] {
+  _id: new ObjectId("64f0cfbf10e499dccddf4fab"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  dob: '10/10/2002',
+  address: '1',
+  role: '1',
+  active: '26/8/2023',
+  lock: false,
+  gender: null,
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 17:42:11 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:42:11 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:42:11 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:42:12 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:42:24 GMT]  
+[API.Admin][Thu, 31 Aug 2023 17:43:31 GMT]  
+[API.Admin][Thu, 31 Aug 2023 17:56:03 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:56:03 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:56:03 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:56:04 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:56:08 GMT] {
+  _id: new ObjectId("64f0c8b5357ef17371d71b1c"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Nguyễn Thị Hương',
+  email: 'huong.nguyen@example.com',
+  phonenumber: '0345678990',
+  rate: 4.8,
+  accept_rate: 95,
+  cancel_rate: 5,
+  begin_day: '2023-01-10',
+  day_income: 120,
+  week_income: 850,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d43869496d0af352888a"),
+      name: 'tiền mặt',
+      balance: 40000
+    },
+    {
+      _id: new ObjectId("64f0d43869496d0af352888b"),
+      name: 'thẻ tín dụng',
+      balance: 80000
+    },
+    {
+      _id: new ObjectId("64f0d43869496d0af352888c"),
+      name: 'zaloPay',
+      balance: 0
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c8f2357ef17371d71b1d"),
+  avatar: 'https://example.com/avatar4.jpg',
+  name: 'Võ Thị Mai',
+  email: 'mai.vo@example.com',
+  phonenumber: '0456789012',
+  rate: 4.7,
+  accept_rate: 94,
+  cancel_rate: 6,
+  begin_day: '2023-04-15',
+  day_income: 150,
+  week_income: 1100,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d43869496d0af352888d"),
+      name: 'tiền mặt',
+      balance: 38000
+    },
+    {
+      _id: new ObjectId("64f0d43869496d0af352888e"),
+      name: 'thẻ tín dụng',
+      balance: 72000
+    },
+    {
+      _id: new ObjectId("64f0d43869496d0af352888f"),
+      name: 'zaloPay',
+      balance: 18000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c9a3357ef17371d71b31"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Trần Văn Nam',
+  email: 'nam.tran@example.com',
+  phonenumber: '0876543210',
+  rate: 4.6,
+  accept_rate: 92,
+  cancel_rate: 8,
+  begin_day: '2023-02-05',
+  day_income: 105,
+  week_income: 720,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d43869496d0af3528890"),
+      name: 'tiền mặt',
+      balance: 30000
+    },
+    {
+      _id: new ObjectId("64f0d43869496d0af3528891"),
+      name: 'thẻ tín dụng',
+      balance: 70000
+    },
+    {
+      _id: new ObjectId("64f0d43869496d0af3528892"),
+      name: 'zaloPay',
+      balance: 25000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d143923c849b2fb87618"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 17:57:01 GMT] {
+  _id: new ObjectId("64f0c8b5357ef17371d71b1c"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Nguyễn Thị Hương',
+  email: 'huong.nguyen@example.com',
+  phonenumber: '0345678990',
+  rate: 4.8,
+  accept_rate: 95,
+  cancel_rate: 5,
+  begin_day: '2023-01-10',
+  day_income: 120,
+  week_income: 850,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d46d69496d0af3528894"),
+      name: 'tiền mặt',
+      balance: 40000
+    },
+    {
+      _id: new ObjectId("64f0d46d69496d0af3528895"),
+      name: 'thẻ tín dụng',
+      balance: 80000
+    },
+    {
+      _id: new ObjectId("64f0d46d69496d0af3528896"),
+      name: 'zaloPay',
+      balance: 0
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c8f2357ef17371d71b1d"),
+  avatar: 'https://example.com/avatar4.jpg',
+  name: 'Võ Thị Mai',
+  email: 'mai.vo@example.com',
+  phonenumber: '0456789012',
+  rate: 4.7,
+  accept_rate: 94,
+  cancel_rate: 6,
+  begin_day: '2023-04-15',
+  day_income: 150,
+  week_income: 1100,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d46d69496d0af3528897"),
+      name: 'tiền mặt',
+      balance: 38000
+    },
+    {
+      _id: new ObjectId("64f0d46d69496d0af3528898"),
+      name: 'thẻ tín dụng',
+      balance: 72000
+    },
+    {
+      _id: new ObjectId("64f0d46d69496d0af3528899"),
+      name: 'zaloPay',
+      balance: 18000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c9a3357ef17371d71b31"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Trần Văn Nam',
+  email: 'nam.tran@example.com',
+  phonenumber: '0876543210',
+  rate: 4.6,
+  accept_rate: 92,
+  cancel_rate: 8,
+  begin_day: '2023-02-05',
+  day_income: 105,
+  week_income: 720,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d46d69496d0af352889a"),
+      name: 'tiền mặt',
+      balance: 30000
+    },
+    {
+      _id: new ObjectId("64f0d46d69496d0af352889b"),
+      name: 'thẻ tín dụng',
+      balance: 70000
+    },
+    {
+      _id: new ObjectId("64f0d46d69496d0af352889c"),
+      name: 'zaloPay',
+      balance: 25000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d143923c849b2fb87618"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 17:57:07 GMT] {
+  _id: new ObjectId("64f0c8b5357ef17371d71b1c"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Nguyễn Thị Hương',
+  email: 'huong.nguyen@example.com',
+  phonenumber: '0345678990',
+  rate: 4.8,
+  accept_rate: 95,
+  cancel_rate: 5,
+  begin_day: '2023-01-10',
+  day_income: 120,
+  week_income: 850,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d47369496d0af352889e"),
+      name: 'tiền mặt',
+      balance: 40000
+    },
+    {
+      _id: new ObjectId("64f0d47369496d0af352889f"),
+      name: 'thẻ tín dụng',
+      balance: 80000
+    },
+    {
+      _id: new ObjectId("64f0d47369496d0af35288a0"),
+      name: 'zaloPay',
+      balance: 0
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c8f2357ef17371d71b1d"),
+  avatar: 'https://example.com/avatar4.jpg',
+  name: 'Võ Thị Mai',
+  email: 'mai.vo@example.com',
+  phonenumber: '0456789012',
+  rate: 4.7,
+  accept_rate: 94,
+  cancel_rate: 6,
+  begin_day: '2023-04-15',
+  day_income: 150,
+  week_income: 1100,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d47369496d0af35288a1"),
+      name: 'tiền mặt',
+      balance: 38000
+    },
+    {
+      _id: new ObjectId("64f0d47369496d0af35288a2"),
+      name: 'thẻ tín dụng',
+      balance: 72000
+    },
+    {
+      _id: new ObjectId("64f0d47369496d0af35288a3"),
+      name: 'zaloPay',
+      balance: 18000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c9a3357ef17371d71b31"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Trần Văn Nam',
+  email: 'nam.tran@example.com',
+  phonenumber: '0876543210',
+  rate: 4.6,
+  accept_rate: 92,
+  cancel_rate: 8,
+  begin_day: '2023-02-05',
+  day_income: 105,
+  week_income: 720,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d47369496d0af35288a4"),
+      name: 'tiền mặt',
+      balance: 30000
+    },
+    {
+      _id: new ObjectId("64f0d47369496d0af35288a5"),
+      name: 'thẻ tín dụng',
+      balance: 70000
+    },
+    {
+      _id: new ObjectId("64f0d47369496d0af35288a6"),
+      name: 'zaloPay',
+      balance: 25000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d143923c849b2fb87618"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 17:57:11 GMT] {
+  _id: new ObjectId("64f0c8b5357ef17371d71b1c"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Nguyễn Thị Hương',
+  email: 'huong.nguyen@example.com',
+  phonenumber: '0345678990',
+  rate: 4.8,
+  accept_rate: 95,
+  cancel_rate: 5,
+  begin_day: '2023-01-10',
+  day_income: 120,
+  week_income: 850,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d47769496d0af35288a8"),
+      name: 'tiền mặt',
+      balance: 40000
+    },
+    {
+      _id: new ObjectId("64f0d47769496d0af35288a9"),
+      name: 'thẻ tín dụng',
+      balance: 80000
+    },
+    {
+      _id: new ObjectId("64f0d47769496d0af35288aa"),
+      name: 'zaloPay',
+      balance: 0
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c8f2357ef17371d71b1d"),
+  avatar: 'https://example.com/avatar4.jpg',
+  name: 'Võ Thị Mai',
+  email: 'mai.vo@example.com',
+  phonenumber: '0456789012',
+  rate: 4.7,
+  accept_rate: 94,
+  cancel_rate: 6,
+  begin_day: '2023-04-15',
+  day_income: 150,
+  week_income: 1100,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d47769496d0af35288ab"),
+      name: 'tiền mặt',
+      balance: 38000
+    },
+    {
+      _id: new ObjectId("64f0d47769496d0af35288ac"),
+      name: 'thẻ tín dụng',
+      balance: 72000
+    },
+    {
+      _id: new ObjectId("64f0d47769496d0af35288ad"),
+      name: 'zaloPay',
+      balance: 18000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c9a3357ef17371d71b31"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Trần Văn Nam',
+  email: 'nam.tran@example.com',
+  phonenumber: '0876543210',
+  rate: 4.6,
+  accept_rate: 92,
+  cancel_rate: 8,
+  begin_day: '2023-02-05',
+  day_income: 105,
+  week_income: 720,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d47769496d0af35288ae"),
+      name: 'tiền mặt',
+      balance: 30000
+    },
+    {
+      _id: new ObjectId("64f0d47769496d0af35288af"),
+      name: 'thẻ tín dụng',
+      balance: 70000
+    },
+    {
+      _id: new ObjectId("64f0d47769496d0af35288b0"),
+      name: 'zaloPay',
+      balance: 25000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d143923c849b2fb87618"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 17:57:31 GMT] {
+  _id: new ObjectId("64f0c8b5357ef17371d71b1c"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Nguyễn Thị Hương',
+  email: 'huong.nguyen@example.com',
+  phonenumber: '0345678990',
+  rate: 4.8,
+  accept_rate: 95,
+  cancel_rate: 5,
+  begin_day: '2023-01-10',
+  day_income: 120,
+  week_income: 850,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d48b69496d0af35288b2"),
+      name: 'tiền mặt',
+      balance: 40000
+    },
+    {
+      _id: new ObjectId("64f0d48b69496d0af35288b3"),
+      name: 'thẻ tín dụng',
+      balance: 80000
+    },
+    {
+      _id: new ObjectId("64f0d48b69496d0af35288b4"),
+      name: 'zaloPay',
+      balance: 0
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c8f2357ef17371d71b1d"),
+  avatar: 'https://example.com/avatar4.jpg',
+  name: 'Võ Thị Mai',
+  email: 'mai.vo@example.com',
+  phonenumber: '0456789012',
+  rate: 4.7,
+  accept_rate: 94,
+  cancel_rate: 6,
+  begin_day: '2023-04-15',
+  day_income: 150,
+  week_income: 1100,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d48b69496d0af35288b5"),
+      name: 'tiền mặt',
+      balance: 38000
+    },
+    {
+      _id: new ObjectId("64f0d48b69496d0af35288b6"),
+      name: 'thẻ tín dụng',
+      balance: 72000
+    },
+    {
+      _id: new ObjectId("64f0d48b69496d0af35288b7"),
+      name: 'zaloPay',
+      balance: 18000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c9a3357ef17371d71b31"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Trần Văn Nam',
+  email: 'nam.tran@example.com',
+  phonenumber: '0876543210',
+  rate: 4.6,
+  accept_rate: 92,
+  cancel_rate: 8,
+  begin_day: '2023-02-05',
+  day_income: 105,
+  week_income: 720,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d48b69496d0af35288b8"),
+      name: 'tiền mặt',
+      balance: 30000
+    },
+    {
+      _id: new ObjectId("64f0d48b69496d0af35288b9"),
+      name: 'thẻ tín dụng',
+      balance: 70000
+    },
+    {
+      _id: new ObjectId("64f0d48b69496d0af35288ba"),
+      name: 'zaloPay',
+      balance: 25000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d143923c849b2fb87618"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 17:57:45 GMT] {
+  _id: new ObjectId("64f0c8b5357ef17371d71b1c"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Nguyễn Thị Hương',
+  email: 'huong.nguyen@example.com',
+  phonenumber: '0345678990',
+  rate: 4.8,
+  accept_rate: 95,
+  cancel_rate: 5,
+  begin_day: '2023-01-10',
+  day_income: 120,
+  week_income: 850,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d49969496d0af35288bc"),
+      name: 'tiền mặt',
+      balance: 40000
+    },
+    {
+      _id: new ObjectId("64f0d49969496d0af35288bd"),
+      name: 'thẻ tín dụng',
+      balance: 80000
+    },
+    {
+      _id: new ObjectId("64f0d49969496d0af35288be"),
+      name: 'zaloPay',
+      balance: 0
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c8f2357ef17371d71b1d"),
+  avatar: 'https://example.com/avatar4.jpg',
+  name: 'Võ Thị Mai',
+  email: 'mai.vo@example.com',
+  phonenumber: '0456789012',
+  rate: 4.7,
+  accept_rate: 94,
+  cancel_rate: 6,
+  begin_day: '2023-04-15',
+  day_income: 150,
+  week_income: 1100,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d49969496d0af35288bf"),
+      name: 'tiền mặt',
+      balance: 38000
+    },
+    {
+      _id: new ObjectId("64f0d49969496d0af35288c0"),
+      name: 'thẻ tín dụng',
+      balance: 72000
+    },
+    {
+      _id: new ObjectId("64f0d49969496d0af35288c1"),
+      name: 'zaloPay',
+      balance: 18000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c9a3357ef17371d71b31"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Trần Văn Nam',
+  email: 'nam.tran@example.com',
+  phonenumber: '0876543210',
+  rate: 4.6,
+  accept_rate: 92,
+  cancel_rate: 8,
+  begin_day: '2023-02-05',
+  day_income: 105,
+  week_income: 720,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d49969496d0af35288c2"),
+      name: 'tiền mặt',
+      balance: 30000
+    },
+    {
+      _id: new ObjectId("64f0d49969496d0af35288c3"),
+      name: 'thẻ tín dụng',
+      balance: 70000
+    },
+    {
+      _id: new ObjectId("64f0d49969496d0af35288c4"),
+      name: 'zaloPay',
+      balance: 25000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d143923c849b2fb87618"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 17:59:09 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:59:09 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:59:09 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:59:10 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:59:20 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 17:59:20 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 17:59:20 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 17:59:21 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 17:59:28 GMT] {
+  _id: new ObjectId("64f0c8b5357ef17371d71b1c"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Nguyễn Thị Hương',
+  email: 'huong.nguyen@example.com',
+  phonenumber: '0345678990',
+  rate: 4.8,
+  accept_rate: 95,
+  cancel_rate: 5,
+  begin_day: '2023-01-10',
+  day_income: 120,
+  week_income: 850,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d500cbd6469681257b4c"),
+      name: 'tiền mặt',
+      balance: 40000
+    },
+    {
+      _id: new ObjectId("64f0d500cbd6469681257b4d"),
+      name: 'thẻ tín dụng',
+      balance: 80000
+    },
+    {
+      _id: new ObjectId("64f0d500cbd6469681257b4e"),
+      name: 'zaloPay',
+      balance: 0
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c8f2357ef17371d71b1d"),
+  avatar: 'https://example.com/avatar4.jpg',
+  name: 'Võ Thị Mai',
+  email: 'mai.vo@example.com',
+  phonenumber: '0456789012',
+  rate: 4.7,
+  accept_rate: 94,
+  cancel_rate: 6,
+  begin_day: '2023-04-15',
+  day_income: 150,
+  week_income: 1100,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d500cbd6469681257b4f"),
+      name: 'tiền mặt',
+      balance: 38000
+    },
+    {
+      _id: new ObjectId("64f0d500cbd6469681257b50"),
+      name: 'thẻ tín dụng',
+      balance: 72000
+    },
+    {
+      _id: new ObjectId("64f0d500cbd6469681257b51"),
+      name: 'zaloPay',
+      balance: 18000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c9a3357ef17371d71b31"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Trần Văn Nam',
+  email: 'nam.tran@example.com',
+  phonenumber: '0876543210',
+  rate: 4.6,
+  accept_rate: 92,
+  cancel_rate: 8,
+  begin_day: '2023-02-05',
+  day_income: 105,
+  week_income: 720,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d500cbd6469681257b52"),
+      name: 'tiền mặt',
+      balance: 30000
+    },
+    {
+      _id: new ObjectId("64f0d500cbd6469681257b53"),
+      name: 'thẻ tín dụng',
+      balance: 70000
+    },
+    {
+      _id: new ObjectId("64f0d500cbd6469681257b54"),
+      name: 'zaloPay',
+      balance: 25000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d143923c849b2fb87618"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 18:04:31 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 18:04:31 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 18:04:31 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 18:04:32 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 18:04:45 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 18:04:45 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 18:04:45 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 18:04:46 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 18:04:49 GMT] {
+  _id: new ObjectId("64f0c8b5357ef17371d71b1c"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Nguyễn Thị Hương',
+  email: 'huong.nguyen@example.com',
+  phonenumber: '0345678990',
+  rate: 4.8,
+  accept_rate: 95,
+  cancel_rate: 5,
+  begin_day: '2023-01-10',
+  day_income: 120,
+  week_income: 850,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d641b7e40b3d8d9a48c1"),
+      name: 'tiền mặt',
+      balance: 40000
+    },
+    {
+      _id: new ObjectId("64f0d641b7e40b3d8d9a48c2"),
+      name: 'thẻ tín dụng',
+      balance: 80000
+    },
+    {
+      _id: new ObjectId("64f0d641b7e40b3d8d9a48c3"),
+      name: 'zaloPay',
+      balance: 0
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c8f2357ef17371d71b1d"),
+  avatar: 'https://example.com/avatar4.jpg',
+  name: 'Võ Thị Mai',
+  email: 'mai.vo@example.com',
+  phonenumber: '0456789012',
+  rate: 4.7,
+  accept_rate: 94,
+  cancel_rate: 6,
+  begin_day: '2023-04-15',
+  day_income: 150,
+  week_income: 1100,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d641b7e40b3d8d9a48c4"),
+      name: 'tiền mặt',
+      balance: 38000
+    },
+    {
+      _id: new ObjectId("64f0d641b7e40b3d8d9a48c5"),
+      name: 'thẻ tín dụng',
+      balance: 72000
+    },
+    {
+      _id: new ObjectId("64f0d641b7e40b3d8d9a48c6"),
+      name: 'zaloPay',
+      balance: 18000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c9a3357ef17371d71b31"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Trần Văn Nam',
+  email: 'nam.tran@example.com',
+  phonenumber: '0876543210',
+  rate: 4.6,
+  accept_rate: 92,
+  cancel_rate: 8,
+  begin_day: '2023-02-05',
+  day_income: 105,
+  week_income: 720,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d641b7e40b3d8d9a48c7"),
+      name: 'tiền mặt',
+      balance: 30000
+    },
+    {
+      _id: new ObjectId("64f0d641b7e40b3d8d9a48c8"),
+      name: 'thẻ tín dụng',
+      balance: 70000
+    },
+    {
+      _id: new ObjectId("64f0d641b7e40b3d8d9a48c9"),
+      name: 'zaloPay',
+      balance: 25000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d143923c849b2fb87618"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 18:05:19 GMT]  
+[API.Admin][Thu, 31 Aug 2023 18:05:19 GMT] {
+  _id: new ObjectId("64f0c8b5357ef17371d71b1c"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Nguyễn Thị Hương',
+  email: 'huong.nguyen@example.com',
+  phonenumber: '0345678990',
+  rate: 4.8,
+  accept_rate: 95,
+  cancel_rate: 5,
+  begin_day: '2023-01-10',
+  day_income: 120,
+  week_income: 850,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d65fb7e40b3d8d9a48ce"),
+      name: 'tiền mặt',
+      balance: 40000
+    },
+    {
+      _id: new ObjectId("64f0d65fb7e40b3d8d9a48cf"),
+      name: 'thẻ tín dụng',
+      balance: 80000
+    },
+    {
+      _id: new ObjectId("64f0d65fb7e40b3d8d9a48d0"),
+      name: 'zaloPay',
+      balance: 0
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c8f2357ef17371d71b1d"),
+  avatar: 'https://example.com/avatar4.jpg',
+  name: 'Võ Thị Mai',
+  email: 'mai.vo@example.com',
+  phonenumber: '0456789012',
+  rate: 4.7,
+  accept_rate: 94,
+  cancel_rate: 6,
+  begin_day: '2023-04-15',
+  day_income: 150,
+  week_income: 1100,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d65fb7e40b3d8d9a48d1"),
+      name: 'tiền mặt',
+      balance: 38000
+    },
+    {
+      _id: new ObjectId("64f0d65fb7e40b3d8d9a48d2"),
+      name: 'thẻ tín dụng',
+      balance: 72000
+    },
+    {
+      _id: new ObjectId("64f0d65fb7e40b3d8d9a48d3"),
+      name: 'zaloPay',
+      balance: 18000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c9a3357ef17371d71b31"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Trần Văn Nam',
+  email: 'nam.tran@example.com',
+  phonenumber: '0876543210',
+  rate: 4.6,
+  accept_rate: 92,
+  cancel_rate: 8,
+  begin_day: '2023-02-05',
+  day_income: 105,
+  week_income: 720,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d65fb7e40b3d8d9a48d4"),
+      name: 'tiền mặt',
+      balance: 30000
+    },
+    {
+      _id: new ObjectId("64f0d65fb7e40b3d8d9a48d5"),
+      name: 'thẻ tín dụng',
+      balance: 70000
+    },
+    {
+      _id: new ObjectId("64f0d65fb7e40b3d8d9a48d6"),
+      name: 'zaloPay',
+      balance: 25000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d143923c849b2fb87618"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+},{
+  _id: new ObjectId("64f0d65fb7e40b3d8d9a48cb"),
+  name: '2',
+  email: '2',
+  phonenumber: '2',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 18:05:41 GMT] {
+  _id: new ObjectId("64f0c8b5357ef17371d71b1c"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Nguyễn Thị Hương',
+  email: 'huong.nguyen@example.com',
+  phonenumber: '0345678990',
+  rate: 4.8,
+  accept_rate: 95,
+  cancel_rate: 5,
+  begin_day: '2023-01-10',
+  day_income: 120,
+  week_income: 850,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d675b7e40b3d8d9a48d8"),
+      name: 'tiền mặt',
+      balance: 40000
+    },
+    {
+      _id: new ObjectId("64f0d675b7e40b3d8d9a48d9"),
+      name: 'thẻ tín dụng',
+      balance: 80000
+    },
+    {
+      _id: new ObjectId("64f0d675b7e40b3d8d9a48da"),
+      name: 'zaloPay',
+      balance: 0
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c8f2357ef17371d71b1d"),
+  avatar: 'https://example.com/avatar4.jpg',
+  name: 'Võ Thị Mai',
+  email: 'mai.vo@example.com',
+  phonenumber: '0456789012',
+  rate: 4.7,
+  accept_rate: 94,
+  cancel_rate: 6,
+  begin_day: '2023-04-15',
+  day_income: 150,
+  week_income: 1100,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d675b7e40b3d8d9a48db"),
+      name: 'tiền mặt',
+      balance: 38000
+    },
+    {
+      _id: new ObjectId("64f0d675b7e40b3d8d9a48dc"),
+      name: 'thẻ tín dụng',
+      balance: 72000
+    },
+    {
+      _id: new ObjectId("64f0d675b7e40b3d8d9a48dd"),
+      name: 'zaloPay',
+      balance: 18000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c9a3357ef17371d71b31"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Trần Văn Nam',
+  email: 'nam.tran@example.com',
+  phonenumber: '0876543210',
+  rate: 4.6,
+  accept_rate: 92,
+  cancel_rate: 8,
+  begin_day: '2023-02-05',
+  day_income: 105,
+  week_income: 720,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d675b7e40b3d8d9a48de"),
+      name: 'tiền mặt',
+      balance: 30000
+    },
+    {
+      _id: new ObjectId("64f0d675b7e40b3d8d9a48df"),
+      name: 'thẻ tín dụng',
+      balance: 70000
+    },
+    {
+      _id: new ObjectId("64f0d675b7e40b3d8d9a48e0"),
+      name: 'zaloPay',
+      balance: 25000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d143923c849b2fb87618"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+},{
+  _id: new ObjectId("64f0d65fb7e40b3d8d9a48cb"),
+  name: '2',
+  email: '2',
+  phonenumber: '2',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 18:05:44 GMT] {
+  _id: new ObjectId("64f0c8b5357ef17371d71b1c"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Nguyễn Thị Hương',
+  email: 'huong.nguyen@example.com',
+  phonenumber: '0345678990',
+  rate: 4.8,
+  accept_rate: 95,
+  cancel_rate: 5,
+  begin_day: '2023-01-10',
+  day_income: 120,
+  week_income: 850,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d678b7e40b3d8d9a48e3"),
+      name: 'tiền mặt',
+      balance: 40000
+    },
+    {
+      _id: new ObjectId("64f0d678b7e40b3d8d9a48e4"),
+      name: 'thẻ tín dụng',
+      balance: 80000
+    },
+    {
+      _id: new ObjectId("64f0d678b7e40b3d8d9a48e5"),
+      name: 'zaloPay',
+      balance: 0
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c8f2357ef17371d71b1d"),
+  avatar: 'https://example.com/avatar4.jpg',
+  name: 'Võ Thị Mai',
+  email: 'mai.vo@example.com',
+  phonenumber: '0456789012',
+  rate: 4.7,
+  accept_rate: 94,
+  cancel_rate: 6,
+  begin_day: '2023-04-15',
+  day_income: 150,
+  week_income: 1100,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d678b7e40b3d8d9a48e6"),
+      name: 'tiền mặt',
+      balance: 38000
+    },
+    {
+      _id: new ObjectId("64f0d678b7e40b3d8d9a48e7"),
+      name: 'thẻ tín dụng',
+      balance: 72000
+    },
+    {
+      _id: new ObjectId("64f0d678b7e40b3d8d9a48e8"),
+      name: 'zaloPay',
+      balance: 18000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c9a3357ef17371d71b31"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Trần Văn Nam',
+  email: 'nam.tran@example.com',
+  phonenumber: '0876543210',
+  rate: 4.6,
+  accept_rate: 92,
+  cancel_rate: 8,
+  begin_day: '2023-02-05',
+  day_income: 105,
+  week_income: 720,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d678b7e40b3d8d9a48e9"),
+      name: 'tiền mặt',
+      balance: 30000
+    },
+    {
+      _id: new ObjectId("64f0d678b7e40b3d8d9a48ea"),
+      name: 'thẻ tín dụng',
+      balance: 70000
+    },
+    {
+      _id: new ObjectId("64f0d678b7e40b3d8d9a48eb"),
+      name: 'zaloPay',
+      balance: 25000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d143923c849b2fb87618"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+},{
+  _id: new ObjectId("64f0d65fb7e40b3d8d9a48cb"),
+  name: '2',
+  email: '2',
+  phonenumber: '2',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 18:08:01 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 18:08:01 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 18:08:01 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 18:08:02 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 18:08:05 GMT] {
+  _id: new ObjectId("64f0c8b5357ef17371d71b1c"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Nguyễn Thị Hương',
+  email: 'huong.nguyen@example.com',
+  phonenumber: '0345678990',
+  rate: 4.8,
+  accept_rate: 95,
+  cancel_rate: 5,
+  begin_day: '2023-01-10',
+  day_income: 120,
+  week_income: 850,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d7055ef1368b83070139"),
+      name: 'tiền mặt',
+      balance: 40000
+    },
+    {
+      _id: new ObjectId("64f0d7055ef1368b8307013a"),
+      name: 'thẻ tín dụng',
+      balance: 80000
+    },
+    {
+      _id: new ObjectId("64f0d7055ef1368b8307013b"),
+      name: 'zaloPay',
+      balance: 0
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c8f2357ef17371d71b1d"),
+  avatar: 'https://example.com/avatar4.jpg',
+  name: 'Võ Thị Mai',
+  email: 'mai.vo@example.com',
+  phonenumber: '0456789012',
+  rate: 4.7,
+  accept_rate: 94,
+  cancel_rate: 6,
+  begin_day: '2023-04-15',
+  day_income: 150,
+  week_income: 1100,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d7055ef1368b8307013c"),
+      name: 'tiền mặt',
+      balance: 38000
+    },
+    {
+      _id: new ObjectId("64f0d7055ef1368b8307013d"),
+      name: 'thẻ tín dụng',
+      balance: 72000
+    },
+    {
+      _id: new ObjectId("64f0d7055ef1368b8307013e"),
+      name: 'zaloPay',
+      balance: 18000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c9a3357ef17371d71b31"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Trần Văn Nam',
+  email: 'nam.tran@example.com',
+  phonenumber: '0876543210',
+  rate: 4.6,
+  accept_rate: 92,
+  cancel_rate: 8,
+  begin_day: '2023-02-05',
+  day_income: 105,
+  week_income: 720,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d7055ef1368b8307013f"),
+      name: 'tiền mặt',
+      balance: 30000
+    },
+    {
+      _id: new ObjectId("64f0d7055ef1368b83070140"),
+      name: 'thẻ tín dụng',
+      balance: 70000
+    },
+    {
+      _id: new ObjectId("64f0d7055ef1368b83070141"),
+      name: 'zaloPay',
+      balance: 25000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d143923c849b2fb87618"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+},{
+  _id: new ObjectId("64f0d65fb7e40b3d8d9a48cb"),
+  name: '2',
+  email: '2',
+  phonenumber: '2',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 18:08:16 GMT] Setting up request middleware... 
+[API.Admin][Thu, 31 Aug 2023 18:08:16 GMT] Server is starting... 
+[API.Admin][Thu, 31 Aug 2023 18:08:16 GMT] Server is running on port 4400 
+[API.Admin][Thu, 31 Aug 2023 18:08:17 GMT] Connected to database successfully 
+[API.Admin][Thu, 31 Aug 2023 18:10:14 GMT] {
+  _id: new ObjectId("64f0c8b5357ef17371d71b1c"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Nguyễn Thị Hương',
+  email: 'huong.nguyen@example.com',
+  phonenumber: '0345678990',
+  rate: 4.8,
+  accept_rate: 95,
+  cancel_rate: 5,
+  begin_day: '2023-01-10',
+  day_income: 120,
+  week_income: 850,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d7861b5520aba7879e5c"),
+      name: 'tiền mặt',
+      balance: 40000
+    },
+    {
+      _id: new ObjectId("64f0d7861b5520aba7879e5d"),
+      name: 'thẻ tín dụng',
+      balance: 80000
+    },
+    {
+      _id: new ObjectId("64f0d7861b5520aba7879e5e"),
+      name: 'zaloPay',
+      balance: 0
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c8f2357ef17371d71b1d"),
+  avatar: 'https://example.com/avatar4.jpg',
+  name: 'Võ Thị Mai',
+  email: 'mai.vo@example.com',
+  phonenumber: '0456789012',
+  rate: 4.7,
+  accept_rate: 94,
+  cancel_rate: 6,
+  begin_day: '2023-04-15',
+  day_income: 150,
+  week_income: 1100,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d7861b5520aba7879e5f"),
+      name: 'tiền mặt',
+      balance: 38000
+    },
+    {
+      _id: new ObjectId("64f0d7861b5520aba7879e60"),
+      name: 'thẻ tín dụng',
+      balance: 72000
+    },
+    {
+      _id: new ObjectId("64f0d7861b5520aba7879e61"),
+      name: 'zaloPay',
+      balance: 18000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0c9a3357ef17371d71b31"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Trần Văn Nam',
+  email: 'nam.tran@example.com',
+  phonenumber: '0876543210',
+  rate: 4.6,
+  accept_rate: 92,
+  cancel_rate: 8,
+  begin_day: '2023-02-05',
+  day_income: 105,
+  week_income: 720,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d7861b5520aba7879e62"),
+      name: 'tiền mặt',
+      balance: 30000
+    },
+    {
+      _id: new ObjectId("64f0d7861b5520aba7879e63"),
+      name: 'thẻ tín dụng',
+      balance: 70000
+    },
+    {
+      _id: new ObjectId("64f0d7861b5520aba7879e64"),
+      name: 'zaloPay',
+      balance: 25000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d143923c849b2fb87618"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+},{
+  _id: new ObjectId("64f0d65fb7e40b3d8d9a48cb"),
+  name: '2',
+  email: '2',
+  phonenumber: '2',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+} 
+[API.Admin][Thu, 31 Aug 2023 18:11:16 GMT] {
+  _id: new ObjectId("64f0d143923c849b2fb87618"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+},{
+  _id: new ObjectId("64f0d65fb7e40b3d8d9a48cb"),
+  name: '2',
+  email: '2',
+  phonenumber: '2',
+  vehicle: [],
+  active: '26/8/2023',
+  lock: false,
+  account_balance: [],
+  __v: 0
+},{
+  _id: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Nguyễn Thị Hương',
+  email: 'huong.nguyen@example.com',
+  phonenumber: '0345678990',
+  rate: 4.8,
+  accept_rate: 95,
+  cancel_rate: 5,
+  begin_day: '2023-01-10',
+  day_income: 120,
+  week_income: 850,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d7c41b5520aba7879e66"),
+      name: 'tiền mặt',
+      balance: 40000
+    },
+    {
+      _id: new ObjectId("64f0d7c41b5520aba7879e67"),
+      name: 'thẻ tín dụng',
+      balance: 80000
+    },
+    {
+      _id: new ObjectId("64f0d7c41b5520aba7879e68"),
+      name: 'zaloPay',
+      balance: 0
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d7ab357ef17371d71b3b"),
+  avatar: 'https://example.com/avatar4.jpg',
+  name: 'Võ Thị Mai',
+  email: 'mai.vo@example.com',
+  phonenumber: '0456789012',
+  rate: 4.7,
+  accept_rate: 94,
+  cancel_rate: 6,
+  begin_day: '2023-04-15',
+  day_income: 150,
+  week_income: 1100,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d7c41b5520aba7879e69"),
+      name: 'tiền mặt',
+      balance: 38000
+    },
+    {
+      _id: new ObjectId("64f0d7c41b5520aba7879e6a"),
+      name: 'thẻ tín dụng',
+      balance: 72000
+    },
+    {
+      _id: new ObjectId("64f0d7c41b5520aba7879e6b"),
+      name: 'zaloPay',
+      balance: 18000
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d7b1357ef17371d71b3c"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Trần Văn Nam',
+  email: 'nam.tran@example.com',
+  phonenumber: '0876543210',
+  rate: 4.6,
+  accept_rate: 92,
+  cancel_rate: 8,
+  begin_day: '2023-02-05',
+  day_income: 105,
+  week_income: 720,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("64f0d7c41b5520aba7879e6c"),
+      name: 'tiền mặt',
+      balance: 30000
+    },
+    {
+      _id: new ObjectId("64f0d7c41b5520aba7879e6d"),
+      name: 'thẻ tín dụng',
+      balance: 70000
+    },
+    {
+      _id: new ObjectId("64f0d7c41b5520aba7879e6e"),
+      name: 'zaloPay',
+      balance: 25000
+    }
+  ],
+  active: '26/8/2023'
+} 
