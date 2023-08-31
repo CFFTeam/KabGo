@@ -102,9 +102,7 @@ const server = app.run(4600, () => {
         });
 
         socket.on('disconnect', () => {
-            const id = socket.phonenumber;
-
-            delete driverList[id];
+            delete driverList[socket.phonenumber];
 
             console.log('Client disconnected');
         });
