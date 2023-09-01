@@ -44,6 +44,12 @@ class SocketClient extends StateNotifier<bool> {
     }
   }
 
+  void publish(String event, String json) {
+    if (state == true) {
+      socket.emit(event, json);
+    }
+  }
+
   bool connected() {
     return state;
   }

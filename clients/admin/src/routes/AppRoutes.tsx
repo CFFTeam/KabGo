@@ -14,7 +14,7 @@ const AppRoutes: React.FC = () => {
     <Routes>
       <Route element={<BaseLayout />}>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/admin">
+        <Route path="/employee">
           <Route index element={<Admin />} />
           <Route path="create" element={<NewAccount />} />
         </Route>

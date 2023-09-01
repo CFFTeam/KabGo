@@ -1,4 +1,5 @@
 import Application from '@common/app';
+import EmployeeController from '@common/controllers/employee.controller';
 import UserController from '@common/controllers/user.controller';
 import dotenv from 'dotenv';
 
@@ -14,7 +15,7 @@ process.on('uncaughtException', (err: Error) => {
 dotenv.config({ path: './.env.local' });
 
 const app = new Application({
-    controllers: [new UserController()],
+    controllers: [new EmployeeController()],
     mongoConnection: {
         uri: process.env.MONGO_URI as string,
     },

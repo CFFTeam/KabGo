@@ -1,42 +1,30 @@
-import 'package:driver/models/location.dart';
 
-class Booking {
-  final LocationPostion from;
-  final LocationPostion to;
+class LocationAddress {
+  final String address;
+  final String longitude;
+  final String latitude;
 
-  final String paymentMethod;
-  final bool promotion;
-  final String vehicle;
-
-  Booking({
-    required this.from,
-    required this.to,
-    required this.paymentMethod,
-    required this.promotion,
-    required this.vehicle
+  LocationAddress({
+    required this.address,
+    required this.longitude,
+    required this.latitude,
   });
 
   bool hasValue() {
-    return from.hasValue() && to.hasValue() && paymentMethod != "" && vehicle != "";
+    return address != "" && longitude != "" && latitude != "";
   }
 
-  factory Booking.fromJson(Map<String, dynamic> json) {
-    return Booking(
-      from: LocationPostion.fromJson(json['from']),
-      to: LocationPostion.fromJson(json['to']),
-      paymentMethod: json['paymentMethod'],
-      promotion: json['promotion'],
-      vehicle: json['vehicle']
+  factory LocationAddress.fromJson(Map<String, dynamic> json) {
+    return LocationAddress(
+      address: json['address'],
+      longitude: json['longitude'],
+      latitude: json['latitude'],
     );
   }
 
-  Map<String, dynamic> toJson() {
-    return {
-      'from': from.toJson(),
-      'to': to.toJson(),
-      'paymentMethod': paymentMethod,
-      'promotion': promotion,
-      'vehicle': vehicle
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'address': address,
+        'longitude': longitude,
+        'latitude': latitude,
+      };
 }
