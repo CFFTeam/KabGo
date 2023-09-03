@@ -12,7 +12,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<String> acceptPath = ['/', '/wallet', '/wallet/income', '/customer/request'];
+  final List<String> acceptPath = ['/', '/wallet', '/wallet/income', '/customer/request', '/customer/request/accept'];
 
   @override
   Widget build(BuildContext context) {

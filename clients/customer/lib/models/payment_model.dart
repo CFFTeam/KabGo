@@ -3,6 +3,6 @@ class PaymentModel {
   String time = 'Bây giờ';
   String vehicle = 'Xe máy';
   String paymentMethod = 'Tiền mặt';
-  String discount = '';
+  String discount = ' ';
   String price = '45000';
 }
