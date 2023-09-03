@@ -68,6 +68,7 @@ const NewAccount: React.FC = () => {
   const changeBorderRed = (emptyName: string[]) => {
     for (let i: number = 0; i < emptyName.length; i++) {
       $(`#${emptyName[i]}`).css("border", "1.5px solid red");
+      $(`#${emptyName[i]}`).css("background", "#FFEFEF");
     }
   };
 
@@ -75,6 +76,7 @@ const NewAccount: React.FC = () => {
     for (let i: number = 0; i < emptyName.length; i++) {
       setTimeout(function () {
         $(`#${emptyName[i]}`).css("border", "");
+        $(`#${emptyName[i]}`).css("background", "");
       }, 4000);
     }
   };
