@@ -84,7 +84,7 @@
     gap: 1rem;
     align-items: center;
     background: #E17644;
-    padding: 0 2.5rem;
+    padding: 0 1.5rem;
 }
 
 .create-button-container:hover{
@@ -392,6 +392,10 @@ input::placeholder {
 }
 
 .lock-body:hover{
+    cursor: pointer;
+}
+
+.table-unlock-icon:hover{
     cursor: pointer;
 }
 

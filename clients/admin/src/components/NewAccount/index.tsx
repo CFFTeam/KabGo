@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import styles from "./newAccount.module.css";
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
-import {useLocation, useNavigate} from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom";
 import { dashboardActions } from "@store/dashboard";
 import { useEffect } from "react";
 import { ReactComponent as Vertical } from "@assets/svg/NewAccount/vertical.svg";
@@ -18,7 +18,7 @@ import $ from "jquery";
 import toast from "react-hot-toast";
 
 const NewAccount: React.FC = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   let location = useLocation();
   const dispatch = useAppDispatch();
   const [gender, setGender] = useState<string>("Giới tính");
@@ -31,92 +31,99 @@ const NewAccount: React.FC = () => {
   const addressRef = useRef<HTMLInputElement>(null);
   const passRef = useRef<HTMLInputElement>(null);
   const confpassRef = useRef<HTMLInputElement>(null);
-  let emptyName: string[] = []
+  let emptyName: string[] = [];
 
-  const checkEmpty = (getFormData: any) =>{
+  const styleSuccess = {
+    style: {
+      border: "2px solid #28a745",
+      padding: "10px",
+      color: "#28a745",
+      fontWeight: "500",
+    },
+    duration: 4000,
+  };
+
+  const styleError = {
+    style: {
+      border: "2px solid red",
+      padding: "10px",
+      color: "red",
+      fontWeight: "500",
+    },
+    duration: 4000,
+  };
+
+  const checkEmpty = (getFormData: any) => {
     emptyName = [];
-    if(getFormData.name === null) emptyName.push('name');
-    if(getFormData.phone === null) emptyName.push('phone');
-    if(getFormData.email === null) emptyName.push('email');
-    if(getFormData.role === null) emptyName.push('role');
-    if(getFormData.pass=== null) emptyName.push('pass');
-    if(getFormData.confpass === null) emptyName.push('confpass');
-    if(emptyName.length !== 0) return true;
+    if (getFormData.name === null) emptyName.push("name");
+    if (getFormData.phone === null) emptyName.push("phone");
+    if (getFormData.email === null) emptyName.push("email");
+    if (getFormData.role === null) emptyName.push("role");
+    if (getFormData.pass === null) emptyName.push("pass");
+    if (getFormData.confpass === null) emptyName.push("confpass");
+    if (emptyName.length !== 0) return true;
     else return false;
-  }
+  };
 
   const changeBorderRed = (emptyName: string[]) => {
-    for(let i: number=0; i<emptyName.length; i++){
-      $(`#${emptyName[i]}`).css('border', '1.5px solid red');
+    for (let i: number = 0; i < emptyName.length; i++) {
+      $(`#${emptyName[i]}`).css("border", "1.5px solid red");
+      $(`#${emptyName[i]}`).css("background", "#FFEFEF");
     }
-  }
+  };
 
   const clearBorderRed = (emptyName: string[]) => {
-    for(let i: number=0; i<emptyName.length; i++){
-      setTimeout(function() {
-        $(`#${emptyName[i]}`).css('border', '');
+    for (let i: number = 0; i < emptyName.length; i++) {
+      setTimeout(function () {
+        $(`#${emptyName[i]}`).css("border", "");
+        $(`#${emptyName[i]}`).css("background", "");
       }, 4000);
     }
-  }
+  };
 
   const submitSearch = () => {
-
     const getFormData = {
       name: nameRef.current?.value || null,
       phone: phoneRef.current?.value || null,
-      gender: gender==='Giới tính' ? null : gender,
+      gender: gender === "Giới tính" ? null : gender,
       email: emailRef.current?.value || null,
       role: roleRef.current?.value || null,
       address: addressRef.current?.value || null,
       pass: passRef.current?.value || null,
       confpass: confpassRef.current?.value || null,
-    }
+    };
 
-    if(checkEmpty(getFormData)){
+    if (checkEmpty(getFormData)) {
       changeBorderRed(emptyName);
-      clearBorderRed(emptyName);  
-      toast.error('Vui lòng nhập đầy đủ thông tin', {
-        style: {
-          border: '2px solid red',
-          padding: '10px',
-          color: 'red',
-          fontWeight: '500'
-        },
-        duration: 4000
-      });
-    }
-    else{
-      if(getFormData.pass !== getFormData.confpass){
-        toast.error('Mật khẩu không trùng khớp', {
-          style: {
-            border: '2px solid red',
-            padding: '10px',
-            color: 'red',
-            fontWeight: '500'
-          },
-          duration: 4000
-        });
-      }
-      else{
-        navigate(location.pathname.substring(0, location.pathname.length-7));
-        toast.success('Tạo tài khoản thành công', {
-          style: {
-            border: '2px solid #28a745',
-            padding: '10px',
-            color: '#28a745',
-            fontWeight: '500'
-          },
-          duration: 4000
-        });
+      clearBorderRed(emptyName);
+      toast.error("Vui lòng nhập đầy đủ thông tin", styleError);
+    } else {
+      if (getFormData.pass !== getFormData.confpass) {
+        toast.error("Mật khẩu không trùng khớp", styleError);
+      } else {
+        axios
+          .post(`${process.env.REACT_APP_API_URI}${location.pathname.substring(0, location.pathname.length - 7)}/create-account`, getFormData)
+          .then((res) => {
+            if(res.data.success){
+              navigate(location.pathname.substring(0, location.pathname.length - 7));
+              toast.success("Tạo tài khoản thành công", styleSuccess);
+            }
+            else{
+              toast.error(res.data.message, styleError);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     }
   };
 
   const handleEnter = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
-        submitSearch();
-      }
-  }
+      submitSearch();
+    }
+  };
 
   const genderHandle = (gender: string) => {
     setGender(gender);
@@ -163,9 +170,7 @@ const NewAccount: React.FC = () => {
                 />
               </div>
               <div className={styles["gender-container"]}>
-                <div className={styles["prop-title"]}>
-                  Giới tính
-                </div>
+                <div className={styles["prop-title"]}>Giới tính</div>
                 <div className={styles["dropdown-container"]}>
                   <button
                     className={`${styles["dropdown-title"]} ${
@@ -273,13 +278,21 @@ const NewAccount: React.FC = () => {
             </div>
             <div className={styles["sendemail-sms-container"]}>
               <div className={styles["sendemail-container"]}>
-                {!sendType ? <Tick onClick={sendTypeHandle}/> : <Untick onClick={sendTypeHandle}/>}
+                {!sendType ? (
+                  <Tick onClick={sendTypeHandle} />
+                ) : (
+                  <Untick onClick={sendTypeHandle} />
+                )}
                 <div className={styles["sendemail-title"]}>
                   Gửi mật khẩu qua địa chỉ email
                 </div>
               </div>
               <div className={styles["sms-container"]}>
-                {sendType ? <Tick onClick={sendTypeHandle}/> : <Untick onClick={sendTypeHandle}/>}
+                {sendType ? (
+                  <Tick onClick={sendTypeHandle} />
+                ) : (
+                  <Untick onClick={sendTypeHandle} />
+                )}
                 <div className={styles["sms-title"]}>
                   Gửi mật khẩu qua tin nhắn SMS
                 </div>
@@ -295,8 +308,19 @@ const NewAccount: React.FC = () => {
             <div className={styles["choose-ava"]}>Chọn ảnh</div>
           </div>
           <div className={styles["submit-container"]}>
-            <div className={styles["cancel"]} onClick={()=> navigate(location.pathname.substring(0, location.pathname.length-7))}>Hủy bỏ</div>
-            <div className={styles["create"]} onClick={submitSearch}>Tạo tài khoản</div>
+            <div
+              className={styles["cancel"]}
+              onClick={() =>
+                navigate(
+                  location.pathname.substring(0, location.pathname.length - 7)
+                )
+              }
+            >
+              Hủy bỏ
+            </div>
+            <div className={styles["create"]} onClick={submitSearch}>
+              Tạo tài khoản
+            </div>
           </div>
         </div>
       </div>

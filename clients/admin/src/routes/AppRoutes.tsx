@@ -8,12 +8,13 @@ import Service from "@components/Service";
 import Vehicle from "@components/Vehicle";
 import Invoice from "@components/Invoice";
 import NewAccount from "@components/NewAccount";
+import LoginPage from "@pages/LoginPage/LoginPage";
 
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
       <Route element={<BaseLayout />}>
-        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/employee">
           <Route index element={<Admin />} />
           <Route path="create" element={<NewAccount />} />
@@ -30,6 +31,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/vehicle" element={<Vehicle />} />
         <Route path="/invoice" element={<Invoice />} />
       </Route>
+      <Route path="/" element={<LoginPage/>} />
     </Routes>
   );
 };

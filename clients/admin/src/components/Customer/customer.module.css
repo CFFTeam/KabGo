@@ -418,6 +418,10 @@ input::placeholder {
    position: absolute;
 }
 
+.table-unlock-icon:hover{
+    cursor: pointer;
+}
+
 .hide-icon{
     opacity: 0;
 }

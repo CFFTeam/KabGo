@@ -26,12 +26,16 @@ const Table: React.FC = () => {
   const [role, setRole] = useState<string[]>(["Supervisor"]);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URI}/admin`).then((res) => {
-      getAllData(res);
-    });
+    getDatabyApi();
   }, []);
 
   const [filterData, setFilterData] = useState<String>("");
+
+  const getDatabyApi = async () => {
+    axios.get(`${process.env.REACT_APP_API_URI}/employee`).then((res) => {
+      getAllData(res);
+    }).catch(err => {console.log(err)});
+  }
 
   const submitSearch = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
@@ -40,16 +44,17 @@ const Table: React.FC = () => {
   };
 
   const getAllData = (res: any) => {
-    const arrayData = res.data.data;
+    const arrayData = res.data.data.reverse();
+
     let roleData: string[] = [];
     for (let i = 0; i < arrayData.length; i++) {
       if (roleData.includes(arrayData[i].role) === false)
         roleData.push(arrayData[i].role);
-      console.log(roleData);
     }
     setInitArrayElementTableData([...arrayData]);
     setArrayElementTableData([...arrayData]);
     setRole([...roleData]);
+    // console.log(arrayElementTableData);
   };
 
   const handleFilterData = (filterDataPara: string) => {
@@ -67,94 +72,27 @@ const Table: React.FC = () => {
     setArrayElementTableData([...initArrayElementTableData]);
   };
 
-  // const role: string[] = [
-  //   "Administrator",
-  //   "Task Manager",
-  //   "Income Manager",
-  //   "IT Manager",
-  // ];
-
+  const handleLockAccount = (id: string) => {
+    axios
+    .post(`${process.env.REACT_APP_API_URI}/employee/lock-account?id=${id}`)
+    .then((res) => {
+      if(res.data.success){
+        getDatabyApi();
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
   interface elementTableData {
+    _id: string;
     name: string;
     role: string;
     email: string;
     phonenumber: string;
     active: string;
     lock: boolean;
-  } //   {
-  //     fullname: "Trần Đàm Gia Huy",
-  //     role: "Administrator",
-  //     email: "giahuy2002@gmail.com",
-  //     phone: "0703350128",
-  //     active: "12/08/2023",
-  //     lock: false,
-  //   },
-  //   {
-  //     fullname: "Đinh Nguyễn Duy Khang",
-  //     role: "Task Manager",
-  //     email: "khangduy017@gmail.com",
-  //     phone: "0976975548",
-  //     active: "12/08/2023",
-  //     lock: false,
-  //   },
-  //   {
-  //     fullname: "Nguyễn Thoại Đăng Khoa",
-  //     role: "Income Manager",
-  //     email: "nguyenthoaidangkhoa@gmail.com",
-  //     phone: "0903861515",
-  //     active: "12/08/2023",
-  //     lock: false,
-  //   },
-  //   {
-  //     fullname: "Culi thích code",
-  //     role: "IT Manager",
-  //     email: "wgmin.it@outlook.com",
-  //     phone: "0778568685",
-  //     active: "12/08/2023",
-  //     lock: false,
-  //   },
-  //   {
-  //     fullname: "Cải xanh",
-  //     role: "IT Manager",
-  //     email: "caixanh.it@outlook.com",
-  //     phone: "0778568685",
-  //     active: "12/08/2023",
-  //     lock: false,
-  //   },
-  //   {
-  //     fullname: "Cải xanh",
-  //     role: "IT Manager",
-  //     email: "caixanh.it@outlook.com",
-  //     phone: "0778568685",
-  //     active: "12/08/2023",
-  //     lock: true,
-  //   },
-  //   {
-  //     fullname: "Culi thích code",
-  //     role: "IT Manager",
-  //     email: "wgmin.it@outlook.com",
-  //     phone: "0778568685",
-  //     active: "12/08/2023",
-  //     lock: false,
-  //   },
-  //   {
-  //     fullname: "Cải xanh",
-  //     role: "IT Manager",
-  //     email: "caixanh.it@outlook.com",
-  //     phone: "0778568685",
-  //     active: "12/08/2023",
-  //     lock: false,
-  //   },
-  //   {
-  //     fullname: "Cải xanh",
-  //     role: "IT Manager",
-  //     email: "caixanh.it@outlook.com",
-  //     phone: "0778568685",
-  //     active: "12/08/2023",
-  //     lock: true,
-  //   },
-  // ];
-
+  } 
   return (
     <div className={styles["table-content-container"]}>
       {/* Search */}
@@ -247,7 +185,7 @@ const Table: React.FC = () => {
                   <EditIcon />
                 </div>
                 <div className={styles["lock-body"]}>
-                  <LockIcon />
+                  <LockIcon onClick={()=>{handleLockAccount(data._id)}}/>
                 </div>
               </div>
             </div>
@@ -256,7 +194,7 @@ const Table: React.FC = () => {
                 <div className={styles["table-lock-title"]}>
                   TÀI KHOẢN ĐANG BỊ KHÓA
                 </div>
-                <UnlockIcon className={styles["table-unlock-icon"]} />
+                <UnlockIcon className={styles["table-unlock-icon"]} onClick={()=>{handleLockAccount(data._id)}}/>
               </div>
             )}
           </div>
