@@ -10,7 +10,7 @@ export interface Vehicle {
     brand: string;
     type: string;
     color: string;
-    service: string;
+    service: mongoose.Types.ObjectId;
     number: string;
 }
 
@@ -43,8 +43,23 @@ const driverSchema = new mongoose.Schema<Driver>({
     day_income: { type: Number },
     week_income: { type: Number },
     account_balance: [{ name: String, balance: Number }],
-    vehicle: [{ name: String, brand: String, type: String, color: String, service: String, number: String }],
-    active: { type: String, default: '26/8/2023' },
+    vehicle: [
+        {
+            name: String,
+            brand: String,
+            type: String,
+            color: String,
+            service: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Service",
+            },
+            number: String,
+        },
+    ],
+    active: {
+        type: String,
+        default: '26/8/2023',
+    },
     lock: { type: Boolean, default: false },
 });
 

@@ -2,6 +2,7 @@ import Application from '@common/app';
 import EmployeeController from '@common/controllers/employee.controller';
 import DriverController from '@common/controllers/driver.controller';
 import UserController from '@common/controllers/user.controller';
+import CustomerController from '@common/controllers/customer.controller';
 import dotenv from 'dotenv';
 
 process.on('uncaughtException', (err: Error) => {
@@ -16,7 +17,7 @@ process.on('uncaughtException', (err: Error) => {
 dotenv.config({ path: './.env.local' });
 
 const app = new Application({
-    controllers: [new EmployeeController(), new DriverController()],
+    controllers: [new EmployeeController(), new DriverController(), new CustomerController()],
     mongoConnection: {
         uri: process.env.MONGO_URI as string,
     },

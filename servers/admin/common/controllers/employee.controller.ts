@@ -22,7 +22,6 @@ class EmployeeController implements Controller {
 
     private createAccount = async (req: Request, res: Response, next: NextFunction) => {
         const getEmailExist = await employeeModel.findOne({ email: req.body.email });
-        console.log(getEmailExist);
         if (getEmailExist !== null) {
             res.json({
                 success: false,

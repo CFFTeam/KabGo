@@ -53,7 +53,6 @@ const Table: React.FC = () => {
         arrayData[i].numServices = 0;
       }
     }
-    console.log(arrayData);
     let numberServices: number[] = [];
     for (let i = 0; i < arrayData.length; i++) {
       if (numberServices.includes(arrayData.numServices) === false)

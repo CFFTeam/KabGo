@@ -12,18 +12,17 @@ class DriverController implements Controller {
     constructor() {
         this.router.get('/', this.getDriver);
         this.router.post('/create-account', this.createAccount);
+        this.router.post('/create-new', this.createAccount);
         this.router.post('/lock-account', this.lockAccount);
     }
 
     private getDriver = async (req: Request, res: Response, next: NextFunction) => {
-        const allDriver = await driverModel.find().sort();
-        console.log(allDriver);
+        const allDriver = await driverModel.find().populate('vehicle.service');
         res.json({ success: true, status: 200, data: allDriver });
     };
 
     private createAccount = async (req: Request, res: Response, next: NextFunction) => {
         const getEmailExist = await driverModel.findOne({ email: req.body.email });
-        console.log(getEmailExist);
         if (getEmailExist !== null) {
             res.json({
                 success: false,
@@ -31,10 +30,26 @@ class DriverController implements Controller {
                 message: 'Email đã tồn tại',
             });
         } else {
+            // const obj = [{
+            //     name: "Wave Alpha 50cc",
+            //     brand: "Honda",
+            //     type: "Xe máy",
+            //     color: "Đỏ",
+            //     number: "51H49283"
+            // },
+            // {
+            //     name: "Wave Alpha 50cc",
+            //     brand: "Honda",
+            //     type: "Xe máy",
+            //     color: "Đỏ",
+            //     number: "51H49283"
+            // }];
+            // console.log(obj);
             const createAccountData = {
                 name: req.body.name,
                 email: req.body.email,
                 phonenumber: req.body.phone,
+                // vehicle: obj
             };
             await driverModel.create(createAccountData);
             res.json({
