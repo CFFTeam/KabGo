@@ -15,6 +15,7 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import '../../models/location.dart';
 import '../../models/vehicle.dart';
 import '../../providers/customer_request.dart';
+import '../../providers/request_status.dart';
 import 'styles.dart';
 
 class CustomerRequest extends ConsumerStatefulWidget {
@@ -30,10 +31,13 @@ class CustomerRequest extends ConsumerStatefulWidget {
 class _CustomerRequestState extends ConsumerState<CustomerRequest> {
   @override
   Widget build(BuildContext context) {
-    final customerRequestNotifier = ref.read(customerRequestProvider.notifier);
-    final customerRequest = ref.watch(customerRequestProvider);
     final socketManager = ref.read(socketClientProvider.notifier);
-    final currentLocation = ref.watch(currentLocationProvider);
+    final currentLocation = ref.read(currentLocationProvider.notifier).currentLocation();
+    
+    final customerRequestNotifier = ref.read(customerRequestProvider.notifier);
+    final requestStatusNotifier = ref.read(requestStatusProvider.notifier);
+
+    final customerRequest = ref.watch(customerRequestProvider);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
@@ -221,7 +225,9 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
             Expanded(
                 child: ElevatedButton(
               onPressed: () {
+                requestStatusNotifier.cancelRequest();
                 customerRequestNotifier.cancelRequest();
+
                 context.go(HomeDashboard.path);
               },
               style: ThemeButton.cancelButton,
@@ -259,7 +265,7 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                                         5.0))
                                 .toJson()));
 
-                        customerRequestNotifier.acceptRequest();
+                        requestStatusNotifier.acceptRequest();
                         context.go(CustomerRequestAccept.path);
                       },
                       style: ThemeButton.acceptButton,
@@ -290,6 +296,7 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                         isReverseAnimation: false,
                         autoStart: true,
                         onComplete: () {
+                          requestStatusNotifier.cancelRequest();
                           customerRequestNotifier.cancelRequest();
                           context.go(HomeDashboard.path);
                         },

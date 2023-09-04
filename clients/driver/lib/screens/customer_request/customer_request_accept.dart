@@ -1,3 +1,4 @@
+import 'package:driver/screens/customer_request/customer_request_comming.dart';
 import 'package:driver/screens/home_dashboard/home_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../providers/customer_request.dart';
+import '../../providers/request_status.dart';
 import 'styles.dart';
 
 class CustomerRequestAccept extends ConsumerStatefulWidget {
@@ -14,14 +16,16 @@ class CustomerRequestAccept extends ConsumerStatefulWidget {
   static String path = '/customer/request/accept';
 
   @override
-  ConsumerState<CustomerRequestAccept> createState() => _CustomerRequestAcceptState();
+  ConsumerState<CustomerRequestAccept> createState() =>
+      _CustomerRequestAcceptState();
 }
 
 class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
   @override
   Widget build(BuildContext context) {
+    final requestStatusNotifier = ref.read(requestStatusProvider.notifier);
     final customerRequestNotifier = ref.read(customerRequestProvider.notifier);
-    final customerRequest = ref.read(customerRequestProvider);
+    final customerRequest = ref.watch(customerRequestProvider);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
@@ -62,7 +66,9 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                       children: <Widget>[
                         SizedBox(
                             width: MediaQuery.of(context).size.width - 270,
-                            child: Text(customerRequest.customer_infor.user_information.name,
+                            child: Text(
+                                customerRequest
+                                    .customer_infor.user_information.name,
                                 style: ThemeText.customerName,
                                 overflow: TextOverflow.ellipsis)),
                         Row(
@@ -73,7 +79,10 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                             //     width: 20),
                             const SizedBox(width: 20),
                             const SizedBox(width: 10),
-                            Text(customerRequest.customer_infor.user_information.rank, style: ThemeText.ranking),
+                            Text(
+                                customerRequest
+                                    .customer_infor.user_information.rank,
+                                style: ThemeText.ranking),
                           ],
                         )
                       ],
@@ -82,16 +91,22 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        Text(customerRequest.customer_infor.user_information.default_payment_method, style: ThemeText.bookingDetails),
+                        Text(
+                            customerRequest.customer_infor.user_information
+                                .default_payment_method,
+                            style: ThemeText.bookingDetails),
                         // if (customerRequest.customer_infor.user_information.promotion) const Text('Khuyến mãi', style: ThemeText.bookingDetails),
-                        Text(customerRequest.customer_infor.user_information.type, style: ThemeText.bookingDetails),
+                        Text(
+                            customerRequest
+                                .customer_infor.user_information.type,
+                            style: ThemeText.bookingDetails),
                         // if (!customerRequest.customer_infor.user_information.promotion) const SizedBox(width: 60),
                         const SizedBox(width: 60),
                       ],
                     )
                   ],
                 ),
-              ) 
+              )
             ],
           ),
           Row(
@@ -123,7 +138,8 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                   const Icon(FontAwesomeIcons.clock,
                       size: 21, color: Color(0xFFF86C1D)),
                   const SizedBox(width: 8),
-                  Text(customerRequest.customer_infor.time, style: ThemeText.locationDurationDetails),
+                  Text(customerRequest.customer_infor.time,
+                      style: ThemeText.locationDurationDetails),
                 ],
               ),
             ],
@@ -161,7 +177,8 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                         ),
                         width: MediaQuery.of(context).size.width - 88,
                         child: Text(
-                          customerRequest.customer_infor.departure_information.address,
+                          customerRequest
+                              .customer_infor.departure_information.address,
                           style: ThemeText.locationDetails,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -180,7 +197,8 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                         ),
                         width: MediaQuery.of(context).size.width - 88,
                         child: Text(
-                          customerRequest.customer_infor.arrival_information.address,
+                          customerRequest
+                              .customer_infor.arrival_information.address,
                           style: ThemeText.locationDetails,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -195,6 +213,7 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
             Expanded(
                 child: ElevatedButton(
               onPressed: () {
+                requestStatusNotifier.cancelRequest();
                 customerRequestNotifier.cancelRequest();
                 context.go(HomeDashboard.path);
               },
@@ -204,15 +223,14 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
             const SizedBox(width: 16),
             Expanded(
               child: ElevatedButton(
-                onPressed: () {
-                  customerRequestNotifier.commingRequest();
-                  // context.go(HomeDashboard.path);
-                },
-                style: ThemeButton.acceptButton2,
-                child: const Center(
-                  child: Text('CHẤP NHẬN', style: ThemeText.acceptButtonText),
-                )
-              ),
+                  onPressed: () {
+                    requestStatusNotifier.commingRequest();
+                    context.go(CustomerRequestComming.path);
+                  },
+                  style: ThemeButton.acceptButton2,
+                  child: const Center(
+                    child: Text('XÁC NHẬN', style: ThemeText.acceptButtonText),
+                  )),
             ),
           ])
         ],

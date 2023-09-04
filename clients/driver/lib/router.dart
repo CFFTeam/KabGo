@@ -1,6 +1,7 @@
 import 'package:driver/providers/auth_provider.dart';
 import 'package:driver/screens/customer_request/customer_request.dart';
 import 'package:driver/screens/customer_request/customer_request_accept.dart';
+import 'package:driver/screens/customer_request/customer_request_comming.dart';
 import 'package:driver/screens/home_dashboard/home_dashboard.dart';
 import 'package:driver/screens/home_income/home_income.dart';
 import 'package:driver/screens/home_screen/index.dart';
@@ -135,6 +136,17 @@ final routerProvider = Provider<GoRouter>((ref) {
                           // context: context,
                           key: state.pageKey,
                           child: const CustomerRequestAccept(),
+                          // transitionDuration: const Duration(milliseconds: 800)
+                      ),
+                    ),
+                    GoRoute(
+                      parentNavigatorKey: _shellDriverKey,
+                      name: CustomerRequestComming.name,
+                      path: CustomerRequestComming.path,
+                      pageBuilder: (context, state) => NoTransitionPage(
+                          // context: context,
+                          key: state.pageKey,
+                          child: const CustomerRequestComming(),
                           // transitionDuration: const Duration(milliseconds: 800)
                       ),
                     ),

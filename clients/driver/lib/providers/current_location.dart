@@ -1,3 +1,4 @@
+import 'package:driver/models/location.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:riverpod/riverpod.dart';
 
@@ -42,6 +43,10 @@ class CurrentLocationProvider extends StateNotifier<Position> {
     getCurrentLocation().then((Position currentLocation) {
       state = currentLocation;
     });
+  }
+
+  Position currentLocation() {
+    return state;
   }
 
   void updateLocation(Position location) {

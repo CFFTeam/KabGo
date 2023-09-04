@@ -14,7 +14,7 @@ class SocketClient extends StateNotifier<bool> {
 
   _createSocket() {
     socket = io(
-      'ws://192.168.2.18:4600/',
+      'ws://192.168.1.46:4600/',
       OptionBuilder()
           .setTransports(['websocket'])
           .disableAutoConnect()
@@ -28,6 +28,8 @@ class SocketClient extends StateNotifier<bool> {
   }
 
   void toggle() {
+    if (!mounted) return;
+
     if (socket.connected) {
       socket.disconnect();
       socket.close();
@@ -39,12 +41,16 @@ class SocketClient extends StateNotifier<bool> {
   }
 
   void subscribe(String event, dynamic Function(dynamic) callback) {
+    if (!mounted) return;
+
     if (state == true) {
       socket.on(event, callback);
     }
   }
 
   void publish(String event, String json) {
+    if (!mounted) return;
+    
     if (state == true) {
       socket.emit(event, json);
     }
