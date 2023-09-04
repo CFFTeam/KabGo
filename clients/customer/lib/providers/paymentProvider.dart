@@ -1,5 +1,6 @@
-import 'package:customer_app/models/payment_model.dart';
 import 'package:riverpod/riverpod.dart';
+
+import '../models/payment_model.dart';
 
 class PaymentNotifier extends StateNotifier<PaymentModel> {
   PaymentNotifier() : super(PaymentModel());
