@@ -4,13 +4,14 @@ import CallReceiptHandlerLayout from "@layouts/CallReceiptHandlerLayout/CallRece
 import CallReceiptPage from "@pages/CallReceiptPage/CallReceiptPage";
 import CallReceiptHandlerPage from "@pages/CallReceiptHandlerPage/CallReceiptHandlerPage";
 import DashboardPage from "@pages/DashboardPage/DashboardPage";
+import LoginPage from "@pages/LoginPage/LoginPage";
 import BookingPage from "@pages/BookingPage/BookingPage";
 
 const AppRoutes = () => {
     return (
         <Routes>
             <Route element={<CallReceiptHandlerLayout />}>
-                <Route path="/" element={<DashboardPage/>} />
+                {/* <Route path="/" element={<DashboardPage/>} /> */}
                 <Route path="/call-receipt-handle" element={<CallReceiptHandlerPage/>} />
                 <Route path = "/booking-page" element = {<BookingPage/>}/>
                 <Route path = "/dashboard" element = {<DashboardPage/>}/>
@@ -21,8 +22,7 @@ const AppRoutes = () => {
                 <Route path = "/contact" element = {<CallReceiptHandlerPage/>}/>
             </Route>
             <Route path="/call-receipt" element={<CallReceiptPage/>} />
-            <Route>
-            </Route>
+            <Route path="/" element={<LoginPage/>} />
         </Routes>
     );
 };

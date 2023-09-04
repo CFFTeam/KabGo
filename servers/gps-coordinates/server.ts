@@ -1,5 +1,10 @@
 import Application from '@common/app';
 import UserController from '@common/controllers/user.controller';
+import Driver from '@common/interfaces/driver';
+import DriverSubmit from '@common/interfaces/driver_submit';
+import User from '@common/interfaces/user';
+import socket from '@common/socket';
+import haversineDistance from '@common/utils/haversineDistance';
 import dotenv from 'dotenv';
 import { Server, Socket } from 'socket.io';
 
@@ -7,7 +12,7 @@ process.on('uncaughtException', (err: Error) => {
     console.error('Uncaught Exception. Shutting down...');
     console.error(err.name, err.message, err.stack);
 
-    setTimeout(() => { 
+    setTimeout(() => {
         process.exit(1);
     }, 3000);
 });
@@ -21,58 +26,100 @@ const app = new Application({
     },
 });
 
-const server = app.run(4600);
+const driverList: any = {};
+const customerList: any = {};
 
-const io = new Server(server, {
-    cors: {
-        origin: '*'
-    }
-});
+const server = app.run(4600, () => {
+    socket.init(server);
+    socket.getIO().on('connection', (socket: any) => {
+        socket.on('join', (message: string) => {
+            const driver = JSON.parse(message) as Driver;
+            const _id = driver.phonenumber;
 
-io.on('connection', (socket: Socket) => { 
+            socket.phonenumber = _id;
 
-    console.log('Client connected');
+            driverList[_id] = {
+                socket: socket,
+                infor: driver,
+            };
+            console.log(driverList);
+        });
 
-    const customerRequest = {
-        customer: {
-            name: 'Maximilliam',
-            phone: '0123456789',
-            avatar: 'lib/assets/test/avatar.png',
-            rankType: 'gold',
-            rankTitle: 'Hạng vàng'
-        },
-        booking: {
-            from: {
-                latitude: 10.739409785339353,
-                longitude: 106.65454734297383
-            },
-            to: {
-                latitude: 10.762711311339077,
-                longitude: 106.68230473890691
-            },
-            paymentMethod: 'ZaloPay',
-            promotion: false,
-            vehicle: 'Xe Oto con'
-        }
-    };
+        socket.on('booking-car', (message: string) => {
+            const customer = JSON.parse(message) as User;
+            const _id = customer.user_information.phonenumber;
 
-    setTimeout(() => socket.emit('welcome', JSON.stringify(customerRequest)), 3000);
-    
-    socket.on('disconnect', () => {
-        console.log('Client disconnected');
+            customerList[_id] = {
+                infor: customer,
+                socket: socket,
+            };
+
+            let drivers: any = [];
+
+            for (const id in driverList) {
+                const distance = haversineDistance(
+                    {
+                        latitude: +customer.departure_information.latitude,
+                        longitude: +customer.departure_information.longitude,
+                    },
+                    {
+                        latitude: driverList[id].infor.coordinate.latitude,
+                        longitude: driverList[id].infor.coordinate.longitude,
+                    }
+                );
+                if (distance <= 1.5) {
+                    driverList[id].infor.distance = distance;
+                    drivers = [...drivers, driverList[id]];
+                }
+            }
+
+            const nearestDriver = drivers?.sort((a: any, b: any) => b.distance - a.distance).slice(0, 5);
+
+            const finalDrivers = nearestDriver.map((el: any) => {
+                el.socket.emit('customer-request', JSON.stringify(customer));
+                delete el.socket;
+
+                return el;
+            });
+
+            socket.emit('send drivers', JSON.stringify(finalDrivers));
+        });
+
+        socket.on('driver-accept', (message: string) => {
+            const driverSubmit = JSON.parse(message) as DriverSubmit;
+
+            const id = driverSubmit.user_id;
+
+            customerList[id].socket.emit('submit driver', JSON.stringify(driverSubmit.driver));
+        });
+
+        socket.on('driver-moving', (message: string) => {
+            const driverSubmit = JSON.parse(message) as DriverSubmit;
+
+            const id = driverSubmit.user_id;
+
+            customerList[id]?.socket.emit('moving driver', JSON.stringify(driverSubmit.driver));
+        });
+
+        socket.on('disconnect', () => {
+            delete driverList[socket.phonenumber];
+
+            console.log('Client disconnected');
+        });
     });
 });
 
-process.on('unhandledRejection', (err: Error) => {
-    console.error('Unhandled Rejection. Shutting down...');
-    console.error(err.name, err.message, err.stack);
-    
-    setTimeout(() => { 
-        io.disconnectSockets();
-        io.close();
+// process.on('unhandledRejection', (err: Error) => {
+//     console.error('Unhandled Rejection. Shutting down...');
+//     console.error(err.name, err.message, err.stack);
 
-        server.close(() => {
-            process.exit(1); // 0 is success, 1 is uncaught exception
-        });
-    }, 3000);
-});
+//     setTimeout(() => {
+//         io.disconnectSockets();
+//         io.close();
+
+//         server.close(() => {
+//             process.exit(1); // 0 is success, 1 is uncaught exception
+//         });
+//     }, 3000);
+// });
+

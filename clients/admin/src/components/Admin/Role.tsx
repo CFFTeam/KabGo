@@ -62,7 +62,7 @@ const Role: React.FC = () => {
         </div>
         <div className={styles["create-button-container"]} onClick={clickHandle}>
           <Add />
-          <div className={styles["create-button-header-content"]} >Thêm quản lý</div>
+          <div className={styles["create-button-header-content"]} >Thêm nhân viên</div>
         </div>
       </div>
     </div>

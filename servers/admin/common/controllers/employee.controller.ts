@@ -6,27 +6,56 @@ import Controller from '@common/interfaces/controller';
 import { BadRequestException } from '@common/utils/exceptions';
 
 class EmployeeController implements Controller {
-    path: string = '/v1/admin';
+    path: string = '/v1/employee';
     router: Router = Router();
 
     constructor() {
         this.router.get('/', this.getEmployee);
-        this.router.get('/logout', this.logout);
-        this.router.get('/get-data', this.getData);
+        this.router.post('/create-account', this.createAccount);
+        this.router.post('/lock-account', this.lockAccount);
     }
 
     private getEmployee = async (req: Request, res: Response, next: NextFunction) => {
-        const allEmployee = await employeeModel.find();
+        const allEmployee = await employeeModel.find().sort();
         res.json({ success: true, status: 200, data: allEmployee });
     };
 
-    private logout = (req: Request, res: Response, next: NextFunction) => {
-        next();
+    private createAccount = async (req: Request, res: Response, next: NextFunction) => {
+        const getEmailExist = await employeeModel.findOne({ email: req.body.email });
+        if (getEmailExist !== null) {
+            res.json({
+                success: false,
+                status: 200,
+                message: 'Email đã tồn tại',
+            });
+        } else {
+            const createAccountData = {
+                name: req.body.name,
+                email: req.body.email,
+                phonenumber: req.body.phone,
+                dob: '10/10/2002',
+                address: req.body.address,
+                role: req.body.role,
+                gender: req.body.gender,
+            };
+            await employeeModel.create(createAccountData);
+            res.json({
+                success: true,
+                status: 200,
+                message: 'Tạo tài khoản thành công',
+            });
+        }
     };
 
-    private getData = (req: Request, res: Response, next: NextFunction) => {
-        console.log('aaaaaaaaa');
+    private lockAccount = async (req: Request, res: Response, next: NextFunction) => {
+        const getAccountManipulate = await employeeModel.findOne({_id: req.query.id});
+        await employeeModel.updateOne({ _id: req.query.id }, { lock: !getAccountManipulate!.lock });
+        res.json({
+            success: true,
+            status: 200,
+        });
     };
 }
 
 export default EmployeeController;
+
