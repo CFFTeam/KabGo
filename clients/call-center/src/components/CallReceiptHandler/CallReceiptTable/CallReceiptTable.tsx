@@ -1,6 +1,11 @@
 import styles from "./CallReceiptTable.module.css";
 import {ReactComponent as SearchIcon} from "@assets/svg/CallReceiptHandler/search-icn.svg";
 import {ReactComponent as CancelIcon} from "@assets/svg/CallReceiptHandler/cancel-icn.svg";
+import {useState, useEffect} from "react";
+import {useNavigate} from "react-router-dom";
+import io, { Socket } from 'socket.io-client';
+import { useAppSelector, useAppDispatch } from "@hooks/ReduxHooks";
+import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSlice";
 
 interface CallReceiptData {
     id: string,
@@ -70,6 +75,73 @@ const callReceiptData: CallReceiptData[] = [
 ]
 
 const CallReceiptTable: React.FC = () => {
+    // const [socket, setSocket] = useState<Socket | null>(null);
+    // const [receivedMessages, setReceivedMessages] = useState<string[]>([]);
+    const dispatch = useAppDispatch();
+    const callReceiptData = useAppSelector((state) => state.callReceiptHandler.bookingInformation);
+    const navigate = useNavigate();
+    // useEffect(() => {
+    //     const socketInstance = io('http://api.call-center-s2.kabgo.local:4501');
+    //     setSocket(socketInstance);
+
+    //     return () => {
+    //         socketInstance.disconnect();
+    //     };
+    // }, []);
+
+    // useEffect(() => {
+    //     if (socket) {
+    //         console.log('socket ne: ', socket);
+    //         socket.on('queue bang socket ne', (message: string) => {
+    //             console.log('message ne ', message);
+    //             setReceivedMessages(prevMessages => [...prevMessages, message]);
+    //         });
+    //     }
+    // }, [socket]);
+    const handleItemClick = (phoneNumber: string, time: string) => {
+        navigate(`/booking-page/${phoneNumber}`);
+        const guestInformation = callReceiptData.find((item) => item.phoneNumber === phoneNumber && item.time === time);
+        // dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
+        //     name: guestInformation?.name || '',
+        //     phoneNumber: guestInformation?.phoneNumber || '',
+        //     vehicleType: guestInformation?.vehicleType || '',
+        //     origin: guestInformation?.origin || '',
+        //     destination: guestInformation?.destination || '',
+        //     note: guestInformation?.note || '',
+        //     time: guestInformation?.time || '',
+        //     state: guestInformation?.state || '',   
+        //     originLatLng: guestInformation?.originLatLng || {},
+        //     destinationLatLng: guestInformation?.destinationLatLng || {},
+        //     distance: '',
+        //     duration: '',
+        //     price: 0
+        // }));
+
+        dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
+            name: 'Khoa Nguyễn',
+            phoneNumber: '0903861515',
+            vehicleType: "Ô tô (2-4 chỗ)",
+            origin: "Chung cư 24/16 Võ Oanh (Chung cư C1 cũ), Võ Oanh, Phường 25, Bình Thạnh, Thành phố Hồ Chí Minh",
+            destination: "Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh",
+            note:"Gần chung ủy ban nhân dân phường 25",
+            time: guestInformation?.time || '',
+            state: "Chờ xử lý",
+            originLatLng: {
+                lat: 10.8441125, 
+                lng: 106.7407742
+            },
+            destinationLatLng:  {
+                lat: 10.7628356, 
+                lng: 106.6824824
+            },
+            distance: '',
+            duration: '',
+            price: 0
+
+        }));
+    }
+
+
     return <div className={styles["call-receipt-table"]}>
 
         <div className={styles["table-title"]}>
@@ -160,21 +232,25 @@ const CallReceiptTable: React.FC = () => {
                     </tr> */}
                     {
                         callReceiptData.map((el, index) => 
-                            <tr key ={el.id}>
+                            <tr key ={el.phoneNumber} onClick = {() => handleItemClick(el.phoneNumber, el.time)}>
                                 <td className ={styles["client"]}>0903861515</td>
                                 <td className = {styles["date-time"]}>
-                                {el.time} - {el.date}
+                                {el.time}
                                 </td>
                                 <td className = {styles["vehicle-type"]} style = {{textAlign: "center"}}>
                                     {el.vehicleType}
                                 </td>
-                                <td className = {el.status === 'Chờ xử lý' ? `${styles["bold"]} ${styles["orange-txt"]}` : `${styles["bold"]} ${styles["black-txt"]}`}>
-                                    {el.status}
+                                <td className = {el.state === 'Chờ xử lý' ? `${styles["bold"]} ${styles["orange-txt"]}` 
+                                : el.state === "Hoàn thành" ? `${styles["bold"]} ${styles["green-txt"]}`
+                                : el.state === "Hẹn giờ" ? `${styles["bold"]} ${styles["purple-txt"]}`
+                                : el.state === "Hủy" ? `${styles["bold"]} ${styles["grey-txt"]}`
+                                : `${styles["bold"]} ${styles["black-txt"]}`}>
+                                    {el.state}
                                 </td>
                                 <td className = {styles["arrival-address"]}>
-                                    45 Trần Hưng Đạo, quận 5, TP. Hồ Chí Minh
+                                    {el.destination}
                                 </td>
-                                {el.status === "Chờ xử lý" ? 
+                                {el.state === "Chờ xử lý" ? 
                                  <td className = {styles["button"]}>
                                     <button className={styles["cancel-btn"]}>
                                         <CancelIcon className = {styles["cancel-icn"]} />
@@ -185,6 +261,7 @@ const CallReceiptTable: React.FC = () => {
                         </tr>
                         )
                     }
+                    
                 </tbody>           
         </table>
     </div>

@@ -11,7 +11,7 @@ const AppRoutes = () => {
             <Route element={<CallReceiptHandlerLayout />}>
                 <Route path="/" element={<CallReceiptHandlerPage/>} />
                 <Route path="/call-receipt-handle" element={<CallReceiptHandlerPage/>} />
-                <Route path = "/booking-page" element = {<BookingPage/>}/>
+                <Route path = "/booking-page/:phoneNumber" element = {<BookingPage/>}/>
                 <Route path = "/dashboard" element = {<CallReceiptHandlerPage/>}/>
                 <Route path = "/statistic" element = {<CallReceiptHandlerPage/>}/>
                 <Route path = "/report" element = {<CallReceiptHandlerPage/>}/>

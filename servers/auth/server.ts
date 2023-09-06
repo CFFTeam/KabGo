@@ -1,5 +1,5 @@
 import Application from '@common/app';
-import UserController from '@common/controllers/user.controller';
+import UserController from '@common/controllers/auth.controller';
 import dotenv from 'dotenv';
 
 process.on('uncaughtException', (err: Error) => {
