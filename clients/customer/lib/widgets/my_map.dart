@@ -1,11 +1,13 @@
 import 'dart:convert';
 
-import 'package:customer_app/functions/setDepartureByPosition.dart';
+import 'package:customer_app/models/driver_model.dart';
 import 'package:customer_app/models/route_model.dart';
 import 'package:customer_app/providers/currentLocationProvider.dart';
+import 'package:customer_app/providers/driverProvider.dart';
 import 'package:customer_app/providers/locationPickerInMap.dart';
 import 'package:customer_app/providers/mapProvider.dart';
 import 'package:customer_app/providers/routeProvider.dart';
+import 'package:customer_app/providers/socketProvider.dart';
 import 'package:customer_app/providers/stepProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -15,6 +17,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../functions/determinePosition.dart';
 import '../functions/getBytesFromAsset.dart';
 import '../functions/networkUtility.dart';
+import '../functions/setAddressByPosition.dart';
 import '../models/location_model.dart';
 import '../providers/arrivalLocationProvider.dart';
 import '../providers/departureLocationProvider.dart';
@@ -30,7 +33,6 @@ class MyMap extends ConsumerStatefulWidget {
 
 class _MyMapState extends ConsumerState<MyMap> {
   late GoogleMapController googleMapController;
-  static late CameraPosition initialCameraPosition;
   CameraPosition? cameraPosition;
   String mapTheme = '';
   Set<Marker> markers = {};
@@ -48,10 +50,13 @@ class _MyMapState extends ConsumerState<MyMap> {
   double mapPaddingBottom = 0;
   double mapPaddingRight = 0;
   double padding = 100;
+  dynamic parsedValue;
+  double zoom = 15;
+  bool isDrawRoute = true;
 
   void getFirstCurrentPosition() async {
     LatLng latLng = await determinePosition();
-    LocationModel currentLocationModel = await setDepartureByPosition(latLng);
+    LocationModel currentLocationModel = await setAddressByPosition(latLng);
     ref
         .read(departureLocationProvider.notifier)
         .setDepartureLocation(currentLocationModel);
@@ -68,7 +73,7 @@ class _MyMapState extends ConsumerState<MyMap> {
       }
     } else {
       LatLng latLng = await determinePosition();
-      LocationModel currentLocationModel = await setDepartureByPosition(latLng);
+      LocationModel currentLocationModel = await setAddressByPosition(latLng);
       departureLocation = latLng;
       ref
           .read(departureLocationProvider.notifier)
@@ -83,7 +88,7 @@ class _MyMapState extends ConsumerState<MyMap> {
             LatLng(departureLocation!.latitude, departureLocation!.longitude),
         icon: BitmapDescriptor.fromBytes(
           await getBytesFromAsset(
-            'assets/map_departure_icon.png',
+            'lib/assets/map_departure_icon.png',
             80,
           ),
         ),
@@ -119,10 +124,11 @@ class _MyMapState extends ConsumerState<MyMap> {
         .setCurrentLocation(currentLocation!);
     markers.remove(const MarkerId('currentLocation'));
     markers.add(Marker(
+      anchor: const Offset(0.5, 0.5),
       markerId: const MarkerId('currentLocation'),
       position: currentLocation!,
       icon: BitmapDescriptor.fromBytes(
-          await getBytesFromAsset('assets/my_location.png', 250)),
+          await getBytesFromAsset('lib/assets/my_location.png', 250)),
     ));
     googleMapController.animateCamera(
       CameraUpdate.newCameraPosition(
@@ -149,7 +155,7 @@ class _MyMapState extends ConsumerState<MyMap> {
               LatLng(departureLocation!.latitude, departureLocation!.longitude),
           icon: BitmapDescriptor.fromBytes(
             await getBytesFromAsset(
-              'assets/map_departure_icon.png',
+              'lib/assets/map_departure_icon.png',
               80,
             ),
           ),
@@ -162,7 +168,7 @@ class _MyMapState extends ConsumerState<MyMap> {
         markerId: const MarkerId('arrivalLocation'),
         position: LatLng(arrivalLocation!.latitude, arrivalLocation!.longitude),
         icon: BitmapDescriptor.fromBytes(
-          await getBytesFromAsset('assets/map_arrival_icon.png', 80),
+          await getBytesFromAsset('lib/assets/map_arrival_icon.png', 80),
         ),
       ),
     );
@@ -235,11 +241,12 @@ class _MyMapState extends ConsumerState<MyMap> {
     markers.clear();
     markers.add(
       Marker(
+        anchor: const Offset(0.5, 0.5),
         markerId: const MarkerId('departureLocation'),
         position:
             LatLng(departureLocation!.latitude, departureLocation!.longitude),
         icon: BitmapDescriptor.fromBytes(
-          await getBytesFromAsset('assets/my_location.png', 250),
+          await getBytesFromAsset('lib/assets/my_location.png', 250),
         ),
       ),
     );
@@ -248,7 +255,7 @@ class _MyMapState extends ConsumerState<MyMap> {
         CameraPosition(
             target: LatLng(
                 departureLocation!.latitude, departureLocation!.longitude),
-            zoom: 16.5),
+            zoom: 15),
       ),
     );
 
@@ -267,17 +274,219 @@ class _MyMapState extends ConsumerState<MyMap> {
     );
   }
 
+  void drawDriver() async {
+    for (dynamic i in parsedValue) {
+      markers.add(
+        Marker(
+          rotation: double.parse(i['infor']['rotation'].toString()),
+          // rotation: 0.5,
+          anchor: const Offset(0.5, 0.5),
+          markerId: MarkerId('departureLocation_$i'),
+          position: LatLng(
+              double.parse(i['infor']['coordinate']['latitude'].toString()),
+              double.parse(i['infor']['coordinate']['longitude'].toString())),
+          icon: BitmapDescriptor.fromBytes(
+            await getBytesFromAsset('lib/assets/bike_image.png', 75),
+          ),
+        ),
+      );
+    }
+    setState(() {});
+  }
+
+  void drawRouteDriver() async {
+    departureLocation = ref.read(departureLocationProvider).postion;
+    DriverModel driverModel = ref.read(driverProvider);
+    markers.clear();
+    if (markers.isEmpty) {
+      markers.add(
+        Marker(
+          markerId: const MarkerId('departureLocation'),
+          anchor: const Offset(0.5, 0.5),
+          position:
+              LatLng(departureLocation!.latitude, departureLocation!.longitude),
+          icon: BitmapDescriptor.fromBytes(
+            await getBytesFromAsset(
+              'lib/assets/map_departure_icon.png',
+              80,
+            ),
+          ),
+        ),
+      );
+    }
+
+    markers.add(
+      Marker(
+        rotation: double.parse(driverModel.rotation.toString()),
+        markerId: const MarkerId('driverLocation'),
+        anchor: const Offset(0.5, 0.5),
+        position: LatLng(
+            double.parse(driverModel.coordinate['latitude'].toString()),
+            double.parse(driverModel.coordinate['longitude'].toString())),
+        icon: BitmapDescriptor.fromBytes(
+          await getBytesFromAsset('lib/assets/bike_image.png', 75),
+        ),
+      ),
+    );
+
+    Uri uri = Uri.https('maps.googleapis.com', 'maps/api/directions/json', {
+      'key': APIKey,
+      'destination':
+          '${departureLocation!.latitude},${departureLocation!.longitude}',
+      'origin':
+          '${driverModel.coordinate['latitude']},${driverModel.coordinate['longitude']}',
+    });
+
+    String? response = await NetworkUtility.fetchUrl(uri);
+    final parsed = json.decode(response!).cast<String, dynamic>();
+    String distance =
+        parsed['routes'][0]['legs'][0]['distance']['text'] as String;
+    double distanceValue = double.parse(distance.split(' ')[0]);
+    String distanceUnit = distance.split(' ')[1];
+    // print('DISTANCE================= $distance');
+    if (distanceUnit == 'km') {
+      if (distanceValue < 0.1) {
+        isDrawRoute = false;
+      }
+    } else {
+      if (distanceValue < 100) {
+        isDrawRoute = false;
+      }
+    }
+
+    polylineList.clear();
+    polylineCoordinates.clear();
+
+    if (isDrawRoute) {
+      PolylinePoints polylinePoints = PolylinePoints();
+      List<PointLatLng> result = polylinePoints.decodePolyline(
+          parsed['routes'][0]['overview_polyline']['points'] as String);
+      // print(result);
+      if (result.isNotEmpty) {
+        polylineCoordinates.clear();
+        for (var point in result) {
+          polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+        }
+      }
+
+      Polyline polyline = Polyline(
+        polylineId: const PolylineId("poly"),
+        points: polylineCoordinates,
+      );
+      polylineList.add(polyline);
+      _setMapFitToTour();
+    }
+    setState(() {});
+  }
+
+  List<Map<String, String>> convertStringToListOfMaps(String input) {
+    input = input.replaceAll("[", "").replaceAll("]", "");
+    List<String> pairs = input.split(", ");
+    List<Map<String, String>> result = [];
+
+    pairs.forEach((pair) {
+      List<String> keyValueStrings = pair.split(" / ");
+      Map<String, String> keyValueMap = {};
+
+      keyValueStrings.forEach((keyValueString) {
+        List<String> keyValue = keyValueString.split(": ");
+        if (keyValue.length == 2) {
+          String key = keyValue[0].trim();
+          String value = keyValue[1].trim();
+          keyValueMap[key] = value;
+        }
+      });
+
+      result.add(keyValueMap);
+    });
+
+    return result;
+  }
+
+  void drawDriverMoving(String value) async {
+    DriverModel driverModel = ref.read(driverProvider);
+    markers.removeWhere(
+        (element) => element.markerId == const MarkerId('driverLocation'));
+
+    markers.add(
+      Marker(
+        rotation: double.parse(driverModel.rotation.toString()),
+        markerId: const MarkerId('driverLocation'),
+        anchor: const Offset(0.5, 0.5),
+        position: LatLng(
+            double.parse(driverModel.coordinate['latitude'].toString()),
+            double.parse(driverModel.coordinate['longitude'].toString())),
+        icon: BitmapDescriptor.fromBytes(
+          await getBytesFromAsset('lib/assets/bike_image.png', 75),
+        ),
+      ),
+    );
+
+    List<Map<String, String>> listValue = convertStringToListOfMaps(value);
+
+    if (listValue.isNotEmpty) {
+      polylineCoordinates.clear();
+      for (var point in listValue) {
+        // print('point: $point');
+        polylineCoordinates.add(LatLng(
+            double.parse(point['lat']!), double.parse(point['longitude']!)));
+      }
+
+      setState(() {
+        polylineList.clear();
+        Polyline polyline = Polyline(
+          polylineId: const PolylineId("poly"),
+          points: polylineCoordinates,
+        );
+        polylineList.add(polyline);
+        // _setMapFitToTour();
+      });
+    }
+  }
+
   String? action;
 
   @override
   void initState() {
     super.initState();
-    initialCameraPosition = const CameraPosition(
-        target: LatLng(10.762898829981317, 106.68242875171526), zoom: 15);
+
     getFirstCurrentPosition();
 
+    SocketClient socketClient = ref.read(socketClientProvider.notifier);
+    socketClient.subscribe('send drivers', (dynamic value) {
+      print('send drivers $value');
+      parsedValue = json.decode(value!).cast<dynamic>();
+      drawDriver();
+    });
+
+    socketClient.subscribe('submit driver', (dynamic value) {
+      print('submit driver: \n$value');
+      dynamic parsed = json.decode(value).cast<String, dynamic>();
+      ref.read(driverProvider.notifier).setDriver(DriverModel.fromMap(parsed));
+      ref.read(mapProvider.notifier).setMapAction('WAIT_DRIVER');
+    });
+
+    socketClient.subscribe('moving driver', (dynamic value) {
+      // print('moving driver: \n$value');
+      dynamic parsed = json.decode(value).cast<String, dynamic>();
+      ref
+          .read(driverProvider.notifier)
+          .setDriver(DriverModel.fromMap(parsed['driver']));
+
+      if (parsed['directions'].toString().length > 2) {
+        drawDriverMoving(parsed['directions']);
+      }
+    });
+
+    socketClient.subscribe('comming driver', (dynamic value) {
+      print('comming driver: \n$value');
+      dynamic parsed = json.decode(value).cast<String, dynamic>();
+      ref.read(driverProvider.notifier).setDriver(DriverModel.fromMap(parsed));
+      ref.read(stepProvider.notifier).setStep('comming_driver');
+    });
+
     DefaultAssetBundle.of(context)
-        .loadString('assets/map.json')
+        .loadString('lib/assets/map.json')
         .then((value) => mapTheme = value);
   }
 
@@ -309,6 +518,7 @@ class _MyMapState extends ConsumerState<MyMap> {
             });
           } else if (next == 'GET_CURRENT_DEPARTURE_LOCATION') {
             ref.read(mapProvider.notifier).setMapAction('');
+            padding = 370;
             polylineList.clear();
             polylineCoordinates.clear();
             getDeparture(false);
@@ -331,11 +541,17 @@ class _MyMapState extends ConsumerState<MyMap> {
             drawRoute();
           } else if (next == 'CREATE_TRIP') {
           } else if (next == 'FIND_DRIVER') {
+            ref.read(mapProvider.notifier).setMapAction('');
             polylineList.clear();
             polylineCoordinates.clear();
             markers.clear();
             padding = 80;
             findDriver();
+          } else if (next == 'WAIT_DRIVER') {
+            padding = 225;
+            ref.read(mapProvider.notifier).setMapAction('');
+            ref.read(stepProvider.notifier).setStep('wait_driver');
+            drawRouteDriver();
           }
         });
         return Container(
@@ -349,7 +565,9 @@ class _MyMapState extends ConsumerState<MyMap> {
             },
             myLocationButtonEnabled: false,
             myLocationEnabled: false,
-            initialCameraPosition: initialCameraPosition,
+            initialCameraPosition: CameraPosition(
+                target: const LatLng(10.762898829981317, 106.68242875171526),
+                zoom: zoom),
             markers: markers,
             zoomControlsEnabled: false,
             polylines: {
@@ -364,12 +582,11 @@ class _MyMapState extends ConsumerState<MyMap> {
               cameraPosition = cameraPositiona; //when map is dragging
             },
             onCameraIdle: () async {
-              if (ref.read(stepProvider) == 'choose_departure_in_map') {
+              if (ref.read(stepProvider) == 'location_picker') {
                 LatLng latLng = LatLng(cameraPosition!.target.latitude,
                     cameraPosition!.target.longitude);
                 LocationModel locationModel =
-                    await setDepartureByPosition(latLng);
-                print(locationModel.structuredFormatting!.mainText);
+                    await setAddressByPosition(latLng);
                 ref
                     .read(pickerLocationProvider.notifier)
                     .setPickerLocation(locationModel);

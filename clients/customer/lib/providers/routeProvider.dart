@@ -1,5 +1,6 @@
-import 'package:customer_app/models/route_model.dart';
 import 'package:riverpod/riverpod.dart';
+
+import '../models/route_model.dart';
 
 class RouteNotifier extends StateNotifier<RouteModel> {
   RouteNotifier() : super(RouteModel());
