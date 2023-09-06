@@ -5,122 +5,21 @@ import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSli
 import io, { Socket } from "socket.io-client";
 import $ from "jquery";
 import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
+import { dashboardActions } from "@store/reducers/dashboardSlice";
 
-interface DashboardData {
-  id: string;
-  client: string;
-  driver: string;
-  date: string;
-  time: string;
-  vehicleType: string;
-  status: string;
-  arrivalAddress: string;
+interface DashboardInformation {
+  customer: string,
+  driver: string,
+  time: string,
+  vehicleType: string,
+  status: string,
+  arrivalAddress: string,
 }
-
 const DashboardTable: React.FC = () => {
-  const initData: DashboardData[] = [
-    {
-      id: "1",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Hoàn thành",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "2",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Đã hủy",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "3",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Đang điều phối",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "4",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Đang tiến hành",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "5",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Hoàn thành",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "6",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Đã hủy",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "3",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Đang điều phối",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "4",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Đang tiến hành",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "5",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Hoàn thành",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "6",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Đã hủy",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-  ];
-  const [dashboardData, setDashboardData] = useState<DashboardData[]>(initData);
+  const initData = useAppSelector((state) => state.dashboard);
+
+  const [dashboardData, setDashboardData] = useState<DashboardInformation[]>(initData);
   const [timeData, setTimeData] = useState<string>("Thời gian");
   const [vehicleData, setVehicleData] = useState<string>("Loại xe khách đặt");
   const [statusData, setStatusData] = useState<string>("Trạng thái");
@@ -130,7 +29,7 @@ const DashboardTable: React.FC = () => {
       setTimeData(dataFilter);
     } else if (id === "vehicle_title") {
       setVehicleData(dataFilter);
-      let filterStatus: DashboardData[] = [];
+      let filterStatus: DashboardInformation[] = [];
 
       if (statusData !== "Trạng thái") {
         filterStatus = initData.filter((data) => data.status === statusData);
@@ -145,7 +44,7 @@ const DashboardTable: React.FC = () => {
       }
     } else {
       setStatusData(dataFilter);
-      let filterVehicle: DashboardData[] = [];
+      let filterVehicle: DashboardInformation[] = [];
 
       if (vehicleData !== "Loại xe khách đặt") {
         filterVehicle = initData.filter(
@@ -164,8 +63,7 @@ const DashboardTable: React.FC = () => {
     }
     //Hadnle filter
   };
-
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const [socket, setSocket] = useState<Socket | null>(null);
 
   // initialize the socket
@@ -180,10 +78,24 @@ const DashboardTable: React.FC = () => {
       console.log("Socket initialized");
       socket.on("Tracking Queue", (message: string) => {
         const data = JSON.parse(message);
-        console.log("data: ", data);
+        console.log("data get: ", data);
+        const newObj = {
+          customer: data.customer,
+          driver: data.driver,
+          time: data.time,
+          vehicleType: data.vehicleType,
+          status: data.status,
+          arrivalAddress: data.arrivalAddress,
+        }
+        console.log(newObj);
+        dispatch(dashboardActions.addDashboardInformation(newObj));
       });
     }
   }, [socket]);
+
+  useEffect(() => {
+    setDashboardData(initData)
+  }, [initData]);
 
   return (
     <div className={styles["call-receipt-table"]}>
@@ -319,11 +231,11 @@ const DashboardTable: React.FC = () => {
           <tbody className={styles["table-content"]}>
             {dashboardData.map((el, index) => (
               <tr key={index}>
-                <td className={styles["ordinal-number"]}>{el.id}</td>
-                <td className={styles["client"]}>{el.client}</td>
+                <td className={styles["ordinal-number"]}>{index+1}</td>
+                <td className={styles["client"]}>{el.customer}</td>
                 <td className={styles["driver"]}>{el.driver}</td>
                 <td className={styles["date-time"]}>
-                  {el.time} - {el.date}
+                  {el.time}
                 </td>
                 <td
                   className={styles["vehicle-type"]}
