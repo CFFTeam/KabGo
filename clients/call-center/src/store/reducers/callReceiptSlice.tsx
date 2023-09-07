@@ -1,5 +1,10 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 
+interface Coordination {
+    lat: number;
+    lng: number;
+}
+
 interface BookingInformation {
     name: string,
     phoneNumber: string,
@@ -9,6 +14,8 @@ interface BookingInformation {
     departureAddress: string,
     arrivalAddress: string,
     note: string,
+    originLatLng: Coordination;
+    destinationLatLng: Coordination;
 }
 
 interface MostVisitedAddressList {
@@ -43,6 +50,14 @@ const initialCallReceiptState: callReceiptState = {
         departureAddress: '',
         arrivalAddress: '',
         note: '',
+        originLatLng: {
+            lat: 0,
+            lng: 0
+        },
+        destinationLatLng: {
+            lat: 0,
+            lng: 0
+        }
     },
     mostVisitedAddresses: [],
     latestBookingData: [],

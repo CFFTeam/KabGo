@@ -1,5 +1,6 @@
-import 'package:customer_app/models/driver_model.dart';
 import 'package:riverpod/riverpod.dart';
+
+import '../models/driver_model.dart';
 
 class DriverNotifier extends StateNotifier<DriverModel> {
   DriverNotifier()

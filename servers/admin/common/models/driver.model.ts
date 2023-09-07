@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import './service.model';
 
 export interface AccountBalance {
     name: string;
@@ -8,7 +9,7 @@ export interface AccountBalance {
 export interface Vehicle {
     name: string;
     brand: string;
-    type: string;
+    category: string;
     color: string;
     service: mongoose.Types.ObjectId;
     number: string;
@@ -27,12 +28,13 @@ export interface Driver {
     day_income?: number;
     week_income?: number;
     lock: boolean;
-    active?: string;
     account_balance?: AccountBalance[];
     vehicle?: Vehicle[];
+    active?: string;
 }
 
 const driverSchema = new mongoose.Schema<Driver>({
+    avatar: { type: String }, 
     name: { type: String },
     email: { type: String },
     phonenumber: { type: String },
@@ -42,28 +44,29 @@ const driverSchema = new mongoose.Schema<Driver>({
     begin_day: { type: String },
     day_income: { type: Number },
     week_income: { type: Number },
+    lock: { type: Boolean, default: false },
     account_balance: [{ name: String, balance: Number }],
     vehicle: [
         {
             name: String,
             brand: String,
-            type: String,
+            category: String,
             color: String,
             service: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Service",
             },
             number: String,
+            _id: false
         },
     ],
     active: {
         type: String,
         default: '26/8/2023',
     },
-    lock: { type: Boolean, default: false },
 });
 
-const driverModel = mongoose.model('drivers', driverSchema);
+const driverModel = mongoose.model<Driver>('Driver', driverSchema);
 
 export default driverModel;
 

@@ -7,6 +7,7 @@ import { Server } from 'http';
 import Controller from './interfaces/controller';
 import ConsoleProxyHandler from '@common/utils/console.proxy';
 import Logger from './utils/logger';
+import globalErrorHandler from "@common/controllers/error.controller";
 
 type ApplicationOptions = {
     controllers: Controller[];
@@ -63,6 +64,8 @@ class Application {
         this.app.get('/status', (req, res) => {
             return res.json({ status: '200 - OK', message: 'Server is running ...' });
         });
+        
+        this.app.use(globalErrorHandler);
     }
 
     public mongoDBConnect(uri: string, options: mongoose.ConnectOptions = {}): void {

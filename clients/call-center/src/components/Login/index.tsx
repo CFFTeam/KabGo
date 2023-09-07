@@ -21,7 +21,7 @@ const Login: React.FC = () => {
       color: "#28a745",
       fontWeight: "500",
     },
-    duration: 2000,
+    duration: 1500,
   };
 
   const styleError = {
@@ -85,7 +85,7 @@ const Login: React.FC = () => {
       toast.success("Đăng nhập thành công", styleSuccess);
       setTimeout(function () {
         navigate("/dashboard");
-      }, 2000);
+      }, 1500);
     }
   };
 

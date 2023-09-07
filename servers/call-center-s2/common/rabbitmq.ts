@@ -8,16 +8,14 @@ class RabbitMQ {
         this.channel = null;
     }
 
-    public connect(uri: string) {
-        amqplib
-            .connect(uri)
-            .then(async (conn: Connection) => this.channel = await conn.createChannel())
-            .then(() => {
-                console.log('Connected to the rabbit mq successfully');
-            })
-            .catch((error) => {
-                console.log('Could not connect to the rabbit mq', error);
-            });
+    public async connect(uri: string) {
+        try {
+            const connection = await amqplib.connect(uri);
+            this.channel = await connection.createChannel();
+            console.log('Connected to the rabbit mq successfully');
+        } catch (error) {
+            console.log('Could not connect to the rabbit mq', error);
+        }
     }
 
     public static getInstance(): RabbitMQ {
