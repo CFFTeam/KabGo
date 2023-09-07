@@ -63,6 +63,14 @@ class Application {
             )
         );
 
+        // Use the CORS middleware here
+        this.app.use((req, res, next) => {
+            res.setHeader('Access-Control-Allow-Origin', 'http://call-center.kabgo.local');
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+            res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+            next();
+        });
+
         this.app.use(morgan(`[${process.env.APP_NAME}][:date] :method :status :url :res[content-length] - :response-time ms`, {
             stream: new Logger('./logs/access.log').createWritableStream(),
         }));

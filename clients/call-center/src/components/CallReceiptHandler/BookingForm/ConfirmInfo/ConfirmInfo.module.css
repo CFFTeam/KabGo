@@ -118,22 +118,32 @@ form.confirm-form > div.details_info_section-content > div > span {
     font-weight: 400;
 }
 
-form.confirm-form > div.details_info_section-content > div.departure-address {
+form.confirm-form > div.details_info_section-content > div.departure-address,
+form.confirm-form > div.details_info_section-content > div.arrival-address {
     gap: 15rem;
 }
 
 form.confirm-form > div.details_info_section-content > div.arrival-address {
     margin-top: 1rem;
-    gap: 15rem;
 }
 
 form.confirm-form > div.details_info_section-content > div.arrival-address > div.title {
     gap: 0.4rem;
 }
 
+
+form.confirm-form > div.details_info_section-content > div.departure-address > span.text,
+form.confirm-form > div.details_info_section-content > div.arrival-address > span.text {
+    flex-basis: 60%;
+    text-align: left; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 form.confirm-form > div.details_info_section-content > div.scheduled-time {
     margin-top: 1rem;
-    gap: 4.8rem;
+    gap: 6.5rem;
 }
 
 

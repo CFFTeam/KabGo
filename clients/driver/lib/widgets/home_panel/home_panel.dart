@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:driver/models/location.dart';
 import 'package:driver/providers/customer_request.dart';
+import 'package:driver/providers/request_status.dart';
 import 'package:driver/providers/socket_provider.dart';
 import 'package:driver/screens/customer_request/customer_request.dart';
 import 'package:driver/widgets/icon_button/icon_button.dart';
@@ -37,21 +38,20 @@ class _HomePanelState extends ConsumerState<HomePanel> {
   Widget build(BuildContext context) {
     final socketNotifier = ref.read(socketClientProvider.notifier);
     final bool active = ref.watch(socketClientProvider);
-    final currentLocation = ref.watch(currentLocationProvider);
 
-    if (active == true) {
-      final customerRequestNotifier =
-          ref.read(customerRequestProvider.notifier);
-      if (customerRequestNotifier.status == RequestStatus.waiting) {
-        final customerRequest = ref.watch(customerRequestProvider);
-        if (customerRequest.hasValue()) {
-          Future.delayed(const Duration(milliseconds: 5), () {
-            if (active == true) {
-              WidgetsBinding.instance.addPostFrameCallback(
-                  (_) => context.go(CustomerRequest.path));
-            }
-          });
-        }
+    final currentLocation = ref.read(currentLocationProvider);
+    final requestState = ref.read(requestStatusProvider);
+
+    if (requestState == RequestStatus.waiting) {
+      final customerRequest = ref.watch(customerRequestProvider);
+
+      if (customerRequest.hasValue()) {
+        Future.delayed(Duration.zero, () {
+          if (active == true) {
+            WidgetsFlutterBinding.ensureInitialized();
+            context.go(CustomerRequest.path);
+          }
+        });
       }
     }
 

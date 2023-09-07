@@ -5,124 +5,26 @@ import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSli
 import io, { Socket } from "socket.io-client";
 import $ from "jquery";
 import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
+import { dashboardActions } from "@store/reducers/dashboardSlice";
+import LoadingSpinner from "@components/SmallLoadingSpinner/SmallLoadingSpinner";
 
-interface DashboardData {
-  id: string;
-  client: string;
+interface DashboardInformation {
+  customer: string;
   driver: string;
-  date: string;
   time: string;
   vehicleType: string;
   status: string;
   arrivalAddress: string;
 }
-
 const DashboardTable: React.FC = () => {
-  const initData: DashboardData[] = [
-    {
-      id: "1",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Hoàn thành",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "2",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Đã hủy",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "3",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Đang điều phối",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "4",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Đang tiến hành",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "5",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Hoàn thành",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "6",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Đã hủy",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "3",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Đang điều phối",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "4",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Đang tiến hành",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "5",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Hoàn thành",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-    {
-      id: "6",
-      client: "Cải Xanh",
-      driver: "Culi chạy xe",
-      date: "31/7/2023",
-      time: "07:30 AM",
-      vehicleType: "Ô tô (7-9 chỗ)",
-      status: "Đã hủy",
-      arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    },
-  ];
-  const [dashboardData, setDashboardData] = useState<DashboardData[]>(initData);
+  const initData = useAppSelector((state) => state.dashboard);
+  const [receivedBookingInformation, setReceivedBookingInformation] = useState<any>({});
+  // console.log("no socket: ", initData);
+  const [dashboardData, setDashboardData] =
+    useState<DashboardInformation[]>(initData);
   const [timeData, setTimeData] = useState<string>("Thời gian");
-  const [vehicleData, setVehicleData] = useState<string>("Loại xe khách đặt");
+  const [vehicleData, setVehicleData] = useState<string>("Loại xe");
   const [statusData, setStatusData] = useState<string>("Trạng thái");
   const handleFilter = (id: string, dataFilter: string) => {
     // $(`#${id}`).text(dataFilter);
@@ -130,14 +32,14 @@ const DashboardTable: React.FC = () => {
       setTimeData(dataFilter);
     } else if (id === "vehicle_title") {
       setVehicleData(dataFilter);
-      let filterStatus: DashboardData[] = [];
+      let filterStatus: DashboardInformation[] = [];
 
       if (statusData !== "Trạng thái") {
         filterStatus = initData.filter((data) => data.status === statusData);
       } else {
         filterStatus = [...initData];
       }
-      if (dataFilter === "Loại xe khách đặt") setDashboardData(filterStatus);
+      if (dataFilter === "Loại xe") setDashboardData(filterStatus);
       else {
         setDashboardData(
           filterStatus.filter((data) => data.vehicleType === dataFilter)
@@ -145,9 +47,9 @@ const DashboardTable: React.FC = () => {
       }
     } else {
       setStatusData(dataFilter);
-      let filterVehicle: DashboardData[] = [];
+      let filterVehicle: DashboardInformation[] = [];
 
-      if (vehicleData !== "Loại xe khách đặt") {
+      if (vehicleData !== "Loại xe") {
         filterVehicle = initData.filter(
           (data) => data.vehicleType === vehicleData
         );
@@ -164,8 +66,7 @@ const DashboardTable: React.FC = () => {
     }
     //Hadnle filter
   };
-
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const [socket, setSocket] = useState<Socket | null>(null);
 
   // initialize the socket
@@ -180,10 +81,37 @@ const DashboardTable: React.FC = () => {
       console.log("Socket initialized");
       socket.on("Tracking Queue", (message: string) => {
         const data = JSON.parse(message);
-        console.log("data: ", data);
+        console.log('data: ', data);
+        setReceivedBookingInformation(data);
       });
     }
   }, [socket]);
+
+  useEffect(()=>{
+    const getBookingByID = initData.find((el:any) => el._id === receivedBookingInformation._id);
+    if(getBookingByID === undefined){
+      const newObj = {
+        _id: receivedBookingInformation._id,
+        customer: receivedBookingInformation.customer_name,
+        driver: "",
+        time: receivedBookingInformation.time,
+        vehicleType: receivedBookingInformation.vehicle_type,
+        status: receivedBookingInformation.status,
+        arrivalAddress: receivedBookingInformation.destination,
+      };
+      console.log('newObj: ', newObj);  
+      if(newObj._id!==undefined){
+        dispatch(dashboardActions.addDashboardInformation(newObj));
+      }
+    }
+    else{
+      dispatch(dashboardActions.updateStateInformation([initData.indexOf(getBookingByID), receivedBookingInformation.status, receivedBookingInformation.driver]));
+    }
+  }, [receivedBookingInformation])
+
+  useEffect(() => {
+    setDashboardData(initData);
+  }, [initData]);
 
   return (
     <div className={styles["call-receipt-table"]}>
@@ -236,11 +164,9 @@ const DashboardTable: React.FC = () => {
                     className={`${styles["dropdown-content-table"]} ${styles["space-vehicle-type"]}`}
                   >
                     <div
-                      onClick={() =>
-                        handleFilter("vehicle_title", "Loại xe khách đặt")
-                      }
+                      onClick={() => handleFilter("vehicle_title", "Loại xe")}
                     >
-                      Loại xe khách đặt
+                      Loại xe
                     </div>
                     <div
                       onClick={() =>
@@ -319,12 +245,12 @@ const DashboardTable: React.FC = () => {
           <tbody className={styles["table-content"]}>
             {dashboardData.map((el, index) => (
               <tr key={index}>
-                <td className={styles["ordinal-number"]}>{el.id}</td>
-                <td className={styles["client"]}>{el.client}</td>
-                <td className={styles["driver"]}>{el.driver}</td>
-                <td className={styles["date-time"]}>
-                  {el.time} - {el.date}
+                <td className={styles["ordinal-number"]}>{index + 1}</td>
+                <td className={styles["client"]}>{el.customer}</td>
+                <td className={styles["driver"]}>
+                  {el.driver === "" ? <LoadingSpinner /> : el.driver}
                 </td>
+                <td className={styles["date-time"]}>{el.time}</td>
                 <td
                   className={styles["vehicle-type"]}
                   style={{ textAlign: "center" }}

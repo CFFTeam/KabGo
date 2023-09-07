@@ -55,8 +55,9 @@ const Table: React.FC = () => {
     }
     let numberServices: number[] = [];
     for (let i = 0; i < arrayData.length; i++) {
-      if (numberServices.includes(arrayData.numServices) === false)
-      numberServices.push(arrayData.numServices);
+      if (numberServices.includes(arrayData[i].numServices) === false){
+        numberServices.push(arrayData[i].numServices);
+      }
     }
     setInitArrayElementTableData([...arrayData]);
     setArrayElementTableData([...arrayData]);
@@ -75,7 +76,7 @@ const Table: React.FC = () => {
   };
 
   const handleCancelFilterData = () => {
-    setFilterData(0);
+    setFilterData(-1);
     setArrayElementTableData([...initArrayElementTableData]);
   };
 
@@ -130,7 +131,7 @@ const Table: React.FC = () => {
           <div className={styles["filter-title"]}>Bộ lọc</div>
         </div>
         <div className={styles["filter-result-container"]}>
-          {filterData === 0 ? (
+          {filterData === -1 ? (
             <div>Không có bộ lọc nào được áp dụng</div>
           ) : (
             <div className={styles["each-filter-result-container"]}>
@@ -203,7 +204,7 @@ const Table: React.FC = () => {
                   <EditIcon />
                 </div>
                 <div className={styles["lock-body"]}>
-                  <LockIcon />
+                  <LockIcon onClick={()=>{handleLockAccount(data._id)}}/>
                 </div>
               </div>
             </div>
@@ -212,7 +213,7 @@ const Table: React.FC = () => {
                 <div className={styles["table-lock-title"]}>
                   TÀI KHOẢN ĐANG BỊ KHÓA
                 </div>
-                <UnlockIcon className={styles["table-unlock-icon"]} />
+                <UnlockIcon className={styles["table-unlock-icon"]} onClick={()=>{handleLockAccount(data._id)}}/>
               </div>
             )}
           </div>

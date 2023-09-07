@@ -2,12 +2,14 @@ import * as jwt from 'jsonwebtoken';
 
 interface JWT {
     secret: string;
-
     createToken(payload: any, options?:jwt.SignOptions): string;
     verifyToken(token: string): any;
 }
 
 class JsonWebToken implements JWT {
+    static createToken(arg0: { id: string; }) {
+        throw new Error('Method not implemented.');
+    }
     secret: string;
 
     constructor(secret?: string) {

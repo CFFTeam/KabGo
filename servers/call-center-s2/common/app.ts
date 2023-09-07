@@ -8,6 +8,7 @@ import Controller from './interfaces/controller';
 import ConsoleProxyHandler from '@common/utils/console.proxy';
 import Logger from './utils/logger';
 import rabbitmq from './rabbitmq';
+import SocketManager from "./socket";
 
 type MongoConnection = {
     uri: string;
@@ -40,7 +41,6 @@ class Application {
 
         this.setup();
         this.mongoDBConnect(this.mongoConnection.uri, this.mongoConnection.options);
-        this.rabbitMQConnect(this.rabbitMQConnection.uri);
     }
 
     public application() {
@@ -66,6 +66,14 @@ class Application {
         this.app.use(morgan(`[${process.env.APP_NAME}][:date] :method :status :url :res[content-length] - :response-time ms`, {
             stream: new Logger('./logs/access.log').createWritableStream(),
         }));
+
+        // Use the CORS middleware here
+        this.app.use((req, res, next) => {
+            res.setHeader('Access-Control-Allow-Origin', 'http://call-center.kabgo.local');
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+            res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+            next();
+        });
         
         this.controllers.forEach((controller) => this.app.use(controller.path, controller.router));
 
@@ -85,18 +93,17 @@ class Application {
             });
     }
 
-    private rabbitMQConnect(uri: string) {
-        rabbitmq.connect(uri);
+    private async rabbitMQConnect(uri: string) {
+        await rabbitmq.connect(uri);
     }
 
     public run(port: number = 3000, callback: Function = () => {}): Server {
         console.log('Server is starting...');
-
         const availablePort = process.env.PORT ?? port;
 
-        return this.app.listen(availablePort, () => {
+        return this.app.listen(availablePort, async () => {
             console.log(`Server is running on port ${availablePort}`);
-
+            await this.rabbitMQConnect(this.rabbitMQConnection.uri);
             callback();
         });
     }

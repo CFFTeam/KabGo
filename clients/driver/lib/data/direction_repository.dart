@@ -6,7 +6,7 @@ import '../models/direction_model.dart';
 
 class DirectionRepository {
   static const String _baseUrl =
-      'https://maps.googleapis.com/maps/api/directions/json';
+      'https://maps.googleapis.com/maps/api/directions/json?';
 
   final Dio _dio;
 
@@ -24,8 +24,6 @@ class DirectionRepository {
 
     if (response.statusCode == 200) {
       if ((response.data['routes'] as List).isEmpty) return null;
-
-      print("dslkdlswalwkjdljawlkdj");
 
       return Directions.fromMap(response.data);
     }
