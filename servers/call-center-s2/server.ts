@@ -44,6 +44,9 @@ const server = app.run(4501, async () => {
             rabbitMQ.publish('tracking', JSON.stringify({
                 ...data,
                 status: "Đang điều phối"
+                // status: "Đang tiến hành"
+                // status: "Hoàn thành"
+                // status: "Đã hủy"
             }))
         })
     })

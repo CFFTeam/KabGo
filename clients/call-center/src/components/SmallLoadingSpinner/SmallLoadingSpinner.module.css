@@ -1,0 +1,20 @@
+/* LoadingSpinner.css */
+.spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 0.4rem solid #FBB58E;
+    border-top: 0.4rem solid #F96D1E;
+    border-radius: 50%;
+    margin: 1rem auto;
+    /* Apply the spin animation */
+    animation: spin 1.3s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
