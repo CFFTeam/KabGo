@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:driver/models/location.dart';
 import 'package:driver/providers/current_location.dart';
 import 'package:driver/providers/socket_provider.dart';
+import 'package:driver/utils/Image.dart';
 import 'package:driver/widgets/icon_button/icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,6 +21,7 @@ import '../../providers/customer_request.dart';
 
 import 'dart:math' as math;
 
+import '../../providers/driver_provider.dart';
 import '../../providers/request_status.dart';
 
 class KGoogleMap extends ConsumerStatefulWidget {
@@ -42,8 +44,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
   static const CameraPosition _cameraPosition =
       CameraPosition(target: _center, zoom: 10, tilt: 0, bearing: 0);
 
-  Set<Circle> _circles = {};
-  Set<Marker> _markers = {};
+  final Set<Circle> _circles = {};
+  final Set<Marker> _markers = {};
   Set<Polyline> _polyline = {};
 
   late BitmapDescriptor currentLocationIcon;
@@ -67,7 +69,9 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
 
   Marker _createMarker(
       String? id, String title, LatLng latLng, BitmapDescriptor icon,
-      {double rotate = 0.0}) {
+      {double rotate = 0.0,
+      Offset anchor = const Offset(0.5, 0.5),
+      double zIndex = 0.0}) {
     id ??= 'marker_id_${DateTime.now().millisecondsSinceEpoch}';
 
     return Marker(
@@ -75,7 +79,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         position: latLng,
         infoWindow: InfoWindow(title: title),
         rotation: rotate,
-        anchor: const Offset(0.5, 0.5),
+        anchor: anchor,
+        zIndex: zIndex,
         icon: icon);
   }
 
@@ -89,7 +94,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
       await _mapController.setMapStyle(value);
 
       _moveToCurrent();
-      // _livePosition();
+      _livePosition();
     });
   }
 
@@ -156,9 +161,10 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
       //         bearing: 0)));
 
       // ref.read(currentLocationProvider.notifier).updateLocation(position);
-      _currentPosition = position;
-
-      _updateIconCurrentLocation(position);
+      if (ref.read(requestStatusProvider) == RequestStatus.waiting) {
+        _currentPosition = position;
+        _updateIconCurrentLocation(position);
+      }
     });
   }
 
@@ -177,9 +183,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         .then((ByteData bytes) => currentLocationIcon =
             BitmapDescriptor.fromBytes(bytes.buffer.asUint8List()));
 
-    DefaultAssetBundle.of(context).load('lib/assets/map/bike.png').then(
-        (ByteData bytes) => driverIcon =
-            BitmapDescriptor.fromBytes(bytes.buffer.asUint8List()));
+    getBytesFromAsset('lib/assets/map/bike.png', 75).then(
+        (Uint8List bytes) => driverIcon = BitmapDescriptor.fromBytes(bytes));
 
     DefaultAssetBundle.of(context).load('lib/assets/map/original.png').then(
         (ByteData bytes) => departureLocationIcon =
@@ -189,9 +194,10 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
   @override
   Widget build(BuildContext context) {
     final bool active = ref.watch(socketClientProvider);
+    final requestStatus = ref.watch(requestStatusProvider);
+    final driverDetails = ref.read(driverDetailsProvider);
 
     if (active) {
-      final requestStatus = ref.watch(requestStatusProvider);
       final customerRequest = ref.watch(customerRequestProvider);
 
       if (customerRequest.hasValue()) {
@@ -340,9 +346,9 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                     user_id: customerRequest
                         .customer_infor.user_information.phonenumber,
                     driver: Driver(
-                        "https://example.com/avatar0.jpg",
-                        "Nguyễn Đức Minh",
-                        "0778568685",
+                        driverDetails.avatar,
+                        driverDetails.name,
+                        driverDetails.phonenumber,
                         Vehicle(
                             name: "Honda Wave RSX",
                             brand: "Honda",
@@ -396,20 +402,21 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         circles: _circles,
         polylines: _polyline,
       ),
-      Align(
-          alignment: Alignment.bottomRight,
-          child: Container(
-            padding: const EdgeInsets.only(bottom: 120, right: 3),
-            child: CIconButton(
-              elevation: 1,
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.grey[500],
-              padding: const EdgeInsets.all(12),
-              icon: const Icon(FontAwesomeIcons.locationCrosshairs,
-                  color: Color(0xFFFF772B)),
-              onPressed: _moveToCurrent,
-            ),
-          )),
+      if (requestStatus == RequestStatus.waiting)
+        Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              padding: const EdgeInsets.only(bottom: 120, right: 3),
+              child: CIconButton(
+                elevation: 1,
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.grey[500],
+                padding: const EdgeInsets.all(12),
+                icon: const Icon(FontAwesomeIcons.locationCrosshairs,
+                    color: Color(0xFFFF772B)),
+                onPressed: _moveToCurrent,
+              ),
+            )),
     ]);
   }
 }

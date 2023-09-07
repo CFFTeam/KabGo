@@ -9,14 +9,25 @@ import { useAppSelector, useAppDispatch } from "@hooks/ReduxHooks";
 import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSlice";
 import Overlay from "@components/Overlay/Overlay";
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
+import { Coordination, FinalBookingInformation, BookingInformation } from "@store/reducers/callReceiptHandlerSlice";
+import { formatAsVietnameseCurrency } from "@utils/formatCurrent";
+
 
 const ConfirmInfo: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const processSteps = useAppSelector((state) => state.callReceiptHandler.processSteps);  
+    const finalBookingInformation = useAppSelector((state) => state.callReceiptHandler.finalBookingInformation);
+    const bookingInformation = useAppSelector((state) => state.callReceiptHandler.bookingInformation);
+    const socketInstance = useAppSelector((state) => state.callReceiptHandler.socketInstance);
     const [isHandled, setIsHandled] = useState<boolean>(false);
     const [isFinished, setIsFinished] = useState<boolean>(false);
 
+   
+
+    // format the price value as Vietnamese currency without space
+    const formattedPrice = formatAsVietnameseCurrency(finalBookingInformation.price);
+      console.log('formatted price: ', formattedPrice);
     // handle button clicking
     const handleBackward = () => {
         dispatch(callReceiptHandlerActions.updateProcessSteps({
@@ -26,17 +37,71 @@ const ConfirmInfo: React.FC = () => {
         }));
     }
 
-    const handleForward = () => { 
+    // handle return button clicking 
+    const handleReturn = () => {
+        // update process steps
+        dispatch(callReceiptHandlerActions.updateProcessSteps({
+            ...processSteps,
+            stepThree: false,
+            stepOne: true,
+        }));
+        // reset final booking information
+        dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
+            name: '',
+            phoneNumber: '',
+            vehicleType: '',
+            origin: '',
+            destination: '',
+            note: '',
+            time: '',
+            state: '',
+            originLatLng: {
+                lat: 0,
+                lng: 0
+            },
+            destinationLatLng: {
+                lat: 0,
+                lng: 0
+            },
+            distance: '',
+            duration: '',
+            price: 0,
+        }));
+        navigate('/');
+    }
+
+    const handleCoordinate = () => { 
         setIsHandled(true);
         setTimeout(() => {
             setIsHandled(false);
             setIsFinished(true);
         }, 2500)
-        // dispatch(callReceiptHandlerActions.updateProcessSteps({
-        //     ...processSteps,
-        //     stepThree: false,
-        //     stepOne: true,
-        // }));
+      
+        socketInstance.emit("gps-coordinates", {
+            customer_name: finalBookingInformation.name,
+            customer_phonenumber: finalBookingInformation.phoneNumber,
+            vehicle_type: finalBookingInformation.vehicleType,
+            origin: finalBookingInformation.origin,
+            destination: finalBookingInformation.destination,
+            note: finalBookingInformation.note,
+            time: finalBookingInformation.time,
+            origin_latlng: finalBookingInformation.originLatLng,
+            destination_latlng: finalBookingInformation.destinationLatLng,
+            distance: finalBookingInformation.distance,
+            duration: finalBookingInformation.duration,
+            price: finalBookingInformation.price,
+        });
+
+        // remove the old item and update the new one
+        // let newBookingInformation = bookingInformation.filter((item) => item.phoneNumber !== finalBookingInformation.phoneNumber) as BookingInformation[];
+        const thisBookingInformationIndex = bookingInformation.findIndex((item) => item.phoneNumber === finalBookingInformation.phoneNumber);
+        // update new booking information (update the state of this booking information)
+        const newBookingInformation = bookingInformation.map((item) => 
+            (item.phoneNumber  === finalBookingInformation.phoneNumber && item.time === finalBookingInformation.time) 
+            ? {...item, state: "Hoàn thành"} : item);
+        console.log('new bookingInformation', newBookingInformation);
+        // update new booking information
+        dispatch(callReceiptHandlerActions.updateBookingInformation(newBookingInformation as BookingInformation[]));
     }
 
     const handleClosingOverlay = () => {
@@ -44,7 +109,6 @@ const ConfirmInfo: React.FC = () => {
         setIsFinished(false);
     }
 
-    // const handleCo
 
     return <div className={styles["wrapper"]}>
          <form className={styles["confirm-form"]}>
@@ -67,7 +131,8 @@ const ConfirmInfo: React.FC = () => {
                             Họ tên:
                        </span> 
                        <span className={styles["text"]}>
-                            Nguyễn Thoại Đăng Khoa
+                            {/* Nguyễn Thoại Đăng Khoa */}
+                            {finalBookingInformation.name}
                        </span>
                     </div>
                     <div className={styles["guest_phone_number"]}>
@@ -75,7 +140,8 @@ const ConfirmInfo: React.FC = () => {
                             Số điện thoại:
                         </span> 
                         <span className={styles["text"]}>
-                           0903861717
+                           {/* 0903861515 */}
+                           {finalBookingInformation.phoneNumber}
                         </span>
                     </div>
                     <div className={styles["guest_vehicle_booking_type"]}>
@@ -83,7 +149,8 @@ const ConfirmInfo: React.FC = () => {
                             Loại xe đặt:
                         </span> 
                         <span className={styles["text"]}>
-                            Ô tô (7 - 9 chỗ)
+                            {/* Ô tô (7 - 9 chỗ) */}
+                            {finalBookingInformation.vehicleType}
                         </span>
                     </div>
                     <div className={styles["guest_note"]}>
@@ -91,7 +158,8 @@ const ConfirmInfo: React.FC = () => {
                             Ghi chú:
                         </span> 
                         <span className={styles["text"]}>
-                            Hẻm nhỏ gần chung cư, đối diện Ủy Ban Nhân Dân Phường 24
+                            {/* Hẻm nhỏ gần chung cư, đối diện Ủy Ban Nhân Dân Phường 24 */}
+                            {finalBookingInformation.note}
                         </span>
                 </div>
             </div>
@@ -113,7 +181,8 @@ const ConfirmInfo: React.FC = () => {
                         </span>    
                     </div>
                     <span className={styles["text"]}>
-                        125 Lý Thái Tổ, Q.10 , TP. Hồ Chí Minh
+                        {/* 125 Lý Thái Tổ, Q.10 , TP. Hồ Chí Minh */}
+                        {finalBookingInformation.origin}
                     </span>
                 </div>
 
@@ -126,8 +195,9 @@ const ConfirmInfo: React.FC = () => {
                             Điểm đến: 
                         </span>    
                     </div>
-                    <span className={styles["text"]}>
-                         45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh
+                    <span className={styles["text"]} >
+                         {/* 45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh */}
+                         {finalBookingInformation.destination}
                     </span>
                 </div>
 
@@ -137,11 +207,11 @@ const ConfirmInfo: React.FC = () => {
                             <ClockIcon style = {{fontSize: "2rem", marginTop: ".3rem"}}/>
                         </span>
                         <span className={styles["title"]}>
-                           Thời gian đón dự kiến: 
+                           Thời gian đi dự kiến:
                         </span>    
                     </div>
                     <span className={styles["text"]}>
-                            09:30 AM - 10/3/2023
+                            {`${finalBookingInformation.duration} (${finalBookingInformation.distance})`}
                     </span>
                 </div>
             </div>
@@ -151,7 +221,7 @@ const ConfirmInfo: React.FC = () => {
                         Tổng tiền
                     </div>
                     <div className={styles["price-text"]}>
-                        167.000đ
+                        {formattedPrice}
                     </div>
             </div>
 
@@ -159,7 +229,7 @@ const ConfirmInfo: React.FC = () => {
                 <button type = 'button' onClick = {handleBackward}>
                     Quay lại
                 </button>
-                <button type = 'button' onClick = {handleForward}>
+                <button type = 'button' onClick = {handleCoordinate}>
                     Điều phối 
                 </button>
             </div>
@@ -195,12 +265,12 @@ const ConfirmInfo: React.FC = () => {
                     </div>
                     <div className={styles["content"]}>
                        <div className={styles["text"]}>
-                       Hệ thống đã ghi nhận cuốc xe. Thông tin sẽ được chuyển đến các bác tài trong giây lát. Với cuốc xe có hẹn giờ, hệ thống sẽ tự động đặt khi đến giờ yêu cầu (có thể chỉnh sửa ở Dashboard)
+                       Hệ thống đã ghi nhận cuốc xe. Thông tin sẽ được chuyển đến các bác tài trong giây lát. Với cuốc xe có hẹn giờ, hệ thống sẽ tự động đặt khi đến giờ yêu cầu (có thể chỉnh sửa ở bảng theo dõi)
                        </div>
                     </div>
                     <div className={styles["back-to-home-btn"]}>
-                        <button type = "button" onClick = {() => navigate('/')}>
-                            Trang chủ
+                        <button type = "button" onClick = {handleReturn}>
+                            Trở lại
                         </button>
                     </div>
                 </div>

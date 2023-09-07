@@ -1,4 +1,10 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
+import 'package:driver/models/driver_account.dart';
+import 'package:driver/models/driver_details.dart';
 import 'package:driver/providers/auth_provider.dart';
+import 'package:driver/providers/driver_provider.dart';
 import 'package:driver/screens/customer_request/customer_request.dart';
 import 'package:driver/screens/customer_request/customer_request_accept.dart';
 import 'package:driver/screens/customer_request/customer_request_comming.dart';
@@ -155,7 +161,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                   ])
             ])
       ],
-      redirect: (context, state) {
+      redirect: (context, state) async {
         final currentLocation = state.uri.toString();
 
         if (authState.isLoading || authState.hasError) {
@@ -167,7 +173,28 @@ final routerProvider = Provider<GoRouter>((ref) {
         final isSplash = currentLocation == SplashScreen.path;
 
         if (isSplash) {
-          return (isAuth) ? HomeDashboard.path : WelcomeScreen.path;
+          if (isAuth) {
+            Dio dio = Dio();
+            final response = await dio.post(
+                'http://192.168.2.68:4100/v1/driver/register',
+                data: jsonEncode(DriverAccount(
+                        avatar: authState.value!.photoURL!,
+                        name: authState.value!.displayName!,
+                        phonenumber: '',
+                        email: authState.value!.email!,
+                        begin_day: DateTime.now().toString(),
+                        social: true)
+                    .toJson()));  
+
+            if (response.statusCode == 200) {
+              ref
+                  .read(driverDetailsProvider.notifier)
+                  .setDriverDetails(DriverDetails.fromJson(response.data));
+            }
+
+            return HomeDashboard.path;
+          }
+          return WelcomeScreen.path;
         }
 
         final isLoggingIn = currentLocation == WelcomeScreen.path;

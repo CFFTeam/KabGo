@@ -1,9 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 
-import 'package:customer_app/models/location_model.dart';
-import 'package:customer_app/models/route_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:socket_io_client/socket_io_client.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../functions/convertTimeFormat.dart';
 

@@ -2,9 +2,10 @@ import styles from "./PlaceInfo.module.css";
 import { useState, useRef } from "react";
 import {ReactComponent as PickUpIcon} from '@assets/svg/CallReceipt/pick-up.svg';
 import {ReactComponent as LocationIcon} from '@assets/svg/CallReceipt/location.svg';
-import { GoogleMap, Marker, Autocomplete, DirectionsRenderer, useJsApiLoader, InfoWindow } from '@react-google-maps/api';
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
+import { GoogleMap, Marker, Autocomplete, DirectionsRenderer, useJsApiLoader, InfoWindow } from '@react-google-maps/api';
 import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSlice";
+import usePlacesAutocomplete, {getGeocode, getLatLng} from "use-places-autocomplete";
 import PlacesAutocompleteInput from "../../../PlacesAutocompleteInput/PlacesAutocompleteInput";
 import originMarkerIcon from "@assets/svg/CallReceiptHandler/origin-point-icn.svg";
 import destinationMarkerIcon from "@assets/svg/CallReceiptHandler/des-point-icn.svg";
@@ -44,16 +45,18 @@ const markerOptions = {
 
 // React PlaceInfo Component
 const PlaceInfo: React.FC = () => {
+    const guestInformation = useAppSelector((state) => state.callReceiptHandler.finalBookingInformation);
     const dispatch = useAppDispatch();
     const processSteps = useAppSelector((state) => state.callReceiptHandler.processSteps);
-
     // used for detecting of specific marker when hovering
 
     const [hoveredMarker, setHoveredMarker] = useState<string>('');
+    const finalBookingInformation = useAppSelector((state) => state.callReceiptHandler.finalBookingInformation);
     // retrieve original_latitude, original_longitude & destination_latitude & destination_longitude
-    const { originLatLng: originLatLngGlobal, destinationLatLng: destinationLatLngGlobal} 
-    = useAppSelector((state) => state.callReceiptHandler);
+    // const { originLatLng: originLatLngGlobal, destinationLatLng: destinationLatLngGlobal} 
+    // = useAppSelector((state) => state.callReceiptHandler.finalBookingInformation);
 
+    const { originLatLng: originLatLngGlobal, destinationLatLng: destinationLatLngGlobal} = finalBookingInformation;
     // calling Google map API service
     const {isLoaded} = useJsApiLoader({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY as string,
@@ -68,20 +71,67 @@ const PlaceInfo: React.FC = () => {
     // used for calculate distance & duration later
     const [distanctace, setDistance] = useState<any>('');
     const [duration, setDuration] = useState<any>('');
+
+    const calculatePrice = (distance: number) => {
+        const distanceConvertedValue = distance * 1000; // convert kilometers to meters -> 1km = 1000m
+        if (finalBookingInformation.vehicleType === "Xe máy") {
+            return distanceConvertedValue * 5.5;
+        }
+        else if (finalBookingInformation.vehicleType === "Xe tay ga") {
+            return distanceConvertedValue * 6.3;
+        }
+        else if (finalBookingInformation.vehicleType === "Ô tô (2-4 chỗ)") {
+            return distanceConvertedValue * 11.8;
+        }
+        else if (finalBookingInformation.vehicleType === "Ô tô (7-9 chỗ)") {
+            return distanceConvertedValue * 13.8;
+        }
+    }
    
     // Used to calculate logic related & render the direction of a route based on the starting address and the destination address
     const calculateRoute = async () => {
-        if (window.google.maps) {
-           const directionService = new window.google.maps.DirectionsService();
-            const results = await directionService.route({
-                origin: new window.google.maps.LatLng(originLatLngGlobal.lat, originLatLngGlobal.lng),
-                destination: new window.google.maps.LatLng(destinationLatLngGlobal.lat, destinationLatLngGlobal.lng), 
-                travelMode: window.google.maps.TravelMode.DRIVING
-            })
-            setDirectionsResponse(results);
-            setDistance(results.routes[0].legs[0].distance?.text);
-            setDuration(results.routes[0].legs[0].duration?.text);
-        }
+        // if (window.google.maps) {
+        //    const directionService = new window.google.maps.DirectionsService();
+        //    console.log('direction service: ', directionService);
+        //    console.log('guestInformation: ', guestInformation);
+        //     const results = await directionService.route({
+        //         origin: new window.google.maps.LatLng(guestInformation.originLatLng.lat, guestInformation.originLatLng.lng),
+        //         destination: new window.google.maps.LatLng(guestInformation.destinationLatLng.lat, guestInformation.destinationLatLng.lng), 
+        //         travelMode: window.google.maps.TravelMode.DRIVING
+        //     })
+           
+        //     setDirectionsResponse(results);
+
+        //     // calculate distance, duration & price
+        //     const distance = results.routes[0].legs[0].distance?.text || '13,6 km';
+        //     const duration = results.routes[0].legs[0].duration?.text || '36 phút';
+        //     // handle price
+        //     const distanceValue = parseFloat(distance.replace(',', '.').split(' ')[0]); // convert to number (13,6 km -> 13.6)
+        //     const price = calculatePrice(distanceValue) || 0;
+        //     console.log('price after handling: ', price);
+
+        //     dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
+        //         ...finalBookingInformation,
+        //         distance: distance,
+        //         duration: duration,
+        //         price: price,
+        //     }))
+        // }
+
+        // handle fake data - delete when done
+        const distance = '13,6 km';
+            const duration = '36 phút';
+            // handle price
+            const distanceValue = parseFloat(distance.replace(',', '.').split(' ')[0]); // convert to number (13,6 km -> 13.6)
+            const price = calculatePrice(distanceValue) || 0;
+            console.log('price after handling: ', price);
+
+            dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
+                ...finalBookingInformation,
+                distance: distance,
+                duration: duration,
+                price: price,
+            }))
     }
 
     // handle button click
@@ -128,7 +178,7 @@ const PlaceInfo: React.FC = () => {
                                     Điểm đón
                                 </span>
                             </label>
-                            <PlacesAutocompleteInput inputStyle = "origin" role = "call-receipt-handler"/>
+                            <PlacesAutocompleteInput inputStyle = "origin" role = "call-receipt-handler" defaultValue = {guestInformation?.origin}/>
                         </div>
 
                         <div className={styles["input"]}>
@@ -140,7 +190,7 @@ const PlaceInfo: React.FC = () => {
                                 Điểm đến
                                 </span>
                             </label>
-                            <PlacesAutocompleteInput inputStyle = "destination" role = "call-receipt-handler"/>
+                            <PlacesAutocompleteInput inputStyle = "destination" role = "call-receipt-handler" defaultValue = {guestInformation?.destination}/>
                         </div>
 
                         <div className={styles["location-btn"]}>
