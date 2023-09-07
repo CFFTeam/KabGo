@@ -20,6 +20,7 @@ interface User {
         latitude: string;
         longitude: string;
     };
+    service: string;
     price: string;
     distance: string;
     time: string;
