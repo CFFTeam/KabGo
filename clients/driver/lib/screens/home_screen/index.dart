@@ -12,7 +12,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<String> acceptPath = ['/', '/wallet', '/wallet/income', '/customer/request', '/customer/request/accept'];
+  final List<String> acceptPath400 = ['/', '/wallet', '/wallet/income', '/customer/request', '/customer/request/accept'];
+  final List<String> acceptPath300 = ['/customer/request/comming'];
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +21,14 @@ class _HomeScreenState extends State<HomeScreen> {
         GoRouterState.of(context).fullPath!;
 
     double panelHeight = 400;
-    if (acceptPath.contains(currentLocation)) {
+
+    if (acceptPath400.contains(currentLocation)) {
       panelHeight = 400;
-    } else {
+    }
+    else if (acceptPath300.contains(currentLocation)) {
+      panelHeight = 300;
+    } 
+    else {
       panelHeight = 500;
     }
 

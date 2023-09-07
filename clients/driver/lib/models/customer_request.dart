@@ -8,11 +8,13 @@ class CustomerRequest {
   final LocationAddress arrival_information;
   final String time;
   final String distance;
+  final String service;
 
   CustomerRequest(
       {required this.user_information,
       required this.departure_information,
       required this.arrival_information,
+      required this.service,
       required this.price,
       required this.time,
       required this.distance});
@@ -24,7 +26,10 @@ class CustomerRequest {
           LocationAddress.fromJson(json['departure_information']),
       arrival_information:
           LocationAddress.fromJson(json['arrival_information']),
-      price: json['price'], distance: json['distance'], time: json['time'],
+      price: json['price'],
+      service: json['service'],
+      distance: json['distance'],
+      time: json['time'],
     );
   }
 
@@ -35,12 +40,14 @@ class CustomerRequest {
         'price': price,
         'distance': distance,
         'time': time,
+        'service': service,
       };
 
   bool hasValue() {
     return user_information.hasValue() &&
         departure_information.hasValue() &&
         arrival_information.hasValue() &&
+        service != "" &&
         price != "";
   }
 }
