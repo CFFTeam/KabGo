@@ -11,6 +11,7 @@ import '../../models/location.dart';
 import '../../models/vehicle.dart';
 import '../../providers/current_location.dart';
 import '../../providers/customer_request.dart';
+import '../../providers/driver_provider.dart';
 import '../../providers/request_status.dart';
 import '../../providers/socket_provider.dart';
 import 'styles.dart';
@@ -33,6 +34,8 @@ class _CustomerRequestCommingState
     final requestStatusNotifier = ref.read(requestStatusProvider.notifier);
     final currentLocation =
         ref.read(currentLocationProvider.notifier).currentLocation();
+
+    final driverDetails = ref.read(driverDetailsProvider);
 
     final customerRequest = ref.watch(customerRequestProvider);
     final socketManager = ref.read(socketClientProvider.notifier);
@@ -176,9 +179,9 @@ class _CustomerRequestCommingState
                               user_id: customerRequest
                                   .customer_infor.user_information.phonenumber,
                               driver: Driver(
-                                  "https://example.com/avatar0.jpg",
-                                  "Nguyễn Đức Minh",
-                                  "0778568685",
+                                  driverDetails.avatar,
+                                  driverDetails.name,
+                                  driverDetails.phonenumber,
                                   Vehicle(
                                       name: "Honda Wave RSX",
                                       brand: "Honda",

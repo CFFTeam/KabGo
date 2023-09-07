@@ -224,8 +224,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
               _polyline = {
                 Polyline(
                     polylineId: const PolylineId('customer_direction'),
-                    color: Colors.orangeAccent,
-                    width: 6,
+                    color: const Color.fromARGB(255, 255, 113, 36),
+                    width: 8,
                     points: customerRequest.direction.polylinePoints!
                         .map((e) => LatLng(e.latitude, e.longitude))
                         .toList())
@@ -330,8 +330,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
               _polyline = {
                 Polyline(
                     polylineId: const PolylineId('customer_direction'),
-                    color: Colors.orangeAccent,
-                    width: 6,
+                    color: const Color.fromARGB(255, 255, 113, 36),
+                    width: 8,
                     points: _info!.polylinePoints!
                         .map((e) => LatLng(e.latitude, e.longitude))
                         .toList()
