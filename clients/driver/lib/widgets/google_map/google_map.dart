@@ -21,6 +21,7 @@ import '../../providers/customer_request.dart';
 
 import 'dart:math' as math;
 
+import '../../providers/driver_provider.dart';
 import '../../providers/request_status.dart';
 
 class KGoogleMap extends ConsumerStatefulWidget {
@@ -190,6 +191,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
   Widget build(BuildContext context) {
     final bool active = ref.watch(socketClientProvider);
     final requestStatus = ref.watch(requestStatusProvider);
+    final driverDetails = ref.read(driverDetailsProvider);
 
     if (active) {
       final customerRequest = ref.watch(customerRequestProvider);
@@ -316,9 +318,9 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                           user_id: customerRequest
                               .customer_infor.user_information.phonenumber,
                           driver: Driver(
-                              "https://example.com/avatar0.jpg",
-                              "Nguyễn Đức Minh",
-                              "0778568685",
+                              driverDetails.avatar,
+                              driverDetails.name,
+                              driverDetails.phonenumber,
                               Vehicle(
                                   name: "Honda Wave RSX",
                                   brand: "Honda",

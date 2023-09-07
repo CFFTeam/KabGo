@@ -16,6 +16,7 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import '../../models/location.dart';
 import '../../models/vehicle.dart';
 import '../../providers/customer_request.dart';
+import '../../providers/driver_provider.dart';
 import '../../providers/request_status.dart';
 import 'styles.dart';
 
@@ -34,6 +35,8 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
   Widget build(BuildContext context) {
     final socketManager = ref.read(socketClientProvider.notifier);
     final currentLocation = ref.read(currentLocationProvider.notifier).currentLocation();
+
+    final driverDetails = ref.read(driverDetailsProvider);
     
     final customerRequestNotifier = ref.read(customerRequestProvider.notifier);
     final requestStatusNotifier = ref.read(requestStatusProvider.notifier);
@@ -296,9 +299,9 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                                     user_id: customerRequest.customer_infor
                                         .user_information.phonenumber,
                                     driver: Driver(
-                                        "https://example.com/avatar0.jpg",
-                                        "Nguyễn Đức Minh",
-                                        "0778568685",
+                                        driverDetails.avatar,
+                                        driverDetails.name,
+                                        driverDetails.phonenumber,
                                         Vehicle(
                                             name: "Honda Wave RSX",
                                             brand: "Honda",
