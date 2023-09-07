@@ -65,7 +65,7 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         SizedBox(
-                            width: MediaQuery.of(context).size.width - 270,
+                            width: MediaQuery.of(context).size.width - 230,
                             child: Text(
                                 customerRequest
                                     .customer_infor.user_information.name,
@@ -106,19 +106,30 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        const SizedBox(width: 10),
-                          Text(
-                              customerRequest.customer_infor.user_information
-                                  .default_payment_method,
-                              style: ThemeText.bookingDetails),
-                          const SizedBox(width: 30),
-                          // if (customerRequest.booking.promotion) const Text('Khuyến mãi', style: ThemeText.bookingDetails),
-                          Text(
-                              customerRequest
-                                  .customer_infor.service,
-                              style: ThemeText.bookingDetails),
-                          // if (!customerRequest.user_information.promotion) constx SizedBox(width: 60),
-                          const Spacer(),
+                        Row(
+                          children: <Widget>[
+                            const Icon(FontAwesomeIcons.solidCreditCard,
+                                size: 15, color: Color(0xFFF86C1D)),
+                            const SizedBox(width: 6),
+                            Text(
+                                customerRequest.customer_infor.user_information
+                                    .default_payment_method,
+                                style: ThemeText.bookingDetails),
+                          ],
+                        ),
+                        const SizedBox(width: 30),
+                        Row(
+                          children: <Widget>[
+                            const Icon(FontAwesomeIcons.taxi,
+                                size: 15, color: Color(0xFFF86C1D)),
+                            const SizedBox(width: 6),
+                            Text(customerRequest.customer_infor.service,
+                                style: ThemeText.bookingDetails),
+                          ],
+                        ),
+                        // if (customerRequest.booking.promotion) const Text('Khuyến mãi', style: ThemeText.bookingDetails),
+                        // if (!customerRequest.user_information.promotion) const Spacer(),
+                        const Spacer(),
                       ],
                     )
                   ],

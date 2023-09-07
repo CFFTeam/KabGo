@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 abstract class ThemeText {
   static const TextStyle customerName = TextStyle(
     fontFamily: 'Montserrat',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: FontWeight.w600,
   );
   

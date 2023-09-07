@@ -161,7 +161,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                   ])
             ])
       ],
-      redirect: (context, state) async {
+      redirect: (context, state) {
         final currentLocation = state.uri.toString();
 
         if (authState.isLoading || authState.hasError) {
@@ -175,7 +175,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         if (isSplash) {
           if (isAuth) {
             Dio dio = Dio();
-            final response = await dio.post(
+            dio.post(
                 'http://192.168.2.68:4100/v1/driver/register',
                 data: jsonEncode(DriverAccount(
                         avatar: authState.value!.photoURL!,
@@ -184,13 +184,13 @@ final routerProvider = Provider<GoRouter>((ref) {
                         email: authState.value!.email!,
                         begin_day: DateTime.now().toString(),
                         social: true)
-                    .toJson()));  
-
-            if (response.statusCode == 200) {
-              ref
-                  .read(driverDetailsProvider.notifier)
-                  .setDriverDetails(DriverDetails.fromJson(response.data));
-            }
+                    .toJson())).then((response) => {
+                      if (response.statusCode == 200) {
+                        ref
+                            .read(driverDetailsProvider.notifier)
+                            .setDriverDetails(DriverDetails.fromJson(response.data))
+                      }
+                    });  
 
             return HomeDashboard.path;
           }

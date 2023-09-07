@@ -81,7 +81,7 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         SizedBox(
-                            width: MediaQuery.of(context).size.width - 270,
+                            width: MediaQuery.of(context).size.width - 230,
                             child: Text(
                                 customerRequest
                                     .customer_infor.user_information.name,
@@ -137,12 +137,11 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        const SizedBox(width: 10),
                         Row(
                           children: <Widget>[
                             const Icon(FontAwesomeIcons.solidCreditCard,
                                 size: 15, color: Color(0xFFF86C1D)),
-                            const SizedBox(width: 8),
+                            const SizedBox(width: 6),
                             Text(
                                 customerRequest.customer_infor.user_information
                                     .default_payment_method,
@@ -154,7 +153,7 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                           children: <Widget>[
                             const Icon(FontAwesomeIcons.taxi,
                                 size: 15, color: Color(0xFFF86C1D)),
-                            const SizedBox(width: 8),
+                            const SizedBox(width: 6),
                             Text(customerRequest.customer_infor.service,
                                 style: ThemeText.bookingDetails),
                           ],
