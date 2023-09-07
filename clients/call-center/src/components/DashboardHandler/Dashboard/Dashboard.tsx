@@ -70,6 +70,7 @@ const DashboardTable: React.FC = () => {
   useEffect(() => {
     const socketInstance = io("http://api.call-center-s3.kabgo.local:4502");
     setSocket(socketInstance);
+    console.log('socket Instance: ', socketInstance);
   }, []);
 
   // get data from socket (2-way communication)

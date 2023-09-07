@@ -11,6 +11,8 @@ function App() {
     window.scrollTo(0, 0);
   }, [location]);
 
+  // Handle events from socket connection
+  
   return <AppRoutes />
 }
 

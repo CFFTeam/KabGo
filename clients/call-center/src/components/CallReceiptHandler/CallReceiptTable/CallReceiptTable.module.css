@@ -134,6 +134,18 @@ div.call-receipt-table > table.table-view > tbody.table-content > tr > td > butt
     color: #FF5C00;
 }
 
+.green-txt {
+    color: #01B476;
+}
+
+.grey-txt {
+    color: #495057;
+}
+
+.purple-txt {
+    color: #5869D1;
+}
+
 .black-txt {
     color: #495057;
 }

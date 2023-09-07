@@ -1,34 +1,66 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
+import { Stringifiable } from 'query-string';
+import { Socket } from 'socket.io-client';
 
-interface ProcessSteps {
+export interface ProcessSteps {
     stepOne: boolean,
     stepTwo: boolean,
     stepThree: boolean,
     stepFour: boolean
 }
 
-interface OriginLatLng {
+export interface Coordination {
     lat: number;
     lng: number;
 }
+    //     name: nameRef.current?.value || '',
+    //     phoneNumber: phoneNumberRef.current?.value || '',
+    //     vehicleType: vehicleTypeRef.current?.value || '',
+    //     scheduledBookingTime_HH: scheduledBookingTime_HH_Ref.current?.value || '',
+    //     scheduledBookingTime_MM: scheduledBookingTime_MM_Ref.current?.value || '',
+    //     departureAddress: bookingInformation.departureAddress || '', // must not be empty (set from PlacesAutocompleteInput)
+    //     arrivalAddress: bookingInformation.arrivalAddress || '',  // must not be empty (set from PlacesAutocompleteInput)
+    //     note: noteRef.current?.value || '',
 
-interface DestinationLatLng {
-    lat: number;
-    lng: number;
+
+export interface FinalBookingInformation {
+    name: string;
+    phoneNumber: string;
+    vehicleType: string;
+    origin: string; // departure address
+    destination: string; // arrival address
+    note: string;
+    time: string;
+    state: string;
+    originLatLng: Coordination | any;
+    destinationLatLng: Coordination | any;
+    distance: string;
+    duration: string;
+    price: number;
 }
 
-interface BookingAddress {
+export interface BookingInformation {
+    name: string;
+    phoneNumber: string;
+    vehicleType: string;
     origin: string;
     destination: string;
+    note: string;
+    time: string;
+    state: string;
+    originLatLng: Coordination;
+    destinationLatLng: Coordination;
 }
 
 
-interface callReceiptHandlerState {
+export interface callReceiptHandlerState {
     processSteps: ProcessSteps,
-    originLatLng: OriginLatLng,
-    destinationLatLng: DestinationLatLng,
-    bookingAddress: BookingAddress
+    bookingInformation: BookingInformation[],
+    finalBookingInformation: FinalBookingInformation,
+    socketInstance: SocketIO | any;
 }
+
+type SocketIO = Socket | null;
 
 
 
@@ -39,21 +71,29 @@ const initialCallReceiptHandlerState: callReceiptHandlerState = {
         stepThree: false,
         stepFour: false
     },
-
-    originLatLng: {
-        lat: 0,
-        lng: 0
-    },
-
-    destinationLatLng: {
-        lat: 0,
-        lng: 0
-    },
-
-    bookingAddress: {
+    bookingInformation: [],
+    finalBookingInformation: {
+        name: '',
+        phoneNumber: '',
+        vehicleType: '',
         origin: '',
-        destination: ''
-    }
+        destination: '',
+        note: '',
+        time: '',
+        state: '',
+        originLatLng: {
+            lat: 0,
+            lng: 0
+        },
+        destinationLatLng: {
+            lat: 0,
+            lng: 0
+        },
+        distance: '',
+        duration: '',
+        price: 0
+    },
+    socketInstance: null
 }
 
 const callReceiptHandlerSlice = createSlice({
@@ -63,17 +103,14 @@ const callReceiptHandlerSlice = createSlice({
         updateProcessSteps: (state, action: PayloadAction<ProcessSteps>) => {
             state.processSteps = action.payload;
         },  
-
-        updateOriginGeolocation: (state, action: PayloadAction<OriginLatLng>) => {
-            state.originLatLng = action.payload
+        updateBookingInformation: (state, action: PayloadAction<BookingInformation[]>) => {
+            state.bookingInformation = action.payload;
         },
-
-        updateDestinationGeolocation: (state, action: PayloadAction<DestinationLatLng>) => {
-            state.destinationLatLng = action.payload
+        updateFinalBookingInformation: (state, action: PayloadAction<FinalBookingInformation>) => {
+            state.finalBookingInformation = action.payload
         },
-
-        updateBookingAddress: (state, action: PayloadAction<BookingAddress>) => {
-            state.bookingAddress = action.payload
+        setSocket(state, action: PayloadAction<SocketIO>) {
+            state.socketInstance = action.payload
         }
     }
 })

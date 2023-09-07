@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import SocketManager from '@common/socket';
 import { Socket } from 'socket.io';
 const accountSid = 'AC2aa9972a3be5eec764feaa72b01825a8';
-const authToken = '5e81b08ffb7f29096bad9f457149a972';
+const authToken = '6821b0833522a797c9944f9cca15d492';
 const client = require('twilio')(accountSid, authToken);
 
 process.on('uncaughtException', (err: Error) => {
@@ -51,7 +51,7 @@ const server = app.run(4502, async ()=>{
         console.log('Socket connected successfully`');
     });
 
-    await rabbitmq.consume('test', (message: string) => {
+    await rabbitmq.consume('tracking', (message: string) => {
         // const data = JSON.parse(message);
         console.log('---------------------');
         console.log('Queue get from s3: ', message);

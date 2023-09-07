@@ -1,5 +1,5 @@
 import styles from "./PlacesAutocompleteInput.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import usePlacesAutocomplete, {getGeocode, getLatLng} from "use-places-autocomplete";
 import { callReceiptActions } from "@store/reducers/callReceiptSlice";
 import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSlice";
@@ -9,9 +9,12 @@ import {ReactComponent as LocationIcon} from "@assets/svg/CallReceipt/location.s
 interface PlacesAutocompleteProps {
     role: "call-receipt" | "call-receipt-handler";
     inputStyle: "origin" | "destination";
+    defaultValue?: string;
 }
 
+
 const PlacesAutocomplete = (props: PlacesAutocompleteProps) => {
+    const [placeHolderText, setPlaceHolderTextChange] = useState<string>('');
     // define usePlacesAutocomplete
     const {
         ready,
@@ -23,17 +26,33 @@ const PlacesAutocomplete = (props: PlacesAutocompleteProps) => {
         },
         clearSuggestions
     } = usePlacesAutocomplete();
+    
+    // define placeHolder text
+    useEffect(() => {
+        if (props.inputStyle === "origin") {
+            if (props.defaultValue) {
+                setPlaceHolderTextChange(props.defaultValue);
+                setValue(props.defaultValue, false);
+            } 
+            else setPlaceHolderTextChange("Nhập địa chỉ đến...");
+        }
+        else {
+            if (props.defaultValue) {
+                setPlaceHolderTextChange(props.defaultValue);
+                setValue(props.defaultValue, false);
+            }
+            else setPlaceHolderTextChange("Nhập địa chỉ đón...");
+        }
+    }, []);
 
     const dispatch = useAppDispatch();
     // call-receipt-handler role 
-    const bookingAddress = useAppSelector((state) => state.callReceiptHandler.bookingAddress); 
+    const finalBookingInformation = useAppSelector((state) => state.callReceiptHandler.finalBookingInformation); 
     // call-receipt role
     const bookingInformation = useAppSelector((state) => state.callReceipt.bookingInformation);
 
     // used to track index of item in suggestions list
     const [activeIndex, setActiveIndex] = useState<number>(-1);
-
-    console.log('bookingInformation: ', bookingInformation);
 
     // handle when clicking to list item (single address)
     const handleSelect = async (address: string) => {
@@ -46,34 +65,35 @@ const PlacesAutocomplete = (props: PlacesAutocompleteProps) => {
         if (props.inputStyle === "origin")
         {
             if (props.role === "call-receipt-handler") {
-                dispatch(callReceiptHandlerActions.updateOriginGeolocation({
-                    lat: lat,
-                    lng: lng
-                }))
 
-                dispatch(callReceiptHandlerActions.updateBookingAddress({
-                    ...bookingAddress,
-                    origin: address
+                dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
+                    ...finalBookingInformation,
+                    originLatLng: {
+                        lat: lat,
+                        lng: lng
+                    }
                 }))
             }
             else if (props.role === "call-receipt") {
                 dispatch(callReceiptActions.updateBookingInformation({
                     ...bookingInformation,
                     departureAddress: address,
+                    originLatLng: {
+                        lat: lat,
+                        lng: lng
+                    }
                 }));
             }
         }
         
         else if (props.inputStyle === 'destination') {
             if (props.role === "call-receipt-handler") {
-                dispatch(callReceiptHandlerActions.updateDestinationGeolocation({
-                    lat: lat,
-                    lng: lng
-                }))
-    
-                dispatch(callReceiptHandlerActions.updateBookingAddress({
-                    ...bookingAddress,
-                    destination: address
+                dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
+                    ...finalBookingInformation,
+                    destinationLatLng: {
+                        lat: lat,
+                        lng: lng,
+                    }
                 }))
             }
 
@@ -81,6 +101,10 @@ const PlacesAutocomplete = (props: PlacesAutocompleteProps) => {
                 dispatch(callReceiptActions.updateBookingInformation({
                     ...bookingInformation,
                     arrivalAddress: address,
+                    destinationLatLng: {
+                        lat: lat,
+                        lng: lng,
+                    }
                 }));
             }
         }
@@ -111,8 +135,8 @@ const PlacesAutocomplete = (props: PlacesAutocompleteProps) => {
 
 
     return <div className={styles["places-complete-input"]}>
-        <input value = {value} disabled = {!ready} onChange = {handleInputChange}
-        type = "text" placeholder = {props.inputStyle === "origin" ? "Nhập địa chỉ đón..." : "Nhập địa chỉ đến..."} 
+        <input value = {value} disabled = {!ready} onChange = {handleInputChange} 
+        type = "text" placeholder = {placeHolderText} 
         onKeyDown = {handleKeyPress}
         />
         {status === 'OK' && 
