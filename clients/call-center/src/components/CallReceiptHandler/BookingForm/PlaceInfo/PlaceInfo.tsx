@@ -10,6 +10,7 @@ import PlacesAutocompleteInput from "../../../PlacesAutocompleteInput/PlacesAuto
 import originMarkerIcon from "@assets/svg/CallReceiptHandler/origin-point-icn.svg";
 import destinationMarkerIcon from "@assets/svg/CallReceiptHandler/des-point-icn.svg";
 import mapStyles from "@assets/googleMapStyles/map.json";
+import { formatAsVietnameseCurrency } from "@utils/formatCurrent";
 
 
 // define global variables (used for setting)
@@ -72,19 +73,25 @@ const PlaceInfo: React.FC = () => {
     const [distanctace, setDistance] = useState<any>('');
     const [duration, setDuration] = useState<any>('');
 
+    const roundToThousands = (price: number) => {
+        return Math.round(price / 1000) * 1000;
+        // console.log(roundToThousands(160480)); // Result: 160000
+        // console.log(roundToThousands(160650)); // Result: 161000
+      }
+
     const calculatePrice = (distance: number) => {
         const distanceConvertedValue = distance * 1000; // convert kilometers to meters -> 1km = 1000m
         if (finalBookingInformation.vehicleType === "Xe máy") {
-            return distanceConvertedValue * 5.5;
+            return roundToThousands(distanceConvertedValue * 5.5);
         }
         else if (finalBookingInformation.vehicleType === "Xe tay ga") {
-            return distanceConvertedValue * 6.3;
+            return roundToThousands(distanceConvertedValue * 6.3);
         }
         else if (finalBookingInformation.vehicleType === "Ô tô (2-4 chỗ)") {
-            return distanceConvertedValue * 11.8;
+            return roundToThousands(distanceConvertedValue * 11.8);
         }
         else if (finalBookingInformation.vehicleType === "Ô tô (7-9 chỗ)") {
-            return distanceConvertedValue * 13.8;
+            return roundToThousands(distanceConvertedValue * 13.8);
         }
     }
    
@@ -124,13 +131,12 @@ const PlaceInfo: React.FC = () => {
             // handle price
             const distanceValue = parseFloat(distance.replace(',', '.').split(' ')[0]); // convert to number (13,6 km -> 13.6)
             const price = calculatePrice(distanceValue) || 0;
-            console.log('price after handling: ', price);
-
+            const formattedPrice = formatAsVietnameseCurrency(price);
             dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
                 ...finalBookingInformation,
                 distance: distance,
                 duration: duration,
-                price: price,
+                price: formattedPrice,
             }))
     }
 
