@@ -6,14 +6,12 @@ import 'package:driver/providers/current_location.dart';
 import 'package:driver/providers/socket_provider.dart';
 import 'package:driver/screens/customer_request/customer_request_accept.dart';
 import 'package:driver/screens/home_dashboard/home_dashboard.dart';
-import 'package:driver/widgets/button/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
-import '../../models/direction_model.dart';
 import '../../models/location.dart';
 import '../../models/vehicle.dart';
 import '../../providers/customer_request.dart';
