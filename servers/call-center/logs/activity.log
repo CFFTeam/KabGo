@@ -2224,3 +2224,96 @@
 [API.Call Center][Tue, 05 Sep 2023 08:30:42 GMT] data from s1:  [object Object] 
 [API.Call Center][Tue, 05 Sep 2023 08:31:03 GMT] object 
 [API.Call Center][Tue, 05 Sep 2023 08:31:03 GMT] data from s1:  [object Object] 
+[API.Call Center][Thu, 07 Sep 2023 04:24:45 GMT] Setting up request middleware... 
+[API.Call Center][Thu, 07 Sep 2023 04:24:45 GMT] Server is starting... 
+[API.Call Center][Thu, 07 Sep 2023 04:24:45 GMT] Server is running on port 4500 
+[API.Call Center][Thu, 07 Sep 2023 04:24:46 GMT] Connected to database successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:26:00 GMT] Could not connect to the rabbit mq Error: connect ECONNREFUSED 192.168.1.8:5672 
+[API.Call Center][Thu, 07 Sep 2023 04:26:10 GMT] object 
+[API.Call Center][Thu, 07 Sep 2023 04:26:10 GMT] data from s1:  [object Object] 
+[API.Call Center][Thu, 07 Sep 2023 04:26:54 GMT] Setting up request middleware... 
+[API.Call Center][Thu, 07 Sep 2023 04:26:54 GMT] Server is starting... 
+[API.Call Center][Thu, 07 Sep 2023 04:26:54 GMT] Server is running on port 4500 
+[API.Call Center][Thu, 07 Sep 2023 04:26:55 GMT] Connected to database successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:27:00 GMT] Setting up request middleware... 
+[API.Call Center][Thu, 07 Sep 2023 04:27:00 GMT] Server is starting... 
+[API.Call Center][Thu, 07 Sep 2023 04:27:00 GMT] Server is running on port 4500 
+[API.Call Center][Thu, 07 Sep 2023 04:27:00 GMT] Connected to database successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:28:19 GMT] Setting up request middleware... 
+[API.Call Center][Thu, 07 Sep 2023 04:28:19 GMT] Could not connect to the rabbit mq Error: Socket closed abruptly during opening handshake 
+[API.Call Center][Thu, 07 Sep 2023 04:28:19 GMT] Server is running on port 4500 
+[API.Call Center][Thu, 07 Sep 2023 04:28:19 GMT] Server is starting... 
+[API.Call Center][Thu, 07 Sep 2023 04:28:20 GMT] Connected to database successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:29:05 GMT] Setting up request middleware... 
+[API.Call Center][Thu, 07 Sep 2023 04:29:05 GMT] Server is starting... 
+[API.Call Center][Thu, 07 Sep 2023 04:29:05 GMT] Server is running on port 4500 
+[API.Call Center][Thu, 07 Sep 2023 04:29:05 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:29:07 GMT] Connected to database successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:29:24 GMT] Setting up request middleware... 
+[API.Call Center][Thu, 07 Sep 2023 04:29:24 GMT] Server is starting... 
+[API.Call Center][Thu, 07 Sep 2023 04:29:24 GMT] Server is running on port 4500 
+[API.Call Center][Thu, 07 Sep 2023 04:29:24 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:29:25 GMT] Connected to database successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:29:48 GMT] Server is starting... 
+[API.Call Center][Thu, 07 Sep 2023 04:29:48 GMT] Server is running on port 4500 
+[API.Call Center][Thu, 07 Sep 2023 04:29:48 GMT] Setting up request middleware... 
+[API.Call Center][Thu, 07 Sep 2023 04:29:48 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:29:48 GMT] Connected to database successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:30:13 GMT] data from s1:  [object Object] 
+[API.Call Center][Thu, 07 Sep 2023 04:30:13 GMT] object 
+[API.Call Center][Thu, 07 Sep 2023 04:31:54 GMT] Setting up request middleware... 
+[API.Call Center][Thu, 07 Sep 2023 04:31:54 GMT] Server is starting... 
+[API.Call Center][Thu, 07 Sep 2023 04:31:54 GMT] Server is running on port 4500 
+[API.Call Center][Thu, 07 Sep 2023 04:31:54 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:31:55 GMT] Connected to database successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:32:19 GMT] Setting up request middleware... 
+[API.Call Center][Thu, 07 Sep 2023 04:32:19 GMT] Server is starting... 
+[API.Call Center][Thu, 07 Sep 2023 04:32:19 GMT] Server is running on port 4500 
+[API.Call Center][Thu, 07 Sep 2023 04:32:19 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:32:21 GMT] Connected to database successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:34:20 GMT] Setting up request middleware... 
+[API.Call Center][Thu, 07 Sep 2023 04:34:20 GMT] Server is starting... 
+[API.Call Center][Thu, 07 Sep 2023 04:34:20 GMT] Server is running on port 4500 
+[API.Call Center][Thu, 07 Sep 2023 04:34:20 GMT] Could not connect to the rabbit mq Error: Socket closed abruptly during opening handshake 
+[API.Call Center][Thu, 07 Sep 2023 04:34:21 GMT] Connected to database successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:34:51 GMT] Setting up request middleware... 
+[API.Call Center][Thu, 07 Sep 2023 04:34:51 GMT] Server is starting... 
+[API.Call Center][Thu, 07 Sep 2023 04:34:51 GMT] Server is running on port 4500 
+[API.Call Center][Thu, 07 Sep 2023 04:34:51 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:34:52 GMT] Connected to database successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:35:17 GMT] object 
+[API.Call Center][Thu, 07 Sep 2023 04:35:17 GMT] data from s1:  [object Object] 
+[API.Call Center][Thu, 07 Sep 2023 04:36:15 GMT] data from s1:  [object Object] 
+[API.Call Center][Thu, 07 Sep 2023 04:36:15 GMT] object 
+[API.Call Center][Thu, 07 Sep 2023 04:38:32 GMT] data from s1:  [object Object] 
+[API.Call Center][Thu, 07 Sep 2023 04:38:32 GMT] object 
+[API.Call Center][Thu, 07 Sep 2023 04:39:18 GMT] data from s1:  [object Object] 
+[API.Call Center][Thu, 07 Sep 2023 04:39:18 GMT] object 
+[API.Call Center][Thu, 07 Sep 2023 04:45:01 GMT] object 
+[API.Call Center][Thu, 07 Sep 2023 04:45:01 GMT] data from s1:  [object Object] 
+[API.Call Center][Thu, 07 Sep 2023 04:47:02 GMT] data from s1:  [object Object] 
+[API.Call Center][Thu, 07 Sep 2023 04:47:02 GMT] object 
+[API.Call Center][Thu, 07 Sep 2023 04:50:45 GMT] object 
+[API.Call Center][Thu, 07 Sep 2023 04:50:45 GMT] data from s1:  [object Object] 
+[API.Call Center][Thu, 07 Sep 2023 04:51:45 GMT] object 
+[API.Call Center][Thu, 07 Sep 2023 04:51:45 GMT] data from s1:  [object Object] 
+[API.Call Center][Thu, 07 Sep 2023 04:51:59 GMT] object 
+[API.Call Center][Thu, 07 Sep 2023 04:51:59 GMT] data from s1:  [object Object] 
+[API.Call Center][Thu, 07 Sep 2023 04:53:40 GMT] object 
+[API.Call Center][Thu, 07 Sep 2023 04:53:40 GMT] data from s1:  [object Object] 
+[API.Call Center][Thu, 07 Sep 2023 04:54:00 GMT] data from s1:  [object Object] 
+[API.Call Center][Thu, 07 Sep 2023 04:54:00 GMT] object 
+[API.Call Center][Thu, 07 Sep 2023 04:54:54 GMT] Setting up request middleware... 
+[API.Call Center][Thu, 07 Sep 2023 04:54:54 GMT] Server is running on port 4500 
+[API.Call Center][Thu, 07 Sep 2023 04:54:54 GMT] Server is starting... 
+[API.Call Center][Thu, 07 Sep 2023 04:54:54 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:54:54 GMT] Connected to database successfully 
+[API.Call Center][Thu, 07 Sep 2023 04:55:20 GMT] object 
+[API.Call Center][Thu, 07 Sep 2023 04:55:20 GMT] data from s1:  [object Object] 
+[API.Call Center][Thu, 07 Sep 2023 05:01:13 GMT] data from s1:  [object Object] 
+[API.Call Center][Thu, 07 Sep 2023 05:01:13 GMT] object 
+[API.Call Center][Thu, 07 Sep 2023 05:02:26 GMT] Setting up request middleware... 
+[API.Call Center][Thu, 07 Sep 2023 05:02:26 GMT] Server is starting... 
+[API.Call Center][Thu, 07 Sep 2023 05:02:26 GMT] Server is running on port 4500 
+[API.Call Center][Thu, 07 Sep 2023 05:02:26 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Thu, 07 Sep 2023 05:02:27 GMT] Connected to database successfully 

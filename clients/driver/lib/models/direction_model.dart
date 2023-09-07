@@ -31,4 +31,24 @@ class Directions {
       totalDuration: data['legs'][0]['duration']['text'],
     );
   }
+
+  factory Directions.fromJson(Map<String, dynamic> json) => Directions(
+        bounds: LatLngBounds(
+          southwest: LatLng(json['bounds']['southwest']['latitude'],
+              json['bounds']['southwest']['longitude']),
+          northeast: LatLng(json['bounds']['northeast']['latitude'],
+              json['bounds']['northeast']['longitude']),
+        ),
+        polylinePoints:
+            PolylinePoints().decodePolyline(json['polylinePoints'].toString()),
+        totalDistance: json['totalDistance'],
+        totalDuration: json['totalDuration'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'bounds': bounds,
+        'polylinePoints': polylinePoints,
+        'totalDistance': totalDistance,
+        'totalDuration': totalDuration,
+      };
 }

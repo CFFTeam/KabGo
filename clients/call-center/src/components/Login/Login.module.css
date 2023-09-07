@@ -1,0 +1,85 @@
+.img-container{
+    background-image: url("../../assets/images/bg.png");
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-container{
+    width: 55.6rem;
+    height: 57.9rem;
+    background: white;
+    border-radius: 2rem;
+    stroke: 1px solid #E8E8E8;
+    text-align: center;
+}
+
+.title-container{
+    margin: 4rem auto;
+    text-align: center;
+}
+
+.email-pass-container{
+    height: 8.5rem;
+    width: 47rem;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+    text-align: left;
+    position: relative;
+}
+
+.email-pass-text{
+    color: #656565;
+    font-weight: 600;
+    font-size: 1.8rem;
+}
+
+.input-self{
+    border-radius: 0.6rem;
+    margin-top: 1.5rem;
+    height: 5.1rem;
+    width: 100%;
+    padding-left: 1rem;
+    background: #F6F6F6;
+    border: none;
+}
+
+input:focus {
+    outline: none !important;
+    border: 1px solid rgb(66, 62, 61);
+}
+
+input::placeholder {
+    color: #A9A9A9;
+    font-size: 1.6rem;
+    font-weight: 500;
+    font-family: 'Montserrat';
+}
+
+.email-pass-svg{
+    position: absolute;
+    right: 2rem;
+    bottom: 1.2rem;
+}
+.button-container{
+    width: 47rem;
+    height: 5.6rem;
+    margin: 6rem auto;
+    background: #F86C1D;
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-container:hover{
+    cursor: pointer;
+    background: #f17d3a;
+}
+
+.button-text{
+    font-size: 2rem;
+    color: white;
+    font-weight: 700;
+}

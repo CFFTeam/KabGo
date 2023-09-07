@@ -1,0 +1,169 @@
+[{
+  "_id": {
+    "$oid": "64e99fffdb83ce30945a0f4d"
+  },
+  "name": "John Doe",
+  "email": "john.doe@example.com",
+  "phonenumber": "+1234567890",
+  "dob": "01/15/1985",
+  "address": "123 Main Street, City, Country",
+  "role": "Supervisor",
+  "active": "26/08/2023",
+  "lock": false
+},
+{
+  "_id": {
+    "$oid": "64e99fffdb83ce30945a0f4e"
+  },
+  "name": "Jane Smith",
+  "email": "jane.smith@example.com",
+  "phonenumber": "+9876543210",
+  "dob": "05/20/1990",
+  "address": "456 Elm Avenue, Town, Country",
+  "role": "Receptionist",
+  "active": "26/08/2023",
+  "lock": false
+},
+{
+  "_id": {
+    "$oid": "64e99fffdb83ce30945a0f4f"
+  },
+  "name": "Bob Johnson",
+  "email": "bob.johnson@example.com",
+  "phonenumber": "+1122334455",
+  "dob": "11/08/1978",
+  "address": "789 Oak Road, Village, Country",
+  "role": "Supervisor",
+  "active": "26/08/2023",
+  "lock": false
+},
+{
+  "_id": {
+    "$oid": "64e99fffdb83ce30945a0f50"
+  },
+  "name": "Alice Johnson",
+  "email": "alice.johnson@example.com",
+  "phonenumber": "+1122334455",
+  "dob": "03/12/1992",
+  "address": "456 Willow Lane, Town, Country",
+  "role": "Receptionist",
+  "active": "26/08/2023",
+  "lock": false
+},
+{
+  "_id": {
+    "$oid": "64e99fffdb83ce30945a0f51"
+  },
+  "name": "Eve Anderson",
+  "email": "eve.anderson@example.com",
+  "phonenumber": "+9876543210",
+  "dob": "09/27/1988",
+  "address": "789 Birch Street, City, Country",
+  "role": "Receptionist",
+  "active": "26/08/2023",
+  "lock": false
+},
+{
+  "_id": {
+    "$oid": "64e99fffdb83ce30945a0f52"
+  },
+  "name": "Michael Smith",
+  "email": "michael.smith@example.com",
+  "phonenumber": "+1234567890",
+  "dob": "07/04/1976",
+  "address": "123 Cedar Avenue, Village, Country",
+  "role": "Supervisor",
+  "active": "26/08/2023",
+  "lock": false
+},
+{
+  "_id": {
+    "$oid": "64e99fffdb83ce30945a0f53"
+  },
+  "name": "Sarah Brown",
+  "email": "sarah.brown@example.com",
+  "phonenumber": "+1122334455",
+  "dob": "12/30/1995",
+  "address": "456 Pine Road, Town, Country",
+  "role": "Coordinator",
+  "active": "26/08/2023",
+  "lock": false
+},
+{
+  "_id": {
+    "$oid": "64e99fffdb83ce30945a0f54"
+  },
+  "name": "David Wilson",
+  "email": "david.wilson@example.com",
+  "phonenumber": "+9876543210",
+  "dob": "06/18/1982",
+  "address": "789 Maple Lane, City, Country",
+  "role": "Coordinator",
+  "active": "26/08/2023",
+  "lock": false
+},
+{
+  "_id": {
+    "$oid": "64e99fffdb83ce30945a0f55"
+  },
+  "name": "Linda Davis",
+  "email": "linda.davis@example.com",
+  "phonenumber": "+1122334455",
+  "dob": "08/21/1980",
+  "address": "123 Oak Avenue, Village, Country",
+  "role": "Coordinator",
+  "active": "26/08/2023",
+  "lock": false
+},
+{
+  "_id": {
+    "$oid": "64e99fffdb83ce30945a0f56"
+  },
+  "name": "Robert White",
+  "email": "robert.white@example.com",
+  "phonenumber": "+9876543210",
+  "dob": "04/10/1991",
+  "address": "789 Elm Road, City, Country",
+  "role": "Admin",
+  "active": "26/08/2023",
+  "lock": true
+},
+{
+  "_id": {
+    "$oid": "64e99fffdb83ce30945a0f57"
+  },
+  "name": "Karen Martinez",
+  "email": "karen.martinez@example.com",
+  "phonenumber": "+1234567890",
+  "dob": "02/15/1987",
+  "address": "456 Cedar Lane, Town, Country",
+  "role": "Receptionist",
+  "active": "26/08/2023",
+  "lock": true
+},
+{
+  "_id": {
+    "$oid": "64e99fffdb83ce30945a0f58"
+  },
+  "name": "Steven Harris",
+  "email": "steven.harris@example.com",
+  "phonenumber": "+1122334455",
+  "dob": "11/05/1979",
+  "address": "789 Pine Avenue, Village, Country",
+  "role": "Supervisor",
+  "active": "26/08/2023",
+  "lock": false
+},
+{
+  "_id": {
+    "$oid": "64e99fffdb83ce30945a0f59"
+  },
+  "name": "Maria Clark",
+  "email": "maria.clark@example.com",
+  "phonenumber": "+9876543210",
+  "dob": "03/29/1993",
+  "address": "123 Birch Road, City, Country",
+  "role": "Receptionist",
+  "active": "26/08/2023",
+  "lock": false
+}]

@@ -1,0 +1,204 @@
+[{
+  "_id": {
+    "$oid": "64e73d06943e0646963ade72"
+  },
+  "avatar": "https://example.com/avatar1.jpg",
+  "name": "Nguyễn Thị Hương",
+  "email": "huong.nguyen@example.com",
+  "phonenumber": "0345678990",
+  "rate": 4.8,
+  "accept_rate": 95,
+  "cancel_rate": 5,
+  "begin_day": "2023-01-10",
+  "day_income": 120,
+  "week_income": 850,
+  "account_balance": [
+    {
+      "name": "tiền mặt",
+      "balance": 40000
+    },
+    {
+      "name": "thẻ tín dụng",
+      "balance": 80000
+    },
+    {
+      "name": "zaloPay",
+      "balance": 0
+    }
+  ],
+  "Phương tiện": [
+    {
+      "name": "Wave Alpha 50cc",
+      "brand": "Honda",
+      "type": "Xe máy",
+      "color": "Đỏ",
+      "service": {
+        "$oid": "64e73bd0943e0646963ade6c"
+      },
+      "number": "51H49283"
+    },
+    {
+      "name": "Air Blade 125cc",
+      "brand": "Honda",
+      "type": "Xe tay ga",
+      "color": "Trắng",
+      "service": {
+        "$oid": "64e73bd0943e0646963ade6d"
+      },
+      "number": "37K63142"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "64e73d06943e0646963ade73"
+  },
+  "avatar": "https://example.com/avatar2.jpg",
+  "name": "Trần Văn Nam",
+  "email": "nam.tran@example.com",
+  "phonenumber": "0876543210",
+  "rate": 4.6,
+  "accept_rate": 92,
+  "cancel_rate": 8,
+  "begin_day": "2023-02-05",
+  "day_income": 105,
+  "week_income": 720,
+  "account_balance": [
+    {
+      "name": "tiền mặt",
+      "balance": 30000
+    },
+    {
+      "name": "thẻ tín dụng",
+      "balance": 70000
+    },
+    {
+      "name": "zaloPay",
+      "balance": 25000
+    }
+  ],
+  "Phương tiện": [
+    {
+      "name": "Scoopy 110cc",
+      "brand": "Honda",
+      "type": "Xe máy",
+      "color": "Trắng",
+      "service": {
+        "$oid": "64e73bd0943e0646963ade6c"
+      },
+      "number": "36E87142"
+    },
+    {
+      "name": "Winner X 150cc",
+      "brand": "Honda",
+      "type": "Xe tay ga",
+      "color": "Đen",
+      "service": {
+        "$oid": "64e73bd0943e0646963ade6d"
+      },
+      "number": "52D41579"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "64e73d06943e0646963ade74"
+  },
+  "avatar": "https://example.com/avatar3.jpg",
+  "name": "Lê Thị Anh",
+  "email": "anh.le@example.com",
+  "phonenumber": "0345678901",
+  "rate": 4.9,
+  "accept_rate": 98,
+  "cancel_rate": 2,
+  "begin_day": "2023-03-20",
+  "day_income": 130,
+  "week_income": 920,
+  "account_balance": [
+    {
+      "name": "tiền mặt",
+      "balance": 45000
+    },
+    {
+      "name": "thẻ tín dụng",
+      "balance": 90000
+    },
+    {
+      "name": "zaloPay",
+      "balance": 15000
+    }
+  ],
+  "Phương tiện": [
+    {
+      "name": "Exciter 150cc",
+      "brand": "Yamaha",
+      "type": "Xe máy",
+      "color": "Đen",
+      "service": {
+        "$oid": "64e73bd0943e0646963ade6c"
+      },
+      "number": "47G69321"
+    },
+    {
+      "name": "Sirius 110cc",
+      "brand": "Yamaha",
+      "type": "Xe tay ga",
+      "color": "Xanh dương",
+      "service": {
+        "$oid": "64e73bd0943e0646963ade6d"
+      },
+      "number": "33L27915"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "64e73d06943e0646963ade75"
+  },
+  "avatar": "https://example.com/avatar4.jpg",
+  "name": "Võ Thị Mai",
+  "email": "mai.vo@example.com",
+  "phonenumber": "0456789012",
+  "rate": 4.7,
+  "accept_rate": 94,
+  "cancel_rate": 6,
+  "begin_day": "2023-04-15",
+  "day_income": 150,
+  "week_income": 1100,
+  "account_balance": [
+    {
+      "name": "tiền mặt",
+      "balance": 38000
+    },
+    {
+      "name": "thẻ tín dụng",
+      "balance": 72000
+    },
+    {
+      "name": "zaloPay",
+      "balance": 18000
+    }
+  ],
+  "Phương tiện": [
+    {
+      "name": "Toyota Vios",
+      "brand": "Toyota",
+      "type": "Xe Ô tô con",
+      "color": "Bạc",
+      "service": {
+        "$oid": "64e73bd0943e0646963ade6e"
+      },
+      "number": "29H71543"
+    },
+    {
+      "name": "Toyota Innova",
+      "brand": "Toyota",
+      "type": "Xe Ô tô",
+      "color": "Đen",
+      "service": {
+        "$oid": "64e73bd0943e0646963ade6f"
+      },
+      "number": "42L80967"
+    }
+  ]
+}]

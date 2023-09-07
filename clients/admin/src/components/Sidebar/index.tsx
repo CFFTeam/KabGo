@@ -16,7 +16,7 @@ const Sidebar: React.FC = () => {
   const onChangeActive = (para: number[]) => {
       dispatch(sidebarActions.updateActive([para[0], para[1]]));
   }
-  const urlData: string[] = ['admin', 'driver', 'customer', 'service', 'vehicle', 'invoice'];
+  const urlData: string[] = ['employee', 'driver', 'customer', 'service', 'vehicle', 'invoice'];
   useEffect(()=>{
     for( let i: number = 0; i<urlData.length; i++){
       if(location.pathname==='/'){

@@ -1,3 +1,10 @@
+import 'dart:convert';
+
+import 'package:driver/models/customer_booking.dart';
+import 'package:driver/models/driver.dart';
+import 'package:driver/providers/current_location.dart';
+import 'package:driver/providers/socket_provider.dart';
+import 'package:driver/screens/customer_request/customer_request_accept.dart';
 import 'package:driver/screens/home_dashboard/home_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -5,7 +12,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
-import '../../providers/connection_provider.dart';
+import '../../models/location.dart';
+import '../../models/vehicle.dart';
+import '../../providers/customer_request.dart';
 import 'styles.dart';
 
 class CustomerRequest extends ConsumerStatefulWidget {
@@ -22,7 +31,9 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
   @override
   Widget build(BuildContext context) {
     final customerRequestNotifier = ref.read(customerRequestProvider.notifier);
-    final customerRequest = ref.read(customerRequestProvider);
+    final customerRequest = ref.watch(customerRequestProvider);
+    final socketManager = ref.read(socketClientProvider.notifier);
+    final currentLocation = ref.watch(currentLocationProvider);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
@@ -48,8 +59,8 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                child: Image(
-                  image: AssetImage(customerRequest.customer.avatar),
+                child: const Image(
+                  image: AssetImage("lib/assets/test/avatar.png"),
                   width: 60,
                   height: 60,
                 ),
@@ -63,17 +74,23 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                       children: <Widget>[
                         SizedBox(
                             width: MediaQuery.of(context).size.width - 270,
-                            child: Text(customerRequest.customer.name,
+                            child: Text(
+                                customerRequest
+                                    .customer_infor.user_information.name,
                                 style: ThemeText.customerName,
                                 overflow: TextOverflow.ellipsis)),
                         Row(
                           children: <Widget>[
-                            Image(
-                                image: AssetImage(
-                                    'lib/assets/icons/${customerRequest.customer.rankType}.png'),
-                                width: 20),
+                            // Image(
+                            //     image: AssetImage(
+                            //         'lib/assets/icons/${customerRequest.user_information.rankType}.png'),
+                            //     width: 20),
+                            const SizedBox(width: 20),
                             const SizedBox(width: 10),
-                            Text(customerRequest.customer.rankTitle, style: ThemeText.ranking),
+                            Text(
+                                customerRequest
+                                    .customer_infor.user_information.rank,
+                                style: ThemeText.ranking),
                           ],
                         )
                       ],
@@ -82,47 +99,55 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        Text(customerRequest.booking.paymentMethod, style: ThemeText.bookingDetails),
-                        if (customerRequest.booking.promotion) const Text('Khuyến mãi', style: ThemeText.bookingDetails),
-                        Text(customerRequest.booking.vehicle, style: ThemeText.bookingDetails),
-                        if (!customerRequest.booking.promotion) const SizedBox(width: 60),
+                        Text(
+                            customerRequest.customer_infor.user_information
+                                .default_payment_method,
+                            style: ThemeText.bookingDetails),
+                        // if (customerRequest.booking.promotion) const Text('Khuyến mãi', style: ThemeText.bookingDetails),
+                        Text(
+                            customerRequest
+                                .customer_infor.user_information.type,
+                            style: ThemeText.bookingDetails),
+                        // if (!customerRequest.user_information.promotion) const SizedBox(width: 60),
+                        const SizedBox(width: 60),
                       ],
                     )
                   ],
                 ),
-              ) 
+              )
             ],
           ),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Icon(FontAwesomeIcons.mapPin,
+                  const Icon(FontAwesomeIcons.mapPin,
                       size: 23, color: Color(0xFFF86C1D)),
-                  SizedBox(width: 6),
-                  Text('Cách bạn 2km',
+                  const SizedBox(width: 6),
+                  Text('Cách bạn ${customerRequest.duration_distance}',
                       style: ThemeText.locationDurationDetails),
                 ],
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Icon(FontAwesomeIcons.locationArrow,
+                  const Icon(FontAwesomeIcons.locationArrow,
                       size: 23, color: Color(0xFFF86C1D)),
-                  SizedBox(width: 6),
-                  Text('Lộ trình 16km',
+                  const SizedBox(width: 6),
+                  Text('Lộ trình ${customerRequest.customer_infor.distance}',
                       style: ThemeText.locationDurationDetails),
                 ],
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Icon(FontAwesomeIcons.clock,
+                  const Icon(FontAwesomeIcons.clock,
                       size: 21, color: Color(0xFFF86C1D)),
-                  SizedBox(width: 8),
-                  Text('39 phút', style: ThemeText.locationDurationDetails),
+                  const SizedBox(width: 8),
+                  Text(customerRequest.customer_infor.time,
+                      style: ThemeText.locationDurationDetails),
                 ],
               ),
             ],
@@ -159,8 +184,9 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         width: MediaQuery.of(context).size.width - 88,
-                        child: const Text(
-                          '1505 Phạm Thế Hiển, phường 6, quận 8, Thành phố Hồ Chí Minh',
+                        child: Text(
+                          customerRequest
+                              .customer_infor.departure_information.address,
                           style: ThemeText.locationDetails,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -178,8 +204,9 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         width: MediaQuery.of(context).size.width - 88,
-                        child: const Text(
-                          '227 Nguyễn Văn Cừ, phường 4, quận 5, Thành phố Hồ Chí Minh',
+                        child: Text(
+                          customerRequest
+                              .customer_infor.arrival_information.address,
                           style: ThemeText.locationDetails,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -209,8 +236,31 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
+                        socketManager.publish(
+                            'driver-accept',
+                            jsonEncode(DriverSubmit(
+                                    user_id: customerRequest.customer_infor
+                                        .user_information.phonenumber,
+                                    driver: Driver(
+                                        "https://example.com/avatar0.jpg",
+                                        "Nguyễn Đức Minh",
+                                        "0778568685",
+                                        Vehicle(
+                                            name: "Honda Wave RSX",
+                                            brand: "Honda",
+                                            type: "Xe máy",
+                                            color: "Xanh đen",
+                                            number: "68S164889"),
+                                        LocationPostion(
+                                            latitude: currentLocation.latitude,
+                                            longitude:
+                                                currentLocation.longitude),
+                                        currentLocation.heading,
+                                        5.0))
+                                .toJson()));
+
                         customerRequestNotifier.acceptRequest();
-                        context.go(HomeDashboard.path);
+                        context.go(CustomerRequestAccept.path);
                       },
                       style: ThemeButton.acceptButton,
                       child: const Text('CHẤP NHẬN',

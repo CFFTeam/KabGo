@@ -15,8 +15,8 @@ const Navbar: React.FC = () => {
   let location = useLocation();
   
   let navbarTitle: string = 'Dashboard';
-  const urlData: string[] = ['/admin', '/driver', '/customer', '/service', '/vehicle', '/invoice', '/create'];
-  const titleData: string[] = ['Admin', 'Tài xế', 'Khách Hàng', 'Service Phương Tiện', 'Loại Phương Tiện', 'Hóa Đơn', 'Thêm tài khoản'];
+  const urlData: string[] = ['/employee', '/driver', '/customer', '/service', '/vehicle', '/invoice', '/create'];
+  const titleData: string[] = ['Nhân viên', 'Tài xế', 'Khách Hàng', 'Service Phương Tiện', 'Loại Phương Tiện', 'Hóa Đơn', 'Thêm tài khoản'];
 
   for( let i: number=0; i<urlData.length; i++){
     if(location.pathname.includes(urlData[i])){

@@ -20,115 +20,97 @@ const Table: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const searchRef = useRef<HTMLInputElement>(null);
-  // useEffect(()=>{
-    
-  // }, []);
+  const [arrayElementTableData, setArrayElementTableData] = useState<elementTableData[]>([]);
+  const [initArrayElementTableData, setInitArrayElementTableData] = useState<elementTableData[]>([]);
 
-  const [filterData, setFilterData] = useState<String>("");
+  const [arrNumberServices, setArrNumberServices] = useState<number[]>([]);
+
+  useEffect(() => {
+    getDatabyApi();
+  }, []);
+
+  const [filterData, setFilterData] = useState<number>(0);
+
+  const getDatabyApi = async () => {
+    axios.get(`${process.env.REACT_APP_API_URI}/driver`).then((res) => {
+      getAllData(res);
+    }).catch(err => {console.log(err)});
+  }
+
   const submitSearch = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
-      console.log("search: ", searchRef.current?.value || null);
+      // console.log("search: ", searchRef.current?.value || null);
     }
   };
 
-  const handleFilterData = (filterDataPara: string) => {
+  const getAllData = (res: any) => {
+    const arrayData = res.data.data.reverse();
+    for (let i = 0; i < arrayData.length; i++) {
+      if (Object.hasOwn(arrayData[i], 'vehicle')) {
+        arrayData[i].numServices = arrayData[i].vehicle.length;
+      }
+      else{
+        arrayData[i].numServices = 0;
+      }
+    }
+    let numberServices: number[] = [];
+    for (let i = 0; i < arrayData.length; i++) {
+      if (numberServices.includes(arrayData[i].numServices) === false){
+        numberServices.push(arrayData[i].numServices);
+      }
+    }
+    setInitArrayElementTableData([...arrayData]);
+    setArrayElementTableData([...arrayData]);
+    setArrNumberServices([...numberServices]);
+    // console.log(arrayElementTableData);
+  };
+
+  const handleFilterData = (filterDataPara: number) => {
     setFilterData(filterDataPara);
+
+    setArrayElementTableData([
+      ...initArrayElementTableData.filter((data) => 
+        data.vehicle.length === filterDataPara
+      ),
+    ]);
   };
 
   const handleCancelFilterData = () => {
-    setFilterData("");
+    setFilterData(-1);
+    setArrayElementTableData([...initArrayElementTableData]);
   };
 
-  const numberServices: string[] = [
-    "01",
-    "02",
-    "03",
-    "04",
-  ];
-
-  interface elementTableData {
-    fullname: string;
-    numServices: string;
-    phone: string;
-    account: string;
-    active: string;
-    lock: boolean;
+  const handleLockAccount = (id: string) => {
+    axios
+    .post(`${process.env.REACT_APP_API_URI}/driver/lock-account?id=${id}`)
+    .then((res) => {
+      if(res.data.success){
+        getDatabyApi();
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
 
-  const arrayElementTableData: elementTableData[] = [
-    {
-      fullname: "Trần Đàm Gia Huy",
-      numServices: "04",
-      phone: "0703350128",
-      account: "200.000đ",
-      active: "12/08/2023",
-      lock: false,
-    },
-    {
-      fullname: "Đinh Nguyễn Duy Khang",
-      numServices: "04",
-      phone: "0703350128",
-      account: "200.000đ",
-      active: "12/08/2023",
-      lock: false,
-    },
-    {
-      fullname: "Nguyễn Thoại Đăng Khoa",
-      numServices: "04",
-      phone: "0703350128",
-      account: "200.000đ",
-      active: "12/08/2023",
-      lock: false,
-    },
-    {
-      fullname: "Culi thích code",
-      numServices: "04",
-      phone: "0703350128",
-      account: "200.000đ",
-      active: "12/08/2023",
-      lock: false,
-    },
-    {
-      fullname: "Cải xanh",
-      numServices: "04",
-      phone: "0703350128",
-      account: "200.000đ",
-      active: "12/08/2023",
-      lock: false,
-    },
-    {
-      fullname: "Cải xanh",
-      numServices: "04",
-      phone: "0703350128",
-      account: "200.000đ",
-      active: "12/08/2023",
-      lock: true,
-    },
-    {
-      fullname: "Culi thích code",
-      numServices: "04",
-      phone: "0703350128",
-      account: "200.000đ",
-      active: "12/08/2023",
-      lock: false,
-    },
-    {
-      fullname: "Cải xanh",
-      numServices: "04",
-      phone: "0703350128",
-      account: "200.000đ",
-      active: "12/08/2023",
-      lock: false,
-    },
-    {
-      fullname: "Cải xanh",
-      numServices: "04",
-      phone: "0703350128",
-      account: "200.000đ",
-      active: "12/08/2023",
-      lock: false,
-    },
-  ];
+  interface eachVehicle{
+    name: string;
+    brand: string;
+    type: string;
+    color: string;
+    service: string;
+    number: string;
+  }
+  interface elementTableData {
+    name: string;
+    numServices: number;
+    phonenumber: string;
+    rate: number;
+    lock: boolean;
+    _id: string;
+    active: string;
+    vehicle: eachVehicle[];
+  }
 
   return (
     <div className={styles["table-content-container"]}>
@@ -149,7 +131,7 @@ const Table: React.FC = () => {
           <div className={styles["filter-title"]}>Bộ lọc</div>
         </div>
         <div className={styles["filter-result-container"]}>
-          {filterData === "" ? (
+          {filterData === -1 ? (
             <div>Không có bộ lọc nào được áp dụng</div>
           ) : (
             <div className={styles["each-filter-result-container"]}>
@@ -179,11 +161,11 @@ const Table: React.FC = () => {
         <div className={styles["staff"]}>Tài xế</div>
         <div className={styles["dropdown-container-table"]}>
           <button className={styles["dropdown-title-table"]}>
-            <div>Số lượng dịch vụ</div>
+            <div>Số lượng xe</div>
             <DownIcon className={styles["dropdown-title-down"]} />
           </button>
           <div className={styles["dropdown-content-table"]}>
-            {numberServices.map((data, index) => (
+            {arrNumberServices.map((data, index) => (
               <div onClick={() => handleFilterData(data)} key={index}>
                 {data}
               </div>
@@ -191,7 +173,7 @@ const Table: React.FC = () => {
           </div>
         </div>
         <div className={styles["phone"]}>Số điện thoại</div>
-        <div className={styles["acc"]}>Tài khoản</div>
+        <div className={styles["acc"]}>Đánh giá</div>
         <div className={styles["time"]}>Hoạt động</div>
         <div className={styles["button-container-header"]}></div>
       </div>
@@ -207,11 +189,11 @@ const Table: React.FC = () => {
               <div className={styles["ord-num-body"]}>{index + 1}</div>
               <div className={styles["staff-body"]}>
                 <img src={UserAvatar} />
-                <div>{data.fullname}</div>
+                <div>{data.name}</div>
               </div>
               <div className={styles["role-body"]}>{data.numServices}</div>
-              <div className={styles["phone-body"]}>{data.phone}</div>
-              <div className={styles["acc-body"]}>{data.account}</div>
+              <div className={styles["phone-body"]}>{data.phonenumber}</div>
+              <div className={styles["acc-body"]}>{data.rate}</div>
               <div className={styles["time-body"]}>{data.active}</div>
               <div
                 className={`${styles["button-container-body"]} ${
@@ -222,7 +204,7 @@ const Table: React.FC = () => {
                   <EditIcon />
                 </div>
                 <div className={styles["lock-body"]}>
-                  <LockIcon />
+                  <LockIcon onClick={()=>{handleLockAccount(data._id)}}/>
                 </div>
               </div>
             </div>
@@ -231,7 +213,7 @@ const Table: React.FC = () => {
                 <div className={styles["table-lock-title"]}>
                   TÀI KHOẢN ĐANG BỊ KHÓA
                 </div>
-                <UnlockIcon className={styles["table-unlock-icon"]} />
+                <UnlockIcon className={styles["table-unlock-icon"]} onClick={()=>{handleLockAccount(data._id)}}/>
               </div>
             )}
           </div>

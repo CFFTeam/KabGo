@@ -1,4 +1,7 @@
-import 'package:driver/providers/connection_provider.dart';
+import 'dart:convert';
+
+import 'package:driver/models/location.dart';
+import 'package:driver/providers/customer_request.dart';
 import 'package:driver/providers/socket_provider.dart';
 import 'package:driver/screens/customer_request/customer_request.dart';
 import 'package:driver/widgets/icon_button/icon_button.dart';
@@ -10,6 +13,9 @@ import 'dart:math' as math;
 
 import 'package:go_router/go_router.dart';
 
+import '../../models/driver.dart';
+import '../../models/vehicle.dart';
+import '../../providers/current_location.dart';
 import 'styles.dart';
 
 class HomePanel extends ConsumerStatefulWidget {
@@ -31,17 +37,18 @@ class _HomePanelState extends ConsumerState<HomePanel> {
   Widget build(BuildContext context) {
     final socketNotifier = ref.read(socketClientProvider.notifier);
     final bool active = ref.watch(socketClientProvider);
+    final currentLocation = ref.watch(currentLocationProvider);
 
     if (active == true) {
       final customerRequestNotifier =
           ref.read(customerRequestProvider.notifier);
       if (customerRequestNotifier.status == RequestStatus.waiting) {
         final customerRequest = ref.watch(customerRequestProvider);
-
         if (customerRequest.hasValue()) {
-          Future.delayed(const Duration(milliseconds: 500), () {
+          Future.delayed(const Duration(milliseconds: 5), () {
             if (active == true) {
-              WidgetsBinding.instance.addPostFrameCallback((_) => context.go(CustomerRequest.path));
+              WidgetsBinding.instance.addPostFrameCallback(
+                  (_) => context.go(CustomerRequest.path));
             }
           });
         }
@@ -85,7 +92,27 @@ class _HomePanelState extends ConsumerState<HomePanel> {
                               : ThemeText.statusText,
                           textAlign: TextAlign.center)),
                   CIconButton(
-                    onPressed: socketNotifier.toggle,
+                    onPressed: () {
+                      socketNotifier.toggle();
+                      socketNotifier.publish(
+                          'join',
+                          jsonEncode(Driver(
+                                  "https://example.com/avatar0.jpg",
+                                  "Nguyễn Đức Minh",
+                                  "0778568685",
+                                  Vehicle(
+                                      name: "Honda Wave RSX",
+                                      brand: "Honda",
+                                      type: "Xe máy",
+                                      color: "Xanh đen",
+                                      number: "68S164889"),
+                                  LocationPostion(
+                                      latitude: currentLocation.latitude,
+                                      longitude: currentLocation.longitude),
+                                  currentLocation.heading,
+                                  5.0)
+                              .toJson()));
+                    },
                     icon: Icon(FontAwesomeIcons.powerOff,
                         color: active == true
                             ? const Color(0xFFF86C1D)

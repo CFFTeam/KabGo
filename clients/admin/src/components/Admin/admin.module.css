@@ -84,7 +84,7 @@
     gap: 1rem;
     align-items: center;
     background: #E17644;
-    padding: 0 2.5rem;
+    padding: 0 1.5rem;
 }
 
 .create-button-container:hover{
@@ -276,7 +276,7 @@ input::placeholder {
     gap: 1rem;
     font-weight: 600;
     color: black;
-    width: 17rem;
+    width: 20rem;
     background: #FFEEEA;
     padding: 0;
 }
@@ -298,7 +298,7 @@ input::placeholder {
     font-size: 1.5rem;
     font-weight: 500;
     color: #3C3C3C;
-    width: 17rem;
+    width: 20rem;
   }
   
   .dropdown-content-table div:hover {
@@ -322,7 +322,7 @@ input::placeholder {
     width: 6rem;
 }
 .staff{
-    width: 31rem;
+    width: 28rem;
 }
 .email{
     width: 30rem;
@@ -359,13 +359,13 @@ input::placeholder {
     padding-left: 1rem;
 }
 .staff-body{
-    width: 31rem;
+    width: 28rem;
     display: flex;
     gap: 2rem;
     align-items: center;
 }
 .role-body{
-    width: 17rem
+    width: 20rem
 }
 .email-body{
     width: 30rem;
@@ -392,6 +392,10 @@ input::placeholder {
 }
 
 .lock-body:hover{
+    cursor: pointer;
+}
+
+.table-unlock-icon:hover{
     cursor: pointer;
 }
 
