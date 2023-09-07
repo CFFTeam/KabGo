@@ -111,8 +111,8 @@ class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
         state = CustomerRequestDetails(
             direction: direct!,
             customer_infor: customerReq,
-            duration_distance: direct.totalDistance,
-            duration_time: direct.totalDuration,
+            duration_distance: direct.totalDistance!,
+            duration_time: direct.totalDuration!,
             currentLocation: LocationPostion(
               latitude: currentLocation.latitude,
               longitude: currentLocation.longitude,

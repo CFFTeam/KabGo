@@ -2,16 +2,16 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Directions {
-  final LatLngBounds bounds;
-  final List<PointLatLng> polylinePoints;
-  final String totalDistance;
-  final String totalDuration;
+  final LatLngBounds? bounds;
+  final List<PointLatLng>? polylinePoints;
+  final String? totalDistance;
+  final String? totalDuration;
 
   const Directions({
-    required this.bounds,
-    required this.polylinePoints,
-    required this.totalDistance,
-    required this.totalDuration,
+    this.bounds,
+    this.polylinePoints,
+    this.totalDistance,
+    this.totalDuration,
   });
 
   factory Directions.fromMap(Map<String, dynamic> map) {
@@ -47,7 +47,7 @@ class Directions {
 
   Map<String, dynamic> toJson() => {
         'bounds': bounds,
-        'polylinePoints': polylinePoints,
+        'polylinePoints': polylinePoints.toString(),
         'totalDistance': totalDistance,
         'totalDuration': totalDuration,
       };

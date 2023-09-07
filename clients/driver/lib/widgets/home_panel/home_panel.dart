@@ -109,6 +109,8 @@ class _HomePanelState extends ConsumerState<HomePanel> {
                                   LocationPostion(
                                       latitude: currentLocation.latitude,
                                       longitude: currentLocation.longitude),
+                                  //                                       latitude: 10.76346158096952,
+                                  // longitude: 106.67991580679914,
                                   currentLocation.heading,
                                   5.0)
                               .toJson()));

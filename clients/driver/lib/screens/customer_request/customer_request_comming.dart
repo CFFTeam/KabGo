@@ -1,10 +1,18 @@
-import 'package:driver/screens/home_dashboard/home_dashboard.dart';
+import 'dart:convert';
+
+import 'package:driver/models/direction_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../models/customer_booking.dart';
+import '../../models/driver.dart';
+import '../../models/location.dart';
+import '../../models/vehicle.dart';
+import '../../providers/current_location.dart';
 import '../../providers/customer_request.dart';
 import '../../providers/request_status.dart';
+import '../../providers/socket_provider.dart';
 import 'styles.dart';
 
 class CustomerRequestComming extends ConsumerStatefulWidget {
@@ -18,12 +26,16 @@ class CustomerRequestComming extends ConsumerStatefulWidget {
       _CustomerRequestCommingState();
 }
 
-class _CustomerRequestCommingState extends ConsumerState<CustomerRequestComming> {
+class _CustomerRequestCommingState
+    extends ConsumerState<CustomerRequestComming> {
   @override
   Widget build(BuildContext context) {
     final requestStatusNotifier = ref.read(requestStatusProvider.notifier);
-    final customerRequestNotifier = ref.read(customerRequestProvider.notifier);
+    final currentLocation =
+        ref.read(currentLocationProvider.notifier).currentLocation();
+
     final customerRequest = ref.watch(customerRequestProvider);
+    final socketManager = ref.read(socketClientProvider.notifier);
 
     return Container(
       decoration: const BoxDecoration(
@@ -50,12 +62,12 @@ class _CustomerRequestCommingState extends ConsumerState<CustomerRequestComming>
             children: <Widget>[
               Container(
                 padding: const EdgeInsets.only(left: 15, top: 24),
-                child: const Text('Thông tin khách hàng', style: TextStyle(
-                  color: Color(0xFFFF772B),
-                  fontSize: 17,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Montserrat'
-                )),
+                child: const Text('Thông tin khách hàng',
+                    style: TextStyle(
+                        color: Color(0xFFFF772B),
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Montserrat')),
               ),
             ],
           ),
@@ -130,12 +142,34 @@ class _CustomerRequestCommingState extends ConsumerState<CustomerRequestComming>
               Expanded(
                 child: ElevatedButton(
                     onPressed: () {
+                      socketManager.publish(
+                          'driver-comming',
+                          jsonEncode(DriverSubmit(
+                              user_id: customerRequest
+                                  .customer_infor.user_information.phonenumber,
+                              driver: Driver(
+                                  "https://example.com/avatar0.jpg",
+                                  "Nguyễn Đức Minh",
+                                  "0778568685",
+                                  Vehicle(
+                                      name: "Honda Wave RSX",
+                                      brand: "Honda",
+                                      type: "Xe máy",
+                                      color: "Xanh đen",
+                                      number: "68S164889"),
+                                  LocationPostion(
+                                      latitude: currentLocation.latitude,
+                                      longitude: currentLocation.longitude),
+                                  currentLocation.heading,
+                                  5.0),
+                              directions: []).toJson()));
                       requestStatusNotifier.commingRequest();
                       // context.go(HomeDashboard.path);
                     },
                     style: ThemeButton.acceptButton2,
                     child: const Center(
-                      child: Text('ĐÃ ĐẾN ĐIỂM ĐÓN', style: ThemeText.acceptButtonText),
+                      child: Text('ĐÃ ĐẾN ĐIỂM ĐÓN',
+                          style: ThemeText.acceptButtonText),
                     )),
               ),
             ]),
@@ -151,12 +185,13 @@ class _CustomerRequestCommingState extends ConsumerState<CustomerRequestComming>
                 ),
               ),
             ),
-            child: const Center(child: Text('Đang đón khách', style: TextStyle(
-              color: Colors.white,
-              fontSize: 17,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'Montserrat'
-            ))),
+            child: const Center(
+                child: Text('Đang đón khách',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Montserrat'))),
           )
         ],
       ),

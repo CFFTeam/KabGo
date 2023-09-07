@@ -93,7 +93,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
     });
   }
 
-  void _updateIconCurrentLocation(final currentPosition, { double rotate = 0.0 }) {
+  void _updateIconCurrentLocation(final currentPosition,
+      {double rotate = 0.0}) {
     final requestStatus = ref.watch(requestStatusProvider);
 
     if (requestStatus == RequestStatus.comming) {
@@ -102,7 +103,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
             'my_location',
             'Vị trí của tôi',
             LatLng(currentPosition.latitude, currentPosition.longitude),
-            driverIcon, rotate: rotate));
+            driverIcon,
+            rotate: rotate));
         _circles.clear();
       });
       return;
@@ -210,7 +212,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
             _info = customerRequest.direction;
 
             _mapController.animateCamera(CameraUpdate.newLatLngBounds(
-                customerRequest.direction.bounds, 100.0));
+                customerRequest.direction.bounds!, 100.0));
 
             setState(() {
               _polyline = {
@@ -218,7 +220,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                     polylineId: const PolylineId('customer_direction'),
                     color: Colors.orangeAccent,
                     width: 6,
-                    points: customerRequest.direction.polylinePoints
+                    points: customerRequest.direction.polylinePoints!
                         .map((e) => LatLng(e.latitude, e.longitude))
                         .toList())
               };
@@ -246,51 +248,74 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         if (requestStatus == RequestStatus.comming &&
             running == true &&
             _info != null) {
+          LocationPostion current_location = LocationPostion(
+              latitude:
+                  customerRequest.direction.polylinePoints![process].latitude,
+              longitude:
+                  customerRequest.direction.polylinePoints![process].longitude);
 
-            LocationPostion current_location = LocationPostion(
-                latitude: customerRequest.direction.polylinePoints[process].latitude,
-                longitude: customerRequest.direction.polylinePoints[process].longitude);
+          final destinationPosition = LocationPostion(
+              latitude: customerRequest
+                  .direction.polylinePoints![process + 1].latitude,
+              longitude: customerRequest.direction.polylinePoints![process + 1]
+                  .longitude); // Replace with your destination's coordinates
 
-            final destinationPosition = LocationPostion(
-                latitude: customerRequest.direction.polylinePoints[process + 1].latitude,
-                longitude: customerRequest.direction.polylinePoints[process + 1]
-                    .longitude); // Replace with your destination's coordinates
+          final bearing = math.atan2(
+              math.sin(math.pi *
+                  (destinationPosition.longitude - current_location.longitude) /
+                  180.0),
+              math.cos(math.pi * current_location.latitude / 180.0) *
+                      math.tan(math.pi * destinationPosition.latitude / 180.0) -
+                  math.sin(math.pi * current_location.latitude / 180.0) *
+                      math.cos(math.pi *
+                          (destinationPosition.longitude -
+                              current_location.longitude) /
+                          180.0));
 
-            final bearing = math.atan2(
-                math.sin(math.pi * (destinationPosition.longitude - current_location.longitude) / 180.0),
-                math.cos(math.pi * current_location.latitude / 180.0) *
-                        math.tan(math.pi * destinationPosition.latitude / 180.0) - math.sin(math.pi * current_location.latitude / 180.0) *
-                        math.cos(math.pi * (destinationPosition.longitude - current_location.longitude) / 180.0));
-
-            double rotate = bearing * 180.0 / math.pi;
+          double rotate = bearing * 180.0 / math.pi;
 
           _updateIconCurrentLocation(current_location, rotate: rotate);
 
           Timer.periodic(const Duration(seconds: 1), (timer) {
             if (_info == null ||
                 requestStatus == RequestStatus.waiting ||
-                process >= customerRequest.direction.polylinePoints.length - 1) {
+                process >=
+                    customerRequest.direction.polylinePoints!.length - 1) {
               timer.cancel();
               return;
             }
 
-            if (process < customerRequest.direction.polylinePoints.length - 1) {
+            if (process <
+                customerRequest.direction.polylinePoints!.length - 1) {
               process++;
 
               LocationPostion current_location = LocationPostion(
-                  latitude: customerRequest.direction.polylinePoints[process].latitude,
-                  longitude: customerRequest.direction.polylinePoints[process].longitude);
+                  latitude: customerRequest
+                      .direction.polylinePoints![process].latitude,
+                  longitude: customerRequest
+                      .direction.polylinePoints![process].longitude);
 
               final destinationPosition = LocationPostion(
-                  latitude: customerRequest.direction.polylinePoints[process - 1].latitude,
-                  longitude: customerRequest.direction.polylinePoints[process - 1]
+                  latitude: customerRequest
+                      .direction.polylinePoints![process - 1].latitude,
+                  longitude: customerRequest
+                      .direction
+                      .polylinePoints![process - 1]
                       .longitude); // Replace with your destination's coordinates
 
               final bearing = math.atan2(
-                  math.sin(math.pi * (destinationPosition.longitude - current_location.longitude) / 180.0),
+                  math.sin(math.pi *
+                      (destinationPosition.longitude -
+                          current_location.longitude) /
+                      180.0),
                   math.cos(math.pi * current_location.latitude / 180.0) *
-                          math.tan(math.pi * destinationPosition.latitude / 180.0) - math.sin(math.pi * current_location.latitude / 180.0) *
-                          math.cos(math.pi * (destinationPosition.longitude - current_location.longitude) / 180.0));
+                          math.tan(
+                              math.pi * destinationPosition.latitude / 180.0) -
+                      math.sin(math.pi * current_location.latitude / 180.0) *
+                          math.cos(math.pi *
+                              (destinationPosition.longitude -
+                                  current_location.longitude) /
+                              180.0));
 
               double rotate = bearing * 180.0 / math.pi;
 
@@ -301,9 +326,10 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                     polylineId: const PolylineId('customer_direction'),
                     color: Colors.orangeAccent,
                     width: 6,
-                    points: _info!.polylinePoints
+                    points: _info!.polylinePoints!
                         .map((e) => LatLng(e.latitude, e.longitude))
-                        .toList().sublist(process, _info!.polylinePoints.length - 1))
+                        .toList()
+                        .sublist(process, _info!.polylinePoints!.length))
               };
 
               _updateIconCurrentLocation(current_location, rotate: rotate);
@@ -311,22 +337,24 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
               ref.read(socketClientProvider.notifier).publish(
                   'driver-moving',
                   jsonEncode(DriverSubmit(
-                          user_id: customerRequest
-                              .customer_infor.user_information.phonenumber,
-                          driver: Driver(
-                              "https://example.com/avatar0.jpg",
-                              "Nguyễn Đức Minh",
-                              "0778568685",
-                              Vehicle(
-                                  name: "Honda Wave RSX",
-                                  brand: "Honda",
-                                  type: "Xe máy",
-                                  color: "Xanh đen",
-                                  number: "68S164889"),
-                              current_location,
-                              rotate,
-                              5.0))
-                      .toJson()));
+                    user_id: customerRequest
+                        .customer_infor.user_information.phonenumber,
+                    driver: Driver(
+                        "https://example.com/avatar0.jpg",
+                        "Nguyễn Đức Minh",
+                        "0778568685",
+                        Vehicle(
+                            name: "Honda Wave RSX",
+                            brand: "Honda",
+                            type: "Xe máy",
+                            color: "Xanh đen",
+                            number: "68S164889"),
+                        current_location,
+                        rotate,
+                        5.0),
+                    directions: _info!.polylinePoints!
+                        .sublist(process, _info!.polylinePoints!.length),
+                  ).toJson()));
             }
           });
           running = false;

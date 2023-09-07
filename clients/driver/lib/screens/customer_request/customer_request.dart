@@ -12,6 +12,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 
+import '../../models/direction_model.dart';
 import '../../models/location.dart';
 import '../../models/vehicle.dart';
 import '../../providers/customer_request.dart';
@@ -32,8 +33,9 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
   @override
   Widget build(BuildContext context) {
     final socketManager = ref.read(socketClientProvider.notifier);
-    final currentLocation = ref.read(currentLocationProvider.notifier).currentLocation();
-    
+    final currentLocation =
+        ref.read(currentLocationProvider.notifier).currentLocation();
+
     final customerRequestNotifier = ref.read(customerRequestProvider.notifier);
     final requestStatusNotifier = ref.read(requestStatusProvider.notifier);
 
@@ -245,25 +247,24 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                         socketManager.publish(
                             'driver-accept',
                             jsonEncode(DriverSubmit(
-                                    user_id: customerRequest.customer_infor
-                                        .user_information.phonenumber,
-                                    driver: Driver(
-                                        "https://example.com/avatar0.jpg",
-                                        "Nguyễn Đức Minh",
-                                        "0778568685",
-                                        Vehicle(
-                                            name: "Honda Wave RSX",
-                                            brand: "Honda",
-                                            type: "Xe máy",
-                                            color: "Xanh đen",
-                                            number: "68S164889"),
-                                        LocationPostion(
-                                            latitude: currentLocation.latitude,
-                                            longitude:
-                                                currentLocation.longitude),
-                                        currentLocation.heading,
-                                        5.0))
-                                .toJson()));
+                                user_id: customerRequest.customer_infor
+                                    .user_information.phonenumber,
+                                driver: Driver(
+                                    "https://example.com/avatar0.jpg",
+                                    "Nguyễn Đức Minh",
+                                    "0778568685",
+                                    Vehicle(
+                                        name: "Honda Wave RSX",
+                                        brand: "Honda",
+                                        type: "Xe máy",
+                                        color: "Xanh đen",
+                                        number: "68S164889"),
+                                    LocationPostion(
+                                        latitude: currentLocation.latitude,
+                                        longitude: currentLocation.longitude),
+                                    currentLocation.heading,
+                                    5.0),
+                                directions: []).toJson()));
 
                         requestStatusNotifier.acceptRequest();
                         context.go(CustomerRequestAccept.path);
