@@ -2317,3 +2317,7 @@
 [API.Call Center][Thu, 07 Sep 2023 05:02:26 GMT] Server is running on port 4500 
 [API.Call Center][Thu, 07 Sep 2023 05:02:26 GMT] Connected to the rabbit mq successfully 
 [API.Call Center][Thu, 07 Sep 2023 05:02:27 GMT] Connected to database successfully 
+[API.Call Center][Thu, 07 Sep 2023 05:03:44 GMT] Setting up request middleware... 
+[API.Call Center][Thu, 07 Sep 2023 05:03:44 GMT] Server is running on port 4500 
+[API.Call Center][Thu, 07 Sep 2023 05:03:44 GMT] Server is starting... 
+[API.Call Center][Thu, 07 Sep 2023 05:03:45 GMT] Connected to database successfully 
