@@ -18,7 +18,8 @@ class CustomerRequestComming extends ConsumerStatefulWidget {
       _CustomerRequestCommingState();
 }
 
-class _CustomerRequestCommingState extends ConsumerState<CustomerRequestComming> {
+class _CustomerRequestCommingState
+    extends ConsumerState<CustomerRequestComming> {
   @override
   Widget build(BuildContext context) {
     final requestStatusNotifier = ref.read(requestStatusProvider.notifier);
@@ -50,12 +51,12 @@ class _CustomerRequestCommingState extends ConsumerState<CustomerRequestComming>
             children: <Widget>[
               Container(
                 padding: const EdgeInsets.only(left: 15, top: 24),
-                child: const Text('Thông tin khách hàng', style: TextStyle(
-                  color: Color(0xFFFF772B),
-                  fontSize: 17,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Montserrat'
-                )),
+                child: const Text('Thông tin khách hàng',
+                    style: TextStyle(
+                        color: Color(0xFFFF772B),
+                        fontSize: 17,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Montserrat')),
               ),
             ],
           ),
@@ -87,15 +88,41 @@ class _CustomerRequestCommingState extends ConsumerState<CustomerRequestComming>
                                   overflow: TextOverflow.ellipsis)),
                           Row(
                             children: <Widget>[
-                              // Image(
-                              //     image: AssetImage(
-                              //         'lib/assets/icons/${customerRequest.customer_infor.user_information.rank}.png'),
-                              //     width: 20),
-                              const SizedBox(width: 20),
+                              if (customerRequest
+                                      .customer_infor.user_information.rank
+                                      .toLowerCase() ==
+                                  'đồng')
+                                const Image(
+                                    image: AssetImage(
+                                        'lib/assets/icons/bronze.png'),
+                                    width: 20),
+                              if (customerRequest
+                                      .customer_infor.user_information.rank
+                                      .toLowerCase() ==
+                                  'bạc')
+                                const Image(
+                                    image: AssetImage(
+                                        'lib/assets/icons/silver.png'),
+                                    width: 20),
+                              if (customerRequest
+                                      .customer_infor.user_information.rank
+                                      .toLowerCase() ==
+                                  'vàng')
+                                const Image(
+                                    image:
+                                        AssetImage('lib/assets/icons/gold.png'),
+                                    width: 20),
+                              if (customerRequest
+                                      .customer_infor.user_information.rank
+                                      .toLowerCase() ==
+                                  'kim cương')
+                                const Image(
+                                    image: AssetImage(
+                                        'lib/assets/icons/diamon.png'),
+                                    width: 20),
                               const SizedBox(width: 10),
                               Text(
-                                  customerRequest
-                                      .customer_infor.user_information.rank,
+                                  "Hạng ${customerRequest.customer_infor.user_information.rank.toLowerCase()}",
                                   style: ThemeText.ranking),
                             ],
                           )
@@ -105,17 +132,19 @@ class _CustomerRequestCommingState extends ConsumerState<CustomerRequestComming>
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
+                          const SizedBox(width: 10),
                           Text(
                               customerRequest.customer_infor.user_information
                                   .default_payment_method,
                               style: ThemeText.bookingDetails),
-                          // if (customerRequest.customer_infor.user_information.promotion) const Text('Khuyến mãi', style: ThemeText.bookingDetails),
+                          const SizedBox(width: 30),
+                          // if (customerRequest.booking.promotion) const Text('Khuyến mãi', style: ThemeText.bookingDetails),
                           Text(
                               customerRequest
-                                  .customer_infor.user_information.type,
+                                  .customer_infor.service,
                               style: ThemeText.bookingDetails),
-                          // if (!customerRequest.customer_infor.user_information.promotion) const SizedBox(width: 60),
-                          const SizedBox(width: 60),
+                          // if (!customerRequest.user_information.promotion) constx SizedBox(width: 60),
+                          const Spacer(),
                         ],
                       ),
                     ],
@@ -135,7 +164,8 @@ class _CustomerRequestCommingState extends ConsumerState<CustomerRequestComming>
                     },
                     style: ThemeButton.acceptButton2,
                     child: const Center(
-                      child: Text('ĐÃ ĐẾN ĐIỂM ĐÓN', style: ThemeText.acceptButtonText),
+                      child: Text('ĐÃ ĐẾN ĐIỂM ĐÓN',
+                          style: ThemeText.acceptButtonText),
                     )),
               ),
             ]),
@@ -151,12 +181,13 @@ class _CustomerRequestCommingState extends ConsumerState<CustomerRequestComming>
                 ),
               ),
             ),
-            child: const Center(child: Text('Đang đón khách', style: TextStyle(
-              color: Colors.white,
-              fontSize: 17,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'Montserrat'
-            ))),
+            child: const Center(
+                child: Text('Đang đón khách',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Montserrat'))),
           )
         ],
       ),

@@ -73,6 +73,7 @@ class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
                   type: ''),
               distance: '',
               time: '',
+              service: '',
               arrival_information:
                   LocationAddress(address: '', latitude: "", longitude: ""),
               departure_information:
@@ -139,6 +140,7 @@ class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
               type: ''),
           distance: '',
           time: '',
+          service: '',
           arrival_information:
               LocationAddress(address: '', latitude: "", longitude: ""),
           departure_information:
