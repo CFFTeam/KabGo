@@ -59,34 +59,43 @@ abstract class ThemeText {
 
 abstract class ThemeButton {
   static ButtonStyle cancelButton = ElevatedButton.styleFrom(
-    padding: const EdgeInsets.all(18),
+    padding: const EdgeInsets.symmetric(vertical: 17),
     backgroundColor: Colors.white,
     foregroundColor: Colors.grey[500],
     side: const BorderSide(
       color: Color(0xFFF42525),
       width: 2,
     ),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
     elevation: 0,
   );
 
   static ButtonStyle acceptButton = ElevatedButton.styleFrom(
-    padding: const EdgeInsets.only(left: 3, right: 36, top: 18, bottom: 18),
-    backgroundColor: const Color(0xFF5EA944),
+    padding: const EdgeInsets.only(left: 3, right: 36, top: 20, bottom: 20),
+    backgroundColor: const Color(0xFF29BD11),
     foregroundColor: Colors.grey[600],
     side: const BorderSide(
-      color: Color(0xFF5EA944),
+      color: Color(0xFF29BD11),
       width: 2,
+    ),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
     ),
     elevation: 0,
   );
   
   static ButtonStyle acceptButton2 = ElevatedButton.styleFrom(
-    padding: const EdgeInsets.only(left: 18, right: 18, top: 18, bottom: 18),
-    backgroundColor: const Color(0xFF5EA944),
+    padding: const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 20),
+    backgroundColor: const Color(0xFF29BD11),
     foregroundColor: Colors.grey[600],
     side: const BorderSide(
-      color: Color(0xFF5EA944),
+      color: Color(0xFF29BD11),
       width: 2,
+    ),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
     ),
     elevation: 0,
   );

@@ -227,17 +227,29 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
             ],
           ),
           Row(children: <Widget>[
-            SizedBox(
-              width: 125,
-              child: ElevatedButton(
-                onPressed: () {
-                  requestStatusNotifier.cancelRequest();
-                  customerRequestNotifier.cancelRequest();
-                  context.go(HomeDashboard.path);
-                },
-                style: ThemeButton.cancelButton,
-                child: const Text('HỦY', style: ThemeText.cancelButtonText),
-              ),
+            // SizedBox(
+            //   width: 125,
+            //   child: ElevatedButton(
+            //     onPressed: () {
+            //       requestStatusNotifier.cancelRequest();
+            //       customerRequestNotifier.cancelRequest();
+            //       context.go(HomeDashboard.path);
+            //     },
+            //     style: ThemeButton.cancelButton,
+            //     child: const Text('HỦY', style: ThemeText.cancelButtonText),
+            //   ),
+            // ),
+            ElevatedButton(
+              onPressed: () {
+                requestStatusNotifier.cancelRequest();
+                customerRequestNotifier.cancelRequest();
+
+                context.go(HomeDashboard.path);
+              },
+              style: ThemeButton.cancelButton,
+              child: const Center(
+                child: Icon(FontAwesomeIcons.xmark, color: Color(0xFFF42525)),
+              )
             ),
             const SizedBox(width: 16),
             Expanded(
