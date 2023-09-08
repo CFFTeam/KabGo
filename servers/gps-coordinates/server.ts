@@ -51,7 +51,6 @@ const server = app.run(4600, async () => {
                 socket: socket,
                 infor: driver,
             };
-            console.log(driverList);
         });
 
         socket.on('booking-car', async (message: string) => {
@@ -62,13 +61,11 @@ const server = app.run(4600, async () => {
                 infor: customer,
                 socket: socket,
             };
-            console.log(customer);
 
             const _service = await serviceModel.findOne({ name: customer.service });
             const _customer = await customerModel.findOne({ email: customer.user_information.email });
-            console.log(_service?.id);
             const controllers = new UserController();
-            const bookingData = controllers.createBooking({
+            const bookingData = await controllers.createBooking({
                 customer: _customer?.id,
                 // driver: '',
                 // related_employee: new mongoose.Types.ObjectId('64e99fffdb83ce30945a0f4d'),
@@ -104,7 +101,7 @@ const server = app.run(4600, async () => {
                         longitude: driverList[id].infor.coordinate.longitude,
                     }
                 );
-                console.log(distance);
+                console.log('DISTANCE: ', distance);
                 if (distance <= 1.5) {
                     driverList[id].infor.distance = distance;
                     drivers = [...drivers, { ...driverList[id] }];
@@ -114,7 +111,10 @@ const server = app.run(4600, async () => {
             const nearestDriver = drivers?.sort((a: any, b: any) => b.distance - a.distance).slice(0, 5);
 
             const finalDrivers = nearestDriver.map((el: any) => {
-                el.socket.emit('customer-request', JSON.stringify({ customer: customer, bookingdata: bookingData }));
+                el.socket.emit(
+                    'customer-request',
+                    JSON.stringify({ ...customer, history_id: bookingData._id.toString() })
+                );
                 delete el.socket;
 
                 return el;
@@ -127,15 +127,16 @@ const server = app.run(4600, async () => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
 
             const id = driverSubmit.user_id;
+            if (stateDriver[id]) {
+                stateDriver[id].state = 'Đang tiến hành';
+                stateDriver[id].driver_name = driverSubmit.driver.name;
+                stateDriver[id].driver_phonenumber = driverSubmit.driver.phonenumber;
+                stateDriver[id].vehicle_number = driverSubmit.driver.vehicle.number;
+                stateDriver[id].vehicle_name = driverSubmit.driver.vehicle.name;
+                stateDriver[id].vehicle_color = driverSubmit.driver.vehicle.color;
 
-            stateDriver[id].state = 'Đang tiến hành';
-            stateDriver[id].driver_name = driverSubmit.driver.name;
-            stateDriver[id].driver_phonenumber = driverSubmit.driver.phonenumber;
-            stateDriver[id].vehicle_number = driverSubmit.driver.vehicle.number;
-            stateDriver[id].vehicle_name = driverSubmit.driver.vehicle.name;
-            stateDriver[id].vehicle_color = driverSubmit.driver.vehicle.color;
-
-            await rabbitmq.publish('tracking', JSON.stringify(stateDriver[id]));
+                await rabbitmq.publish('tracking', JSON.stringify(stateDriver[id]));
+            }
 
             customerList[id]?.socket.emit('submit driver', JSON.stringify(driverSubmit.driver));
         });
