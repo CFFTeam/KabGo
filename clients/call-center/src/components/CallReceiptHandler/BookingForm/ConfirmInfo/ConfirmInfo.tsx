@@ -26,8 +26,8 @@ const ConfirmInfo: React.FC = () => {
    
 
     // format the price value as Vietnamese currency without space
-    const formattedPrice = formatAsVietnameseCurrency(finalBookingInformation.price);
-      console.log('formatted price: ', formattedPrice);
+    // const formattedPrice = formatAsVietnameseCurrency(finalBookingInformation.price);
+    //   console.log('formatted price: ', formattedPrice);
     // handle button clicking
     const handleBackward = () => {
         dispatch(callReceiptHandlerActions.updateProcessSteps({
@@ -47,6 +47,7 @@ const ConfirmInfo: React.FC = () => {
         }));
         // reset final booking information
         dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
+            _id: '',
             name: '',
             phoneNumber: '',
             vehicleType: '',
@@ -54,6 +55,7 @@ const ConfirmInfo: React.FC = () => {
             destination: '',
             note: '',
             time: '',
+            localTime: '',
             state: '',
             originLatLng: {
                 lat: 0,
@@ -67,7 +69,7 @@ const ConfirmInfo: React.FC = () => {
             duration: '',
             price: 0,
         }));
-        navigate('/');
+        navigate('/call-receipt-handle');
     }
 
     const handleCoordinate = () => { 
@@ -78,6 +80,7 @@ const ConfirmInfo: React.FC = () => {
         }, 2500)
       
         socketInstance.emit("gps-coordinates", {
+            _id: finalBookingInformation._id,
             customer_name: finalBookingInformation.name,
             customer_phonenumber: finalBookingInformation.phoneNumber,
             vehicle_type: finalBookingInformation.vehicleType,
@@ -85,11 +88,13 @@ const ConfirmInfo: React.FC = () => {
             destination: finalBookingInformation.destination,
             note: finalBookingInformation.note,
             time: finalBookingInformation.time,
+            local_time: finalBookingInformation.localTime,
             origin_latlng: finalBookingInformation.originLatLng,
             destination_latlng: finalBookingInformation.destinationLatLng,
             distance: finalBookingInformation.distance,
             duration: finalBookingInformation.duration,
             price: finalBookingInformation.price,
+            related_employee: "64f0c03d9e9037d91cce0d7e",
         });
 
         // remove the old item and update the new one
@@ -99,7 +104,6 @@ const ConfirmInfo: React.FC = () => {
         const newBookingInformation = bookingInformation.map((item) => 
             (item.phoneNumber  === finalBookingInformation.phoneNumber && item.time === finalBookingInformation.time) 
             ? {...item, state: "Hoàn thành"} : item);
-        console.log('new bookingInformation', newBookingInformation);
         // update new booking information
         dispatch(callReceiptHandlerActions.updateBookingInformation(newBookingInformation as BookingInformation[]));
     }
@@ -221,7 +225,7 @@ const ConfirmInfo: React.FC = () => {
                         Tổng tiền
                     </div>
                     <div className={styles["price-text"]}>
-                        {formattedPrice}
+                        {finalBookingInformation.price}
                     </div>
             </div>
 

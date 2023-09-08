@@ -4,25 +4,26 @@ import {useState, useEffect} from "react";
 import io, {Socket} from "socket.io-client";
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import {callReceiptHandlerActions} from "../../store/reducers/callReceiptHandlerSlice";
+import { Coordination, BookingInformation } from "../../store/reducers/callReceiptHandlerSlice";
 
 
-interface Coordination {
-    lat: number;
-    lng: number;
-}
+// interface Coordination {
+//     lat: number;
+//     lng: number;
+// }
 
-interface BookingInformation {
-    name: string;
-    phoneNumber: string;
-    vehicleType: string;
-    origin: string;
-    destination: string;
-    note: string;
-    time: string;
-    state: string;
-    originLatLng: Coordination;
-    destinationLatLng: Coordination;
-}
+// interface BookingInformation {
+//     name: string;
+//     phoneNumber: string;
+//     vehicleType: string;
+//     origin: string;
+//     destination: string;
+//     note: string;
+//     time: string;
+//     state: string;
+//     originLatLng: Coordination;
+//     destinationLatLng: Coordination;
+// }
 
 type SocketIO = Socket | null;
 
@@ -48,6 +49,7 @@ const CallReceiptHandlerPage: React.FC = () => {
                 const data = JSON.parse(message);
                 console.log('my data: ', data);
                 const receivedBookingInformation = {
+                    _id: data._id,
                     name: data.customer_name,
                     phoneNumber: data.customer_phonenumber,
                     vehicleType: data.vehicle_type,
