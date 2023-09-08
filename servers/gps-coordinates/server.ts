@@ -1,8 +1,10 @@
+import { CallCenterRequest } from './common/interfaces/call_center_request';
 import Application from '@common/app';
 import UserController from '@common/controllers/user.controller';
 import Driver from '@common/interfaces/driver';
 import DriverSubmit from '@common/interfaces/driver_submit';
 import User from '@common/interfaces/user';
+import rabbitmq from '@common/rabbitmq';
 import socket from '@common/socket';
 import haversineDistance from '@common/utils/haversineDistance';
 import dotenv from 'dotenv';
@@ -24,12 +26,15 @@ const app = new Application({
     mongoConnection: {
         uri: process.env.MONGO_URI as string,
     },
+    rabbitMQConnection: {
+        uri: process.env.RABBITMQ_URI as string,
+    },
 });
 
 const driverList: any = {};
 const customerList: any = {};
 
-const server = app.run(4600, () => {
+const server = app.run(4600, async () => {
     socket.init(server);
     socket.getIO().on('connection', (socket: any) => {
         socket.on('join', (message: string) => {
@@ -69,7 +74,7 @@ const server = app.run(4600, () => {
                 );
                 if (distance <= 1.5) {
                     driverList[id].infor.distance = distance;
-                    drivers = [...drivers, driverList[id]];
+                    drivers = [...drivers, { ...driverList[id] }];
                 }
             }
 
@@ -107,6 +112,40 @@ const server = app.run(4600, () => {
             console.log('Client disconnected');
         });
     });
+
+    // await rabbitmq.consume('gps-coordinates', (message: string) => {
+    //     const request = JSON.parse(message) as CallCenterRequest;                                                   
+
+    //     let drivers: any = [];
+
+    //         for (const id in driverList) {
+    //             const distance = haversineDistance(
+    //                 {
+    //                     latitude: +customer.departure_information.latitude,
+    //                     longitude: +customer.departure_information.longitude,
+    //                 },
+    //                 {
+    //                     latitude: driverList[id].infor.coordinate.latitude,
+    //                     longitude: driverList[id].infor.coordinate.longitude,
+    //                 }
+    //             );
+    //             if (distance <= 1.5) {
+    //                 driverList[id].infor.distance = distance;
+    //                 drivers = [...drivers, { ...driverList[id] }];
+    //             }
+    //         }
+
+    //         const nearestDriver = drivers?.sort((a: any, b: any) => b.distance - a.distance).slice(0, 5);
+
+    //         const finalDrivers = nearestDriver.map((el: any) => {
+    //             el.socket.emit('customer-request', JSON.stringify(customer));
+    //             delete el.socket;
+
+    //             return el;
+    //         });
+
+    //         // socket.emit('send drivers', JSON.stringify(finalDrivers));
+    // });
 });
 
 // process.on('unhandledRejection', (err: Error) => {

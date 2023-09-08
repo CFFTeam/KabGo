@@ -1,3 +1,4 @@
+import rabbitmq from '@common/rabbitmq';
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
@@ -8,9 +9,8 @@ import Controller from './interfaces/controller';
 import ConsoleProxyHandler from '@common/utils/console.proxy';
 import Logger from './utils/logger';
 
-type ApplicationOptions = {
-    controllers: Controller[];
-    mongoConnection: MongoConnection;
+type RabbitMQConnection = {
+    uri: string;
 };
 
 type MongoConnection = {
@@ -18,15 +18,23 @@ type MongoConnection = {
     options?: mongoose.ConnectOptions;
 };
 
+type ApplicationOptions = {
+    controllers: Controller[];
+    mongoConnection: MongoConnection;
+    rabbitMQConnection: RabbitMQConnection;
+};
+
 class Application {
     private app: express.Application;
     private controllers: Controller[] = [];
     private mongoConnection: MongoConnection;
+    private rabbitMQConnection: RabbitMQConnection;
 
     constructor(options: ApplicationOptions) {
         this.app = express();
         this.controllers = options.controllers;
         this.mongoConnection = options.mongoConnection;
+        this.rabbitMQConnection = options.rabbitMQConnection;
 
         console = new Proxy(console, new ConsoleProxyHandler());
 
@@ -76,14 +84,19 @@ class Application {
             });
     }
 
+    private async rabbitMQConnect(uri: string) {
+        await rabbitmq.connect(uri);
+    }
+
     public run(port: number = 3000, callback: Function = () => {}): Server {
         console.log('Server is starting...');
 
         const availablePort = process.env.PORT ?? port;
 
-        return this.app.listen(availablePort, () => {
+        return this.app.listen(availablePort, async () => {
             console.log(`Server is running on port ${availablePort}`);
 
+            await this.rabbitMQConnect(this.rabbitMQConnection.uri);
             callback();
         });
     }
