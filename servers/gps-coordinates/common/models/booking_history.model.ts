@@ -36,7 +36,6 @@ const BookingHistorySchema = new mongoose.Schema<IBookingHistory>(
         driver: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Driver',
-            required: true,
         },
         related_employee: {
             type: mongoose.Schema.Types.ObjectId,
@@ -110,3 +109,4 @@ const BookingHistorySchema = new mongoose.Schema<IBookingHistory>(
 const BookingHistory = mongoose.model<IBookingHistory>('Booking_Histories', BookingHistorySchema);
 
 export default BookingHistory;
+

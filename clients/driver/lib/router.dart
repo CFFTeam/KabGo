@@ -32,6 +32,8 @@ final _shellDriverKey =
 final routerProvider = Provider<GoRouter>((ref) {
   // final appState = ref.watch(appNotifierProvider);
   final authState = ref.watch(authProvider);
+  final driverDetails = ref.watch(driverDetailsProvider);
+  final driverDetailsNotifier = ref.read(driverDetailsProvider.notifier);
 
   return GoRouter(
       debugLogDiagnostics: true,
@@ -174,9 +176,14 @@ final routerProvider = Provider<GoRouter>((ref) {
 
         if (isSplash) {
           if (isAuth) {
+
+            if (driverDetailsNotifier.hasValue) {
+              return HomeDashboard.path;
+            }
+            
             Dio dio = Dio();
             dio.post(
-                'http://192.168.2.68:4100/v1/driver/register',
+                'http://192.168.2.95:4100/v1/driver/register',
                 data: jsonEncode(DriverAccount(
                         avatar: authState.value!.photoURL!,
                         name: authState.value!.displayName!,
@@ -192,7 +199,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                       }
                     });  
 
-            return HomeDashboard.path;
+            return null;
           }
           return WelcomeScreen.path;
         }

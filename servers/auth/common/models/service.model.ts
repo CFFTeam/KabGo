@@ -1,19 +1,18 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 export interface IService {
-	_id?: string;
-	name?: string;
-	description?: string;
-	price?: number;
+    _id?: string;
+    name?: string;
+    description?: string;
+    price?: number;
 }
 
 const serviceSchema = new mongoose.Schema<IService>({
-	name: { type: String },
-	description: { type: String },
-	price: { type: Number },
+    name: { type: String },
+    description: { type: String },
+    price: { type: Number },
 });
 
-
-const serviceModel = mongoose.model<IService>("Service", serviceSchema);
+const serviceModel = mongoose.model<IService>('Service', serviceSchema);
 
 export default serviceModel;

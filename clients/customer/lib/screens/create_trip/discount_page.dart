@@ -1,9 +1,9 @@
-import 'package:customer_app/data/data.dart';
-import 'package:customer_app/widgets/discount_item.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../data/data.dart';
 import '../../functions/setHexColor.dart';
+import '../../widgets/discount_item.dart';
 
 class DiscountPage extends StatefulWidget {
   const DiscountPage({Key? key, required this.chooseItem}) : super(key: key);

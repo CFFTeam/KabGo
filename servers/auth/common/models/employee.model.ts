@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import { Model, Schema, model } from 'mongoose';
 import { Request, Response, NextFunction } from "express";
@@ -11,11 +11,11 @@ export interface IEmployee {
 	passwordConfirm?: string | undefined;
 	phoneNumber?: string;
     dob?: string;
-	address: string;
-	role?: string;
-	active?: string;
-	lock?: boolean;
-	gender?: string;
+    address: string;
+    role?: string;
+    active?: string;
+    lock?: boolean;
+    gender?: string;
 }
 
 interface IEmployeeMethods {
@@ -41,10 +41,10 @@ const employeeSchema = new mongoose.Schema<IEmployee, EmployeeModel, IEmployeeMe
 	  },
 	dob: { type: String },
     address: { type: String },
-	role: { type: String },
-	active: {type: String, default: "26/8/2023" },
-	lock: {type: Boolean, default: false },
-	gender: {type: String}
+    role: { type: String },
+    active: { type: String, default: '26/8/2023' },
+    lock: { type: Boolean, default: false },
+    gender: { type: String },
 });
 
 

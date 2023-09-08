@@ -1,6 +1,11 @@
 
 export interface CallCenterRequest {
     _id: string,
+    driver_name?: string,
+    driver_phonenumber?: string,
+    vehicle_number?: string,
+    vehicle_name?: string,
+    vehicle_color?: string,
     customer_name: string,
     customer_phonenumber: string,
     vehicle_type: string,

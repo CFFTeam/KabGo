@@ -35,7 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_polyline_points: ^1.0.0
-  location: ^4.4.0
+  location: ^5.0.0
   google_maps_flutter: ^2.3.1
   google_fonts: ^4.0.4
   sliding_up_panel: ^2.0.0+1
@@ -45,6 +45,20 @@ dependencies:
   flutter_typeahead: ^4.6.2
   riverpod: ^2.3.6
   flutter_riverpod: ^2.3.6
+  geocoding: ^2.1.0
+  animations: ^2.0.7
+  font_awesome_flutter: ^10.5.0
+  intl: ^0.18.0
+  map_location_picker: ^1.2.1
+  dio: ^4.0.6
+  flutter_dotenv: ^5.1.0
+  socket_io_client: ^2.0.3+1
+  awesome_ripple_animation: ^1.0.2
+  google_sign_in: ^6.1.4
+  firebase_core: ^2.15.0
+  firebase_auth: ^4.7.2
+  flutter_launcher_icons: ^0.13.1
+  flutter_spinkit: ^5.2.0
 
 dev_dependencies:
   flutter_test:
@@ -59,7 +73,11 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  remove_alpha_ios: true
+  image_path: "lib/assets/logo.png"
 # The following section is specific to Flutter packages.
 flutter:
   # The following line ensures that the Material Icons font is
@@ -71,7 +89,8 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
+  assets:
+    - lib/assets/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
@@ -83,6 +102,21 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: lib/assets/fonts/Montserrat/Montserrat-Light.ttf
+          weight: 300
+        - asset: lib/assets/fonts/Montserrat/Montserrat-Regular.ttf
+          weight: 400
+        - asset: lib/assets/fonts/Montserrat/Montserrat-Medium.ttf
+          weight: 500
+        - asset: lib/assets/fonts/Montserrat/Montserrat-SemiBold.ttf
+          weight: 600
+        - asset: lib/assets/fonts/Montserrat/Montserrat-Bold.ttf
+          weight: 700
+        - asset: lib/assets/fonts/Montserrat/Montserrat-ExtraBold.ttf
+          weight: 800
   # fonts:
   #   - family: Schyler
   #     fonts:

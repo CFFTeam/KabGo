@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/data.dart';
-import '../../functions/setHexColor.dart';
-import '../../widgets/recently_arrival_item.dart';
+import '../../providers/mapProvider.dart';
+import '../../providers/stepProvider.dart';
+import '../find_arrival_page/find_arrival_page.dart';
 
 class HomePanel extends ConsumerWidget {
-  const HomePanel({Key? key, required this.findArrival}) : super(key: key);
-
-  final void Function(BuildContext context) findArrival;
+  const HomePanel({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     print('===========> HOME_PANEL BUILD');
+
+    // SocketClient socketClient = ref.read(socketClientProvider.notifier);
+    // socketClient.subscribe('dat xe', (dynamic value) {
+    //   print(value);
+    // });
 
     return Container(
       decoration: const BoxDecoration(
@@ -29,7 +32,7 @@ class HomePanel extends ConsumerWidget {
           ),
         ],
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+      padding: const EdgeInsets.fromLTRB(15, 24, 15, 30),
       width: MediaQuery.of(context).size.width,
       height: 215,
       // alignment: Alignment.topLeft,
@@ -37,21 +40,21 @@ class HomePanel extends ConsumerWidget {
         // mainAxisAlignment: MainAxisAlignment.start,
         // mainAxisSize: MainAxisSize.min,
         children: [
-          Center(
-            child: Container(
-              width: 50,
-              height: 4,
-              decoration: BoxDecoration(
-                color: HexColor('D9D9D9'),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(50),
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 24,
-          ),
+          // Center(
+          //   child: Container(
+          //     width: 50,
+          //     height: 4,
+          //     decoration: BoxDecoration(
+          //       color: HexColor('D9D9D9'),
+          //       borderRadius: const BorderRadius.all(
+          //         Radius.circular(50),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // const SizedBox(
+          //   height: 24,
+          // ),
           ///////////////////////////////////////////////////// LOCATION INPUT
           Align(
             alignment: Alignment.topLeft,
@@ -68,50 +71,74 @@ class HomePanel extends ConsumerWidget {
             'Chọn điểm bạn muốn đến để chúng tôi giúp bạn thực hiện việc đặt xe',
             style: Theme.of(context).textTheme.bodyMedium,
           ),
-          const SizedBox(
-            height: 36,
-          ),
+          // const SizedBox(
+          //   height: 36,
+          // ),
+          const Spacer(),
           SizedBox(
             width: double.infinity,
             height: 54,
             child: ElevatedButton(
               onPressed: () {
-                findArrival(context);
+                ref.read(stepProvider.notifier).setStep('find_arrival');
+                ref
+                    .read(mapProvider.notifier)
+                    .setMapAction('FIND_ARRIVAL_LOCATION');
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: const Duration(milliseconds: 400),
+                    pageBuilder: (context, animation, secondaryAnimation) =>
+                        const FindArrivalPage(),
+                    transitionsBuilder:
+                        (context, animation, secondaryAnimation, child) {
+                      const begin = Offset(0.0, 1.0);
+                      const end = Offset.zero;
+
+                      final tween = Tween(begin: begin, end: end);
+
+                      return SlideTransition(
+                        position: tween.animate(animation),
+                        child: child,
+                      );
+                    },
+                  ),
+                );
               },
               child: Text('chọn điểm đến'.toUpperCase(),
                   style: Theme.of(context).textTheme.labelMedium),
             ),
           ),
-          const SizedBox(
-            height: 36,
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Các điểm đến gần đây',
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Column(
-              children: [
-                ...recentlyArrivalData.map(
-                  (e) => Column(
-                    children: [
-                      RecentlyArrivalItem(data: e),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          // const SizedBox(
+          //   height: 36,
+          // ),
+          // Align(
+          //   alignment: Alignment.centerLeft,
+          //   child: Text(
+          //     'Các điểm đến gần đây',
+          //     style: Theme.of(context).textTheme.titleMedium,
+          //   ),
+          // ),
+          // const SizedBox(
+          //   height: 20,
+          // ),
+          // Align(
+          //   alignment: Alignment.centerLeft,
+          //   child: Column(
+          //     children: [
+          //       ...recentlyArrivalData.map(
+          //         (e) => Column(
+          //           children: [
+          //             RecentlyArrivalItem(data: e),
+          //             const SizedBox(
+          //               height: 20,
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );
