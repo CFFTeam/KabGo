@@ -15,6 +15,8 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import '../../models/location.dart';
 import '../../models/vehicle.dart';
 import '../../providers/customer_request.dart';
+import '../../providers/driver_provider.dart';
+import '../../providers/request_status.dart';
 import 'styles.dart';
 
 class CustomerRequest extends ConsumerStatefulWidget {
@@ -30,10 +32,16 @@ class CustomerRequest extends ConsumerStatefulWidget {
 class _CustomerRequestState extends ConsumerState<CustomerRequest> {
   @override
   Widget build(BuildContext context) {
-    final customerRequestNotifier = ref.read(customerRequestProvider.notifier);
-    final customerRequest = ref.watch(customerRequestProvider);
     final socketManager = ref.read(socketClientProvider.notifier);
-    final currentLocation = ref.watch(currentLocationProvider);
+    final currentLocation =
+        ref.read(currentLocationProvider.notifier).currentLocation();
+
+    final driverDetails = ref.read(driverDetailsProvider);
+
+    final customerRequestNotifier = ref.read(customerRequestProvider.notifier);
+    final requestStatusNotifier = ref.read(requestStatusProvider.notifier);
+
+    final customerRequest = ref.watch(customerRequestProvider);
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
@@ -73,7 +81,7 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         SizedBox(
-                            width: MediaQuery.of(context).size.width - 270,
+                            width: MediaQuery.of(context).size.width - 230,
                             child: Text(
                                 customerRequest
                                     .customer_infor.user_information.name,
@@ -85,11 +93,41 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                             //     image: AssetImage(
                             //         'lib/assets/icons/${customerRequest.user_information.rankType}.png'),
                             //     width: 20),
-                            const SizedBox(width: 20),
+                            if (customerRequest
+                                    .customer_infor.user_information.rank
+                                    .toLowerCase() ==
+                                'đồng')
+                              const Image(
+                                  image:
+                                      AssetImage('lib/assets/icons/bronze.png'),
+                                  width: 20),
+                            if (customerRequest
+                                    .customer_infor.user_information.rank
+                                    .toLowerCase() ==
+                                'bạc')
+                              const Image(
+                                  image:
+                                      AssetImage('lib/assets/icons/silver.png'),
+                                  width: 20),
+                            if (customerRequest
+                                    .customer_infor.user_information.rank
+                                    .toLowerCase() ==
+                                'vàng')
+                              const Image(
+                                  image:
+                                      AssetImage('lib/assets/icons/gold.png'),
+                                  width: 20),
+                            if (customerRequest
+                                    .customer_infor.user_information.rank
+                                    .toLowerCase() ==
+                                'kim cương')
+                              const Image(
+                                  image:
+                                      AssetImage('lib/assets/icons/diamon.png'),
+                                  width: 20),
                             const SizedBox(width: 10),
                             Text(
-                                customerRequest
-                                    .customer_infor.user_information.rank,
+                                "Hạng ${customerRequest.customer_infor.user_information.rank.toLowerCase()}",
                                 style: ThemeText.ranking),
                           ],
                         )
@@ -99,17 +137,30 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        Text(
-                            customerRequest.customer_infor.user_information
-                                .default_payment_method,
-                            style: ThemeText.bookingDetails),
+                        Row(
+                          children: <Widget>[
+                            const Icon(FontAwesomeIcons.solidCreditCard,
+                                size: 15, color: Color(0xFFF86C1D)),
+                            const SizedBox(width: 6),
+                            Text(
+                                customerRequest.customer_infor.user_information
+                                    .default_payment_method,
+                                style: ThemeText.bookingDetails),
+                          ],
+                        ),
+                        const SizedBox(width: 30),
+                        Row(
+                          children: <Widget>[
+                            const Icon(FontAwesomeIcons.taxi,
+                                size: 15, color: Color(0xFFF86C1D)),
+                            const SizedBox(width: 6),
+                            Text(customerRequest.customer_infor.service,
+                                style: ThemeText.bookingDetails),
+                          ],
+                        ),
                         // if (customerRequest.booking.promotion) const Text('Khuyến mãi', style: ThemeText.bookingDetails),
-                        Text(
-                            customerRequest
-                                .customer_infor.user_information.type,
-                            style: ThemeText.bookingDetails),
-                        // if (!customerRequest.user_information.promotion) const SizedBox(width: 60),
-                        const SizedBox(width: 60),
+                        // if (!customerRequest.user_information.promotion) const Spacer(),
+                        const Spacer(),
                       ],
                     )
                   ],
@@ -143,8 +194,8 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  const Icon(FontAwesomeIcons.clock,
-                      size: 21, color: Color(0xFFF86C1D)),
+                  const Icon(FontAwesomeIcons.solidClock,
+                      size: 19, color: Color(0xFFF86C1D)),
                   const SizedBox(width: 8),
                   Text(customerRequest.customer_infor.time,
                       style: ThemeText.locationDurationDetails),
@@ -218,15 +269,28 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
             ],
           ),
           Row(children: <Widget>[
-            Expanded(
-                child: ElevatedButton(
-              onPressed: () {
-                customerRequestNotifier.cancelRequest();
-                context.go(HomeDashboard.path);
-              },
-              style: ThemeButton.cancelButton,
-              child: const Text('TỪ CHỐI', style: ThemeText.cancelButtonText),
-            )),
+            // Expanded(
+            //     child: ElevatedButton(
+            //   onPressed: () {
+            //     requestStatusNotifier.cancelRequest();
+            //     customerRequestNotifier.cancelRequest();
+
+            //     context.go(HomeDashboard.path);
+            //   },
+            //   style: ThemeButton.cancelButton,
+            //   child: const Text('TỪ CHỐI', style: ThemeText.cancelButtonText),
+            // )),
+            ElevatedButton(
+                onPressed: () {
+                  requestStatusNotifier.cancelRequest();
+                  customerRequestNotifier.cancelRequest();
+
+                  context.go(HomeDashboard.path);
+                },
+                style: ThemeButton.cancelButton,
+                child: const Center(
+                  child: Icon(FontAwesomeIcons.xmark, color: Color(0xFFF42525)),
+                )),
             const SizedBox(width: 16),
             Expanded(
               child: Stack(
@@ -239,27 +303,26 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                         socketManager.publish(
                             'driver-accept',
                             jsonEncode(DriverSubmit(
-                                    user_id: customerRequest.customer_infor
-                                        .user_information.phonenumber,
-                                    driver: Driver(
-                                        "https://example.com/avatar0.jpg",
-                                        "Nguyễn Đức Minh",
-                                        "0778568685",
-                                        Vehicle(
-                                            name: "Honda Wave RSX",
-                                            brand: "Honda",
-                                            type: "Xe máy",
-                                            color: "Xanh đen",
-                                            number: "68S164889"),
-                                        LocationPostion(
-                                            latitude: currentLocation.latitude,
-                                            longitude:
-                                                currentLocation.longitude),
-                                        currentLocation.heading,
-                                        5.0))
-                                .toJson()));
+                                user_id: customerRequest.customer_infor
+                                    .user_information.phonenumber,
+                                driver: Driver(
+                                    driverDetails.avatar,
+                                    driverDetails.name,
+                                    driverDetails.phonenumber,
+                                    Vehicle(
+                                        name: "Honda Wave RSX",
+                                        brand: "Honda",
+                                        type: "Xe máy",
+                                        color: "Xanh đen",
+                                        number: "68S164889"),
+                                    LocationPostion(
+                                        latitude: currentLocation.latitude,
+                                        longitude: currentLocation.longitude),
+                                    currentLocation.heading,
+                                    5.0),
+                                directions: []).toJson()));
 
-                        customerRequestNotifier.acceptRequest();
+                        requestStatusNotifier.acceptRequest();
                         context.go(CustomerRequestAccept.path);
                       },
                       style: ThemeButton.acceptButton,
@@ -290,6 +353,7 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                         isReverseAnimation: false,
                         autoStart: true,
                         onComplete: () {
+                          requestStatusNotifier.cancelRequest();
                           customerRequestNotifier.cancelRequest();
                           context.go(HomeDashboard.path);
                         },

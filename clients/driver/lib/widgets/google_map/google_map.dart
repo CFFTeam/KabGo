@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:driver/models/location.dart';
 import 'package:driver/providers/current_location.dart';
 import 'package:driver/providers/socket_provider.dart';
+import 'package:driver/utils/Image.dart';
 import 'package:driver/widgets/icon_button/icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,6 +20,9 @@ import '../../models/vehicle.dart';
 import '../../providers/customer_request.dart';
 
 import 'dart:math' as math;
+
+import '../../providers/driver_provider.dart';
+import '../../providers/request_status.dart';
 
 class KGoogleMap extends ConsumerStatefulWidget {
   const KGoogleMap({Key? key}) : super(key: key);
@@ -40,54 +44,44 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
   static const CameraPosition _cameraPosition =
       CameraPosition(target: _center, zoom: 10, tilt: 0, bearing: 0);
 
-  Set<Circle> _circles = {};
-  Set<Marker> _markers = {};
+  final Set<Circle> _circles = {};
+  final Set<Marker> _markers = {};
   Set<Polyline> _polyline = {};
 
   late BitmapDescriptor currentLocationIcon;
+  late BitmapDescriptor driverIcon;
   late BitmapDescriptor departureLocationIcon;
 
   Directions? _info;
 
-  Set<Circle> _createCircle(String? id, LatLng latLng,
-      {double radius = 50, bool vector = true}) {
+  Circle _createCircle(String? id, LatLng latLng, {double radius = 50}) {
     id ??= 'circle_id_${DateTime.now().millisecondsSinceEpoch}';
-    if (vector) {
-      return {
-        Circle(
-          circleId: CircleId(id),
-          center: latLng,
-          radius: radius == 0 ? radius * 1.5 : 50,
-          fillColor: const Color.fromRGBO(255, 100, 51, 0.15),
-          strokeColor: const Color.fromRGBO(255, 100, 51, 0.3),
-          strokeWidth: 1,
-        )
-      };
-    }
 
-    return {
-      Circle(
-        circleId: CircleId(id),
-        center: latLng,
-        radius: radius == 0 ? radius * 1.5 : 50,
-        fillColor: const Color.fromRGBO(255, 100, 51, 0.15),
-        strokeColor: const Color.fromRGBO(255, 100, 51, 0.3),
-        strokeWidth: 1,
-      )
-    };
+    return Circle(
+      circleId: CircleId(id),
+      center: latLng,
+      radius: radius == 0 ? radius * 1.5 : 50,
+      fillColor: const Color.fromRGBO(255, 100, 51, 0.15),
+      strokeColor: const Color.fromRGBO(255, 100, 51, 0.3),
+      strokeWidth: 1,
+    );
   }
 
-  Future<Set<Marker>> _createMarker(String? id, LatLng latLng) async {
+  Marker _createMarker(
+      String? id, String title, LatLng latLng, BitmapDescriptor icon,
+      {double rotate = 0.0,
+      Offset anchor = const Offset(0.5, 0.5),
+      double zIndex = 0.0}) {
     id ??= 'marker_id_${DateTime.now().millisecondsSinceEpoch}';
 
-    return {
-      Marker(
-          markerId: MarkerId(id),
-          position: latLng,
-          infoWindow: const InfoWindow(title: 'Vị trí của bạn'),
-          anchor: const Offset(0.5, 0.5),
-          icon: currentLocationIcon),
-    };
+    return Marker(
+        markerId: MarkerId(id),
+        position: latLng,
+        infoWindow: InfoWindow(title: title),
+        rotation: rotate,
+        anchor: anchor,
+        zIndex: zIndex,
+        icon: icon);
   }
 
   void _onMapCreated(GoogleMapController controller) {
@@ -104,30 +98,34 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
     });
   }
 
-  Future<Position> _getCurrentLocation() async {
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  void _updateIconCurrentLocation(final currentPosition,
+      {double rotate = 0.0}) {
+    final requestStatus = ref.watch(requestStatusProvider);
 
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled');
+    if (requestStatus == RequestStatus.comming) {
+      setState(() {
+        _markers.add(_createMarker(
+            'my_location',
+            'Vị trí của tôi',
+            LatLng(currentPosition.latitude, currentPosition.longitude),
+            driverIcon,
+            rotate: rotate));
+        _circles.clear();
+      });
+      return;
     }
 
-    LocationPermission permission = await Geolocator.checkPermission();
+    setState(() {
+      _markers.add(_createMarker(
+          'my_location',
+          'Vị trí của tôi',
+          LatLng(currentPosition.latitude, currentPosition.longitude),
+          currentLocationIcon));
 
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied.');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-
-    return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.bestForNavigation);
+      _circles.add(_createCircle('my_location',
+          LatLng(currentPosition.latitude, currentPosition.longitude),
+          radius: currentPosition.accuracy));
+    });
   }
 
   void _moveToCurrent() {
@@ -136,6 +134,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         .getCurrentLocation()
         .then((value) {
       _currentPosition = value;
+
       _mapController.animateCamera(CameraUpdate.newCameraPosition(
           CameraPosition(
               target:
@@ -144,18 +143,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
               tilt: 0,
               bearing: 0)));
 
-      setState(() {
-        _createMarker('my_location',
-                LatLng(_currentPosition.latitude, _currentPosition.longitude))
-            .then((value) => _markers = _markers
-                .map((Marker e) =>
-                    e.mapsId.value == 'my_location' ? value.first : e)
-                .toSet());
-
-        _circles = _createCircle('my_location',
-            LatLng(_currentPosition.latitude, _currentPosition.longitude),
-            radius: 50);
-      });
+      _updateIconCurrentLocation(_currentPosition);
     });
   }
 
@@ -172,19 +160,11 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
       //         tilt: 0,
       //         bearing: 0)));
 
-      ref.read(currentLocationProvider.notifier).updateLocation(position);
-
-      _currentPosition = position;
-
-      setState(() {
-        _createMarker(
-                'my_location', LatLng(position.latitude, position.longitude))
-            .then((value) => _markers = value);
-
-        _circles = _createCircle(
-            'my_location', LatLng(position.latitude, position.longitude),
-            radius: position.accuracy);
-      });
+      // ref.read(currentLocationProvider.notifier).updateLocation(position);
+      if (ref.read(requestStatusProvider) == RequestStatus.waiting) {
+        _currentPosition = position;
+        _updateIconCurrentLocation(position);
+      }
     });
   }
 
@@ -203,6 +183,9 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         .then((ByteData bytes) => currentLocationIcon =
             BitmapDescriptor.fromBytes(bytes.buffer.asUint8List()));
 
+    getBytesFromAsset('lib/assets/map/bike.png', 75).then(
+        (Uint8List bytes) => driverIcon = BitmapDescriptor.fromBytes(bytes));
+
     DefaultAssetBundle.of(context).load('lib/assets/map/original.png').then(
         (ByteData bytes) => departureLocationIcon =
             BitmapDescriptor.fromBytes(bytes.buffer.asUint8List()));
@@ -210,107 +193,120 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
 
   @override
   Widget build(BuildContext context) {
-    final bool active = ref.read(socketClientProvider);
+    final bool active = ref.watch(socketClientProvider);
+    final requestStatus = ref.watch(requestStatusProvider);
+    final driverDetails = ref.read(driverDetailsProvider);
 
     if (active) {
-      final customerRequestNotifier =
-          ref.read(customerRequestProvider.notifier);
       final customerRequest = ref.watch(customerRequestProvider);
 
       if (customerRequest.hasValue()) {
-        if (customerRequestNotifier.status == RequestStatus.accepted) {
+        if (requestStatus == RequestStatus.accepted) {
           final LocationPostion customerLocation = LocationPostion(
               latitude: double.parse(customerRequest
                   .customer_infor.departure_information.latitude),
               longitude: double.parse(customerRequest
                   .customer_infor.departure_information.longitude));
 
-          final LocationPostion destinationLocation = LocationPostion(
-              latitude: double.parse(
-                  customerRequest.customer_infor.arrival_information.latitude),
-              longitude: double.parse(customerRequest
-                  .customer_infor.arrival_information.longitude));
+          // final LocationPostion destinationLocation = LocationPostion(
+          //     latitude: double.parse(
+          //         customerRequest.customer_infor.arrival_information.latitude),
+          //     longitude: double.parse(customerRequest
+          //         .customer_infor.arrival_information.longitude));
 
           if (_info == null) {
             _info = customerRequest.direction;
 
             _mapController.animateCamera(CameraUpdate.newLatLngBounds(
-                customerRequest.direction.bounds, 100.0));
+                customerRequest.direction.bounds!, 100.0));
 
             setState(() {
               _polyline = {
                 Polyline(
                     polylineId: const PolylineId('customer_direction'),
-                    color: Colors.orangeAccent,
-                    width: 6,
-                    points: customerRequest.direction.polylinePoints
+                    color: const Color.fromARGB(255, 255, 113, 36),
+                    width: 8,
+                    points: customerRequest.direction.polylinePoints!
                         .map((e) => LatLng(e.latitude, e.longitude))
                         .toList())
               };
 
-              _markers = {
-                _markers.first,
-                Marker(
-                    markerId: const MarkerId('customer_location'),
-                    position: LatLng(
+              _markers.addAll({
+                _createMarker(
+                    'customer_location',
+                    'Vị trí khách hàng',
+                    LatLng(
                         customerLocation.latitude, customerLocation.longitude),
-                    infoWindow: const InfoWindow(title: 'Vị trí khách hàng'),
-                    anchor: const Offset(0.5, 0.5),
-                    icon: departureLocationIcon),
-                Marker(
-                    markerId: const MarkerId('destination_location'),
-                    position: LatLng(destinationLocation.latitude,
-                        destinationLocation.longitude),
-                    infoWindow: const InfoWindow(title: 'Điểm đến  khách hàng'),
-                    anchor: const Offset(0.5, 0.5),
-                    icon: BitmapDescriptor.defaultMarkerWithHue(
-                        BitmapDescriptor.hueOrange)),
-              };
+                    departureLocationIcon),
+
+                // _createMarker(
+                //     'destination_location',
+                //     'Điểm đến  khách hàng',
+                //     LatLng(destinationLocation.latitude,
+                //         destinationLocation.longitude),
+                //     BitmapDescriptor.defaultMarkerWithHue(
+                //         BitmapDescriptor.hueOrange)),
+              });
             });
           }
-          setState(() {
-            _markers = {
-              _markers.first,
-              Marker(
-                  markerId: const MarkerId('customer_location'),
-                  position: LatLng(
-                      customerLocation.latitude, customerLocation.longitude),
-                  infoWindow: const InfoWindow(title: 'Vị trí khách hàng'),
-                  anchor: const Offset(0.5, 0.5),
-                  icon: departureLocationIcon),
-              Marker(
-                  markerId: const MarkerId('destination_location'),
-                  position: LatLng(destinationLocation.latitude,
-                      destinationLocation.longitude),
-                  infoWindow: const InfoWindow(title: 'Điểm đến  khách hàng'),
-                  anchor: const Offset(0.5, 0.5),
-                  icon: BitmapDescriptor.defaultMarkerWithHue(
-                      BitmapDescriptor.hueOrange)),
-            };
-          });
         }
 
-        if (customerRequestNotifier.status == RequestStatus.comming &&
+        if (requestStatus == RequestStatus.comming &&
             running == true &&
             _info != null) {
-          Timer.periodic(const Duration(seconds: 3), (timer) {
+          LocationPostion current_location = LocationPostion(
+              latitude:
+                  customerRequest.direction.polylinePoints![process].latitude,
+              longitude:
+                  customerRequest.direction.polylinePoints![process].longitude);
+
+          final destinationPosition = LocationPostion(
+              latitude: customerRequest
+                  .direction.polylinePoints![process + 1].latitude,
+              longitude: customerRequest.direction.polylinePoints![process + 1]
+                  .longitude); // Replace with your destination's coordinates
+
+          final bearing = math.atan2(
+              math.sin(math.pi *
+                  (destinationPosition.longitude - current_location.longitude) /
+                  180.0),
+              math.cos(math.pi * current_location.latitude / 180.0) *
+                      math.tan(math.pi * destinationPosition.latitude / 180.0) -
+                  math.sin(math.pi * current_location.latitude / 180.0) *
+                      math.cos(math.pi *
+                          (destinationPosition.longitude -
+                              current_location.longitude) /
+                          180.0));
+
+          double rotate = bearing * 180.0 / math.pi;
+
+          _updateIconCurrentLocation(current_location, rotate: rotate);
+
+          Timer.periodic(const Duration(seconds: 1), (timer) {
             if (_info == null ||
-                customerRequestNotifier.status == RequestStatus.waiting ||
-                process >= _info!.polylinePoints.length - 1) {
+                requestStatus == RequestStatus.waiting ||
+                process >=
+                    customerRequest.direction.polylinePoints!.length - 1) {
               timer.cancel();
               return;
             }
 
-            if (process < _info!.polylinePoints.length - 1) {
+            if (process <
+                customerRequest.direction.polylinePoints!.length - 1) {
               process++;
 
               LocationPostion current_location = LocationPostion(
-                  latitude: _info!.polylinePoints[process].latitude,
-                  longitude: _info!.polylinePoints[process].longitude);
+                  latitude: customerRequest
+                      .direction.polylinePoints![process].latitude,
+                  longitude: customerRequest
+                      .direction.polylinePoints![process].longitude);
 
               final destinationPosition = LocationPostion(
-                  latitude: _info!.polylinePoints[process - 1].latitude,
-                  longitude: _info!.polylinePoints[process - 1]
+                  latitude: customerRequest
+                      .direction.polylinePoints![process - 1].latitude,
+                  longitude: customerRequest
+                      .direction
+                      .polylinePoints![process - 1]
                       .longitude); // Replace with your destination's coordinates
 
               final bearing = math.atan2(
@@ -327,35 +323,60 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                                   current_location.longitude) /
                               180.0));
 
+              double rotate = bearing * 180.0 / math.pi;
+
+              // _info!.polylinePoints.removeAt(0);
+
+              _polyline = {
+                Polyline(
+                    polylineId: const PolylineId('customer_direction'),
+                    color: const Color.fromARGB(255, 255, 113, 36),
+                    width: 8,
+                    points: _info!.polylinePoints!
+                        .map((e) => LatLng(e.latitude, e.longitude))
+                        .toList()
+                        .sublist(process, _info!.polylinePoints!.length))
+              };
+
+              _updateIconCurrentLocation(current_location, rotate: rotate);
+
               ref.read(socketClientProvider.notifier).publish(
                   'driver-moving',
                   jsonEncode(DriverSubmit(
-                          user_id: customerRequest
-                              .customer_infor.user_information.phonenumber,
-                          driver: Driver(
-                              "https://example.com/avatar0.jpg",
-                              "Nguyễn Đức Minh",
-                              "0778568685",
-                              Vehicle(
-                                  name: "Honda Wave RSX",
-                                  brand: "Honda",
-                                  type: "Xe máy",
-                                  color: "Xanh đen",
-                                  number: "68S164889"),
-                              current_location,
-                              bearing * 180.0 / math.pi,
-                              5.0))
-                      .toJson()));
+                    user_id: customerRequest
+                        .customer_infor.user_information.phonenumber,
+                    driver: Driver(
+                        driverDetails.avatar,
+                        driverDetails.name,
+                        driverDetails.phonenumber,
+                        Vehicle(
+                            name: "Honda Wave RSX",
+                            brand: "Honda",
+                            type: "Xe máy",
+                            color: "Xanh đen",
+                            number: "68S164889"),
+                        current_location,
+                        rotate,
+                        5.0),
+                    directions: _info!.polylinePoints!
+                        .sublist(process, _info!.polylinePoints!.length),
+                  ).toJson()));
             }
           });
           running = false;
         }
       }
 
-      if (customerRequestNotifier.status == RequestStatus.waiting) {
+      if (requestStatus == RequestStatus.waiting) {
         setState(() {
           _info = null;
           _polyline.clear();
+          _markers.clear();
+          _markers.add(_createMarker(
+              'my_location',
+              'Vị trí của tôi',
+              LatLng(_currentPosition.latitude, _currentPosition.longitude),
+              currentLocationIcon));
           process = 0;
           running = true;
         });
@@ -381,20 +402,21 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         circles: _circles,
         polylines: _polyline,
       ),
-      Align(
-          alignment: Alignment.bottomRight,
-          child: Container(
-            padding: const EdgeInsets.only(bottom: 120, right: 3),
-            child: CIconButton(
-              elevation: 1,
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.grey[500],
-              padding: const EdgeInsets.all(12),
-              icon: const Icon(FontAwesomeIcons.locationCrosshairs,
-                  color: Color(0xFFFF772B)),
-              onPressed: _moveToCurrent,
-            ),
-          )),
+      if (requestStatus == RequestStatus.waiting)
+        Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              padding: const EdgeInsets.only(bottom: 120, right: 3),
+              child: CIconButton(
+                elevation: 1,
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.grey[500],
+                padding: const EdgeInsets.all(12),
+                icon: const Icon(FontAwesomeIcons.locationCrosshairs,
+                    color: Color(0xFFFF772B)),
+                onPressed: _moveToCurrent,
+              ),
+            )),
     ]);
   }
 }

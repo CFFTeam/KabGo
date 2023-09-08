@@ -13,14 +13,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-abstract class RequestStatus {
-  static int waiting = 0;
-  static int accepted = 1;
-  static int comming = 2;
-  static int ready = 3;
-  static int ongoing = 4;
-}
-
 class CustomerRequestDetails {
   final LocationPostion currentLocation;
   final CustomerRequest customer_infor;
@@ -64,8 +56,6 @@ class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
   final SocketClient _socket;
   final LocationPostion currentLocation;
 
-  int status = RequestStatus.waiting;
-
   CustomerRequestNotifier(this._socket, this.currentLocation)
       : super(CustomerRequestDetails(
             customer_infor: CustomerRequest(
@@ -82,6 +72,7 @@ class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
                   type: ''),
               distance: '',
               time: '',
+              service: '',
               arrival_information:
                   LocationAddress(address: '', latitude: "", longitude: ""),
               departure_information:
@@ -102,43 +93,36 @@ class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
             ),
             duration_distance: '',
             duration_time: '')) {
-    _socket.subscribe('customer-request', (data) {
-      print('server say: ${jsonDecode(data)}');
+    if (_socket.connected()) {
+      _socket.subscribe('customer-request', (data) async {
+        print('server say: ${jsonDecode(data)}');
 
-      CustomerRequest customerReq = CustomerRequest.fromJson(jsonDecode(data));
-      DirectionRepository(dio: Dio())
-          .getDirection(
-              origin:
-                  LatLng(currentLocation.latitude, currentLocation.longitude),
-              destination: LatLng(
-                  double.parse(customerReq.departure_information.latitude),
-                  double.parse(customerReq.departure_information.longitude)))
-          .then((value) {
-        if (value != null) {
-          state = CustomerRequestDetails(
-              direction: value,
-              customer_infor: customerReq,
-              duration_distance: value.totalDistance,
-              duration_time: value.totalDuration,
-              currentLocation: LocationPostion(
-                latitude: currentLocation.latitude,
-                longitude: currentLocation.longitude,
-              ));
-        }
+        CustomerRequest customerReq =
+            CustomerRequest.fromJson(jsonDecode(data));
+
+        Directions? direct = await DirectionRepository(dio: Dio()).getDirection(
+            origin: LatLng(currentLocation.latitude, currentLocation.longitude),
+            destination: LatLng(
+                double.parse(customerReq.departure_information.latitude),
+                double.parse(customerReq.departure_information.longitude)));
+
+        if (!mounted) return;
+
+        state = CustomerRequestDetails(
+            direction: direct!,
+            customer_infor: customerReq,
+            duration_distance: direct.totalDistance!,
+            duration_time: direct.totalDuration!,
+            currentLocation: LocationPostion(
+              latitude: currentLocation.latitude,
+              longitude: currentLocation.longitude,
+            ));
       });
-    });
-  }
-
-  void acceptRequest() {
-    status = RequestStatus.accepted;
-  }
-
-  void commingRequest() {
-    status = RequestStatus.comming;
+    }
   }
 
   void cancelRequest() {
-    status = RequestStatus.waiting;
+    if (!mounted) return;
 
     state = CustomerRequestDetails(
         customer_infor: CustomerRequest(
@@ -155,6 +139,7 @@ class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
               type: ''),
           distance: '',
           time: '',
+          service: '',
           arrival_information:
               LocationAddress(address: '', latitude: "", longitude: ""),
           departure_information:
@@ -178,7 +163,10 @@ class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
 final customerRequestProvider =
     StateNotifierProvider<CustomerRequestNotifier, CustomerRequestDetails>(
         (ref) {
-  Position currentLocation = ref.read(currentLocationProvider);
+  ref.watch(socketClientProvider);
+
+  final Position currentLocation = ref.watch(currentLocationProvider);
+
   return CustomerRequestNotifier(
       ref.read(socketClientProvider.notifier),
       LocationPostion(

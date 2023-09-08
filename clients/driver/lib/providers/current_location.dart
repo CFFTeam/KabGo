@@ -44,6 +44,10 @@ class CurrentLocationProvider extends StateNotifier<Position> {
     });
   }
 
+  Position currentLocation() {
+    return state;
+  }
+
   void updateLocation(Position location) {
     state = location;
   }

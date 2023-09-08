@@ -97,6 +97,9 @@ const server = app.run(4501, async () => {
                 _id: newBooking._id,    
                 ...data,
                 status: "Đang điều phối"
+                // status: "Đang tiến hành"
+                // status: "Hoàn thành"
+                // status: "Đã hủy"
             }))
         })
     })

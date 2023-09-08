@@ -21,6 +21,7 @@ const dashboardSlice = createSlice({
 
         updateStateInformation: (state, action: PayloadAction<any[]>) => {
             state[action.payload[0]].status = action.payload[1];
+            state[action.payload[0]].driver = action.payload[2];
         },
     },
 })

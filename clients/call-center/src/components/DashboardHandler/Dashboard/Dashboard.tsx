@@ -7,21 +7,24 @@ import $ from "jquery";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import { dashboardActions } from "@store/reducers/dashboardSlice";
+import LoadingSpinner from "@components/SmallLoadingSpinner/SmallLoadingSpinner";
 
 interface DashboardInformation {
-  customer: string,
-  driver: string,
-  time: string,
-  vehicleType: string,
-  status: string,
-  arrivalAddress: string,
+  customer: string;
+  driver: string;
+  time: string;
+  vehicleType: string;
+  status: string;
+  arrivalAddress: string;
 }
 const DashboardTable: React.FC = () => {
   const initData = useAppSelector((state) => state.dashboard);
-
-  const [dashboardData, setDashboardData] = useState<DashboardInformation[]>(initData);
+  const [receivedBookingInformation, setReceivedBookingInformation] = useState<any>({});
+  // console.log("no socket: ", initData);
+  const [dashboardData, setDashboardData] =
+    useState<DashboardInformation[]>(initData);
   const [timeData, setTimeData] = useState<string>("Thời gian");
-  const [vehicleData, setVehicleData] = useState<string>("Loại xe khách đặt");
+  const [vehicleData, setVehicleData] = useState<string>("Loại xe");
   const [statusData, setStatusData] = useState<string>("Trạng thái");
   const handleFilter = (id: string, dataFilter: string) => {
     // $(`#${id}`).text(dataFilter);
@@ -36,7 +39,7 @@ const DashboardTable: React.FC = () => {
       } else {
         filterStatus = [...initData];
       }
-      if (dataFilter === "Loại xe khách đặt") setDashboardData(filterStatus);
+      if (dataFilter === "Loại xe") setDashboardData(filterStatus);
       else {
         setDashboardData(
           filterStatus.filter((data) => data.vehicleType === dataFilter)
@@ -46,7 +49,7 @@ const DashboardTable: React.FC = () => {
       setStatusData(dataFilter);
       let filterVehicle: DashboardInformation[] = [];
 
-      if (vehicleData !== "Loại xe khách đặt") {
+      if (vehicleData !== "Loại xe") {
         filterVehicle = initData.filter(
           (data) => data.vehicleType === vehicleData
         );
@@ -70,7 +73,6 @@ const DashboardTable: React.FC = () => {
   useEffect(() => {
     const socketInstance = io("http://api.call-center-s3.kabgo.local:4502");
     setSocket(socketInstance);
-    console.log('socket Instance: ', socketInstance);
   }, []);
 
   // get data from socket (2-way communication)
@@ -79,23 +81,36 @@ const DashboardTable: React.FC = () => {
       console.log("Socket initialized");
       socket.on("Tracking Queue", (message: string) => {
         const data = JSON.parse(message);
-        console.log("data get: ", data);
-        const newObj = {
-          customer: data.customer,
-          driver: data.driver,
-          time: data.time,
-          vehicleType: data.vehicleType,
-          status: data.status,
-          arrivalAddress: data.arrivalAddress,
-        }
-        console.log(newObj);
-        dispatch(dashboardActions.addDashboardInformation(newObj));
+        console.log('data: ', data);
+        setReceivedBookingInformation(data);
       });
     }
   }, [socket]);
 
+  useEffect(()=>{
+    const getBookingByID = initData.find((el:any) => el._id === receivedBookingInformation._id);
+    if(getBookingByID === undefined){
+      const newObj = {
+        _id: receivedBookingInformation._id,
+        customer: receivedBookingInformation.customer_name,
+        driver: "",
+        time: receivedBookingInformation.time,
+        vehicleType: receivedBookingInformation.vehicle_type,
+        status: receivedBookingInformation.status,
+        arrivalAddress: receivedBookingInformation.destination,
+      };
+      console.log('newObj: ', newObj);  
+      if(newObj._id!==undefined){
+        dispatch(dashboardActions.addDashboardInformation(newObj));
+      }
+    }
+    else{
+      dispatch(dashboardActions.updateStateInformation([initData.indexOf(getBookingByID), receivedBookingInformation.status, receivedBookingInformation.driver]));
+    }
+  }, [receivedBookingInformation])
+
   useEffect(() => {
-    setDashboardData(initData)
+    setDashboardData(initData);
   }, [initData]);
 
   return (
@@ -149,11 +164,9 @@ const DashboardTable: React.FC = () => {
                     className={`${styles["dropdown-content-table"]} ${styles["space-vehicle-type"]}`}
                   >
                     <div
-                      onClick={() =>
-                        handleFilter("vehicle_title", "Loại xe khách đặt")
-                      }
+                      onClick={() => handleFilter("vehicle_title", "Loại xe")}
                     >
-                      Loại xe khách đặt
+                      Loại xe
                     </div>
                     <div
                       onClick={() =>
@@ -232,12 +245,12 @@ const DashboardTable: React.FC = () => {
           <tbody className={styles["table-content"]}>
             {dashboardData.map((el, index) => (
               <tr key={index}>
-                <td className={styles["ordinal-number"]}>{index+1}</td>
+                <td className={styles["ordinal-number"]}>{index + 1}</td>
                 <td className={styles["client"]}>{el.customer}</td>
-                <td className={styles["driver"]}>{el.driver}</td>
-                <td className={styles["date-time"]}>
-                  {el.time}
+                <td className={styles["driver"]}>
+                  {el.driver === "" ? <LoadingSpinner /> : el.driver}
                 </td>
+                <td className={styles["date-time"]}>{el.time}</td>
                 <td
                   className={styles["vehicle-type"]}
                   style={{ textAlign: "center" }}
