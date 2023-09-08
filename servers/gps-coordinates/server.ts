@@ -5,9 +5,11 @@ import Driver from '@common/interfaces/driver';
 import DriverSubmit from '@common/interfaces/driver_submit';
 import User from '@common/interfaces/user';
 import rabbitmq from '@common/rabbitmq';
+import serviceModel from '@common/models/service.model';
 import socket from '@common/socket';
 import haversineDistance from '@common/utils/haversineDistance';
 import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 import { Server, Socket } from 'socket.io';
 
 process.on('uncaughtException', (err: Error) => {
@@ -50,7 +52,7 @@ const server = app.run(4600, async () => {
             console.log(driverList);
         });
 
-        socket.on('booking-car', (message: string) => {
+        socket.on('booking-car', async (message: string) => {
             const customer = JSON.parse(message) as User;
             const _id = customer.user_information.phonenumber;
 
@@ -58,6 +60,33 @@ const server = app.run(4600, async () => {
                 infor: customer,
                 socket: socket,
             };
+            console.log(customer);
+
+            const _service = await serviceModel.findOne({ name: customer.service });
+            console.log(_service?.id);
+            const controllers = new UserController();
+            controllers.createBooking({
+                customer: new mongoose.Types.ObjectId('64e741543ce0d32a53a60469'),
+                driver: new mongoose.Types.ObjectId('64f0d7a7357ef17371d71b3a'),
+                // related_employee: new mongoose.Types.ObjectId('64e99fffdb83ce30945a0f4d'),
+                original: {
+                    address: customer.departure_information.address,
+                    longitude: customer.departure_information.longitude,
+                    latitude: customer.departure_information.latitude,
+                },
+                destination: {
+                    address: customer.arrival_information.address,
+                    longitude: customer.arrival_information.longitude,
+                    latitude: customer.arrival_information.latitude,
+                },
+                time: new Date().toISOString(),
+                status: 'điều phối', //điều phối | tiến hành | hủy | hoàn thành
+                frequency: '1',
+                price: customer.price,
+                vehicle: _service?.id,
+                note: '',
+                // coupon: new mongoose.Types.ObjectId('64e73b79646803068e5c21f7'),
+            });
 
             let drivers: any = [];
 
@@ -72,6 +101,7 @@ const server = app.run(4600, async () => {
                         longitude: driverList[id].infor.coordinate.longitude,
                     }
                 );
+                console.log(distance);
                 if (distance <= 1.5) {
                     driverList[id].infor.distance = distance;
                     drivers = [...drivers, { ...driverList[id] }];
@@ -103,7 +133,13 @@ const server = app.run(4600, async () => {
 
             const id = driverSubmit.user_id;
 
-            customerList[id]?.socket.emit('moving driver', JSON.stringify(driverSubmit.driver));
+            customerList[id]?.socket.emit('moving driver', JSON.stringify(driverSubmit));
+        });
+
+        socket.on('driver-comming', (message: string) => {
+            const driverSubmit = JSON.parse(message) as DriverSubmit;
+            const id = driverSubmit.user_id;
+            customerList[id]?.socket.emit('comming driver', JSON.stringify(driverSubmit.driver));
         });
 
         socket.on('disconnect', () => {

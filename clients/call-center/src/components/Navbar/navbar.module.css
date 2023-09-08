@@ -7,6 +7,8 @@
     border: 2px solid #F0F0F0;
     border-radius: 8px;
     margin: 1rem;
+    background: white;
+    z-index: 10;
 }
 
 nav.nav-bar > span.dock-option {
