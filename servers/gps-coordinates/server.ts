@@ -35,6 +35,7 @@ const app = new Application({
 
 const driverList: any = {};
 const customerList: any = {};
+const stateDriver: any = {};
 
 const server = app.run(4600, async () => {
     socket.init(server);
@@ -120,12 +121,21 @@ const server = app.run(4600, async () => {
             socket.emit('send drivers', JSON.stringify(finalDrivers));
         });
 
-        socket.on('driver-accept', (message: string) => {
+        socket.on('driver-accept', async (message: string) => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
 
             const id = driverSubmit.user_id;
 
-            customerList[id].socket.emit('submit driver', JSON.stringify(driverSubmit.driver));
+            stateDriver[id].state = 'Đang tiến hành';
+            stateDriver[id].driver_name = driverSubmit.driver.name;
+            stateDriver[id].driver_phonenumber = driverSubmit.driver.phonenumber;
+            stateDriver[id].vehicle_number = driverSubmit.driver.vehicle.number;
+            stateDriver[id].vehicle_name = driverSubmit.driver.vehicle.name;
+            stateDriver[id].vehicle_color = driverSubmit.driver.vehicle.color;
+
+            await rabbitmq.publish('tracking', JSON.stringify(stateDriver[id]));
+            
+            customerList[id]?.socket.emit('submit driver', JSON.stringify(driverSubmit.driver));
         });
 
         socket.on('driver-moving', (message: string) => {
@@ -149,39 +159,70 @@ const server = app.run(4600, async () => {
         });
     });
 
-    // await rabbitmq.consume('gps-coordinates', (message: string) => {
-    //     const request = JSON.parse(message) as CallCenterRequest;                                                   
+    await rabbitmq.consume('gps-coordinates', (message: string) => {
+        console.log(message);
 
-    //     let drivers: any = [];
+        const request = JSON.parse(message) as CallCenterRequest;                                                   
 
-    //         for (const id in driverList) {
-    //             const distance = haversineDistance(
-    //                 {
-    //                     latitude: +customer.departure_information.latitude,
-    //                     longitude: +customer.departure_information.longitude,
-    //                 },
-    //                 {
-    //                     latitude: driverList[id].infor.coordinate.latitude,
-    //                     longitude: driverList[id].infor.coordinate.longitude,
-    //                 }
-    //             );
-    //             if (distance <= 1.5) {
-    //                 driverList[id].infor.distance = distance;
-    //                 drivers = [...drivers, { ...driverList[id] }];
-    //             }
-    //         }
+        let drivers: any = [];
 
-    //         const nearestDriver = drivers?.sort((a: any, b: any) => b.distance - a.distance).slice(0, 5);
+        for (const id in driverList) {
+            const distance = haversineDistance(
+                {
+                    latitude: +request.origin_latlng.lat,
+                    longitude: +request.origin_latlng.lng,
+                },
+                {
+                    latitude: driverList[id].infor.coordinate.latitude,
+                    longitude: driverList[id].infor.coordinate.longitude,
+                }
+            );
 
-    //         const finalDrivers = nearestDriver.map((el: any) => {
-    //             el.socket.emit('customer-request', JSON.stringify(customer));
-    //             delete el.socket;
+            if (distance <= 1.5) {
+                driverList[id].infor.distance = distance;
+                drivers = [...drivers, { ...driverList[id] }];
+            }
+        }
 
-    //             return el;
-    //         });
+        const nearestDriver = drivers?.sort((a: any, b: any) => b.distance - a.distance).slice(0, 5);
 
-    //         // socket.emit('send drivers', JSON.stringify(finalDrivers));
-    // });
+        const customer: User = {
+            user_information: {
+                avatar: 'https://www.slotcharter.net/wp-content/uploads/2020/02/no-avatar.png',
+                name: request.customer_name,
+                email: 'no email',
+                phonenumber: request.customer_phonenumber,
+                dob: '',
+                home_address: '',
+                type: 'STANDARD',
+                default_payment_method: 'Tiền mặt',
+                rank: 'Đồng',
+            },
+            departure_information: {
+                address: request.origin,
+                latitude: `${request.origin_latlng.lat}`,
+                longitude: `${request.origin_latlng.lng}`,
+            },
+            arrival_information: {
+                address: request.destination,
+                latitude: `${request.destination_latlng.lat}`,
+                longitude: `${request.destination_latlng.lng}`,
+            },
+            service: request.vehicle_type,
+            price: '160.000đ',
+            distance: '36.5km',
+            time: '35 phút',
+        }
+
+        stateDriver[request.customer_phonenumber] = {...request};
+
+        nearestDriver.map((el: any) => {
+            el.socket.emit('customer-request', JSON.stringify(customer));
+            delete el.socket;
+
+            return el;
+        });
+    });
 });
 
 // process.on('unhandledRejection', (err: Error) => {
