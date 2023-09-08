@@ -49941,3 +49941,7 @@
 [API.Authentication][Fri, 08 Sep 2023 13:35:02 GMT] Server is running on port 4100 
 [API.Authentication][Fri, 08 Sep 2023 13:35:03 GMT] Connected to database successfully 
 >>>>>>> 0f4b35d8c54b52bf040433b540b409b2e8ef810d
+[API.Authentication][Fri, 08 Sep 2023 21:13:19 GMT] Setting up request middleware... 
+[API.Authentication][Fri, 08 Sep 2023 21:13:19 GMT] Server is starting... 
+[API.Authentication][Fri, 08 Sep 2023 21:13:19 GMT] Server is running on port 4100 
+[API.Authentication][Fri, 08 Sep 2023 21:13:20 GMT] Connected to database successfully 

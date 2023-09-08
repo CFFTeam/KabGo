@@ -11,6 +11,11 @@ export const authStorage = {
         }
         return JSON.parse(authData);
     },
+
+    logout() {
+        if (localStorage.getItem('auth'))
+            localStorage.removeItem('auth');
+    },
     
     isAuthenticated() {
         const authData = localStorage.getItem('auth');
