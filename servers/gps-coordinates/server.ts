@@ -3,6 +3,7 @@ import UserController from '@common/controllers/user.controller';
 import Driver from '@common/interfaces/driver';
 import DriverSubmit from '@common/interfaces/driver_submit';
 import User from '@common/interfaces/user';
+import customerModel from '@common/models/customer.model';
 import serviceModel from '@common/models/service.model';
 import socket from '@common/socket';
 import haversineDistance from '@common/utils/haversineDistance';
@@ -58,11 +59,12 @@ const server = app.run(4600, () => {
             console.log(customer);
 
             const _service = await serviceModel.findOne({ name: customer.service });
+            const _customer = await customerModel.findOne({ email: customer.user_information.email });
             console.log(_service?.id);
             const controllers = new UserController();
-            controllers.createBooking({
-                customer: new mongoose.Types.ObjectId('64e741543ce0d32a53a60469'),
-                driver: new mongoose.Types.ObjectId('64f0d7a7357ef17371d71b3a'),
+            const bookingData = controllers.createBooking({
+                customer: _customer?.id,
+                // driver: '',
                 // related_employee: new mongoose.Types.ObjectId('64e99fffdb83ce30945a0f4d'),
                 original: {
                     address: customer.departure_information.address,
@@ -106,7 +108,7 @@ const server = app.run(4600, () => {
             const nearestDriver = drivers?.sort((a: any, b: any) => b.distance - a.distance).slice(0, 5);
 
             const finalDrivers = nearestDriver.map((el: any) => {
-                el.socket.emit('customer-request', JSON.stringify(customer));
+                el.socket.emit('customer-request', JSON.stringify({ customer: customer, 'booking-data': bookingData }));
                 delete el.socket;
 
                 return el;
