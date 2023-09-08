@@ -5,24 +5,25 @@ import ConfirmInfo from "@components/CallReceiptHandler/BookingForm/ConfirmInfo/
 import { useAppDispatch, useAppSelector } from "@hooks/ReduxHooks";
 import { useState, useEffect } from "react";
 import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSlice";
+import { Coordination, BookingInformation } from "@store/reducers/callReceiptHandlerSlice";
 
-interface Coordination {
-    lat: number;
-    lng: number;
-}
+// interface Coordination {
+//     lat: number;
+//     lng: number;
+// }
 
-interface BookingInformation {
-    name: string;
-    phoneNumber: string;
-    vehicleType: string;
-    origin: string;
-    destination: string;
-    note: string;
-    time: string;
-    state: string;
-    originLatLng: Coordination;
-    destinationLatLng: Coordination;
-}
+// interface BookingInformation {
+//     name: string;
+//     phoneNumber: string;
+//     vehicleType: string;
+//     origin: string;
+//     destination: string;
+//     note: string;
+//     time: string;
+//     state: string;
+//     originLatLng: Coordination;
+//     destinationLatLng: Coordination;
+// }
 
 const BookingPage: React.FC = () => {
     const dispatch = useAppDispatch();

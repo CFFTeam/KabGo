@@ -8,7 +8,7 @@ import { useAppSelector, useAppDispatch } from "@hooks/ReduxHooks";
 import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSlice";
 
 interface CallReceiptData {
-    id: string,
+    _id: string,
     phoneNumber: string,
     date: string,
     time: string,
@@ -16,63 +16,6 @@ interface CallReceiptData {
     status: string,
     arrivalAddress: string,
 }
-
-const callReceiptData: CallReceiptData[] = [
-    {   
-        id: '1',
-        phoneNumber: "090386151",
-        date: "31/7/2023",
-        time: "07:30 AM",
-        vehicleType: "Ô tô (7-9 chỗ)",
-        status: "Chờ xử lý",
-        arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    }, 
-    {   
-        id: '2',
-        phoneNumber: "090386151",
-        date: "31/7/2023",
-        time: "07:30 AM",
-        vehicleType: "Ô tô (7-9 chỗ)",
-        status: "Đã hủy",
-        arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    }, 
-    {   
-        id: '3',
-        phoneNumber: "090386151",
-        date: "31/7/2023",
-        time: "07:30 AM",
-        vehicleType: "Ô tô (7-9 chỗ)",
-        status: "Chờ xử lý",
-        arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    }, 
-    {   
-        id: '4',
-        phoneNumber: "090386151",
-        date: "31/7/2023",
-        time: "07:30 AM",
-        vehicleType: "Ô tô (7-9 chỗ)",
-        status: "Đã hủy",
-        arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    }, 
-    {   
-        id: '5',
-        phoneNumber: "090386151",
-        date: "31/7/2023",
-        time: "07:30 AM",
-        vehicleType: "Ô tô (7-9 chỗ)",
-        status: "Chờ xử lý",
-        arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    }, 
-    {   
-        id: '6',
-        phoneNumber: "090386151",
-        date: "31/7/2023",
-        time: "07:30 AM",
-        vehicleType: "Ô tô (7-9 chỗ)",
-        status: "Đã hủy",
-        arrivalAddress: "45 Trần Hưng Đạo, Q.5, TP. Hồ Chí Minh",
-    }, 
-]
 
 const CallReceiptTable: React.FC = () => {
     // const [socket, setSocket] = useState<Socket | null>(null);
@@ -98,10 +41,12 @@ const CallReceiptTable: React.FC = () => {
     //         });
     //     }
     // }, [socket]);
-    const handleItemClick = (phoneNumber: string, time: string) => {
-        navigate(`/booking-page/${phoneNumber}`);
-        const guestInformation = callReceiptData.find((item) => item.phoneNumber === phoneNumber && item.time === time);
+    const handleItemClick = (id: string) => {
+        navigate(`/booking-page/${id}`);
+        const guestInformation = callReceiptData.find((item) => item._id === id);
+        // used with google api key
         // dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
+        //     _id: guestInformation?._id || '',
         //     name: guestInformation?.name || '',
         //     phoneNumber: guestInformation?.phoneNumber || '',
         //     vehicleType: guestInformation?.vehicleType || '',
@@ -109,6 +54,7 @@ const CallReceiptTable: React.FC = () => {
         //     destination: guestInformation?.destination || '',
         //     note: guestInformation?.note || '',
         //     time: guestInformation?.time || '',
+        //     localTime: guestInformation?.local_time || '',
         //     state: guestInformation?.state || '',   
         //     originLatLng: guestInformation?.originLatLng || {},
         //     destinationLatLng: guestInformation?.destinationLatLng || {},
@@ -117,14 +63,17 @@ const CallReceiptTable: React.FC = () => {
         //     price: 0
         // }));
 
+        // static data
         dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
+            _id: guestInformation?._id || '64f9ca9541b8fa780d5a2127',
             name: 'Khoa Nguyễn',
             phoneNumber: '0903861515',
             vehicleType: "Ô tô (2-4 chỗ)",
             origin: "Chung cư 24/16 Võ Oanh (Chung cư C1 cũ), Võ Oanh, Phường 25, Bình Thạnh, Thành phố Hồ Chí Minh",
             destination: "Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh",
             note:"Gần chung ủy ban nhân dân phường 25",
-            time: guestInformation?.time || '',
+            time: guestInformation?.time || '2023-09-06T10:00:00.000+00:00',
+            localTime: "2023-09-06T10:00:00Z",
             state: "Chờ xử lý",
             originLatLng: {
                 lat: 10.8441125, 
@@ -232,7 +181,7 @@ const CallReceiptTable: React.FC = () => {
                     </tr> */}
                     {
                         callReceiptData.map((el, index) => 
-                            <tr key ={el.phoneNumber} onClick = {() => handleItemClick(el.phoneNumber, el.time)}>
+                            <tr key ={el._id} onClick = {() => handleItemClick(el._id)}>
                                 <td className ={styles["client"]}>0903861515</td>
                                 <td className = {styles["date-time"]}>
                                 {el.time}
