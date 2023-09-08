@@ -305,6 +305,7 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                             jsonEncode(DriverSubmit(
                                 user_id: customerRequest.customer_infor
                                     .user_information.phonenumber,
+                                history_id: customerRequest.customer_infor.history_id,
                                 driver: Driver(
                                     driverDetails.avatar,
                                     driverDetails.name,
