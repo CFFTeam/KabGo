@@ -1,8 +1,4 @@
-import 'package:customer_app/providers/arrivalLocationProvider.dart';
-import 'package:customer_app/providers/departureLocationProvider.dart';
-import 'package:customer_app/providers/stepProvider.dart';
-import 'package:customer_app/utils/Google_Api_Key.dart';
-import 'package:customer_app/widgets/suggestion_item.dart';
+import 'package:customer/widgets/suggestion_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -10,6 +6,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../models/location_model.dart';
 import '../models/place_auto_complate_response.dart';
 import '../functions/networkUtility.dart';
+import '../providers/arrivalLocationProvider.dart';
+import '../providers/departureLocationProvider.dart';
+import '../providers/stepProvider.dart';
+import '../utils/Google_Api_Key.dart';
 
 class InputCustom extends StatefulWidget {
   const InputCustom(
@@ -36,8 +36,9 @@ class _InputCustomState extends State<InputCustom> {
         Uri.https('maps.googleapis.com', 'maps/api/place/autocomplete/json', {
       'input': query,
       'key': APIKey,
-      'region': 'vn',
+      'components': 'country:vn',
       'city': 'Ho Chi Minh City',
+      'locationbias': 'circle:5000@10.791043518001057, 106.64709564391066',
       'language': 'vi',
     });
 
@@ -145,12 +146,16 @@ class _InputCustomState extends State<InputCustom> {
           ),
           hideOnLoading: true,
           onSuggestionSelected: (suggestion) {
+            suggestion.structuredFormatting!.formatSecondaryText();
             inputController.text = suggestion.structuredFormatting!.mainText!;
             widget.choosePoint(suggestion);
           },
-          itemBuilder: (ctx, suggestion) => SuggestionItem(
-            data: suggestion.structuredFormatting!,
-          ),
+          itemBuilder: (ctx, suggestion) {
+            suggestion.structuredFormatting!.formatSecondaryText();
+            return SuggestionItem(
+              data: suggestion.structuredFormatting!,
+            );
+          },
           suggestionsCallback: (pattern) async {
             List<LocationModel> matches = await placeAutoComplate(pattern);
             return matches;

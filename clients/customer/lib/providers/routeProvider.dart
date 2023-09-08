@@ -8,6 +8,14 @@ class RouteNotifier extends StateNotifier<RouteModel> {
   void setRoute(RouteModel value) async {
     state = value;
   }
+
+  void setPrice(String value) {
+    state.price = value;
+  }
+
+  void setService(String value) {
+    state.service = value;
+  }
 }
 
 final routeProvider =

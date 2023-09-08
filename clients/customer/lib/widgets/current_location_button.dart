@@ -27,7 +27,7 @@ class CurrentLocationButton extends StatelessWidget {
       child: IconButton(
         onPressed: getCurrentLocation,
         padding: EdgeInsets.zero,
-        icon: Image.asset('assets/location_button.png'),
+        icon: Image.asset('lib/assets/location_button.png'),
         iconSize: 60,
       ),
     );

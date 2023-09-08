@@ -1,16 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../../functions/convertTimeFormat.dart';
 import '../../functions/setHexColor.dart';
+import '../../models/driver_model.dart';
+import '../../models/location_model.dart';
+import '../../models/route_model.dart';
+import '../../providers/arrivalLocationProvider.dart';
+import '../../providers/departureLocationProvider.dart';
+import '../../providers/driverProvider.dart';
+import '../../providers/routeProvider.dart';
 import '../../providers/stepProvider.dart';
 
-class WaitDriverPanel extends ConsumerWidget {
+class WaitDriverPanel extends ConsumerStatefulWidget {
   const WaitDriverPanel({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _WaitDriverPanelState createState() => _WaitDriverPanelState();
+}
+
+class _WaitDriverPanelState extends ConsumerState<WaitDriverPanel> {
+  Widget widgetText = Text(
+    'Tài xế của bạn đang đến...',
+    style: GoogleFonts.montserrat(
+        color: HexColor('6A6A6A'), fontWeight: FontWeight.w600, fontSize: 18),
+    textAlign: TextAlign.start,
+  );
+  @override
+  Widget build(BuildContext context) {
     print('===========> WAIT_DRIVER_PANEL BUILD');
+    RouteModel routeModel = ref.read(routeProvider);
+    LocationModel departure = ref.read(departureLocationProvider);
+    LocationModel arrival = ref.read(arrivalLocationProvider);
+    DriverModel driverModel = ref.read(driverProvider);
 
     return Container(
       decoration: const BoxDecoration(
@@ -53,19 +77,37 @@ class WaitDriverPanel extends ConsumerWidget {
           ///////////////////////////////////////////////////// LOCATION INPUT
           Align(
             alignment: Alignment.topLeft,
-            child: Row(
-              children: [
-                const SizedBox(
-                  width: 15,
-                ),
-                Text(
-                  ref.read(stepProvider) == 'wait_driver'
-                      ? 'Tài xế của bạn đang đến'
-                      : 'Tài xế của bạn',
-                  style: Theme.of(context).textTheme.titleLarge,
-                  textAlign: TextAlign.start,
-                ),
-              ],
+            child: Consumer(
+              builder: (context, ref, child) {
+                ref.listen(stepProvider, ((previous, next) {
+                  setState(() {
+                    if (next == 'wait_driver') {
+                      widgetText = Text(
+                        'Tài xế của bạn đang đến...',
+                        style: Theme.of(context).textTheme.titleSmall,
+                        textAlign: TextAlign.start,
+                      );
+                    } else if (next == 'comming_driver') {
+                      widgetText = Text(
+                        'Tài xế của bạn đã đến',
+                        style: GoogleFonts.montserrat(
+                            color: HexColor('29BD11'),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18),
+                        textAlign: TextAlign.start,
+                      );
+                    } else {}
+                  });
+                }));
+                return Row(
+                  children: [
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    widgetText
+                  ],
+                );
+              },
             ),
           ),
           const SizedBox(
@@ -79,39 +121,50 @@ class WaitDriverPanel extends ConsumerWidget {
               Container(
                 width: 64,
                 height: 64,
+                clipBehavior: Clip.hardEdge,
                 decoration: const BoxDecoration(
                   color: Colors.grey,
                   borderRadius: BorderRadius.all(
                     Radius.circular(10),
                   ),
                 ),
+                child: Image.network(driverModel.avatar!),
               ),
               const SizedBox(
-                width: 16,
+                width: 12,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Trần Gia Huy',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 18,
+              SizedBox(
+                height: 64,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      width: 170,
+                      child: Text(
+                        driverModel.name!,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18,
+                          height: 1,
+                        ),
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Toyota Vios',
-                    style: TextStyle(
-                      color: HexColor('6A6A6A'),
-                      fontWeight: FontWeight.w700,
-                      fontSize: 15,
+                    SizedBox(
+                      width: 170,
+                      child: Text(
+                        driverModel.vehicle['name'],
+                        style: TextStyle(
+                          color: HexColor('6A6A6A'),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 15,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
                     ),
-                  )
-                ],
+                  ],
+                ),
               ),
               const Spacer(),
               Column(
@@ -128,16 +181,16 @@ class WaitDriverPanel extends ConsumerWidget {
                         ),
                       ),
                       const SizedBox(
-                        width: 1,
+                        width: 4,
                       ),
                       ...List.generate(
                           5,
                           (index) => const Padding(
-                                padding: EdgeInsets.only(bottom: 3, left: 4),
+                                padding: EdgeInsets.only(bottom: 3, left: 2),
                                 child: FaIcon(
                                   FontAwesomeIcons.solidStar,
                                   color: Color.fromARGB(255, 245, 221, 4),
-                                  size: 15,
+                                  size: 14,
                                 ),
                               ))
                     ],
@@ -156,7 +209,7 @@ class WaitDriverPanel extends ConsumerWidget {
                       ),
                     ),
                     child: Text(
-                      '54C1-4525.12',
+                      driverModel.vehicle['number'],
                       style: Theme.of(context).textTheme.displayMedium,
                     ),
                   ),
@@ -199,7 +252,7 @@ class WaitDriverPanel extends ConsumerWidget {
                       width: 10,
                     ),
                     Text(
-                      '15 km',
+                      routeModel.distance!,
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ],
@@ -215,13 +268,13 @@ class WaitDriverPanel extends ConsumerWidget {
                       width: 10,
                     ),
                     Text(
-                      '40 phút',
+                      convertTimeFormat(routeModel.time!),
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ],
                 ),
                 Text(
-                  '75.000đ',
+                  routeModel.price,
                   style: Theme.of(context).textTheme.titleLarge,
                 )
               ],
@@ -255,7 +308,7 @@ class WaitDriverPanel extends ConsumerWidget {
                 width: 15,
               ),
               Image.asset(
-                'assets/trip_icon.png',
+                'lib/assets/trip_icon.png',
                 height: 120,
               ),
               const SizedBox(
@@ -282,7 +335,7 @@ class WaitDriverPanel extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('1505 Phạm Thế Hiển',
+                          Text(departure.structuredFormatting!.mainText!,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                               style: Theme.of(context).textTheme.displayMedium),
@@ -290,7 +343,7 @@ class WaitDriverPanel extends ConsumerWidget {
                             height: 5,
                           ),
                           Text(
-                              '1647 Phạm Thế Hiển, phường 6, quận 8, TP. Hồ Chí Minh',
+                              '${departure.structuredFormatting!.mainText!}, ${(departure.structuredFormatting!.secondaryText!).replaceFirst(RegExp(r',[^,]*$'), ', TP.HCM')}',
                               style: Theme.of(context).textTheme.displaySmall),
                         ],
                       ),
@@ -317,7 +370,7 @@ class WaitDriverPanel extends ConsumerWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            '227 Nguyễn Văn Cừ',
+                            arrival.structuredFormatting!.mainText!,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                             style: Theme.of(context).textTheme.displayMedium,
@@ -326,7 +379,7 @@ class WaitDriverPanel extends ConsumerWidget {
                             height: 5,
                           ),
                           Text(
-                            '1647 Phạm Thế Hiển, phường 6, quận 8, TP. Hồ Chí Minh',
+                            '${arrival.structuredFormatting!.mainText!}, ${(arrival.structuredFormatting!.secondaryText!).replaceFirst(RegExp(r',[^,]*$'), ', TP.HCM')}',
                             style: Theme.of(context).textTheme.displaySmall,
                           ),
                         ],

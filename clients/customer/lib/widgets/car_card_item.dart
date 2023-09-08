@@ -1,16 +1,30 @@
-import 'package:customer_app/functions/setHexColor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
-class CarCardItem extends StatelessWidget {
-  const CarCardItem({Key? key, required this.isChosen, required this.data})
+import '../functions/setHexColor.dart';
+import '../providers/routeProvider.dart';
+
+class CarCardItem extends ConsumerWidget {
+  const CarCardItem(
+      {Key? key,
+      required this.isChosen,
+      required this.data,
+      required this.distance})
       : super(key: key);
 
   final bool isChosen;
   final Map<String, String> data;
+  final String distance;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    if (isChosen) {
+      ref.read(routeProvider.notifier).setPrice(
+          '${convertDistanceToMeters(data['price/m']!, distance).replaceAll(',', '.')}đ');
+      ref.read(routeProvider.notifier).setService(data['name']!);
+    }
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
@@ -55,7 +69,7 @@ class CarCardItem extends StatelessWidget {
           ),
           const Spacer(),
           Text(
-            data['price'].toString(),
+            '${convertDistanceToMeters(data['price/m']!, distance).replaceAll(',', '.')}đ',
             style: GoogleFonts.montserrat(
               color: HexColor('F86C1D'),
               fontWeight: FontWeight.w600,
@@ -65,5 +79,21 @@ class CarCardItem extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String convertDistanceToMeters(String price, String distanceString) {
+    String value = '';
+    double distanceValue = double.parse(distanceString.split(' ')[0]);
+    String distanceUnit = distanceString.split(' ')[1];
+    if (distanceUnit == 'km') {
+      distanceValue *= 1000; // 1 km = 1000 m
+    }
+    value = (((double.parse(data['price/m'].toString()) * distanceValue) / 1000)
+                .roundToDouble() *
+            1000)
+        .toStringAsFixed(0);
+    final formatter = NumberFormat("#,##0", "en_US");
+
+    return formatter.format(double.parse(value));
   }
 }

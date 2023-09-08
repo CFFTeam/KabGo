@@ -1,30 +1,24 @@
-import 'dart:convert';
-
-import 'package:customer_app/providers/departureLocationProvider.dart';
-import 'package:customer_app/providers/mapProvider.dart';
-import 'package:customer_app/providers/socketProvider.dart';
-import 'package:customer_app/screens/create_trip/choose_payment_method.dart';
-import 'package:customer_app/screens/create_trip/discount_page.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import '../../data/data.dart';
 import '../../functions/setHexColor.dart';
+import '../../models/customer_model.dart';
 import '../../models/location_model.dart';
 import '../../models/route_model.dart';
 import '../../providers/arrivalLocationProvider.dart';
+import '../../providers/customerProvider.dart';
+import '../../providers/departureLocationProvider.dart';
+import '../../providers/mapProvider.dart';
 import '../../providers/routeProvider.dart';
+import '../../providers/socketProvider.dart';
 import '../../providers/stepProvider.dart';
-import '../../services/dio_client.dart';
 import '../../widgets/bottom_button.dart';
 import '../../widgets/car_card_item.dart';
 import '../../widgets/home_lock/homelock.dart';
-
-import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'choose_payment_method.dart';
+import 'discount_page.dart';
 
 class SetSchedule extends ConsumerStatefulWidget {
   const SetSchedule({
@@ -91,13 +85,12 @@ class _SetScheduleState extends ConsumerState<SetSchedule> {
   String discount = '';
 
   Future<void> bookCar() async {
-    print('xuli');
-
     SocketClient socketClient = ref.read(socketClientProvider.notifier);
     LocationModel departure = ref.read(departureLocationProvider);
     LocationModel arrival = ref.read(arrivalLocationProvider);
     RouteModel routeModel = ref.read(routeProvider);
-    socketClient.emitBookingCar(departure, arrival, routeModel);
+    CustomerModel customerModel = ref.read(customerProvider);
+    socketClient.emitBookingCar(departure, arrival, routeModel, customerModel);
     ref.read(stepProvider.notifier).setStep('find_driver');
     ref.read(mapProvider.notifier).setMapAction('FIND_DRIVER');
 

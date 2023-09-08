@@ -1,16 +1,16 @@
-import 'package:customer_app/functions/setHexColor.dart';
-import 'package:customer_app/models/location_model.dart';
-import 'package:customer_app/models/route_model.dart';
-import 'package:customer_app/providers/arrivalLocationProvider.dart';
-import 'package:customer_app/providers/departureLocationProvider.dart';
-import 'package:customer_app/providers/mapProvider.dart';
-import 'package:customer_app/providers/routeProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../functions/convertTimeFormat.dart';
+import '../../functions/setHexColor.dart';
+import '../../models/location_model.dart';
+import '../../models/route_model.dart';
+import '../../providers/arrivalLocationProvider.dart';
+import '../../providers/departureLocationProvider.dart';
+import '../../providers/mapProvider.dart';
+import '../../providers/routeProvider.dart';
 import '../../providers/stepProvider.dart';
 import '../../widgets/bottom_button.dart';
 
@@ -103,7 +103,7 @@ class _ConfirmRouteDialogState extends ConsumerState<ConfirmRoutePanel> {
                             height: 5,
                           ),
                           Text(
-                              '${departure.structuredFormatting!.mainText!}, ${(departure.structuredFormatting!.secondaryText!).replaceFirst(RegExp(r',[^,]*$'), ', TP.HCM')}',
+                              '${departure.structuredFormatting!.mainText!}, ${(departure.structuredFormatting!.secondaryText!)}',
                               style: Theme.of(context).textTheme.displaySmall),
                         ],
                       ),
@@ -139,7 +139,7 @@ class _ConfirmRouteDialogState extends ConsumerState<ConfirmRoutePanel> {
                             height: 5,
                           ),
                           Text(
-                            '${arrival.structuredFormatting!.mainText!}, ${(arrival.structuredFormatting!.secondaryText!).replaceFirst(RegExp(r',[^,]*$'), ', TP.HCM')}',
+                            '${arrival.structuredFormatting!.mainText!}, ${(arrival.structuredFormatting!.secondaryText!)}',
                             style: Theme.of(context).textTheme.displaySmall,
                           ),
                         ],

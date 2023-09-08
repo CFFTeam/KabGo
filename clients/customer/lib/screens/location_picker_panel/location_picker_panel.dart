@@ -1,13 +1,13 @@
-import 'package:customer_app/models/location_model.dart';
-import 'package:customer_app/providers/arrivalLocationProvider.dart';
-import 'package:customer_app/providers/departureLocationProvider.dart';
-import 'package:customer_app/providers/locationPickerInMap.dart';
-import 'package:customer_app/providers/stepProvider.dart';
-import 'package:customer_app/widgets/bottom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../functions/setHexColor.dart';
+import '../../models/location_model.dart';
+import '../../providers/arrivalLocationProvider.dart';
+import '../../providers/departureLocationProvider.dart';
+import '../../providers/locationPickerInMap.dart';
 import '../../providers/mapProvider.dart';
+import '../../providers/stepProvider.dart';
+import '../../widgets/bottom_button.dart';
 import '../find_arrival_page/find_arrival_page.dart';
 
 class LocationPickerPanel extends ConsumerStatefulWidget {

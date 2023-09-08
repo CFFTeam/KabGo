@@ -1,9 +1,17 @@
-bool isCityHCM(String stringValue) {
-  int lastIndex = stringValue.lastIndexOf(',');
-  if (lastIndex == -1) {
-    return false;
+String convertTimeFormat(String input) {
+  List<String> parts = input.split(' ');
+  if (parts.length == 4) {
+    int hours = int.parse(parts[0]);
+    int mins = int.parse(parts[2]);
+    return '$hours giờ $mins phút';
+  } else if (parts.length == 2) {
+    if (parts[1] == 'mins') {
+      int mins = int.parse(parts[0]);
+      return '$mins phút';
+    } else if (parts[1] == 'min') {
+      int mins = int.parse(parts[0]);
+      return '$mins phút';
+    }
   }
-  String city = stringValue.substring(lastIndex + 1).trim();
-
-  return city == 'Thành phố Hồ Chí Minh';
+  return input;
 }
