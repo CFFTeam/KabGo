@@ -2446,3 +2446,48 @@
 [API.Call Center][Thu, 07 Sep 2023 07:43:23 GMT] Connected to database successfully 
 [API.Call Center][Thu, 07 Sep 2023 08:10:38 GMT] object 
 [API.Call Center][Thu, 07 Sep 2023 08:10:38 GMT] data from s1:  [object Object] 
+[API.Call Center][Fri, 08 Sep 2023 12:52:56 GMT] Server is starting... 
+[API.Call Center][Fri, 08 Sep 2023 12:52:56 GMT] Server is running on port 4500 
+[API.Call Center][Fri, 08 Sep 2023 12:52:56 GMT] Setting up request middleware... 
+[API.Call Center][Fri, 08 Sep 2023 12:52:56 GMT] Connected to database successfully 
+[API.Call Center][Fri, 08 Sep 2023 12:54:11 GMT] Could not connect to the rabbit mq Error: connect ECONNREFUSED 192.168.2.98:5672 
+[API.Call Center][Fri, 08 Sep 2023 13:39:57 GMT] Server is running on port 4500 
+[API.Call Center][Fri, 08 Sep 2023 13:39:57 GMT] Server is starting... 
+[API.Call Center][Fri, 08 Sep 2023 13:39:57 GMT] Setting up request middleware... 
+[API.Call Center][Fri, 08 Sep 2023 13:39:57 GMT] Connected to database successfully 
+[API.Call Center][Fri, 08 Sep 2023 13:41:12 GMT] Could not connect to the rabbit mq Error: connect ECONNREFUSED 192.168.2.98:5672 
+[API.Call Center][Fri, 08 Sep 2023 15:14:40 GMT] Setting up request middleware... 
+[API.Call Center][Fri, 08 Sep 2023 15:14:40 GMT] Server is starting... 
+[API.Call Center][Fri, 08 Sep 2023 15:14:40 GMT] Server is running on port 4500 
+[API.Call Center][Fri, 08 Sep 2023 15:14:41 GMT] Connected to database successfully 
+[API.Call Center][Fri, 08 Sep 2023 15:15:55 GMT] Could not connect to the rabbit mq Error: connect ECONNREFUSED 192.168.2.98:5672 
+[API.Call Center][Fri, 08 Sep 2023 17:56:56 GMT] Setting up request middleware... 
+[API.Call Center][Fri, 08 Sep 2023 17:56:56 GMT] Server is starting... 
+[API.Call Center][Fri, 08 Sep 2023 17:56:56 GMT] Server is running on port 4500 
+[API.Call Center][Fri, 08 Sep 2023 17:56:57 GMT] Connected to database successfully 
+[API.Call Center][Fri, 08 Sep 2023 17:58:11 GMT] Could not connect to the rabbit mq Error: connect ECONNREFUSED 192.168.2.98:5672 
+[API.Call Center][Fri, 08 Sep 2023 20:02:41 GMT] object 
+[API.Call Center][Fri, 08 Sep 2023 20:02:41 GMT] data from client-s1:  [object Object] 
+[API.Call Center][Fri, 08 Sep 2023 20:03:00 GMT] object 
+[API.Call Center][Fri, 08 Sep 2023 20:03:00 GMT] data from client-s1:  [object Object] 
+[API.Call Center][Fri, 08 Sep 2023 20:03:21 GMT] object 
+[API.Call Center][Fri, 08 Sep 2023 20:03:21 GMT] data from client-s1:  [object Object] 
+[API.Call Center][Fri, 08 Sep 2023 20:15:17 GMT] Setting up request middleware... 
+[API.Call Center][Fri, 08 Sep 2023 20:15:17 GMT] Server is starting... 
+[API.Call Center][Fri, 08 Sep 2023 20:15:17 GMT] Server is running on port 4500 
+[API.Call Center][Fri, 08 Sep 2023 20:15:17 GMT] Could not connect to the rabbit mq Error: Socket closed abruptly during opening handshake 
+[API.Call Center][Fri, 08 Sep 2023 20:15:17 GMT] Connected to database successfully 
+[API.Call Center][Fri, 08 Sep 2023 20:15:43 GMT] Setting up request middleware... 
+[API.Call Center][Fri, 08 Sep 2023 20:15:43 GMT] Server is starting... 
+[API.Call Center][Fri, 08 Sep 2023 20:15:43 GMT] Server is running on port 4500 
+[API.Call Center][Fri, 08 Sep 2023 20:15:43 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Fri, 08 Sep 2023 20:15:44 GMT] Connected to database successfully 
+[API.Call Center][Fri, 08 Sep 2023 20:16:10 GMT] Setting up request middleware... 
+[API.Call Center][Fri, 08 Sep 2023 20:16:10 GMT] Server is running on port 4500 
+[API.Call Center][Fri, 08 Sep 2023 20:16:10 GMT] Server is starting... 
+[API.Call Center][Fri, 08 Sep 2023 20:16:10 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Fri, 08 Sep 2023 20:16:11 GMT] Connected to database successfully 
+[API.Call Center][Fri, 08 Sep 2023 20:21:14 GMT] object 
+[API.Call Center][Fri, 08 Sep 2023 20:21:14 GMT] data from client-s1:  [object Object] 
+[API.Call Center][Fri, 08 Sep 2023 20:22:59 GMT] object 
+[API.Call Center][Fri, 08 Sep 2023 20:22:59 GMT] data from client-s1:  [object Object] 
