@@ -17,6 +17,7 @@ import 'package:go_router/go_router.dart';
 import '../../models/driver.dart';
 import '../../models/vehicle.dart';
 import '../../providers/current_location.dart';
+import '../../providers/driver_provider.dart';
 import 'styles.dart';
 
 class HomePanel extends ConsumerStatefulWidget {
@@ -38,6 +39,8 @@ class _HomePanelState extends ConsumerState<HomePanel> {
   Widget build(BuildContext context) {
     final socketNotifier = ref.read(socketClientProvider.notifier);
     final bool active = ref.watch(socketClientProvider);
+
+    final driverDetails = ref.read(driverDetailsProvider);
 
     final currentLocation = ref.read(currentLocationProvider);
     final requestState = ref.read(requestStatusProvider);
@@ -97,9 +100,9 @@ class _HomePanelState extends ConsumerState<HomePanel> {
                       socketNotifier.publish(
                           'join',
                           jsonEncode(Driver(
-                                  "https://example.com/avatar0.jpg",
-                                  "Nguyễn Đức Minh",
-                                  "0778568685",
+                                  driverDetails.avatar,
+                                  driverDetails.name,
+                                  driverDetails.phonenumber,
                                   Vehicle(
                                       name: "Honda Wave RSX",
                                       brand: "Honda",
@@ -109,6 +112,8 @@ class _HomePanelState extends ConsumerState<HomePanel> {
                                   LocationPostion(
                                       latitude: currentLocation.latitude,
                                       longitude: currentLocation.longitude),
+                                  //                                       latitude: 10.76346158096952,
+                                  // longitude: 106.67991580679914,
                                   currentLocation.heading,
                                   5.0)
                               .toJson()));

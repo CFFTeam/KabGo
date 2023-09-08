@@ -68,24 +68,18 @@ const CallReceiptForm: React.FC = () => {
             const bookingTime = `${scheduledBookingTime_HH_Ref.current?.value}:${scheduledBookingTime_MM_Ref.current?.value} ${isAM ? "AM" : 
         "PM"} - ${formattedDate}`;
             const formData = {
-                // name: nameRef.current?.value || '',
-                // phone_number: phoneNumberRef.current?.value || '',
+                // customer_name: nameRef.current?.value || '',
+                // customer_phonenumber: phoneNumberRef.current?.value || '',
                 // vehicle_type: vehicleTypeRef.current?.value || '',  
                 // origin: bookingInformation.departureAddress || '',
                 // destination: bookingInformation.arrivalAddress || '',
                 // note: noteRef.current?.value || '',
-                // customer_name: nameRef.current?.value || '',
-                // customer_phonenumber: phoneNumberRef.current?.value || '',
-                // vehicle_type: vehicleTypeRef.current?.value || '', 
-                // origin: bookingInformation.departureAddress || '',
-                // destination: bookingInformation.arrivalAddress || '',
-                // note: noteRef.current?.value || '',
-                // // local_time: 
-                // time: bookingTime,
                 // state: "Chờ xử lý",
                 // origin_latlng: bookingInformation.originLatLng,
                 // destination_latlng: bookingInformation.destinationLatLng,
-
+                // time: bookingTime,
+                // local_time: new Date(date.getTime() + (7 * 60 * 60 * 1000)).toISOString()
+            
                 customer_name: 'Khoa Nguyễn',
                 customer_phonenumber: '0903861515',
                 vehicle_type: "Ô tô (2-4 chỗ)",
@@ -102,7 +96,7 @@ const CallReceiptForm: React.FC = () => {
                     lng: 106.6824824
                 },
                 time: "12:30 PM - 01/09/2023",
-                localTime: new Date(date.getTime() + (7 * 60 * 60 * 1000)).toISOString()
+                local_time: new Date(date.getTime() + (7 * 60 * 60 * 1000)).toISOString()
             }
             // call axios service
             const response = await axiosClient.post(`${process.env.REACT_APP_API_URI_S1}/v1/locating/call-receipt` as string, formData);

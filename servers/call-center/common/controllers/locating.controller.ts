@@ -3,6 +3,7 @@ import Controller from '@common/interfaces/controller';
 import validationMiddleware from '@common/middlerware/validation.middleware';
 import CallReceiptDto from '@common/dtos/call_receipt.dto';
 import rabbitMQ from '@common/rabbitmq';
+import mongoose from 'mongoose';
 
 class LocatingController implements Controller {
     path: string = '/v1/locating';
@@ -13,9 +14,12 @@ class LocatingController implements Controller {
     }
 
     callReceipt = (req: Request, res: Response, next: NextFunction) => {
-        const data = req.body as CallReceiptDto;
+        const data = {
+        _id: new mongoose.Types.ObjectId(),
+        ...req.body as CallReceiptDto,
+        };
         console.log(typeof data);
-        console.log('data from s1: ', req.body);
+        console.log('data from client-s1: ', data);
         res.status(200).json({
             status: 'success',
             data

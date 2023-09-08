@@ -1,4 +1,3 @@
-import 'package:driver/models/location.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:riverpod/riverpod.dart';
 

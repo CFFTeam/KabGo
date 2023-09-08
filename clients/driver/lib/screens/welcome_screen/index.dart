@@ -1,4 +1,6 @@
+import 'package:driver/models/driver_details.dart';
 import 'package:driver/providers/auth_provider.dart';
+import 'package:driver/providers/driver_provider.dart';
 import 'package:driver/widgets/carousel/carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -56,7 +58,13 @@ class WelcomeScreen extends StatelessWidget {
                               width: double.infinity,
                               text: 'Tiếp tục với tài khoản Google',
                               onPressed: () async {
-                                await auth.signInWithGoogle(context);
+                                final DriverDetails? driverInfo =
+                                    await auth.signInWithGoogle(context);
+                                if (driverInfo != null) {
+                                  ref
+                                      .read(driverDetailsProvider.notifier)
+                                      .setDriverDetails(driverInfo);
+                                }
                               },
                               assetImage: 'lib/assets/images/auths/google.png');
                         }),

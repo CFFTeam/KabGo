@@ -7,7 +7,6 @@ import 'package:driver/models/customer_request.dart';
 import 'package:driver/models/direction_model.dart';
 import 'package:driver/models/location.dart';
 import 'package:driver/providers/current_location.dart';
-import 'package:driver/providers/request_status.dart';
 import 'package:driver/providers/socket_provider.dart';
 import 'package:driver/data/direction_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -112,8 +111,8 @@ class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
         state = CustomerRequestDetails(
             direction: direct!,
             customer_infor: customerReq,
-            duration_distance: direct.totalDistance,
-            duration_time: direct.totalDuration,
+            duration_distance: direct.totalDistance!,
+            duration_time: direct.totalDuration!,
             currentLocation: LocationPostion(
               latitude: currentLocation.latitude,
               longitude: currentLocation.longitude,

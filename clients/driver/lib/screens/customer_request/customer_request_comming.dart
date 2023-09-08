@@ -1,10 +1,18 @@
-import 'package:driver/screens/home_dashboard/home_dashboard.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../models/customer_booking.dart';
+import '../../models/driver.dart';
+import '../../models/location.dart';
+import '../../models/vehicle.dart';
+import '../../providers/current_location.dart';
 import '../../providers/customer_request.dart';
+import '../../providers/driver_provider.dart';
 import '../../providers/request_status.dart';
+import '../../providers/socket_provider.dart';
 import 'styles.dart';
 
 class CustomerRequestComming extends ConsumerStatefulWidget {
@@ -23,8 +31,13 @@ class _CustomerRequestCommingState
   @override
   Widget build(BuildContext context) {
     final requestStatusNotifier = ref.read(requestStatusProvider.notifier);
-    final customerRequestNotifier = ref.read(customerRequestProvider.notifier);
+    final currentLocation =
+        ref.read(currentLocationProvider.notifier).currentLocation();
+
+    final driverDetails = ref.read(driverDetailsProvider);
+
     final customerRequest = ref.watch(customerRequestProvider);
+    final socketManager = ref.read(socketClientProvider.notifier);
 
     return Container(
       decoration: const BoxDecoration(
@@ -80,7 +93,7 @@ class _CustomerRequestCommingState
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           SizedBox(
-                              width: MediaQuery.of(context).size.width - 270,
+                              width: MediaQuery.of(context).size.width - 230,
                               child: Text(
                                   customerRequest
                                       .customer_infor.user_information.name,
@@ -132,18 +145,29 @@ class _CustomerRequestCommingState
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          const SizedBox(width: 10),
-                          Text(
-                              customerRequest.customer_infor.user_information
-                                  .default_payment_method,
-                              style: ThemeText.bookingDetails),
+                          Row(
+                            children: <Widget>[
+                              const Icon(FontAwesomeIcons.solidCreditCard,
+                                  size: 15, color: Color(0xFFF86C1D)),
+                              const SizedBox(width: 6),
+                              Text(
+                                  customerRequest.customer_infor
+                                      .user_information.default_payment_method,
+                                  style: ThemeText.bookingDetails),
+                            ],
+                          ),
                           const SizedBox(width: 30),
+                          Row(
+                            children: <Widget>[
+                              const Icon(FontAwesomeIcons.taxi,
+                                  size: 15, color: Color(0xFFF86C1D)),
+                              const SizedBox(width: 6),
+                              Text(customerRequest.customer_infor.service,
+                                  style: ThemeText.bookingDetails),
+                            ],
+                          ),
                           // if (customerRequest.booking.promotion) const Text('Khuyến mãi', style: ThemeText.bookingDetails),
-                          Text(
-                              customerRequest
-                                  .customer_infor.service,
-                              style: ThemeText.bookingDetails),
-                          // if (!customerRequest.user_information.promotion) constx SizedBox(width: 60),
+                          // if (!customerRequest.user_information.promotion) const Spacer(),
                           const Spacer(),
                         ],
                       ),
@@ -159,6 +183,27 @@ class _CustomerRequestCommingState
               Expanded(
                 child: ElevatedButton(
                     onPressed: () {
+                      socketManager.publish(
+                          'driver-comming',
+                          jsonEncode(DriverSubmit(
+                              user_id: customerRequest
+                                  .customer_infor.user_information.phonenumber,
+                              driver: Driver(
+                                  driverDetails.avatar,
+                                  driverDetails.name,
+                                  driverDetails.phonenumber,
+                                  Vehicle(
+                                      name: "Honda Wave RSX",
+                                      brand: "Honda",
+                                      type: "Xe máy",
+                                      color: "Xanh đen",
+                                      number: "68S164889"),
+                                  LocationPostion(
+                                      latitude: currentLocation.latitude,
+                                      longitude: currentLocation.longitude),
+                                  currentLocation.heading,
+                                  5.0),
+                              directions: []).toJson()));
                       requestStatusNotifier.commingRequest();
                       // context.go(HomeDashboard.path);
                     },

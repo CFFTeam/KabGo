@@ -21,6 +21,7 @@ import '../../providers/customer_request.dart';
 
 import 'dart:math' as math;
 
+import '../../providers/driver_provider.dart';
 import '../../providers/request_status.dart';
 
 class KGoogleMap extends ConsumerStatefulWidget {
@@ -68,7 +69,9 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
 
   Marker _createMarker(
       String? id, String title, LatLng latLng, BitmapDescriptor icon,
-      {double rotate = 0.0, Offset anchor = const Offset(0.5, 0.5), double zIndex = 0.0}) {
+      {double rotate = 0.0,
+      Offset anchor = const Offset(0.5, 0.5),
+      double zIndex = 0.0}) {
     id ??= 'marker_id_${DateTime.now().millisecondsSinceEpoch}';
 
     return Marker(
@@ -95,7 +98,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
     });
   }
 
-  void _updateIconCurrentLocation(final currentPosition, { double rotate = 0.0 }) {
+  void _updateIconCurrentLocation(final currentPosition,
+      {double rotate = 0.0}) {
     final requestStatus = ref.watch(requestStatusProvider);
 
     if (requestStatus == RequestStatus.comming) {
@@ -104,7 +108,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
             'my_location',
             'Vị trí của tôi',
             LatLng(currentPosition.latitude, currentPosition.longitude),
-            driverIcon, rotate: rotate));
+            driverIcon,
+            rotate: rotate));
         _circles.clear();
       });
       return;
@@ -178,8 +183,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         .then((ByteData bytes) => currentLocationIcon =
             BitmapDescriptor.fromBytes(bytes.buffer.asUint8List()));
 
-    getBytesFromAsset('lib/assets/map/bike.png', 75)
-    .then((Uint8List bytes) => driverIcon = BitmapDescriptor.fromBytes(bytes));
+    getBytesFromAsset('lib/assets/map/bike.png', 75).then(
+        (Uint8List bytes) => driverIcon = BitmapDescriptor.fromBytes(bytes));
 
     DefaultAssetBundle.of(context).load('lib/assets/map/original.png').then(
         (ByteData bytes) => departureLocationIcon =
@@ -190,6 +195,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
   Widget build(BuildContext context) {
     final bool active = ref.watch(socketClientProvider);
     final requestStatus = ref.watch(requestStatusProvider);
+    final driverDetails = ref.read(driverDetailsProvider);
 
     if (active) {
       final customerRequest = ref.watch(customerRequestProvider);
@@ -212,15 +218,15 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
             _info = customerRequest.direction;
 
             _mapController.animateCamera(CameraUpdate.newLatLngBounds(
-                customerRequest.direction.bounds, 100.0));
+                customerRequest.direction.bounds!, 100.0));
 
             setState(() {
               _polyline = {
                 Polyline(
                     polylineId: const PolylineId('customer_direction'),
-                    color: Colors.orangeAccent,
-                    width: 6,
-                    points: customerRequest.direction.polylinePoints
+                    color: const Color.fromARGB(255, 255, 113, 36),
+                    width: 8,
+                    points: customerRequest.direction.polylinePoints!
                         .map((e) => LatLng(e.latitude, e.longitude))
                         .toList())
               };
@@ -248,51 +254,74 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         if (requestStatus == RequestStatus.comming &&
             running == true &&
             _info != null) {
+          LocationPostion current_location = LocationPostion(
+              latitude:
+                  customerRequest.direction.polylinePoints![process].latitude,
+              longitude:
+                  customerRequest.direction.polylinePoints![process].longitude);
 
-            LocationPostion current_location = LocationPostion(
-                latitude: customerRequest.direction.polylinePoints[process].latitude,
-                longitude: customerRequest.direction.polylinePoints[process].longitude);
+          final destinationPosition = LocationPostion(
+              latitude: customerRequest
+                  .direction.polylinePoints![process + 1].latitude,
+              longitude: customerRequest.direction.polylinePoints![process + 1]
+                  .longitude); // Replace with your destination's coordinates
 
-            final destinationPosition = LocationPostion(
-                latitude: customerRequest.direction.polylinePoints[process + 1].latitude,
-                longitude: customerRequest.direction.polylinePoints[process + 1]
-                    .longitude); // Replace with your destination's coordinates
+          final bearing = math.atan2(
+              math.sin(math.pi *
+                  (destinationPosition.longitude - current_location.longitude) /
+                  180.0),
+              math.cos(math.pi * current_location.latitude / 180.0) *
+                      math.tan(math.pi * destinationPosition.latitude / 180.0) -
+                  math.sin(math.pi * current_location.latitude / 180.0) *
+                      math.cos(math.pi *
+                          (destinationPosition.longitude -
+                              current_location.longitude) /
+                          180.0));
 
-            final bearing = math.atan2(
-                math.sin(math.pi * (destinationPosition.longitude - current_location.longitude) / 180.0),
-                math.cos(math.pi * current_location.latitude / 180.0) *
-                        math.tan(math.pi * destinationPosition.latitude / 180.0) - math.sin(math.pi * current_location.latitude / 180.0) *
-                        math.cos(math.pi * (destinationPosition.longitude - current_location.longitude) / 180.0));
-
-            double rotate = bearing * 180.0 / math.pi;
+          double rotate = bearing * 180.0 / math.pi;
 
           _updateIconCurrentLocation(current_location, rotate: rotate);
 
           Timer.periodic(const Duration(seconds: 1), (timer) {
             if (_info == null ||
                 requestStatus == RequestStatus.waiting ||
-                process >= customerRequest.direction.polylinePoints.length - 1) {
+                process >=
+                    customerRequest.direction.polylinePoints!.length - 1) {
               timer.cancel();
               return;
             }
 
-            if (process < customerRequest.direction.polylinePoints.length - 1) {
+            if (process <
+                customerRequest.direction.polylinePoints!.length - 1) {
               process++;
 
               LocationPostion current_location = LocationPostion(
-                  latitude: customerRequest.direction.polylinePoints[process].latitude,
-                  longitude: customerRequest.direction.polylinePoints[process].longitude);
+                  latitude: customerRequest
+                      .direction.polylinePoints![process].latitude,
+                  longitude: customerRequest
+                      .direction.polylinePoints![process].longitude);
 
               final destinationPosition = LocationPostion(
-                  latitude: customerRequest.direction.polylinePoints[process - 1].latitude,
-                  longitude: customerRequest.direction.polylinePoints[process - 1]
+                  latitude: customerRequest
+                      .direction.polylinePoints![process - 1].latitude,
+                  longitude: customerRequest
+                      .direction
+                      .polylinePoints![process - 1]
                       .longitude); // Replace with your destination's coordinates
 
               final bearing = math.atan2(
-                  math.sin(math.pi * (destinationPosition.longitude - current_location.longitude) / 180.0),
+                  math.sin(math.pi *
+                      (destinationPosition.longitude -
+                          current_location.longitude) /
+                      180.0),
                   math.cos(math.pi * current_location.latitude / 180.0) *
-                          math.tan(math.pi * destinationPosition.latitude / 180.0) - math.sin(math.pi * current_location.latitude / 180.0) *
-                          math.cos(math.pi * (destinationPosition.longitude - current_location.longitude) / 180.0));
+                          math.tan(
+                              math.pi * destinationPosition.latitude / 180.0) -
+                      math.sin(math.pi * current_location.latitude / 180.0) *
+                          math.cos(math.pi *
+                              (destinationPosition.longitude -
+                                  current_location.longitude) /
+                              180.0));
 
               double rotate = bearing * 180.0 / math.pi;
 
@@ -301,11 +330,12 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
               _polyline = {
                 Polyline(
                     polylineId: const PolylineId('customer_direction'),
-                    color: Colors.orangeAccent,
-                    width: 6,
-                    points: _info!.polylinePoints
+                    color: const Color.fromARGB(255, 255, 113, 36),
+                    width: 8,
+                    points: _info!.polylinePoints!
                         .map((e) => LatLng(e.latitude, e.longitude))
-                        .toList().sublist(process, _info!.polylinePoints.length - 1))
+                        .toList()
+                        .sublist(process, _info!.polylinePoints!.length))
               };
 
               _updateIconCurrentLocation(current_location, rotate: rotate);
@@ -313,22 +343,24 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
               ref.read(socketClientProvider.notifier).publish(
                   'driver-moving',
                   jsonEncode(DriverSubmit(
-                          user_id: customerRequest
-                              .customer_infor.user_information.phonenumber,
-                          driver: Driver(
-                              "https://example.com/avatar0.jpg",
-                              "Nguyễn Đức Minh",
-                              "0778568685",
-                              Vehicle(
-                                  name: "Honda Wave RSX",
-                                  brand: "Honda",
-                                  type: "Xe máy",
-                                  color: "Xanh đen",
-                                  number: "68S164889"),
-                              current_location,
-                              rotate,
-                              5.0))
-                      .toJson()));
+                    user_id: customerRequest
+                        .customer_infor.user_information.phonenumber,
+                    driver: Driver(
+                        driverDetails.avatar,
+                        driverDetails.name,
+                        driverDetails.phonenumber,
+                        Vehicle(
+                            name: "Honda Wave RSX",
+                            brand: "Honda",
+                            type: "Xe máy",
+                            color: "Xanh đen",
+                            number: "68S164889"),
+                        current_location,
+                        rotate,
+                        5.0),
+                    directions: _info!.polylinePoints!
+                        .sublist(process, _info!.polylinePoints!.length),
+                  ).toJson()));
             }
           });
           running = false;
@@ -371,20 +403,20 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         polylines: _polyline,
       ),
       if (requestStatus == RequestStatus.waiting)
-      Align(
-          alignment: Alignment.bottomRight,
-          child: Container(
-            padding: const EdgeInsets.only(bottom: 120, right: 3),
-            child: CIconButton(
-              elevation: 1,
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.grey[500],
-              padding: const EdgeInsets.all(12),
-              icon: const Icon(FontAwesomeIcons.locationCrosshairs,
-                  color: Color(0xFFFF772B)),
-              onPressed: _moveToCurrent,
-            ),
-          )),
+        Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              padding: const EdgeInsets.only(bottom: 120, right: 3),
+              child: CIconButton(
+                elevation: 1,
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.grey[500],
+                padding: const EdgeInsets.all(12),
+                icon: const Icon(FontAwesomeIcons.locationCrosshairs,
+                    color: Color(0xFFFF772B)),
+                onPressed: _moveToCurrent,
+              ),
+            )),
     ]);
   }
 }

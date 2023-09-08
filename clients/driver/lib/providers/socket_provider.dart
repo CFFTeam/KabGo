@@ -50,7 +50,7 @@ class SocketClient extends StateNotifier<bool> {
 
   void publish(String event, String json) {
     if (!mounted) return;
-    
+
     if (state == true) {
       socket.emit(event, json);
     }

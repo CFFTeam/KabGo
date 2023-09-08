@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 import './service.model';
 
-export interface IAccountBalance {
+export interface AccountBalance {
     name: string;
     balance: number;
 }
 
-export interface IVehicle {
+export interface Vehicle {
     name: string;
     brand: string;
     category: string;
@@ -15,7 +15,7 @@ export interface IVehicle {
     number: string;
 }
 
-export interface IDriver {
+export interface Driver {
     _id?: string;
     avatar?: string;
     name?: string;
@@ -28,23 +28,22 @@ export interface IDriver {
     day_income?: number;
     week_income?: number;
     lock: boolean;
-    account_balance?: IAccountBalance[];
-    vehicle?: IVehicle[];
+    account_balance?: AccountBalance[];
+    vehicle?: Vehicle[];
     active?: string;
-    social?: boolean;
 }
 
-const driverSchema = new mongoose.Schema<IDriver>({
+const driverSchema = new mongoose.Schema<Driver>({
     avatar: { type: String }, 
     name: { type: String },
     email: { type: String },
     phonenumber: { type: String },
-    rate: { type: Number, default: 0.0 },
-    accept_rate: { type: Number, default: 0.0 },
-    cancel_rate: { type: Number, default: 0.0 },
+    rate: { type: Number },
+    accept_rate: { type: Number },
+    cancel_rate: { type: Number },
     begin_day: { type: String },
-    day_income: { type: Number, default: 0.0 },
-    week_income: { type: Number, default: 0.0 },
+    day_income: { type: Number },
+    week_income: { type: Number },
     lock: { type: Boolean, default: false },
     account_balance: [{ name: String, balance: Number }],
     vehicle: [
@@ -63,15 +62,11 @@ const driverSchema = new mongoose.Schema<IDriver>({
     ],
     active: {
         type: String,
-        default: Date.now(),
+        default: '26/8/2023',
     },
-    social: {
-        type: Boolean,
-        default: false,
-    }
 });
 
-const Driver = mongoose.model<IDriver>('Driver', driverSchema);
+const driverModel = mongoose.model<Driver>('Driver', driverSchema);
 
-export default Driver;
+export default driverModel;
 

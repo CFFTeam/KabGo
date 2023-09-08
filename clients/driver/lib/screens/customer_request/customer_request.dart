@@ -6,7 +6,6 @@ import 'package:driver/providers/current_location.dart';
 import 'package:driver/providers/socket_provider.dart';
 import 'package:driver/screens/customer_request/customer_request_accept.dart';
 import 'package:driver/screens/home_dashboard/home_dashboard.dart';
-import 'package:driver/widgets/button/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,6 +15,7 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import '../../models/location.dart';
 import '../../models/vehicle.dart';
 import '../../providers/customer_request.dart';
+import '../../providers/driver_provider.dart';
 import '../../providers/request_status.dart';
 import 'styles.dart';
 
@@ -33,8 +33,11 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
   @override
   Widget build(BuildContext context) {
     final socketManager = ref.read(socketClientProvider.notifier);
-    final currentLocation = ref.read(currentLocationProvider.notifier).currentLocation();
-    
+    final currentLocation =
+        ref.read(currentLocationProvider.notifier).currentLocation();
+
+    final driverDetails = ref.read(driverDetailsProvider);
+
     final customerRequestNotifier = ref.read(customerRequestProvider.notifier);
     final requestStatusNotifier = ref.read(requestStatusProvider.notifier);
 
@@ -78,7 +81,7 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         SizedBox(
-                            width: MediaQuery.of(context).size.width - 270,
+                            width: MediaQuery.of(context).size.width - 230,
                             child: Text(
                                 customerRequest
                                     .customer_infor.user_information.name,
@@ -90,30 +93,41 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                             //     image: AssetImage(
                             //         'lib/assets/icons/${customerRequest.user_information.rankType}.png'),
                             //     width: 20),
-                            if (customerRequest.customer_infor.user_information.rank.toLowerCase() == 'đồng')
-                            const Image(
-                                image: AssetImage(
-                                    'lib/assets/icons/bronze.png'),
-                                width: 20),
-                            if (customerRequest.customer_infor.user_information.rank.toLowerCase() == 'bạc')
-                            const Image(
-                                image: AssetImage(
-                                    'lib/assets/icons/silver.png'),
-                                width: 20),
-                            if (customerRequest.customer_infor.user_information.rank.toLowerCase() == 'vàng')
-                            const Image(
-                                image: AssetImage(
-                                    'lib/assets/icons/gold.png'),
-                                width: 20),
-                            if (customerRequest.customer_infor.user_information.rank.toLowerCase() == 'kim cương')
-                            const Image(
-                                image: AssetImage(
-                                    'lib/assets/icons/diamon.png'),
-                                width: 20),
+                            if (customerRequest
+                                    .customer_infor.user_information.rank
+                                    .toLowerCase() ==
+                                'đồng')
+                              const Image(
+                                  image:
+                                      AssetImage('lib/assets/icons/bronze.png'),
+                                  width: 20),
+                            if (customerRequest
+                                    .customer_infor.user_information.rank
+                                    .toLowerCase() ==
+                                'bạc')
+                              const Image(
+                                  image:
+                                      AssetImage('lib/assets/icons/silver.png'),
+                                  width: 20),
+                            if (customerRequest
+                                    .customer_infor.user_information.rank
+                                    .toLowerCase() ==
+                                'vàng')
+                              const Image(
+                                  image:
+                                      AssetImage('lib/assets/icons/gold.png'),
+                                  width: 20),
+                            if (customerRequest
+                                    .customer_infor.user_information.rank
+                                    .toLowerCase() ==
+                                'kim cương')
+                              const Image(
+                                  image:
+                                      AssetImage('lib/assets/icons/diamon.png'),
+                                  width: 20),
                             const SizedBox(width: 10),
                             Text(
-                                "Hạng ${customerRequest
-                                    .customer_infor.user_information.rank.toLowerCase()}",
+                                "Hạng ${customerRequest.customer_infor.user_information.rank.toLowerCase()}",
                                 style: ThemeText.ranking),
                           ],
                         )
@@ -123,16 +137,15 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        const SizedBox(width: 10),
                         Row(
                           children: <Widget>[
                             const Icon(FontAwesomeIcons.solidCreditCard,
                                 size: 15, color: Color(0xFFF86C1D)),
-                            const SizedBox(width: 8),
+                            const SizedBox(width: 6),
                             Text(
-                              customerRequest.customer_infor.user_information
-                                  .default_payment_method,
-                              style: ThemeText.bookingDetails),
+                                customerRequest.customer_infor.user_information
+                                    .default_payment_method,
+                                style: ThemeText.bookingDetails),
                           ],
                         ),
                         const SizedBox(width: 30),
@@ -140,11 +153,9 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                           children: <Widget>[
                             const Icon(FontAwesomeIcons.taxi,
                                 size: 15, color: Color(0xFFF86C1D)),
-                            const SizedBox(width: 8),
-                            Text(
-                              customerRequest
-                                  .customer_infor.service,
-                              style: ThemeText.bookingDetails),
+                            const SizedBox(width: 6),
+                            Text(customerRequest.customer_infor.service,
+                                style: ThemeText.bookingDetails),
                           ],
                         ),
                         // if (customerRequest.booking.promotion) const Text('Khuyến mãi', style: ThemeText.bookingDetails),
@@ -270,17 +281,16 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
             //   child: const Text('TỪ CHỐI', style: ThemeText.cancelButtonText),
             // )),
             ElevatedButton(
-              onPressed: () {
-                requestStatusNotifier.cancelRequest();
-                customerRequestNotifier.cancelRequest();
+                onPressed: () {
+                  requestStatusNotifier.cancelRequest();
+                  customerRequestNotifier.cancelRequest();
 
-                context.go(HomeDashboard.path);
-              },
-              style: ThemeButton.cancelButton,
-              child: const Center(
-                child: Icon(FontAwesomeIcons.xmark, color: Color(0xFFF42525)),
-              )
-            ),
+                  context.go(HomeDashboard.path);
+                },
+                style: ThemeButton.cancelButton,
+                child: const Center(
+                  child: Icon(FontAwesomeIcons.xmark, color: Color(0xFFF42525)),
+                )),
             const SizedBox(width: 16),
             Expanded(
               child: Stack(
@@ -293,25 +303,24 @@ class _CustomerRequestState extends ConsumerState<CustomerRequest> {
                         socketManager.publish(
                             'driver-accept',
                             jsonEncode(DriverSubmit(
-                                    user_id: customerRequest.customer_infor
-                                        .user_information.phonenumber,
-                                    driver: Driver(
-                                        "https://example.com/avatar0.jpg",
-                                        "Nguyễn Đức Minh",
-                                        "0778568685",
-                                        Vehicle(
-                                            name: "Honda Wave RSX",
-                                            brand: "Honda",
-                                            type: "Xe máy",
-                                            color: "Xanh đen",
-                                            number: "68S164889"),
-                                        LocationPostion(
-                                            latitude: currentLocation.latitude,
-                                            longitude:
-                                                currentLocation.longitude),
-                                        currentLocation.heading,
-                                        5.0))
-                                .toJson()));
+                                user_id: customerRequest.customer_infor
+                                    .user_information.phonenumber,
+                                driver: Driver(
+                                    driverDetails.avatar,
+                                    driverDetails.name,
+                                    driverDetails.phonenumber,
+                                    Vehicle(
+                                        name: "Honda Wave RSX",
+                                        brand: "Honda",
+                                        type: "Xe máy",
+                                        color: "Xanh đen",
+                                        number: "68S164889"),
+                                    LocationPostion(
+                                        latitude: currentLocation.latitude,
+                                        longitude: currentLocation.longitude),
+                                    currentLocation.heading,
+                                    5.0),
+                                directions: []).toJson()));
 
                         requestStatusNotifier.acceptRequest();
                         context.go(CustomerRequestAccept.path);

@@ -212,7 +212,7 @@ form.confirm-form > div.btn-section > button:hover {
 
 div.wrapper > div.loading-form,
 div.wrapper > div.successful-form {
-    z-index: 3;
+    z-index: 200;
     position: fixed;
     width: 60rem;
     top: 50%;

@@ -13,17 +13,18 @@ export interface Coordination {
     lat: number;
     lng: number;
 }
-    //     name: nameRef.current?.value || '',
-    //     phoneNumber: phoneNumberRef.current?.value || '',
-    //     vehicleType: vehicleTypeRef.current?.value || '',
-    //     scheduledBookingTime_HH: scheduledBookingTime_HH_Ref.current?.value || '',
-    //     scheduledBookingTime_MM: scheduledBookingTime_MM_Ref.current?.value || '',
-    //     departureAddress: bookingInformation.departureAddress || '', // must not be empty (set from PlacesAutocompleteInput)
-    //     arrivalAddress: bookingInformation.arrivalAddress || '',  // must not be empty (set from PlacesAutocompleteInput)
-    //     note: noteRef.current?.value || '',
+    // name: nameRef.current?.value || '',
+    // phoneNumber: phoneNumberRef.current?.value || '',
+    // vehicleType: vehicleTypeRef.current?.value || '',
+    // scheduledBookingTime_HH: scheduledBookingTime_HH_Ref.current?.value || '',
+    // scheduledBookingTime_MM: scheduledBookingTime_MM_Ref.current?.value || '',
+    // departureAddress: bookingInformation.departureAddress || '', // must not be empty (set from PlacesAutocompleteInput)
+    // arrivalAddress: bookingInformation.arrivalAddress || '',  // must not be empty (set from PlacesAutocompleteInput)
+    // note: noteRef.current?.value || '',
 
 
 export interface FinalBookingInformation {
+    _id: string | any;
     name: string;
     phoneNumber: string;
     vehicleType: string;
@@ -31,15 +32,17 @@ export interface FinalBookingInformation {
     destination: string; // arrival address
     note: string;
     time: string;
+    localTime: Date | string;
     state: string;
     originLatLng: Coordination | any;
     destinationLatLng: Coordination | any;
     distance: string;
     duration: string;
-    price: number;
+    price: string | number;
 }
 
 export interface BookingInformation {
+    _id: string | any;
     name: string;
     phoneNumber: string;
     vehicleType: string;
@@ -47,6 +50,7 @@ export interface BookingInformation {
     destination: string;
     note: string;
     time: string;
+    localTime: Date | string;
     state: string;
     originLatLng: Coordination;
     destinationLatLng: Coordination;
@@ -73,6 +77,7 @@ const initialCallReceiptHandlerState: callReceiptHandlerState = {
     },
     bookingInformation: [],
     finalBookingInformation: {
+        _id: '',
         name: '',
         phoneNumber: '',
         vehicleType: '',
@@ -80,6 +85,7 @@ const initialCallReceiptHandlerState: callReceiptHandlerState = {
         destination: '',
         note: '',
         time: '',
+        localTime: '',
         state: '',
         originLatLng: {
             lat: 0,
