@@ -1,7 +1,6 @@
 import { CallCenterRequest } from './common/interfaces/call_center_request';
 import Application from '@common/app';
 import UserController from '@common/controllers/user.controller';
-import Driver from '@common/interfaces/driver';
 import DriverSubmit from '@common/interfaces/driver_submit';
 import User from '@common/interfaces/user';
 import customerModel from '@common/models/customer.model';
@@ -10,8 +9,10 @@ import serviceModel from '@common/models/service.model';
 import socket from '@common/socket';
 import haversineDistance from '@common/utils/haversineDistance';
 import dotenv from 'dotenv';
+import Driver from '@common/interfaces/driver';
+import driverModel from '@common/models/driver.model';
+import BookingHistory from '@common/models/booking_history.model';
 import mongoose from 'mongoose';
-import { Server, Socket } from 'socket.io';
 
 process.on('uncaughtException', (err: Error) => {
     console.error('Uncaught Exception. Shutting down...');
@@ -47,7 +48,7 @@ const server = app.run(4600, async () => {
 
             socket.phonenumber = _id;
 
-            driverList[_id] = {
+            driverList[socket.phonenumber] = {
                 socket: socket,
                 infor: driver,
             };
@@ -127,15 +128,66 @@ const server = app.run(4600, async () => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
 
             const id = driverSubmit.user_id;
+            const phonenumber = driverSubmit.driver.phonenumber;
 
-            stateDriver[id].state = 'Đang tiến hành';
-            stateDriver[id].driver_name = driverSubmit.driver.name;
-            stateDriver[id].driver_phonenumber = driverSubmit.driver.phonenumber;
-            stateDriver[id].vehicle_number = driverSubmit.driver.vehicle.number;
-            stateDriver[id].vehicle_name = driverSubmit.driver.vehicle.name;
-            stateDriver[id].vehicle_color = driverSubmit.driver.vehicle.color;
+            const driverInfor = await driverModel.findOne({ phonenumber: phonenumber }).select('_id');
 
-            await rabbitmq.publish('tracking', JSON.stringify(stateDriver[id]));
+            let history_id = stateDriver[id]?.history_id ?? driverSubmit.history_id;
+
+            if (stateDriver[id]) {
+                stateDriver[id].state = 'Đang tiến hành';
+                stateDriver[id].driver_name = driverSubmit.driver.name;
+                stateDriver[id].driver_phonenumber = driverSubmit.driver.phonenumber;
+                stateDriver[id].vehicle_number = driverSubmit.driver.vehicle.number;
+                stateDriver[id].vehicle_name = driverSubmit.driver.vehicle.name;
+                stateDriver[id].vehicle_color = driverSubmit.driver.vehicle.color;
+                
+                await rabbitmq.publish('tracking', JSON.stringify(stateDriver[id]));
+            }
+            
+            if (driverInfor) {
+                const history = await BookingHistory.findById(history_id);
+
+                if (history) {
+                    history.driver = new mongoose.Types.ObjectId(driverInfor._id);
+                    history.status = 'Đang tiến hành';
+
+                    await history.save();
+
+                    const customerInfo = customerList[id]?.infor;
+
+                    const request: CallCenterRequest = {
+                        _id: history_id,
+                        driver_name: driverSubmit.driver.name,
+                        driver_phonenumber: driverSubmit.driver.phonenumber,
+                        vehicle_number: driverSubmit.driver.vehicle.number,
+                        vehicle_name: driverSubmit.driver.vehicle.name,
+                        vehicle_color: driverSubmit.driver.vehicle.color,
+                        customer_name: customerInfo.user_information.name,
+                        customer_phonenumber: customerInfo.user_information.phonenumber,
+                        vehicle_type: customerInfo.user_information.service,
+                        origin: customerInfo.departure_information.address,
+                        destination: customerInfo.arrival_information.address,
+                        note: '',
+                        time: '',
+                        local_time: '',
+                        state: 'Đang tiến hành',
+                        origin_latlng: {
+                            lat: +customerInfo.departure_information.latitude,
+                            lng: +customerInfo.departure_information.longitude,
+                        },
+                        destination_latlng: {
+                            lat: +customerInfo.arrival_information.latitude,
+                            lng: +customerInfo.arrival_information.longitude,
+                        },
+                    }
+
+                    const customer_id = customerInfo.user_information.phonenumber;
+                    stateDriver[customer_id] = { ...request };
+                    
+                    await rabbitmq.publish('tracking', JSON.stringify(stateDriver[customer_id]));    
+                }
+            }
 
             customerList[id]?.socket.emit('submit driver', JSON.stringify(driverSubmit.driver));
         });
@@ -162,7 +214,7 @@ const server = app.run(4600, async () => {
     });
 
     await rabbitmq.consume('gps-coordinates', (message: string) => {
-        console.log(message);
+        // console.log(message);
 
         const request = JSON.parse(message) as CallCenterRequest;
 

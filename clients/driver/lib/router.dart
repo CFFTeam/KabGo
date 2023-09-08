@@ -183,7 +183,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             
             Dio dio = Dio();
             dio.post(
-                'http://192.168.2.68:4100/v1/driver/register',
+                'http://192.168.2.95:4100/v1/driver/register',
                 data: jsonEncode(DriverAccount(
                         avatar: authState.value!.photoURL!,
                         name: authState.value!.displayName!,

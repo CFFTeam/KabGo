@@ -22557,3 +22557,7 @@
   updatedAt: 2023-09-08T11:26:22.070Z,
   __v: 0
 } 
+[API.Authentication][Fri, 08 Sep 2023 13:09:50 GMT] Setting up request middleware... 
+[API.Authentication][Fri, 08 Sep 2023 13:09:50 GMT] Server is starting... 
+[API.Authentication][Fri, 08 Sep 2023 13:09:50 GMT] Server is running on port 4100 
+[API.Authentication][Fri, 08 Sep 2023 13:09:51 GMT] Connected to database successfully 
