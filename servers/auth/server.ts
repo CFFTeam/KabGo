@@ -1,7 +1,6 @@
 import Application from '@common/app';
-import UserController from '@common/controllers/auth.controller';
 import EmployeeController from '@common/controllers/call_center.controller';
-import CustomerController from '@common/controllers/customerAuth.controller';
+import CustomerController from '@common/controllers/customer.controller';
 import DriverController from '@common/controllers/driver.controller';
 import dotenv from 'dotenv';
 
