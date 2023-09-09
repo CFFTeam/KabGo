@@ -87,13 +87,13 @@ class _CustomerRequestCommingState
                 //         height: 60,
                 //         fit: BoxFit.cover)),
                 ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: const Image(
-                        image: AssetImage("lib/assets/test/avatar.png"),
-                        width: 60,
-                        height: 60,
-                      ),
-                    ),
+                  borderRadius: BorderRadius.circular(15),
+                  child: const Image(
+                    image: AssetImage("lib/assets/test/avatar.png"),
+                    width: 60,
+                    height: 60,
+                  ),
+                ),
                 const SizedBox(width: 15),
                 Expanded(
                   child: Column(
@@ -192,29 +192,6 @@ class _CustomerRequestCommingState
               Expanded(
                 child: ElevatedButton(
                     onPressed: () {
-                      socketManager.publish(
-                          'driver-comming',
-                          jsonEncode(DriverSubmit(
-                              user_id: customerRequest
-                                  .customer_infor.user_information.phonenumber,
-                              history_id:
-                                  customerRequest.customer_infor.history_id,
-                              driver: Driver(
-                                  driverDetails.avatar,
-                                  driverDetails.name,
-                                  driverDetails.phonenumber,
-                                  Vehicle(
-                                      name: "Honda Wave RSX",
-                                      brand: "Honda",
-                                      type: "Xe máy",
-                                      color: "Xanh đen",
-                                      number: "68S164889"),
-                                  LocationPostion(
-                                      latitude: currentLocation.latitude,
-                                      longitude: currentLocation.longitude),
-                                  currentLocation.heading,
-                                  5.0),
-                              directions: []).toJson()));
                       requestStatusNotifier.readyRequest();
                       context.go(CustomerRequestReady.path);
                     },

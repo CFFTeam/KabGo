@@ -289,6 +289,33 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
           customerRequestNotifier.acceptRequest().then((value) {
             _info = customerRequest.direction;
 
+            ref.read(socketClientProvider.notifier).publish(
+                'driver-comming',
+                jsonEncode(DriverSubmit(
+                        user_id: customerRequest
+                            .customer_infor.user_information.phonenumber,
+                        history_id: customerRequest.customer_infor.history_id,
+                        driver: Driver(
+                            driverDetails.avatar,
+                            driverDetails.name,
+                            driverDetails.phonenumber,
+                            Vehicle(
+                                name: "Honda Wave RSX",
+                                brand: "Honda",
+                                type: "Xe máy",
+                                color: "Xanh đen",
+                                number: "68S164889"),
+                            LocationPostion(
+                                latitude:
+                                    ref.read(currentLocationProvider).latitude,
+                                longitude: ref
+                                    .read(currentLocationProvider)
+                                    .longitude),
+                            ref.read(currentLocationProvider).heading,
+                            5.0),
+                        directions: customerRequest.direction.polylinePoints!)
+                    .toJson()));
+
             setState(() {
               // _polyline = {
               //   Polyline(

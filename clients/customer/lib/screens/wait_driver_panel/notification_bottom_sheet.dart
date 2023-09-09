@@ -1,18 +1,23 @@
 import 'package:customer/models/driver_model.dart';
+import 'package:customer/providers/stepProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../functions/setHexColor.dart';
 
-class NotificationBottomSheet extends StatelessWidget {
+class NotificationBottomSheet extends ConsumerWidget {
   const NotificationBottomSheet({Key? key, required this.driverModel})
       : super(key: key);
 
   final DriverModel driverModel;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    if (ref.watch(stepProvider) == 'moving') {
+      Navigator.pop(context);
+    }
     return Container(
       height: 300,
       padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 15),
