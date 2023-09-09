@@ -10,38 +10,43 @@ interface MostVisitedAddressList {
     frequency: number
 }
 
-const mostVisitedAddresses: MostVisitedAddressList[] = [
-    {
-        address: '22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh',
-        frequency: 10
-    },
-    {
-        address: '24/18 Huỳnh Đình Hai, phường 24, quận Bình Thạnh',
-        frequency: 3
-    },
-    {
-        address: '22/19 Huỳnh Đình Hai, phường 24, quận Bình Thạnh',
-        frequency: 2
-    },
-    {
-        address: '22/18 Huỳnh Đình Hai, phường 24, quận Bình Thạnh',
-        frequency: 10
-    },
-    {
-        address: '22/35 Huỳnh Đình Hai, phường 24, quận Bình Thạnh',
-        frequency: 6
-    },
-]
+// const mostVisitedAddresses: MostVisitedAddressList[] = [
+//     {
+//         address: '22/16 Huỳnh Đình Hai, phường 24, quận Bình Thạnh',
+//         frequency: 10
+//     },
+//     {
+//         address: '24/18 Huỳnh Đình Hai, phường 24, quận Bình Thạnh',
+//         frequency: 3
+//     },
+//     {
+//         address: '22/19 Huỳnh Đình Hai, phường 24, quận Bình Thạnh',
+//         frequency: 2
+//     },
+//     {
+//         address: '22/18 Huỳnh Đình Hai, phường 24, quận Bình Thạnh',
+//         frequency: 10
+//     },
+//     {
+//         address: '22/35 Huỳnh Đình Hai, phường 24, quận Bình Thạnh',
+//         frequency: 6
+//     },
+// ]
 
 const MostVisitedAddressForm: React.FC = () => {
     const dispatch = useAppDispatch();
     const bookingInformation = useAppSelector((state) => state.callReceipt.bookingInformation);
+    const mostVisitedAddresses = useAppSelector((state) => state.callReceipt.mostVisitedAddresses);
 
-    const handleRowClick = (address: string): void  => {
+    const handleRowClick = (rowData: any): void  => {
         // handle something
         dispatch(callReceiptActions.updateBookingInformation({
             ...bookingInformation,
-            arrivalAddress: address,
+            arrivalAddress: rowData.address,
+            destinationLatLng: {
+                lat: rowData.destinationLatLng.lat,
+                lng: rowData.destinationLatLng.lng,
+            }
         }))
     }   
 
@@ -69,25 +74,32 @@ const MostVisitedAddressForm: React.FC = () => {
                     <th style = {{fontSize: "1.8rem"}}>Lượt đi</th>
                 </tr>
             </thead>
+            {mostVisitedAddresses.length > 0 ? 
             <tbody>
-                {
-                    mostVisitedAddresses.map((el, index) => 
-                        <tr style = {{backgroundColor: "#FBF9FA", cursor: "pointer"}} onClick = {() => handleRowClick(el.address)} key = {index}>
-                            <td>
-                                <div style = {{display: "flex", gap: "1rem", marginTop: '0.3rem'}}>
-                                    <span>
-                                        <LocationIcon style = {{fontSize: "2rem"}}/>
-                                    </span>
-                                    <span style = {{fontSize: "1.6rem", display: "inline-block", maxWidth: "50rem"}}>
-                                        {el.address}
-                                    </span>
-                                </div>
-                            </td>
-                        <td style = {{fontSize: "1.7rem", color: "#F86C1D", fontWeight: "600"}}>{el.frequency} lần</td>
-                        </tr>
-                    )
-                }
-            </tbody>    
+             {
+                 mostVisitedAddresses.map((el, index) => 
+                     <tr style = {{backgroundColor: "#FBF9FA", cursor: "pointer"}} onClick = {() => handleRowClick(el)} key = {index}>
+                         <td>
+                             <div style = {{display: "flex", gap: "1rem", marginTop: '0.3rem'}}>
+                                 <span>
+                                     <LocationIcon style = {{fontSize: "2rem"}}/>
+                                 </span>
+                                 <span style = {{fontSize: "1.6rem", display: "inline-block", 
+                                 maxWidth: "45rem", whiteSpace: "nowrap", overflow: "hidden", 
+                                 textOverflow: "ellipsis"}}>
+                                     {el.address}
+                                 </span>
+                             </div>
+                         </td>
+                     <td style = {{fontSize: "1.7rem", color: "#F86C1D", fontWeight: "600"}}>{el.frequency} lần</td>
+                     </tr>
+                 )
+             }
+            </tbody> 
+            : <div style = {{padding: "1rem", fontSize: "2rem"}}>
+                Chưa có dữ liệu
+            </div>} 
+              
         </table>
         
     </form>

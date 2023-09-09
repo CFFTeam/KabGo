@@ -45,49 +45,49 @@ const CallReceiptTable: React.FC = () => {
         navigate(`/booking-page/${id}`);
         const guestInformation = callReceiptData.find((item) => item._id === id);
         // used with google api key
-        // dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
-        //     _id: guestInformation?._id || '',
-        //     name: guestInformation?.name || '',
-        //     phoneNumber: guestInformation?.phoneNumber || '',
-        //     vehicleType: guestInformation?.vehicleType || '',
-        //     origin: guestInformation?.origin || '',
-        //     destination: guestInformation?.destination || '',
-        //     note: guestInformation?.note || '',
-        //     time: guestInformation?.time || '',
-        //     localTime: guestInformation?.local_time || '',
-        //     state: guestInformation?.state || '',   
-        //     originLatLng: guestInformation?.originLatLng || {},
-        //     destinationLatLng: guestInformation?.destinationLatLng || {},
-        //     distance: '',
-        //     duration: '',
-        //     price: 0
-        // }));
-
-        // static data
         dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
-            _id: guestInformation?._id || '64f9ca9541b8fa780d5a2127',
-            name: 'Khoa Nguyễn',
-            phoneNumber: '0903861515',
-            vehicleType: "Ô tô (2-4 chỗ)",
-            origin: "Chung cư 24/16 Võ Oanh (Chung cư C1 cũ), Võ Oanh, Phường 25, Bình Thạnh, Thành phố Hồ Chí Minh",
-            destination: "Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh",
-            note:"Gần chung ủy ban nhân dân phường 25",
-            time: guestInformation?.time || '2023-09-06T10:00:00.000+00:00',
-            localTime: "2023-09-06T10:00:00Z",
-            state: "Chờ xử lý",
-            originLatLng: {
-                lat: 10.8441125, 
-                lng: 106.7407742
-            },
-            destinationLatLng:  {
-                lat: 10.7628356, 
-                lng: 106.6824824
-            },
+            _id: guestInformation?._id || '',
+            name: guestInformation?.name || '',
+            phoneNumber: guestInformation?.phoneNumber || '',
+            vehicleType: guestInformation?.vehicleType || '',
+            origin: guestInformation?.origin || '',
+            destination: guestInformation?.destination || '',
+            note: guestInformation?.note || '',
+            time: guestInformation?.time || '',
+            localTime: guestInformation?.localTime || '',
+            state: guestInformation?.state || '',   
+            originLatLng: guestInformation?.originLatLng || {},
+            destinationLatLng: guestInformation?.destinationLatLng || {},
             distance: '',
             duration: '',
             price: 0
-
         }));
+
+        // static data
+        // dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
+        //     _id: guestInformation?._id || '64f9ca9541b8fa780d5a2127',
+        //     name: 'Khoa Nguyễn',
+        //     phoneNumber: '0903861515',
+        //     vehicleType: "Ô tô (2-4 chỗ)",
+        //     origin: "Chung cư 24/16 Võ Oanh (Chung cư C1 cũ), Võ Oanh, Phường 25, Bình Thạnh, Thành phố Hồ Chí Minh",
+        //     destination: "Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh",
+        //     note:"Gần chung ủy ban nhân dân phường 25",
+        //     time: guestInformation?.time || '2023-09-06T10:00:00.000+00:00',
+        //     localTime: "2023-09-06T10:00:00Z",
+        //     state: "Chờ xử lý",
+        //     originLatLng: {
+        //         lat: 10.8441125, 
+        //         lng: 106.7407742
+        //     },
+        //     destinationLatLng:  {
+        //         lat: 10.7628356, 
+        //         lng: 106.6824824
+        //     },
+        //     distance: '',
+        //     duration: '',
+        //     price: 0
+
+        // }));
     }
 
 

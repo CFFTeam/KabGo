@@ -43,7 +43,7 @@ const PlacesAutocomplete = (props: PlacesAutocompleteProps) => {
             }
             else setPlaceHolderTextChange("Nhập địa chỉ đón...");
         }
-    }, []);
+    }, [props.defaultValue]);
 
     const dispatch = useAppDispatch();
     // call-receipt-handler role 

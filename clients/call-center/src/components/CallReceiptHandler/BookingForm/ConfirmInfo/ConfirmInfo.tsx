@@ -97,12 +97,9 @@ const ConfirmInfo: React.FC = () => {
             related_employee: "64f0c03d9e9037d91cce0d7e",
         });
 
-        // remove the old item and update the new one
-        // let newBookingInformation = bookingInformation.filter((item) => item.phoneNumber !== finalBookingInformation.phoneNumber) as BookingInformation[];
-        const thisBookingInformationIndex = bookingInformation.findIndex((item) => item.phoneNumber === finalBookingInformation.phoneNumber);
         // update new booking information (update the state of this booking information)
         const newBookingInformation = bookingInformation.map((item) => 
-            (item.phoneNumber  === finalBookingInformation.phoneNumber && item.time === finalBookingInformation.time) 
+            (item._id  === finalBookingInformation._id) 
             ? {...item, state: "Hoàn thành"} : item);
         // update new booking information
         dispatch(callReceiptHandlerActions.updateBookingInformation(newBookingInformation as BookingInformation[]));

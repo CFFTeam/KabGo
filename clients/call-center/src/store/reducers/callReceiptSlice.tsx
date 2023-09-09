@@ -1,11 +1,11 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
 
-interface Coordination {
+export interface Coordination {
     lat: number;
     lng: number;
 }
 
-interface BookingInformation {
+export interface BookingInformation {
     name: string,
     phoneNumber: string,
     vehicleType: string,
@@ -18,24 +18,29 @@ interface BookingInformation {
     destinationLatLng: Coordination;
 }
 
-interface MostVisitedAddressList {
+export interface MostVisitedAddress {
+    _id: any,
     address: string,
-    frequency: number
+    frequency: number,
+    destinationLatLng: Coordination
 }
 
-interface LatestBookingData {
+export interface MostRecentBooking {
+    _id: any,
     bookingTime: string,
     departureAddress: string,
     arrivalAddress: string,
     vehicleType: string,
+    originLatLng: Coordination;
+    destinationLatLng: Coordination;
 }
 
 
 // define the type of call receipt state
 interface callReceiptState {
     bookingInformation: BookingInformation,
-    mostVisitedAddresses: MostVisitedAddressList[],
-    latestBookingData: LatestBookingData[],
+    mostVisitedAddresses: MostVisitedAddress[],
+    mostRecentBookings: MostRecentBooking[],
     // mostVisitedAddress: string,
 }
 
@@ -60,7 +65,7 @@ const initialCallReceiptState: callReceiptState = {
         }
     },
     mostVisitedAddresses: [],
-    latestBookingData: [],
+    mostRecentBookings: [],
     // mostVisitedAddress: 'Huynh Dinh hai'
 }
 
@@ -71,6 +76,12 @@ const callReceiptSlice = createSlice({
         updateBookingInformation: (state, action: PayloadAction<BookingInformation>) => {
             state.bookingInformation = action.payload;
         },
+        updateMostVisitedAddressList: (state, action: PayloadAction<MostVisitedAddress[]>) => {
+            state.mostVisitedAddresses = action.payload;
+        },
+        updateMostRecentBookingList: (state, action: PayloadAction<MostRecentBooking[]>) => {
+            state.mostRecentBookings = action.payload;
+        }
         // setMostVisitedAddress: (state, action: PayloadAction<string>) => {
         //     state.mostVisitedAddress = action.payload;
         // }
