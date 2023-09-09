@@ -474,7 +474,7 @@ class _MyMapState extends ConsumerState<MyMap> {
       ref
           .read(driverProvider.notifier)
           .setDriver(DriverModel.fromMap(parsed['driver']));
-
+      print(parsed['directions']);
       if (parsed['directions'].toString().length > 2) {
         drawDriverMoving(parsed['directions']);
       }

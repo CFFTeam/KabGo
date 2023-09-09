@@ -35,7 +35,7 @@ class customerAuthController implements Controller {
         const customer = await customerModel.findOne({ email: req.body.email });
         if (customer != null) {
             const historyList = await bookingHistory.find({ customer: customer?._id.toString() }).sort('-_id');
-
+            console.log(historyList);
             const _historyList: any = [];
             for (const i in historyList) {
                 let check: boolean = true;
