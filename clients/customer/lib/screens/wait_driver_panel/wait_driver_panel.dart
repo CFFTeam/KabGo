@@ -1,3 +1,4 @@
+import 'package:customer/screens/wait_driver_panel/notification_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,6 +14,7 @@ import '../../providers/departureLocationProvider.dart';
 import '../../providers/driverProvider.dart';
 import '../../providers/routeProvider.dart';
 import '../../providers/stepProvider.dart';
+import '../create_trip/choose_payment_method.dart';
 
 class WaitDriverPanel extends ConsumerStatefulWidget {
   const WaitDriverPanel({Key? key}) : super(key: key);
@@ -35,6 +37,15 @@ class _WaitDriverPanelState extends ConsumerState<WaitDriverPanel> {
     LocationModel departure = ref.read(departureLocationProvider);
     LocationModel arrival = ref.read(arrivalLocationProvider);
     DriverModel driverModel = ref.read(driverProvider);
+
+    void showDriverNotification() {
+      showModalBottomSheet(
+          backgroundColor: Colors.transparent,
+          context: context,
+          builder: (ctx) => NotificationBottomSheet(
+                driverModel: driverModel,
+              ));
+    }
 
     return Container(
       decoration: const BoxDecoration(
@@ -88,6 +99,7 @@ class _WaitDriverPanelState extends ConsumerState<WaitDriverPanel> {
                         textAlign: TextAlign.start,
                       );
                     } else if (next == 'comming_driver') {
+                      showDriverNotification();
                       widgetText = Text(
                         'Tài xế của bạn đã đến',
                         style: GoogleFonts.montserrat(

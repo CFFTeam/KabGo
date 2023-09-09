@@ -59,6 +59,7 @@ dependencies:
   firebase_auth: ^4.7.2
   flutter_launcher_icons: ^0.13.1
   flutter_spinkit: ^5.2.0
+  firebase_messaging: ^14.6.7
 
 dev_dependencies:
   flutter_test:

@@ -13,6 +13,7 @@ import Driver from '@common/interfaces/driver';
 import driverModel from '@common/models/driver.model';
 import BookingHistory from '@common/models/booking_history.model';
 import mongoose from 'mongoose';
+import { DriverNearest, RideService } from '@common/utils/notification.observer';
 
 process.on('uncaughtException', (err: Error) => {
     console.error('Uncaught Exception. Shutting down...');
@@ -35,7 +36,8 @@ const app = new Application({
     },
 });
 
-const driverList: any = {};
+// const driverList: any = {};
+const rideService = new RideService();
 const customerList: any = {};
 const stateDriver: any = {};
 
@@ -48,10 +50,8 @@ const server = app.run(4600, async () => {
 
             socket.phonenumber = _id;
 
-            driverList[socket.phonenumber] = {
-                socket: socket,
-                infor: driver,
-            };
+            rideService.addObserver(new DriverNearest(socket, driver));
+            console.log(rideService.observers);
         });
 
         socket.on('booking-car', async (message: string) => {
@@ -81,7 +81,7 @@ const server = app.run(4600, async () => {
                     latitude: customer.arrival_information.latitude,
                 },
                 time: new Date().toISOString(),
-                status: 'điều phối', //điều phối | tiến hành | hủy | hoàn thành
+                status: 'Đang điều phối', //điều phối | tiến hành | hủy | hoàn thành
                 frequency: '1',
                 price: customer.price,
                 vehicle: _service?.id,
@@ -89,39 +89,7 @@ const server = app.run(4600, async () => {
                 // coupon: new mongoose.Types.ObjectId('64e73b79646803068e5c21f7'),
             });
 
-            let drivers: any = [];
-
-            for (const id in driverList) {
-                const distance = haversineDistance(
-                    {
-                        latitude: +customer.departure_information.latitude,
-                        longitude: +customer.departure_information.longitude,
-                    },
-                    {
-                        latitude: driverList[id].infor.coordinate.latitude,
-                        longitude: driverList[id].infor.coordinate.longitude,
-                    }
-                );
-                console.log('DISTANCE: ', distance);
-                if (distance <= 1.5) {
-                    driverList[id].infor.distance = distance;
-                    drivers = [...drivers, { ...driverList[id] }];
-                }
-            }
-
-            const nearestDriver = drivers?.sort((a: any, b: any) => b.distance - a.distance).slice(0, 5);
-
-            const finalDrivers = nearestDriver.map((el: any) => {
-                el.socket.emit(
-                    'customer-request',
-                    JSON.stringify({ ...customer, history_id: bookingData._id.toString() })
-                );
-                delete el.socket;
-
-                return el;
-            });
-
-            socket.emit('send drivers', JSON.stringify(finalDrivers));
+            rideService.bookRide(socket, customer, bookingData);
         });
 
         socket.on('driver-accept', async (message: string) => {
@@ -280,9 +248,10 @@ const server = app.run(4600, async () => {
         });
 
         socket.on('disconnect', () => {
-            delete driverList[socket.phonenumber];
-
+            // delete driverList[socket.phonenumber];
+            rideService.removeObserver(rideService.observers.find((value) => value.socket.id == socket.id));
             console.log('Client disconnected');
+            console.log(rideService.observers);
         });
     });
 
@@ -293,21 +262,21 @@ const server = app.run(4600, async () => {
 
         let drivers: any = [];
 
-        for (const id in driverList) {
+        for (const value of rideService.observers) {
             const distance = haversineDistance(
                 {
                     latitude: +request.origin_latlng.lat,
                     longitude: +request.origin_latlng.lng,
                 },
                 {
-                    latitude: driverList[id].infor.coordinate.latitude,
-                    longitude: driverList[id].infor.coordinate.longitude,
+                    latitude: +value.infor.coordinate.latitude,
+                    longitude: +value.infor.coordinate.longitude,
                 }
             );
 
             if (distance <= 1.5) {
-                driverList[id].infor.distance = distance;
-                drivers = [...drivers, { ...driverList[id] }];
+                value.infor.distance = distance;
+                drivers = [...drivers, value];
             }
         }
 
