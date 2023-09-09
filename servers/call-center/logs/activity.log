@@ -2566,3 +2566,15 @@
 [API.Call Center][Fri, 08 Sep 2023 21:14:05 GMT] Connected to database successfully 
 [API.Call Center][Fri, 08 Sep 2023 21:16:22 GMT] object 
 [API.Call Center][Fri, 08 Sep 2023 21:16:22 GMT] data from client-s1:  [object Object] 
+[API.Call Center][Sat, 09 Sep 2023 09:51:19 GMT] Setting up request middleware... 
+[API.Call Center][Sat, 09 Sep 2023 09:51:19 GMT] Server is starting... 
+[API.Call Center][Sat, 09 Sep 2023 09:51:19 GMT] Server is running on port 4500 
+[API.Call Center][Sat, 09 Sep 2023 09:51:19 GMT] Could not connect to the rabbit mq Error: connect ECONNREFUSED 192.168.2.29:5672 
+[API.Call Center][Sat, 09 Sep 2023 09:51:20 GMT] Connected to database successfully 
+[API.Call Center][Sat, 09 Sep 2023 09:58:11 GMT] Setting up request middleware... 
+[API.Call Center][Sat, 09 Sep 2023 09:58:11 GMT] Server is starting... 
+[API.Call Center][Sat, 09 Sep 2023 09:58:11 GMT] Server is running on port 4500 
+[API.Call Center][Sat, 09 Sep 2023 09:58:11 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Sat, 09 Sep 2023 09:58:12 GMT] Connected to database successfully 
+[API.Call Center][Sat, 09 Sep 2023 09:59:44 GMT] data from client-s1:  [object Object] 
+[API.Call Center][Sat, 09 Sep 2023 09:59:44 GMT] object 
