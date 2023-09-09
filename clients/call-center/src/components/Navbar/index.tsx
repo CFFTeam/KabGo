@@ -8,6 +8,7 @@ import {ReactComponent as ProfileIcon} from "@assets/svg/Navbar/profile-icn.svg"
 import {ReactComponent as NotificationIcon} from "@assets/svg/Navbar/notification-icn.svg";
 import {ReactComponent as SettingIcon} from "@assets/svg/Navbar/setting-icn.svg";
 import {ReactComponent as LogoutIcon} from "@assets/svg/Navbar/logout-icn.svg";
+import { authStorage } from '@utils/storage';
 import KhoaImg from "@assets/images/Khoa.jpg";
  
 const Navbar: React.FC = () => {
@@ -28,6 +29,11 @@ const Navbar: React.FC = () => {
     
     const handleReload = () => {
         navigate(0);
+    }
+
+    const handleLogout = () => {
+        authStorage.logout();
+        navigate('/');
     }
 
     return (
@@ -59,7 +65,7 @@ const Navbar: React.FC = () => {
                 <span className={styles["setting-section"]}>
                     <SettingIcon className = {styles["setting-icn"]}/>
                 </span>
-                <span className={styles["log-out-section"]}>
+                <span className={styles["log-out-section"]} onClick = {handleLogout}>
                     <LogoutIcon className = {styles["logout-icn"]}/>
                 </span>
             </div>

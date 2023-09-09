@@ -79,13 +79,13 @@ List<Map<String, String>> listCarCard = [
   },
   {
     'image': 'lib/assets/oto_mini.png',
-    'name': 'Xe Oto con',
+    'name': 'Xe Ô tô con',
     'description': 'Từ 2 - 4 chỗ ngồi',
     'price/m': '11.8',
   },
   {
     'image': 'lib/assets/oto.png',
-    'name': 'Xe Oto',
+    'name': 'Xe Ô tô',
     'description': 'Từ 7 - 9 chỗ ngồi',
     'price/m': '13.8',
   },

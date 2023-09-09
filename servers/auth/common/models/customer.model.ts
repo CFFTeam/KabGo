@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 export interface Customer {
     _id?: string;
+    avatar?: string;
     name?: string;
     email: string;
     phonenumber?: string;
@@ -17,16 +18,17 @@ export interface Customer {
 }
 
 const customerSchema = new mongoose.Schema<Customer>({
-    name: { type: String },
-    email: { type: String },
-    phonenumber: { type: String },
-    dob: { type: String },
-    home_address: { type: String },
+    name: { type: String, default: '' },
+    email: { type: String, default: '' },
+    avatar: { type: String, default: '' },
+    phonenumber: { type: String, default: '' },
+    dob: { type: String, default: '' },
+    home_address: { type: String, default: '' },
     type: { type: String, default: 'STANDARD' },
     default_payment_method: { type: String, default: 'Tiền mặt' },
     rank: { type: String, default: 'Đồng' },
-    distance: { type: String },
-    password: { type: String },
+    distance: { type: String, default: '' },
+    password: { type: String, default: '' },
     active: { type: String, default: '26/8/2023' },
     lock: { type: Boolean, default: false },
 });

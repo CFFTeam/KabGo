@@ -1,14 +1,5 @@
 import 'dart:convert';
 
-import 'package:customer_app/models/driver_model.dart';
-import 'package:customer_app/models/route_model.dart';
-import 'package:customer_app/providers/currentLocationProvider.dart';
-import 'package:customer_app/providers/driverProvider.dart';
-import 'package:customer_app/providers/locationPickerInMap.dart';
-import 'package:customer_app/providers/mapProvider.dart';
-import 'package:customer_app/providers/routeProvider.dart';
-import 'package:customer_app/providers/socketProvider.dart';
-import 'package:customer_app/providers/stepProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,9 +9,18 @@ import '../functions/determinePosition.dart';
 import '../functions/getBytesFromAsset.dart';
 import '../functions/networkUtility.dart';
 import '../functions/setAddressByPosition.dart';
+import '../models/driver_model.dart';
 import '../models/location_model.dart';
+import '../models/route_model.dart';
 import '../providers/arrivalLocationProvider.dart';
+import '../providers/currentLocationProvider.dart';
 import '../providers/departureLocationProvider.dart';
+import '../providers/driverProvider.dart';
+import '../providers/locationPickerInMap.dart';
+import '../providers/mapProvider.dart';
+import '../providers/routeProvider.dart';
+import '../providers/socketProvider.dart';
+import '../providers/stepProvider.dart';
 import '../utils/Google_Api_Key.dart';
 
 class MyMap extends ConsumerStatefulWidget {
@@ -57,6 +57,7 @@ class _MyMapState extends ConsumerState<MyMap> {
   void getFirstCurrentPosition() async {
     LatLng latLng = await determinePosition();
     LocationModel currentLocationModel = await setAddressByPosition(latLng);
+    currentLocationModel.structuredFormatting!.formatSecondaryText();
     ref
         .read(departureLocationProvider.notifier)
         .setDepartureLocation(currentLocationModel);
@@ -230,26 +231,27 @@ class _MyMapState extends ConsumerState<MyMap> {
 
     googleMapController.animateCamera(CameraUpdate.newLatLngBounds(
         LatLngBounds(
-            southwest: LatLng(minLat, minLong),
-            northeast: LatLng(maxLat, maxLong)),
+          southwest: LatLng(minLat, minLong),
+          northeast: LatLng(maxLat, maxLong),
+        ),
         70));
   }
 
   void findDriver() async {
     departureLocation = ref.read(departureLocationProvider).postion;
 
-    markers.clear();
-    markers.add(
-      Marker(
-        anchor: const Offset(0.5, 0.5),
-        markerId: const MarkerId('departureLocation'),
-        position:
-            LatLng(departureLocation!.latitude, departureLocation!.longitude),
-        icon: BitmapDescriptor.fromBytes(
-          await getBytesFromAsset('lib/assets/my_location.png', 250),
-        ),
-      ),
-    );
+    // markers.clear();
+    // markers.add(
+    //   Marker(
+    //     anchor: const Offset(0.5, 0.5),
+    //     markerId: const MarkerId('departureLocation'),
+    //     position:
+    //         LatLng(departureLocation!.latitude, departureLocation!.longitude),
+    //     icon: BitmapDescriptor.fromBytes(
+    //       await getBytesFromAsset('lib/assets/my_location.png', 250),
+    //     ),
+    //   ),
+    // );
     googleMapController.moveCamera(
       CameraUpdate.newCameraPosition(
         CameraPosition(
@@ -545,7 +547,7 @@ class _MyMapState extends ConsumerState<MyMap> {
             polylineList.clear();
             polylineCoordinates.clear();
             markers.clear();
-            padding = 80;
+            padding = 190;
             findDriver();
           } else if (next == 'WAIT_DRIVER') {
             padding = 225;
@@ -587,6 +589,7 @@ class _MyMapState extends ConsumerState<MyMap> {
                     cameraPosition!.target.longitude);
                 LocationModel locationModel =
                     await setAddressByPosition(latLng);
+                locationModel.structuredFormatting!.formatSecondaryText();
                 ref
                     .read(pickerLocationProvider.notifier)
                     .setPickerLocation(locationModel);

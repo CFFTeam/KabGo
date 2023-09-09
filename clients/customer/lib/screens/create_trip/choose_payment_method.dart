@@ -1,7 +1,7 @@
-import 'package:customer_app/providers/paymentProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/data.dart';
+import '../../providers/paymentProvider.dart';
 import '../../widgets/payment_method_item.dart';
 
 class ChoosePaymentMethod extends ConsumerStatefulWidget {

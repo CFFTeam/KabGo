@@ -1,22 +1,27 @@
-import 'package:customer_app/functions/setHexColor.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatefulWidget {
+import '../../functions/setHexColor.dart';
+import '../../providers/auth_provider.dart';
+import '../../providers/stepProvider.dart';
+
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   final FocusNode _phoneNumberFocus = FocusNode();
   final FocusNode _passwordFocus = FocusNode();
 
   @override
   Widget build(BuildContext context) {
+    ref.read(stepProvider.notifier).setStep('login_page');
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -26,11 +31,11 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const FaIcon(
-                  FontAwesomeIcons.arrowLeft,
-                  color: Colors.black,
-                  size: 32,
-                ),
+                // const FaIcon(
+                //   FontAwesomeIcons.arrowLeft,
+                //   color: Colors.black,
+                //   size: 32,
+                // ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -272,24 +277,30 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(
                   height: 28,
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 54,
-                  child: OutlinedButton.icon(
-                    onPressed: () {},
-                    icon: FaIcon(
-                      FontAwesomeIcons.google,
-                      color: HexColor('FE8248'),
-                    ),
-                    label: Text(
-                      'Đăng nhập bằng Google',
-                      style: GoogleFonts.montserrat(
-                        color: HexColor('F86C1D'),
-                        fontWeight: FontWeight.w600,
+                Consumer(builder: (context, ref, _) {
+                  final auth = ref.watch(authenticationProvider);
+
+                  return SizedBox(
+                    width: double.infinity,
+                    height: 54,
+                    child: OutlinedButton.icon(
+                      onPressed: () async {
+                        await auth.signInWithGoogle(context);
+                      },
+                      icon: Image.asset(
+                        'lib/assets/google_logo.png',
+                        width: 24,
+                      ),
+                      label: Text(
+                        'Đăng nhập bằng Google',
+                        style: GoogleFonts.montserrat(
+                          color: HexColor('F86C1D'),
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                  ),
-                ),
+                  );
+                }),
               ],
             ),
           ),
