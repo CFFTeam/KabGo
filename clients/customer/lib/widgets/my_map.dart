@@ -547,14 +547,10 @@ class _MyMapState extends ConsumerState<MyMap> {
       drawRouteToArrival(parsed['directions']);
     });
 
-    // socketClient.subscribe('ready driver', (dynamic value) {
-    //   print('ready driver: \n$value');
-    //   dynamic parsed = json.decode(value).cast<String, dynamic>();
-    //   if (parsed['directions'].toString().length > 2) {
-    //     drawRouteToArrival(parsed['directions']);
-    //   }
-    //   ref.read(stepProvider.notifier).setStep('comming_driver');
-    // });
+    socketClient.subscribe('success driver', (dynamic value) {
+      ref.read(mapProvider.notifier).setMapAction('SET_DEFAULT');
+      ref.read(stepProvider.notifier).setStep('complete');
+    });
 
     DefaultAssetBundle.of(context)
         .loadString('lib/assets/map.json')
