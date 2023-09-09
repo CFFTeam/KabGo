@@ -1,20 +1,11 @@
-import 'dart:convert';
-
 import 'package:driver/screens/route_screen/route_screen.dart';
 import 'package:driver/widgets/icon_button/icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:driver/models/customer_booking.dart';
-import 'package:driver/models/driver.dart';
-import 'package:driver/models/location.dart';
-import 'package:driver/models/vehicle.dart';
-import 'package:driver/providers/current_location.dart';
 import 'package:driver/providers/customer_request.dart';
-import 'package:driver/providers/driver_provider.dart';
 import 'package:driver/providers/request_status.dart';
-import 'package:driver/providers/socket_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'styles.dart';
 
@@ -33,13 +24,7 @@ class _CustomerRequestReadyState extends ConsumerState<CustomerRequestReady> {
   @override
   Widget build(BuildContext context) {
     final requestStatusNotifier = ref.read(requestStatusProvider.notifier);
-    final currentLocation =
-        ref.read(currentLocationProvider.notifier).currentLocation();
-
-    final driverDetails = ref.read(driverDetailsProvider);
-
     final customerRequest = ref.watch(customerRequestProvider);
-    final socketManager = ref.read(socketClientProvider.notifier);
 
     return Container(
       decoration: const BoxDecoration(

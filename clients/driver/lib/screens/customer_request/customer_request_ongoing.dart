@@ -7,7 +7,6 @@ import 'package:driver/models/vehicle.dart';
 import 'package:driver/providers/current_location.dart';
 import 'package:driver/providers/driver_provider.dart';
 import 'package:driver/providers/socket_provider.dart';
-import 'package:driver/screens/customer_request/customer_request_comming.dart';
 import 'package:driver/screens/customer_request/customer_request_ready.dart';
 import 'package:driver/screens/home_dashboard/home_dashboard.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +14,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../providers/customer_request.dart';
-import '../../providers/request_status.dart';
+import 'package:driver/providers/customer_request.dart';
+import 'package:driver/providers/request_status.dart';
 import 'styles.dart';
 
 class CustomerRequestGoing extends ConsumerStatefulWidget {
@@ -92,13 +91,13 @@ class _CustomerRequestGoingState extends ConsumerState<CustomerRequestGoing> {
                     //       fit: BoxFit.cover),
                     // ),
                     ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: const Image(
-                            image: AssetImage("lib/assets/test/avatar.png"),
-                            width: 60,
-                            height: 60,
-                          ),
-                        ),
+                      borderRadius: BorderRadius.circular(15),
+                      child: const Image(
+                        image: AssetImage("lib/assets/test/avatar.png"),
+                        width: 60,
+                        height: 60,
+                      ),
+                    ),
                     const SizedBox(width: 15),
                     Expanded(
                       child: Column(
@@ -107,7 +106,8 @@ class _CustomerRequestGoingState extends ConsumerState<CustomerRequestGoing> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               SizedBox(
-                                  width: MediaQuery.of(context).size.width - 230,
+                                  width:
+                                      MediaQuery.of(context).size.width - 230,
                                   child: Text(
                                       customerRequest
                                           .customer_infor.user_information.name,
@@ -136,8 +136,8 @@ class _CustomerRequestGoingState extends ConsumerState<CustomerRequestGoing> {
                                           .toLowerCase() ==
                                       'vàng')
                                     const Image(
-                                        image:
-                                            AssetImage('lib/assets/icons/gold.png'),
+                                        image: AssetImage(
+                                            'lib/assets/icons/gold.png'),
                                         width: 20),
                                   if (customerRequest
                                           .customer_infor.user_information.rank
@@ -165,8 +165,10 @@ class _CustomerRequestGoingState extends ConsumerState<CustomerRequestGoing> {
                                       size: 15, color: Color(0xFFF86C1D)),
                                   const SizedBox(width: 6),
                                   Text(
-                                      customerRequest.customer_infor
-                                          .user_information.default_payment_method,
+                                      customerRequest
+                                          .customer_infor
+                                          .user_information
+                                          .default_payment_method,
                                       style: ThemeText.bookingDetails),
                                 ],
                               ),
@@ -198,10 +200,10 @@ class _CustomerRequestGoingState extends ConsumerState<CustomerRequestGoing> {
                     child: ElevatedButton(
                         onPressed: () {
                           socketManager.publish(
-                              'driver-going',
+                              'driver-success',
                               jsonEncode(DriverSubmit(
-                                  user_id: customerRequest
-                                      .customer_infor.user_information.phonenumber,
+                                  user_id: customerRequest.customer_infor
+                                      .user_information.phonenumber,
                                   history_id:
                                       customerRequest.customer_infor.history_id,
                                   driver: Driver(
@@ -220,8 +222,11 @@ class _CustomerRequestGoingState extends ConsumerState<CustomerRequestGoing> {
                                       currentLocation.heading,
                                       5.0),
                                   directions: []).toJson()));
-                          requestStatusNotifier.readyRequest();
-                          context.go(CustomerRequestReady.path);
+                          requestStatusNotifier.cancelRequest();
+                          ref
+                              .read(customerRequestProvider.notifier)
+                              .cancelRequest();
+                          context.go(HomeDashboard.path);
                         },
                         style: ThemeButton.acceptButton2,
                         child: const Center(
