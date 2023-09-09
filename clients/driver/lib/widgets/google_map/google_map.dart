@@ -348,7 +348,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
 
           _updateIconCurrentLocation(current_location, rotate: rotate);
 
-          Future.delayed(const Duration(milliseconds: 1500), () {
+          Future.delayed(const Duration(milliseconds: 2000), () {
             Timer.periodic(const Duration(milliseconds: 900), (timer) {
               if (_info == null ||
                   requestStatus == RequestStatus.waiting ||
@@ -435,6 +435,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
               LatLng(_currentPosition.latitude, _currentPosition.longitude),
               currentLocationIcon));
           process = 0;
+          compass = false;
           running = true;
         });
       }
@@ -443,6 +444,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         _info = null;
         _polyline.clear();
         process = 0;
+        compass = false;
         running = true;
       });
     }
@@ -474,7 +476,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                 onPressed: _moveToCurrent,
               ),
             )),
-      if (requestStatus == RequestStatus.comming || requestStatus == RequestStatus.ongoing)
+      if (requestStatus == RequestStatus.comming ||
+          requestStatus == RequestStatus.ongoing)
         Align(
             alignment: Alignment.bottomRight,
             child: Container(
