@@ -4,13 +4,19 @@ import 'dart:typed_data';
 
 import 'package:driver/models/location.dart';
 import 'package:driver/providers/current_location.dart';
+import 'package:driver/providers/direction_provider.dart';
+import 'package:driver/providers/route_provider.dart';
 import 'package:driver/providers/socket_provider.dart';
+import 'package:driver/screens/customer_request/customer_request_comming.dart';
+import 'package:driver/screens/customer_request/customer_request_ongoing.dart';
+import 'package:driver/screens/route_screen/route_screen.dart';
 import 'package:driver/utils/Image.dart';
 import 'package:driver/widgets/icon_button/icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../models/customer_booking.dart';
@@ -47,7 +53,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
   final Set<Circle> _circles = {};
   final Set<Marker> _markers = {};
   Set<Polyline> _polyline = {};
-  static bool compass = false;
+  // static bool compassNotifier.setDirection(false);
 
   late BitmapDescriptor currentLocationIcon;
   late BitmapDescriptor driverIcon;
@@ -105,6 +111,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
 
     if (requestStatus == RequestStatus.comming ||
         requestStatus == RequestStatus.ongoing) {
+      final compass = ref.read(directionProvider);
+
       setState(() {
         _markers.add(_createMarker(
             'my_location',
@@ -233,6 +241,10 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
     final customerRequest = ref.watch(customerRequestProvider);
     final customerRequestNotifier = ref.watch(customerRequestProvider.notifier);
 
+    final compass = ref.watch(directionProvider);
+    final compassNotifier = ref.read(directionProvider.notifier);
+    final routesList = ref.watch(routeListProvider);
+
     if (active) {
       if (customerRequest.hasValue()) {
         if (requestStatus == RequestStatus.accepted) {
@@ -285,44 +297,67 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
           }
         }
 
-        if (requestStatus == RequestStatus.ready) {
+        if (requestStatus == RequestStatus.ready && running == false) {
           customerRequestNotifier.acceptRequest().then((value) {
-            _info = customerRequest.direction;
+            _info = value!;
 
-            setState(() {
-              // _polyline = {
-              //   Polyline(
-              //       polylineId: const PolylineId('customer_direction'),
-              //       color: const Color.fromARGB(255, 255, 113, 36),
-              //       width: 8,
-              //       points: customerRequest.direction.polylinePoints!
-              //           .map((e) => LatLng(e.latitude, e.longitude))
-              //           .toList())
-              // };
+            ref.read(socketClientProvider.notifier).publish(
+                'driver-comming',
+                jsonEncode(DriverSubmit(
+                    user_id: customerRequest
+                        .customer_infor.user_information.phonenumber,
+                    history_id: customerRequest.customer_infor.history_id,
+                    driver: Driver(
+                        driverDetails.avatar,
+                        driverDetails.name,
+                        driverDetails.phonenumber,
+                        Vehicle(
+                            name: "Honda Wave RSX",
+                            brand: "Honda",
+                            type: "Xe máy",
+                            color: "Xanh đen",
+                            number: "68S164889"),
+                        LocationPostion(
+                            latitude:
+                                ref.read(currentLocationProvider).latitude,
+                            longitude:
+                                ref.read(currentLocationProvider).longitude),
+                        ref.read(currentLocationProvider).heading,
+                        5.0),
+                    directions: []).toJson()));
 
-              _markers.addAll({
-                // _createMarker(
-                //     'customer_location',
-                //     'Vị trí khách hàng',
-                //     LatLng(customerRequest.currentLocation.latitude,
-                //         customerRequest.currentLocation.longitude),
-                //     departureLocationIcon),
+            _polyline = {
+              Polyline(
+                  polylineId: const PolylineId('customer_direction'),
+                  color: const Color.fromARGB(255, 255, 113, 36),
+                  width: 8,
+                  points: value.polylinePoints!
+                      .map((e) => LatLng(e.latitude, e.longitude))
+                      .toList())
+            };
 
-                _createMarker(
-                    'destination_location',
-                    'Điểm đến  khách hàng',
-                    LatLng(
-                        double.parse(customerRequest
-                            .customer_infor.arrival_information.latitude),
-                        double.parse(customerRequest
-                            .customer_infor.arrival_information.longitude)),
-                    BitmapDescriptor.defaultMarkerWithHue(
-                        BitmapDescriptor.hueOrange)),
-              });
+            _markers.addAll({
+              // _createMarker(
+              //     'customer_location',
+              //     'Vị trí khách hàng',
+              //     LatLng(customerRequest.currentLocation.latitude,
+              //         customerRequest.currentLocation.longitude),
+              //     departureLocationIcon),
+
+              _createMarker(
+                  'destination_location',
+                  'Điểm đến  khách hàng',
+                  LatLng(
+                      double.parse(customerRequest
+                          .customer_infor.arrival_information.latitude),
+                      double.parse(customerRequest
+                          .customer_infor.arrival_information.longitude)),
+                  BitmapDescriptor.defaultMarkerWithHue(
+                      BitmapDescriptor.hueOrange)),
             });
 
-            compass = false;
             running = true;
+            compassNotifier.setDirection(false);
             process = 0;
           });
         }
@@ -331,6 +366,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                 requestStatus == RequestStatus.ongoing) &&
             running == true &&
             _info != null) {
+          running = false;
+
           LocationPostion current_location = LocationPostion(
               latitude:
                   customerRequest.direction.polylinePoints![process].latitude,
@@ -348,8 +385,10 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
 
           _updateIconCurrentLocation(current_location, rotate: rotate);
 
-          Future.delayed(const Duration(milliseconds: 2000), () {
-            Timer.periodic(const Duration(milliseconds: 900), (timer) {
+          Future.delayed(const Duration(milliseconds: 3000), () {
+            print("GO HERE");
+
+            Timer.periodic(const Duration(milliseconds: 1000), (timer) {
               if (_info == null ||
                   requestStatus == RequestStatus.waiting ||
                   requestStatus == RequestStatus.ready ||
@@ -379,6 +418,14 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
 
                 double rotate =
                     calculateBearing(current_location, destinationPosition);
+
+                if (routesList.isNotEmpty) {
+                  for (int i = 0; i < routesList.length; ++i) {
+                    if (routesList[i].index == process) {
+                      ref.read(routeProvider.notifier).setRoute(routesList[i]);
+                    }
+                  }
+                }
 
                 // _info!.polylinePoints.removeAt(0);
 
@@ -420,7 +467,6 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
               }
             });
           });
-          running = false;
         }
       }
 
@@ -435,7 +481,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
               LatLng(_currentPosition.latitude, _currentPosition.longitude),
               currentLocationIcon));
           process = 0;
-          compass = false;
+          compassNotifier.setDirection(false);
           running = true;
         });
       }
@@ -444,7 +490,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         _info = null;
         _polyline.clear();
         process = 0;
-        compass = false;
+        compassNotifier.setDirection(false);
         running = true;
       });
     }
@@ -490,7 +536,18 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                 icon: const Icon(FontAwesomeIcons.solidCompass,
                     color: Color(0xFFFF772B)),
                 onPressed: () {
-                  compass = !compass;
+                  if (compass == true) {
+                    context.go(RouteScreen.path);
+                  } else {
+                    if (requestStatus == RequestStatus.comming) {
+                      context.go(CustomerRequestComming.path);
+                    } else if (requestStatus == RequestStatus.ongoing) {
+                      context.go(CustomerRequestGoing.path);
+                    }
+                  }
+
+                  compassNotifier.toggleDirection();
+
                   _mapController.animateCamera(CameraUpdate.newLatLngBounds(
                       customerRequest.direction.bounds!, 100.0));
                 },
