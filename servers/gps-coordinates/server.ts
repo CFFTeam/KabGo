@@ -43,6 +43,7 @@ const stateDriver: any = {};
 
 const server = app.run(4600, async () => {
     socket.init(server);
+    console.log(rideService.observers);
     socket.getIO().on('connection', (socket: any) => {
         socket.on('join', (message: string) => {
             const driver = JSON.parse(message) as Driver;
@@ -88,6 +89,8 @@ const server = app.run(4600, async () => {
                 note: '',
                 // coupon: new mongoose.Types.ObjectId('64e73b79646803068e5c21f7'),
             });
+
+            console.log(bookingData);
 
             rideService.bookRide(socket, customer, bookingData);
         });
@@ -166,25 +169,19 @@ const server = app.run(4600, async () => {
             const id = driverSubmit.user_id;
 
             customerList[id]?.socket.emit('moving driver', JSON.stringify(driverSubmit));
-        }); 
+        });
 
         socket.on('driver-comming', (message: string) => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
             const id = driverSubmit.user_id;
-            customerList[id]?.socket.emit('comming driver', JSON.stringify(driverSubmit.driver));
+            customerList[id]?.socket.emit('comming driver', JSON.stringify(driverSubmit));
         });
 
-        socket.on('driver-ready', (message: string) => {
-            const driverSubmit = JSON.parse(message) as DriverSubmit;
-            const id = driverSubmit.user_id;
-            customerList[id]?.socket.emit('comming driver', JSON.stringify(driverSubmit.driver));
-        });
-
-        socket.on('driver-going', (message: string) => {
-            const driverSubmit = JSON.parse(message) as DriverSubmit;
-            const id = driverSubmit.user_id;
-            customerList[id]?.socket.emit('comming driver', JSON.stringify(driverSubmit.driver));
-        });
+        // socket.on('driver-ready', (message: string) => {
+        //     const driverSubmit = JSON.parse(message) as DriverSubmit;
+        //     const id = driverSubmit.user_id;
+        //     customerList[id]?.socket.emit('ready driver', JSON.stringify(driverSubmit));
+        // });
 
         socket.on('driver-reject', (message: string) => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
@@ -196,8 +193,10 @@ const server = app.run(4600, async () => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
             const history_id = driverSubmit.history_id;
             const id = driverSubmit.user_id;
-            
-            const driverInfor = await driverModel.findOne({ phonenumber: driverSubmit.driver.phonenumber }).select('_id');
+
+            const driverInfor = await driverModel
+                .findOne({ phonenumber: driverSubmit.driver.phonenumber })
+                .select('_id');
 
             if (driverInfor) {
                 const history = await BookingHistory.findById(history_id);
@@ -237,7 +236,7 @@ const server = app.run(4600, async () => {
                         },
                     };
 
-                    await rabbitmq.publish('tracking', JSON.stringify(request));    
+                    await rabbitmq.publish('tracking', JSON.stringify(request));
                     if (stateDriver[customer_id]) {
                         delete stateDriver[customer_id];
                     }
@@ -249,9 +248,10 @@ const server = app.run(4600, async () => {
 
         socket.on('disconnect', () => {
             // delete driverList[socket.phonenumber];
-            rideService.removeObserver(rideService.observers.find((value) => value.socket.id == socket.id));
+            rideService.removeObserver(
+                rideService.observers.find((value) => value.socket.phonenumber == socket.phonenumber)
+            );
             console.log('Client disconnected');
-            console.log(rideService.observers);
         });
     });
 

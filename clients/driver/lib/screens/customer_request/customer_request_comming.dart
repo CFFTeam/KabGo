@@ -75,13 +75,13 @@ class _CustomerRequestCommingState
                     //         height: 60,
                     //         fit: BoxFit.cover)),
                     ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: const Image(
-                            image: AssetImage("lib/assets/test/avatar.png"),
-                            width: 60,
-                            height: 60,
-                          ),
-                        ),
+                      borderRadius: BorderRadius.circular(15),
+                      child: const Image(
+                        image: AssetImage("lib/assets/test/avatar.png"),
+                        width: 60,
+                        height: 60,
+                      ),
+                    ),
                     const SizedBox(width: 15),
                     Expanded(
                       child: Column(
@@ -90,7 +90,8 @@ class _CustomerRequestCommingState
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               SizedBox(
-                                  width: MediaQuery.of(context).size.width - 230,
+                                  width:
+                                      MediaQuery.of(context).size.width - 230,
                                   child: Text(
                                       customerRequest
                                           .customer_infor.user_information.name,
@@ -119,8 +120,8 @@ class _CustomerRequestCommingState
                                           .toLowerCase() ==
                                       'vàng')
                                     const Image(
-                                        image:
-                                            AssetImage('lib/assets/icons/gold.png'),
+                                        image: AssetImage(
+                                            'lib/assets/icons/gold.png'),
                                         width: 20),
                                   if (customerRequest
                                           .customer_infor.user_information.rank
@@ -148,8 +149,10 @@ class _CustomerRequestCommingState
                                       size: 15, color: Color(0xFFF86C1D)),
                                   const SizedBox(width: 6),
                                   Text(
-                                      customerRequest.customer_infor
-                                          .user_information.default_payment_method,
+                                      customerRequest
+                                          .customer_infor
+                                          .user_information
+                                          .default_payment_method,
                                       style: ThemeText.bookingDetails),
                                 ],
                               ),

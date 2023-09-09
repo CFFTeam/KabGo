@@ -446,6 +446,58 @@ class _MyMapState extends ConsumerState<MyMap> {
     }
   }
 
+  void drawRouteToArrival(String value) async {
+    List<Map<String, String>> listValue = convertStringToListOfMaps(value);
+
+    DriverModel driverModel = ref.read(driverProvider);
+    // markers.removeWhere(
+    //     (element) => element.markerId == const MarkerId('driverLocation'));
+    markers.clear();
+    markers.add(
+      Marker(
+        rotation: double.parse(driverModel.rotation.toString()),
+        markerId: const MarkerId('driverLocation'),
+        anchor: const Offset(0.5, 0.5),
+        position: LatLng(double.parse(listValue[0]['lat'].toString()),
+            double.parse(listValue[0]['longitude'].toString())),
+        icon: BitmapDescriptor.fromBytes(
+          await getBytesFromAsset('lib/assets/bike_image.png', 75),
+        ),
+      ),
+    );
+    LocationModel arrival = ref.read(arrivalLocationProvider);
+    markers.add(
+      Marker(
+        markerId: const MarkerId('arrivalLocation'),
+        position: LatLng(arrival.postion!.latitude, arrival.postion!.longitude),
+        icon: BitmapDescriptor.fromBytes(
+          await getBytesFromAsset('lib/assets/map_arrival_icon.png', 80),
+        ),
+      ),
+    );
+
+    if (listValue.isNotEmpty) {
+      polylineCoordinates.clear();
+      for (var point in listValue) {
+        // print('point: $point');
+        polylineCoordinates.add(LatLng(
+            double.parse(point['lat']!), double.parse(point['longitude']!)));
+      }
+
+      setState(() {
+        polylineList.clear();
+        Polyline polyline = Polyline(
+          polylineId: const PolylineId("poly"),
+          points: polylineCoordinates,
+        );
+        polylineList.add(polyline);
+        if (ref.read(stepProvider) != 'moving') {
+          _setMapFitToTour();
+        }
+      });
+    }
+  }
+
   String? action;
 
   @override
@@ -476,15 +528,28 @@ class _MyMapState extends ConsumerState<MyMap> {
           .setDriver(DriverModel.fromMap(parsed['driver']));
       print(parsed['directions']);
       if (parsed['directions'].toString().length > 2) {
-        drawDriverMoving(parsed['directions']);
+        if (ref.read(stepProvider) == 'wait_driver') {
+          drawDriverMoving(parsed['directions']);
+        } else {
+          ref.read(stepProvider.notifier).setStep('moving');
+          drawRouteToArrival(parsed['directions']);
+        }
       }
     });
 
     socketClient.subscribe('comming driver', (dynamic value) {
       print('comming driver: \n$value');
       dynamic parsed = json.decode(value).cast<String, dynamic>();
-      ref.read(driverProvider.notifier).setDriver(DriverModel.fromMap(parsed));
+      ref
+          .read(driverProvider.notifier)
+          .setDriver(DriverModel.fromMap(parsed['driver']));
       ref.read(stepProvider.notifier).setStep('comming_driver');
+      drawRouteToArrival(parsed['directions']);
+    });
+
+    socketClient.subscribe('success driver', (dynamic value) {
+      ref.read(mapProvider.notifier).setMapAction('SET_DEFAULT');
+      ref.read(stepProvider.notifier).setStep('complete');
     });
 
     DefaultAssetBundle.of(context)

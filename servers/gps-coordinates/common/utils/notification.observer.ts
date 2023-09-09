@@ -56,7 +56,9 @@ export class RideService implements Subject {
 
         const finalDrivers = nearestDriver.map((observer: any) => {
             observer.update(customer, bookingData);
-            return observer;
+            const _observer: any = { ...observer };
+            delete _observer.socket;
+            return _observer;
         });
         return finalDrivers;
     }
@@ -73,7 +75,6 @@ export class DriverNearest implements Observer {
 
     update(customer: any, bookingData: any): void {
         this.socket.emit('customer-request', JSON.stringify({ ...customer, history_id: bookingData._id.toString() }));
-        delete this.socket;
     }
 }
 

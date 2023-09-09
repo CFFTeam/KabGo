@@ -32,15 +32,19 @@ class customerAuthController implements Controller {
         const customer = await customerModel.findOne({ email: req.body.email });
         if (customer != null) {
             const historyList = await bookingHistory.find({ customer: customer?._id.toString() }).sort('-_id');
-            console.log(historyList);
+            // console.log(historyList.length);
+            // console.log(historyList);
             const _historyList: any = [];
             for (const i in historyList) {
                 let check: boolean = true;
                 for (const j in _historyList) {
-                    if (historyList[i].destination.address == _historyList[j].destination.address) check = false;
+                    if (historyList[i].destination.address === _historyList[j].destination.address) check = false;
                 }
                 if (check) _historyList.push(historyList[i]);
             }
+
+            // console.log('================= DIEM PHAN BIET: ', _historyList.length);
+            // console.log(_historyList);
 
             return res.status(200).json({
                 status: 'success',
