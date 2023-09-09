@@ -20,6 +20,14 @@ class RequestStatusNotifier extends StateNotifier<int> {
     state = RequestStatus.comming;
   }
 
+  void readyRequest() {
+    state = RequestStatus.ready;
+  }
+
+  void ongoingRequest() {
+    state = RequestStatus.ongoing;
+  }
+
   void cancelRequest() {
     state = RequestStatus.waiting;
   }

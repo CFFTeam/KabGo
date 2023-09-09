@@ -10,7 +10,6 @@ class PlaceAutocompleteResponse {
   PlaceAutocompleteResponse({this.status, this.predictions});
 
   factory PlaceAutocompleteResponse.fromJson(Map<String, dynamic> json) {
-    // print(json);
     return PlaceAutocompleteResponse(
       status: json['status'] as String?,
       predictions: json['predictions'] != null

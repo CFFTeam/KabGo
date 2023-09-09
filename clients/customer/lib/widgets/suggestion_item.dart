@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../models/location_model.dart';
 
 class SuggestionItem extends StatelessWidget {

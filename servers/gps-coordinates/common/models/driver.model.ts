@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 import './service.model';
 
-export interface AccountBalance {
+export interface IAccountBalance {
     name: string;
     balance: number;
 }
 
-export interface Vehicle {
+export interface IVehicle {
     name: string;
     brand: string;
     category: string;
@@ -15,7 +15,7 @@ export interface Vehicle {
     number: string;
 }
 
-export interface Driver {
+export interface IDriver {
     _id?: string;
     avatar?: string;
     name?: string;
@@ -28,22 +28,23 @@ export interface Driver {
     day_income?: number;
     week_income?: number;
     lock: boolean;
-    account_balance?: AccountBalance[];
-    vehicle?: Vehicle[];
+    account_balance?: IAccountBalance[];
+    vehicle?: IVehicle[];
     active?: string;
+    social?: boolean;
 }
 
-const driverSchema = new mongoose.Schema<Driver>({
+const driverSchema = new mongoose.Schema<IDriver>({
     avatar: { type: String }, 
     name: { type: String },
     email: { type: String },
     phonenumber: { type: String },
-    rate: { type: Number },
-    accept_rate: { type: Number },
-    cancel_rate: { type: Number },
+    rate: { type: Number, default: 0.0 },
+    accept_rate: { type: Number, default: 0.0 },
+    cancel_rate: { type: Number, default: 0.0 },
     begin_day: { type: String },
-    day_income: { type: Number },
-    week_income: { type: Number },
+    day_income: { type: Number, default: 0.0 },
+    week_income: { type: Number, default: 0.0 },
     lock: { type: Boolean, default: false },
     account_balance: [{ name: String, balance: Number }],
     vehicle: [
@@ -62,11 +63,14 @@ const driverSchema = new mongoose.Schema<Driver>({
     ],
     active: {
         type: String,
-        default: '26/8/2023',
+        default: Date.now(),
     },
+    social: {
+        type: Boolean,
+        default: false,
+    }
 });
 
-const driverModel = mongoose.model<Driver>('Driver', driverSchema);
+const driverModel = mongoose.model<IDriver>('Driver', driverSchema);
 
 export default driverModel;
-

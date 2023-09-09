@@ -49,7 +49,7 @@ class StructuredFormatting {
   final String? mainText;
 
   /// secondaryText contains the secondary text of a prediction, usually the location of the place.
-  final String? secondaryText;
+  String? secondaryText;
 
   StructuredFormatting({this.mainText, this.secondaryText});
 
@@ -58,5 +58,17 @@ class StructuredFormatting {
       mainText: json['main_text'] as String?,
       secondaryText: json['secondary_text'] as String?,
     );
+  }
+
+  void formatSecondaryText() {
+    secondaryText = secondaryText!.trim();
+
+    if (secondaryText!.endsWith("Thành phố Hồ Chí Minh, Việt Nam")) {
+      secondaryText = secondaryText!
+          .replaceAll("Thành phố Hồ Chí Minh, Việt Nam", "TP.HCM");
+    } else if (secondaryText!.endsWith("Thành phố Hồ Chí Minh")) {
+      secondaryText =
+          secondaryText!.replaceAll("Thành phố Hồ Chí Minh", "TP.HCM");
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import Controller from '@common/interfaces/controller';
-import bookingHistoryModel, { IBookingHistory } from '../models/booking_history.model';
+import bookingHistoryModel from '../models/booking_history.model';
 
 class UserController implements Controller {
     // path: string = '/user';
@@ -20,7 +20,7 @@ class UserController implements Controller {
     };
 
     public createBooking = async (createBookingData: any) => {
-        await bookingHistoryModel.create(createBookingData);
+        return await bookingHistoryModel.create(createBookingData);
     };
 }
 

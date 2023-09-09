@@ -1,13 +1,18 @@
-import 'package:customer_app/providers/mapProvider.dart';
-import 'package:customer_app/providers/stepProvider.dart';
-import 'package:customer_app/widgets/input_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../data/data.dart';
+import '../../functions/setAddressByPosition.dart';
 import '../../functions/setHexColor.dart';
 import '../../models/location_model.dart';
 import '../../providers/arrivalLocationProvider.dart';
+import '../../providers/bookingHistoryProvider.dart';
+import '../../providers/currentLocationProvider.dart';
+import '../../providers/departureLocationProvider.dart';
+import '../../providers/locationPickerInMap.dart';
+import '../../providers/mapProvider.dart';
+import '../../providers/stepProvider.dart';
 import '../../widgets/favorite_location_item.dart';
+import '../../widgets/input_custom.dart';
 import '../../widgets/recently_arrival_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,10 +23,14 @@ class FindArrivalPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     print('===========> FIND_ARRIVAL_PAGE BUILD');
 
-    void chooseArrival(LocationModel value) {
-      ref.read(arrivalLocationProvider.notifier).setArrivalLocation(value);
-      ref.read(mapProvider.notifier).setMapAction('GET_DEPARTURE_LOCATION');
+    List<LocationModel> bookingHistory = ref.read(bookingHistoryProvider);
+
+    void chooseArrival() {
       ref.read(stepProvider.notifier).setStep('choose_departure');
+      ref
+          .read(mapProvider.notifier)
+          .setMapAction('GET_CURRENT_DEPARTURE_LOCATION');
+
       Navigator.pop(context);
     }
 
@@ -30,6 +39,7 @@ class FindArrivalPage extends ConsumerWidget {
         : '';
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Chọn điểm đến',
             style: Theme.of(context).textTheme.titleLarge),
@@ -47,7 +57,7 @@ class FindArrivalPage extends ConsumerWidget {
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+        padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
         color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +65,7 @@ class FindArrivalPage extends ConsumerWidget {
             Row(
               children: [
                 Image.asset(
-                  'assets/arrival_icon.png',
+                  'lib/assets/arrival_icon.png',
                   width: 36,
                 ),
                 const SizedBox(
@@ -65,14 +75,88 @@ class FindArrivalPage extends ConsumerWidget {
                   child: InputCustom(
                     placeHolder: 'Nhập điểm đến...',
                     value: departureValue,
-                    choosePoint: chooseArrival,
+                    choosePoint: (value) {
+                      ref
+                          .read(arrivalLocationProvider.notifier)
+                          .setArrivalLocation(value);
+                      chooseArrival();
+                    },
                   ),
                 )
               ],
             ),
             const SizedBox(
-              height: 32,
+              height: 10,
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size.zero, // Set this
+                    shape: const StadiumBorder(),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 9,
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    ref
+                        .read(mapProvider.notifier)
+                        .setMapAction('LOCATION_PICKER');
+                    ref.read(stepProvider.notifier).setStep('location_picker');
+                    ref
+                        .read(pickerLocationProvider.notifier)
+                        .setPickerLocation(ref.read(departureLocationProvider));
+                  },
+                  icon: const FaIcon(
+                    FontAwesomeIcons.mapLocationDot,
+                    color: Colors.white,
+                    size: 18,
+                  ),
+                  label: const Text(
+                    'Chọn trên bản đồ',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500),
+                  ),
+                ),
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size.zero, // Set this
+                    shape: const StadiumBorder(),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 15,
+                      vertical: 9,
+                    ),
+                  ),
+                  onPressed: () async {
+                    LocationModel currentLocationModel =
+                        await setAddressByPosition(
+                            ref.read(currentLocationProvider));
+                    ref
+                        .read(arrivalLocationProvider.notifier)
+                        .setArrivalLocation(currentLocationModel);
+                    chooseArrival();
+                  },
+                  icon: const FaIcon(
+                    FontAwesomeIcons.locationCrosshairs,
+                    color: Colors.white,
+                    size: 18,
+                  ),
+                  label: const Text(
+                    'Lấy vị trí hiện tại',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500),
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(height: 20),
             /////////////////////////////////////////////////// FAVORITE ARRIVAL
             Text(
               'Các địa điểm yêu thích',
@@ -104,11 +188,19 @@ class FindArrivalPage extends ConsumerWidget {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: recentlyArrivalData.length,
+                itemCount: bookingHistory.length,
                 itemBuilder: (context, index) => Column(
                   children: [
-                    RecentlyArrivalItem(
-                      data: recentlyArrivalData[index],
+                    InkWell(
+                      onTap: () {
+                        ref
+                            .read(arrivalLocationProvider.notifier)
+                            .setArrivalLocation(bookingHistory[index]);
+                        chooseArrival();
+                      },
+                      child: RecentlyArrivalItem(
+                        data: bookingHistory[index],
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
@@ -116,6 +208,9 @@ class FindArrivalPage extends ConsumerWidget {
                   ],
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 75,
             ),
           ],
         ),

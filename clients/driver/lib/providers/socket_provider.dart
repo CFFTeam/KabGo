@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:socket_io_client/socket_io_client.dart';
 
+import '../.env.dart';
+
 class SocketClient extends StateNotifier<bool> {
   static final SocketClient _socketClient = SocketClient._internal();
 
@@ -14,7 +16,7 @@ class SocketClient extends StateNotifier<bool> {
 
   _createSocket() {
     socket = io(
-      'ws://192.168.2.68:4600/',
+      "ws://${ip}:4600/",
       OptionBuilder()
           .setTransports(['websocket'])
           .disableAutoConnect()

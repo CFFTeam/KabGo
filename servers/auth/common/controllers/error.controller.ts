@@ -4,7 +4,7 @@ import { AppErrorInterface } from "@common/utils/appError";
 
 class ErrorFactory {
   static createError(err: any) {
-    switch (err.name || err.code) {
+    switch (err?.name || err?.code) {
       case 'CastError':
         return this.createCastError(err);
       case 11000:

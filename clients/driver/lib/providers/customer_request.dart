@@ -73,6 +73,7 @@ class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
               distance: '',
               time: '',
               service: '',
+              history_id: '',
               arrival_information:
                   LocationAddress(address: '', latitude: "", longitude: ""),
               departure_information:
@@ -121,6 +122,31 @@ class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
     }
   }
 
+  Future<void> acceptRequest() async {
+    
+    Directions? direct = await DirectionRepository(dio: Dio()).getDirection(
+        origin: LatLng(
+            double.parse(state.customer_infor.departure_information.latitude),
+            double.parse(state.customer_infor.departure_information.longitude)),
+
+        destination: LatLng(
+            double.parse(state.customer_infor.arrival_information.latitude),
+            double.parse(
+                state.customer_infor.arrival_information.longitude)));
+
+    if (!mounted) return;
+
+    state = CustomerRequestDetails(
+        direction: direct!,
+        customer_infor: state.customer_infor,
+        duration_distance: direct.totalDistance!,
+        duration_time: direct.totalDuration!,
+        currentLocation: LocationPostion(
+          latitude: currentLocation.latitude,
+          longitude: currentLocation.longitude,
+        ));
+  }
+
   void cancelRequest() {
     if (!mounted) return;
 
@@ -139,6 +165,7 @@ class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
               type: ''),
           distance: '',
           time: '',
+          history_id: '',
           service: '',
           arrival_information:
               LocationAddress(address: '', latitude: "", longitude: ""),

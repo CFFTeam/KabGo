@@ -21,6 +21,8 @@ class DriverDetailsNotifier extends StateNotifier<DriverDetails> {
       social: false
   ));
 
+  bool get hasValue => state.id.isNotEmpty;
+
   void setDriverDetails(DriverDetails driverDetails) {
     state = driverDetails;
   }

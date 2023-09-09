@@ -9,6 +9,7 @@ class CustomerRequest {
   final String time;
   final String distance;
   final String service;
+  final String history_id;
 
   CustomerRequest(
       {required this.user_information,
@@ -17,7 +18,8 @@ class CustomerRequest {
       required this.service,
       required this.price,
       required this.time,
-      required this.distance});
+      required this.distance,
+      required this.history_id});
 
   factory CustomerRequest.fromJson(Map<String, dynamic> json) {
     return CustomerRequest(
@@ -30,6 +32,7 @@ class CustomerRequest {
       service: json['service'],
       distance: json['distance'],
       time: json['time'],
+      history_id: json['history_id'],
     );
   }
 
@@ -41,6 +44,7 @@ class CustomerRequest {
         'distance': distance,
         'time': time,
         'service': service,
+        'history_id': history_id,
       };
 
   bool hasValue() {
@@ -48,6 +52,6 @@ class CustomerRequest {
         departure_information.hasValue() &&
         arrival_information.hasValue() &&
         service != "" &&
-        price != "";
+        price != "" && history_id != "";
   }
 }

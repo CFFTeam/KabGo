@@ -1,7 +1,7 @@
 import 'package:riverpod/riverpod.dart';
 
 class StepNotifier extends StateNotifier<String> {
-  StepNotifier() : super('home');
+  StepNotifier() : super('splash_page');
 
   void setStep(String value) async {
     state = value;

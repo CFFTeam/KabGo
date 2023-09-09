@@ -6,7 +6,8 @@ import { ReactComponent as Eye } from "@assets/svg/Login/eye.svg";
 import axios from "axios";
 import $ from "jquery";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, redirect } from "react-router-dom";
+import { authStorage } from "@utils/storage";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -69,22 +70,35 @@ const Login: React.FC = () => {
       clearBorderRed(emptyName);
       toast.error("Vui lòng nhập đầy đủ thông tin", styleError);
     } else {
-      //   axios
-      //     .post(`${process.env.REACT_APP_API_URI}`, getFormData)
-      //     .then((res) => {
-      //       if (res.data.success) {
-      //         navigate("");
-      //         toast.success("Tạo tài khoản thành công", styleSuccess);
-      //       } else {
-      //         toast.error(res.data.message, styleError);
-      //       }
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //     });
-      toast.success("Đăng nhập thành công", styleSuccess);
+        axios
+          .post(`${process.env.REACT_APP_AUTH_API_URI}/v1/call-center/login`, getFormData)
+          .then((res) => {
+            if (res.data.status === "success") {
+              authStorage.authenticate({
+                ...res.data.data.employee_info,
+                access_token: res.data.data.access_token
+              })
+              toast.success("Đăng nhập thành công", styleSuccess);
+            } else {
+              toast.error(res.data.message, styleError);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      // toast.success("Đăng nhập thành công", styleSuccess);
       setTimeout(function () {
-        navigate("/dashboard");
+        // navigate("/dashboard");
+        if (authStorage.getAuthData()?.role === "Receptionist") {
+          navigate("/call-receipt");
+        }
+        else if (authStorage.getAuthData()?.role === "Coordinator") {
+          navigate("/call-receipt-handle");
+        }
+        else if (authStorage.getAuthData()?.role === "Supervisor") {
+          navigate("/dashboard");
+        }
+        else navigate("/");
       }, 1500);
     }
   };
@@ -114,7 +128,7 @@ const Login: React.FC = () => {
           <input
             id="password"
             ref={passwordRef}
-            type="email"
+            type="password"
             className={styles["input-self"]}
             placeholder="Nhập mật khẩu"
           />

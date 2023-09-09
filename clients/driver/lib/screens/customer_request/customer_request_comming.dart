@@ -1,8 +1,10 @@
 import 'dart:convert';
 
+import 'package:driver/screens/customer_request/customer_request_ready.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../models/customer_booking.dart';
 import '../../models/driver.dart';
@@ -77,14 +79,21 @@ class _CustomerRequestCommingState
             padding: const EdgeInsets.only(left: 15, right: 15, bottom: 9),
             child: Row(
               children: <Widget>[
+                // ClipRRect(
+                //     borderRadius: BorderRadius.circular(15),
+                //     child: Image.network(
+                //         customerRequest.customer_infor.user_information.avatar,
+                //         width: 60,
+                //         height: 60,
+                //         fit: BoxFit.cover)),
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: const Image(
-                    image: AssetImage("lib/assets/test/avatar.png"),
-                    width: 60,
-                    height: 60,
-                  ),
-                ),
+                      borderRadius: BorderRadius.circular(15),
+                      child: const Image(
+                        image: AssetImage("lib/assets/test/avatar.png"),
+                        width: 60,
+                        height: 60,
+                      ),
+                    ),
                 const SizedBox(width: 15),
                 Expanded(
                   child: Column(
@@ -188,6 +197,8 @@ class _CustomerRequestCommingState
                           jsonEncode(DriverSubmit(
                               user_id: customerRequest
                                   .customer_infor.user_information.phonenumber,
+                              history_id:
+                                  customerRequest.customer_infor.history_id,
                               driver: Driver(
                                   driverDetails.avatar,
                                   driverDetails.name,
@@ -204,8 +215,8 @@ class _CustomerRequestCommingState
                                   currentLocation.heading,
                                   5.0),
                               directions: []).toJson()));
-                      requestStatusNotifier.commingRequest();
-                      // context.go(HomeDashboard.path);
+                      requestStatusNotifier.readyRequest();
+                      context.go(CustomerRequestReady.path);
                     },
                     style: ThemeButton.acceptButton2,
                     child: const Center(

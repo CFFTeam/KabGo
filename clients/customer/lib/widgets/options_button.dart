@@ -22,7 +22,7 @@ class OptionsButton extends StatelessWidget {
           // print('abchcdhdhh');
         },
         padding: EdgeInsets.zero,
-        icon: Image.asset('assets/options_button.png'),
+        icon: Image.asset('lib/assets/options_button.png'),
         iconSize: 50,
       ),
     );
