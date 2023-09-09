@@ -47,6 +47,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
   final Set<Circle> _circles = {};
   final Set<Marker> _markers = {};
   Set<Polyline> _polyline = {};
+  static bool compass = false;
 
   late BitmapDescriptor currentLocationIcon;
   late BitmapDescriptor driverIcon;
@@ -102,16 +103,29 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
       {double rotate = 0.0}) {
     final requestStatus = ref.watch(requestStatusProvider);
 
-    if (requestStatus == RequestStatus.comming) {
+    if (requestStatus == RequestStatus.comming ||
+        requestStatus == RequestStatus.ongoing) {
       setState(() {
         _markers.add(_createMarker(
             'my_location',
             'Vị trí của tôi',
             LatLng(currentPosition.latitude, currentPosition.longitude),
             driverIcon,
-            rotate: rotate));
+            rotate: compass ? rotate : 180));
         _circles.clear();
       });
+
+      if (compass == false) {
+        double cameraBearing = (rotate < 0) ? rotate - 180.0 : rotate - 180;
+
+        _mapController.animateCamera(CameraUpdate.newCameraPosition(
+            CameraPosition(
+                target:
+                    LatLng(currentPosition.latitude, currentPosition.longitude),
+                zoom: 20,
+                tilt: 90.0,
+                bearing: cameraBearing)));
+      }
       return;
     }
 
@@ -124,7 +138,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
 
       _circles.add(_createCircle('my_location',
           LatLng(currentPosition.latitude, currentPosition.longitude),
-          radius: currentPosition.accuracy));
+          radius: currentPosition?.accuracy));
     });
   }
 
@@ -191,15 +205,32 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
             BitmapDescriptor.fromBytes(bytes.buffer.asUint8List()));
   }
 
+  double calculateBearing(
+      LocationPostion currentLocation, LocationPostion destinationPosition) {
+    final bearing = math.atan2(
+        math.sin(math.pi *
+            (destinationPosition.longitude - currentLocation.longitude) /
+            180.0),
+        math.cos(math.pi * currentLocation.latitude / 180.0) *
+                math.tan(math.pi * destinationPosition.latitude / 180.0) -
+            math.sin(math.pi * currentLocation.latitude / 180.0) *
+                math.cos(math.pi *
+                    (destinationPosition.longitude -
+                        currentLocation.longitude) /
+                    180.0));
+
+    return bearing * 180.0 / math.pi;
+  }
+
   @override
   Widget build(BuildContext context) {
     final bool active = ref.watch(socketClientProvider);
     final requestStatus = ref.watch(requestStatusProvider);
     final driverDetails = ref.read(driverDetailsProvider);
+    final customerRequest = ref.watch(customerRequestProvider);
+    final customerRequestNotifier = ref.watch(customerRequestProvider.notifier);
 
     if (active) {
-      final customerRequest = ref.watch(customerRequestProvider);
-
       if (customerRequest.hasValue()) {
         if (requestStatus == RequestStatus.accepted) {
           final LocationPostion customerLocation = LocationPostion(
@@ -251,7 +282,14 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
           }
         }
 
-        if (requestStatus == RequestStatus.comming &&
+        if (requestStatus == RequestStatus.ready) {
+          customerRequestNotifier.acceptRequest().then((value) {
+            _info = customerRequest.direction;
+          });
+        }
+
+        if ((requestStatus == RequestStatus.comming ||
+                requestStatus == RequestStatus.ongoing) &&
             running == true &&
             _info != null) {
           LocationPostion current_location = LocationPostion(
@@ -266,103 +304,82 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
               longitude: customerRequest.direction.polylinePoints![process + 1]
                   .longitude); // Replace with your destination's coordinates
 
-          final bearing = math.atan2(
-              math.sin(math.pi *
-                  (destinationPosition.longitude - current_location.longitude) /
-                  180.0),
-              math.cos(math.pi * current_location.latitude / 180.0) *
-                      math.tan(math.pi * destinationPosition.latitude / 180.0) -
-                  math.sin(math.pi * current_location.latitude / 180.0) *
-                      math.cos(math.pi *
-                          (destinationPosition.longitude -
-                              current_location.longitude) /
-                          180.0));
-
-          double rotate = bearing * 180.0 / math.pi;
+          double rotate =
+              calculateBearing(current_location, destinationPosition);
 
           _updateIconCurrentLocation(current_location, rotate: rotate);
 
-          Timer.periodic(const Duration(seconds: 1), (timer) {
-            if (_info == null ||
-                requestStatus == RequestStatus.waiting ||
-                process >=
-                    customerRequest.direction.polylinePoints!.length - 1) {
-              timer.cancel();
-              return;
-            }
+          Future.delayed(const Duration(milliseconds: 1500), () {
+            Timer.periodic(const Duration(milliseconds: 900), (timer) {
+              if (_info == null ||
+                  requestStatus == RequestStatus.waiting ||
+                  process >=
+                      customerRequest.direction.polylinePoints!.length - 1) {
+                process = 0;
+                timer.cancel();
+                return;
+              }
 
-            if (process <
-                customerRequest.direction.polylinePoints!.length - 1) {
-              process++;
+              if (process <
+                  customerRequest.direction.polylinePoints!.length - 1) {
+                process++;
 
-              LocationPostion current_location = LocationPostion(
-                  latitude: customerRequest
-                      .direction.polylinePoints![process].latitude,
-                  longitude: customerRequest
-                      .direction.polylinePoints![process].longitude);
+                LocationPostion current_location = LocationPostion(
+                    latitude: customerRequest
+                        .direction.polylinePoints![process].latitude,
+                    longitude: customerRequest
+                        .direction.polylinePoints![process].longitude);
 
-              final destinationPosition = LocationPostion(
-                  latitude: customerRequest
-                      .direction.polylinePoints![process - 1].latitude,
-                  longitude: customerRequest
-                      .direction
-                      .polylinePoints![process - 1]
-                      .longitude); // Replace with your destination's coordinates
+                final destinationPosition = LocationPostion(
+                    latitude: customerRequest
+                        .direction.polylinePoints![process - 1].latitude,
+                    longitude: customerRequest
+                        .direction
+                        .polylinePoints![process - 1]
+                        .longitude); // Replace with your destination's coordinates
 
-              final bearing = math.atan2(
-                  math.sin(math.pi *
-                      (destinationPosition.longitude -
-                          current_location.longitude) /
-                      180.0),
-                  math.cos(math.pi * current_location.latitude / 180.0) *
-                          math.tan(
-                              math.pi * destinationPosition.latitude / 180.0) -
-                      math.sin(math.pi * current_location.latitude / 180.0) *
-                          math.cos(math.pi *
-                              (destinationPosition.longitude -
-                                  current_location.longitude) /
-                              180.0));
+                double rotate =
+                    calculateBearing(current_location, destinationPosition);
 
-              double rotate = bearing * 180.0 / math.pi;
+                // _info!.polylinePoints.removeAt(0);
 
-              // _info!.polylinePoints.removeAt(0);
+                _polyline = {
+                  Polyline(
+                      polylineId: const PolylineId('customer_direction'),
+                      color: const Color.fromARGB(255, 255, 113, 36),
+                      width: 8,
+                      points: _info!.polylinePoints!
+                          .map((e) => LatLng(e.latitude, e.longitude))
+                          .toList()
+                          .sublist(process, _info!.polylinePoints!.length))
+                };
 
-              _polyline = {
-                Polyline(
-                    polylineId: const PolylineId('customer_direction'),
-                    color: const Color.fromARGB(255, 255, 113, 36),
-                    width: 8,
-                    points: _info!.polylinePoints!
-                        .map((e) => LatLng(e.latitude, e.longitude))
-                        .toList()
-                        .sublist(process, _info!.polylinePoints!.length))
-              };
+                _updateIconCurrentLocation(current_location, rotate: rotate);
 
-              _updateIconCurrentLocation(current_location, rotate: rotate);
-
-              ref.read(socketClientProvider.notifier).publish(
-                  'driver-moving',
-                  jsonEncode(DriverSubmit(
-                    user_id: customerRequest
-                        .customer_infor.user_information.phonenumber,
-                    history_id: customerRequest.customer_infor.history_id,
-                    driver: Driver(
-                        driverDetails.avatar,
-                        driverDetails.name,
-                        driverDetails.phonenumber,
-                        Vehicle(
-                            name: "Honda Wave RSX",
-                            brand: "Honda",
-                            type: "Xe máy",
-                            color: "Xanh đen",
-                            number: "68S164889"),
-                        current_location,
-                        rotate,
-                        5.0),
-                    directions: _info!.polylinePoints!
-                        .sublist(process, _info!.polylinePoints!.length),
-                  ).toJson()));
-            }
+                ref.read(socketClientProvider.notifier).publish(
+                    'driver-moving',
+                    jsonEncode(DriverSubmit(
+                      user_id: customerRequest
+                          .customer_infor.user_information.phonenumber,
+                      history_id: customerRequest.customer_infor.history_id,
+                      driver: Driver(
+                          driverDetails.avatar,
+                          driverDetails.name,
+                          driverDetails.phonenumber,
+                          Vehicle(
+                              name: "Honda Wave RSX",
+                              brand: "Honda",
+                              type: "Xe máy",
+                              color: "Xanh đen",
+                              number: "68S164889"),
+                          current_location,
+                          rotate,
+                          5.0),
+                      directions: _info!.polylinePoints!
+                          .sublist(process, _info!.polylinePoints!.length),
+                    ).toJson()));
+              }
+            });
           });
           running = false;
         }
@@ -416,6 +433,25 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                 icon: const Icon(FontAwesomeIcons.locationCrosshairs,
                     color: Color(0xFFFF772B)),
                 onPressed: _moveToCurrent,
+              ),
+            )),
+      if (requestStatus == RequestStatus.comming)
+        Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              padding: const EdgeInsets.only(bottom: 120, right: 3),
+              child: CIconButton(
+                elevation: 1,
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.grey[500],
+                padding: const EdgeInsets.all(12),
+                icon: const Icon(FontAwesomeIcons.solidCompass,
+                    color: Color(0xFFFF772B)),
+                onPressed: () {
+                  compass = !compass;
+                  _mapController.animateCamera(CameraUpdate.newLatLngBounds(
+                      customerRequest.direction.bounds!, 100.0));
+                },
               ),
             )),
     ]);

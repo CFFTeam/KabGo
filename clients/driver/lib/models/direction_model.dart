@@ -20,13 +20,21 @@ class Directions {
     final northeast = data['bounds']['northeast'];
     final southwest = data['bounds']['southwest'];
 
+    final steps = data['legs'][0]['steps'];
+
+    List<PointLatLng> polylinePointsTemp = [];
+
+    for (int i = 0; i < steps.length; ++i) {
+      final stepsPoint = PolylinePoints().decodePolyline(steps[i]['polyline']['points'].toString());
+      polylinePointsTemp.addAll(stepsPoint);
+    }
+
     return Directions(
       bounds: LatLngBounds(
         southwest: LatLng(southwest['lat'], southwest['lng']),
         northeast: LatLng(northeast['lat'], northeast['lng']),
       ),
-      polylinePoints:
-          PolylinePoints().decodePolyline(data['overview_polyline']['points']),
+      polylinePoints: [...polylinePointsTemp],
       totalDistance: data['legs'][0]['distance']['text'],
       totalDuration: data['legs'][0]['duration']['text'],
     );

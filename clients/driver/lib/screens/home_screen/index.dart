@@ -14,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final List<String> acceptPath400 = ['/', '/wallet', '/wallet/income', '/customer/request', '/customer/request/accept'];
   final List<String> acceptPath300 = ['/customer/request/comming'];
+  final List<String> acceptPath700 = ['/customer/request/ready'];
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,9 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     else if (acceptPath300.contains(currentLocation)) {
       panelHeight = 300;
+    } 
+    else if (acceptPath700.contains(currentLocation)) {
+      panelHeight = 700;
     } 
     else {
       panelHeight = 500;
