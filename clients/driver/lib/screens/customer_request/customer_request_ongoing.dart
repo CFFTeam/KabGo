@@ -80,14 +80,22 @@ class _CustomerRequestGoingState extends ConsumerState<CustomerRequestGoing> {
             padding: const EdgeInsets.only(left: 15, right: 15, bottom: 9),
             child: Row(
               children: <Widget>[
+                // ClipRRect(
+                //   borderRadius: BorderRadius.circular(15),
+                //   child: Image.network(
+                //       customerRequest.customer_infor.user_information.avatar,
+                //       width: 60,
+                //       height: 60,
+                //       fit: BoxFit.cover),
+                // ),
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(15),
-                  child: Image.network(
-                      customerRequest.customer_infor.user_information.avatar,
-                      width: 60,
-                      height: 60,
-                      fit: BoxFit.cover),
-                ),
+                      borderRadius: BorderRadius.circular(15),
+                      child: const Image(
+                        image: AssetImage("lib/assets/test/avatar.png"),
+                        width: 60,
+                        height: 60,
+                      ),
+                    ),
                 const SizedBox(width: 15),
                 Expanded(
                   child: Column(

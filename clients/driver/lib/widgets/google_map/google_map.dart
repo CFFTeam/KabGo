@@ -129,17 +129,20 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
       return;
     }
 
-    setState(() {
-      _markers.add(_createMarker(
-          'my_location',
-          'Vị trí của tôi',
-          LatLng(currentPosition.latitude, currentPosition.longitude),
-          currentLocationIcon));
+    if (requestStatus == RequestStatus.waiting ||
+        requestStatus == RequestStatus.accepted) {
+      setState(() {
+        _markers.add(_createMarker(
+            'my_location',
+            'Vị trí của tôi',
+            LatLng(currentPosition.latitude, currentPosition.longitude),
+            currentLocationIcon));
 
-      _circles.add(_createCircle('my_location',
-          LatLng(currentPosition.latitude, currentPosition.longitude),
-          radius: currentPosition?.accuracy));
-    });
+        _circles.add(_createCircle('my_location',
+            LatLng(currentPosition.latitude, currentPosition.longitude),
+            radius: currentPosition?.accuracy));
+      });
+    }
   }
 
   void _moveToCurrent() {
@@ -285,6 +288,42 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         if (requestStatus == RequestStatus.ready) {
           customerRequestNotifier.acceptRequest().then((value) {
             _info = customerRequest.direction;
+
+            setState(() {
+              // _polyline = {
+              //   Polyline(
+              //       polylineId: const PolylineId('customer_direction'),
+              //       color: const Color.fromARGB(255, 255, 113, 36),
+              //       width: 8,
+              //       points: customerRequest.direction.polylinePoints!
+              //           .map((e) => LatLng(e.latitude, e.longitude))
+              //           .toList())
+              // };
+
+              _markers.addAll({
+                // _createMarker(
+                //     'customer_location',
+                //     'Vị trí khách hàng',
+                //     LatLng(customerRequest.currentLocation.latitude,
+                //         customerRequest.currentLocation.longitude),
+                //     departureLocationIcon),
+
+                _createMarker(
+                    'destination_location',
+                    'Điểm đến  khách hàng',
+                    LatLng(
+                        double.parse(customerRequest
+                            .customer_infor.arrival_information.latitude),
+                        double.parse(customerRequest
+                            .customer_infor.arrival_information.longitude)),
+                    BitmapDescriptor.defaultMarkerWithHue(
+                        BitmapDescriptor.hueOrange)),
+              });
+            });
+
+            compass = false;
+            running = true;
+            process = 0;
           });
         }
 
@@ -313,9 +352,9 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
             Timer.periodic(const Duration(milliseconds: 900), (timer) {
               if (_info == null ||
                   requestStatus == RequestStatus.waiting ||
+                  requestStatus == RequestStatus.ready ||
                   process >=
                       customerRequest.direction.polylinePoints!.length - 1) {
-                process = 0;
                 timer.cancel();
                 return;
               }
@@ -435,7 +474,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                 onPressed: _moveToCurrent,
               ),
             )),
-      if (requestStatus == RequestStatus.comming)
+      if (requestStatus == RequestStatus.comming || requestStatus == RequestStatus.ongoing)
         Align(
             alignment: Alignment.bottomRight,
             child: Container(

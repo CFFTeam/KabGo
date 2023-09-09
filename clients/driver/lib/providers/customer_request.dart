@@ -123,8 +123,7 @@ class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
   }
 
   Future<void> acceptRequest() async {
-    if (!mounted) return;
-
+    
     Directions? direct = await DirectionRepository(dio: Dio()).getDirection(
         origin: LatLng(
             double.parse(state.customer_infor.departure_information.latitude),

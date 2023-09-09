@@ -201,28 +201,31 @@ final routerProvider = Provider<GoRouter>((ref) {
 
         if (isSplash) {
           if (isAuth) {
-
             if (driverDetailsNotifier.hasValue) {
               return HomeDashboard.path;
             }
-            
+
+            print('cmmmmm');
+
             Dio dio = Dio();
-            dio.post(
-                "http://${ip}:4100/v1/driver/register",
-                data: jsonEncode(DriverAccount(
-                        avatar: authState.value!.photoURL!,
-                        name: authState.value!.displayName!,
-                        phonenumber: '',
-                        email: authState.value!.email!,
-                        begin_day: DateTime.now().toString(),
-                        social: true)
-                    .toJson())).then((response) => {
-                      if (response.statusCode == 200) {
-                        ref
-                            .read(driverDetailsProvider.notifier)
-                            .setDriverDetails(DriverDetails.fromJson(response.data))
-                      }
-                    });  
+            dio
+                .post("http://${ip}:4100/v1/driver/register",
+                    data: jsonEncode(DriverAccount(
+                            avatar: authState.value!.photoURL!,
+                            name: authState.value!.displayName!,
+                            phonenumber: '',
+                            email: authState.value!.email!,
+                            begin_day: DateTime.now().toString(),
+                            social: true)
+                        .toJson()))
+                .then((response) {
+              print(response);
+              if (response.statusCode == 200) {
+                ref
+                    .read(driverDetailsProvider.notifier)
+                    .setDriverDetails(DriverDetails.fromJson(response.data));
+              }
+            });
 
             return null;
           }
