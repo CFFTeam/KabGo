@@ -2474,3 +2474,19 @@
 [API.Call Center][Fri, 08 Sep 2023 09:57:22 GMT] Server is running on port 4500 
 [API.Call Center][Fri, 08 Sep 2023 09:57:22 GMT] Connected to the rabbit mq successfully 
 [API.Call Center][Fri, 08 Sep 2023 09:57:23 GMT] Connected to database successfully 
+[API.Call Center][Fri, 08 Sep 2023 09:59:01 GMT] Setting up request middleware... 
+[API.Call Center][Fri, 08 Sep 2023 09:59:01 GMT] Server is starting... 
+[API.Call Center][Fri, 08 Sep 2023 09:59:01 GMT] Server is running on port 4500 
+[API.Call Center][Fri, 08 Sep 2023 09:59:01 GMT] Could not connect to the rabbit mq Error: Socket closed abruptly during opening handshake 
+[API.Call Center][Fri, 08 Sep 2023 09:59:02 GMT] Connected to database successfully 
+[API.Call Center][Fri, 08 Sep 2023 09:59:52 GMT] Setting up request middleware... 
+[API.Call Center][Fri, 08 Sep 2023 09:59:52 GMT] Server is starting... 
+[API.Call Center][Fri, 08 Sep 2023 09:59:52 GMT] Server is running on port 4500 
+[API.Call Center][Fri, 08 Sep 2023 09:59:52 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Fri, 08 Sep 2023 09:59:52 GMT] Connected to database successfully 
+[API.Call Center][Fri, 08 Sep 2023 10:00:31 GMT] object 
+[API.Call Center][Fri, 08 Sep 2023 10:00:31 GMT] data from client-s1:  [object Object] 
+[API.Call Center][Fri, 08 Sep 2023 10:02:09 GMT] object 
+[API.Call Center][Fri, 08 Sep 2023 10:02:09 GMT] data from client-s1:  [object Object] 
+[API.Call Center][Fri, 08 Sep 2023 10:04:05 GMT] object 
+[API.Call Center][Fri, 08 Sep 2023 10:04:05 GMT] data from client-s1:  [object Object] 
