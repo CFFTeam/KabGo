@@ -5,6 +5,7 @@ import 'package:driver/models/driver.dart';
 import 'package:driver/models/location.dart';
 import 'package:driver/models/vehicle.dart';
 import 'package:driver/providers/current_location.dart';
+import 'package:driver/providers/direction_provider.dart';
 import 'package:driver/providers/driver_provider.dart';
 import 'package:driver/providers/socket_provider.dart';
 import 'package:driver/screens/customer_request/customer_request_ready.dart';
@@ -226,6 +227,9 @@ class _CustomerRequestGoingState extends ConsumerState<CustomerRequestGoing> {
                           ref
                               .read(customerRequestProvider.notifier)
                               .cancelRequest();
+                          ref
+                              .read(directionProvider.notifier)
+                              .setDirection(false);
                           context.go(HomeDashboard.path);
                         },
                         style: ThemeButton.acceptButton2,

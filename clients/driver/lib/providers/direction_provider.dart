@@ -1,4 +1,3 @@
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DirectionProvider extends StateNotifier<bool> {
@@ -9,6 +8,7 @@ class DirectionProvider extends StateNotifier<bool> {
   }
 
   void setDirection(bool value) {
+    if (!mounted) return;
     state = value;
   }
 }

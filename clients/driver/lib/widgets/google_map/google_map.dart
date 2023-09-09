@@ -304,27 +304,29 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
             ref.read(socketClientProvider.notifier).publish(
                 'driver-comming',
                 jsonEncode(DriverSubmit(
-                    user_id: customerRequest
-                        .customer_infor.user_information.phonenumber,
-                    history_id: customerRequest.customer_infor.history_id,
-                    driver: Driver(
-                        driverDetails.avatar,
-                        driverDetails.name,
-                        driverDetails.phonenumber,
-                        Vehicle(
-                            name: "Honda Wave RSX",
-                            brand: "Honda",
-                            type: "Xe máy",
-                            color: "Xanh đen",
-                            number: "68S164889"),
-                        LocationPostion(
-                            latitude:
-                                ref.read(currentLocationProvider).latitude,
-                            longitude:
-                                ref.read(currentLocationProvider).longitude),
-                        ref.read(currentLocationProvider).heading,
-                        5.0),
-                    directions: []).toJson()));
+                        user_id: customerRequest
+                            .customer_infor.user_information.phonenumber,
+                        history_id: customerRequest.customer_infor.history_id,
+                        driver: Driver(
+                            driverDetails.avatar,
+                            driverDetails.name,
+                            driverDetails.phonenumber,
+                            Vehicle(
+                                name: "Honda Wave RSX",
+                                brand: "Honda",
+                                type: "Xe máy",
+                                color: "Xanh đen",
+                                number: "68S164889"),
+                            LocationPostion(
+                                latitude:
+                                    ref.read(currentLocationProvider).latitude,
+                                longitude: ref
+                                    .read(currentLocationProvider)
+                                    .longitude),
+                            ref.read(currentLocationProvider).heading,
+                            5.0),
+                        directions: value.polylinePoints!)
+                    .toJson()));
 
             _polyline = {
               Polyline(
@@ -385,9 +387,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
 
           _updateIconCurrentLocation(current_location, rotate: rotate);
 
-          Future.delayed(const Duration(milliseconds: 3000), () {
-            print("GO HERE");
-
+          Future.delayed(const Duration(milliseconds: 2000), () {
             Timer.periodic(const Duration(milliseconds: 1000), (timer) {
               if (_info == null ||
                   requestStatus == RequestStatus.waiting ||
@@ -395,6 +395,20 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                   process >=
                       customerRequest.direction.polylinePoints!.length - 1) {
                 timer.cancel();
+
+                if (compass == true) {
+                  // context.go(RouteScreen.path);
+                } else {
+                  if (requestStatus == RequestStatus.comming) {
+                    context.go(CustomerRequestComming.path);
+                  } else if (requestStatus == RequestStatus.ongoing) {
+                    context.go(CustomerRequestGoing.path);
+                  }
+                }
+
+                compassNotifier.setDirection(true);
+                 _mapController.animateCamera(CameraUpdate.newLatLngBounds(
+                      customerRequest.direction.bounds!, 100.0));
                 return;
               }
 
@@ -481,7 +495,6 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
               LatLng(_currentPosition.latitude, _currentPosition.longitude),
               currentLocationIcon));
           process = 0;
-          compassNotifier.setDirection(false);
           running = true;
         });
       }
@@ -490,7 +503,6 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         _info = null;
         _polyline.clear();
         process = 0;
-        compassNotifier.setDirection(false);
         running = true;
       });
     }
