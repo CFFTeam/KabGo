@@ -1,35 +1,36 @@
 import 'dart:convert';
 
+import 'package:driver/models/customer_booking.dart';
+import 'package:driver/models/driver.dart';
+import 'package:driver/models/location.dart';
+import 'package:driver/models/vehicle.dart';
+import 'package:driver/providers/current_location.dart';
+import 'package:driver/providers/driver_provider.dart';
+import 'package:driver/providers/socket_provider.dart';
+import 'package:driver/screens/customer_request/customer_request_comming.dart';
 import 'package:driver/screens/customer_request/customer_request_ready.dart';
+import 'package:driver/screens/home_dashboard/home_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../models/customer_booking.dart';
-import '../../models/driver.dart';
-import '../../models/location.dart';
-import '../../models/vehicle.dart';
-import '../../providers/current_location.dart';
 import '../../providers/customer_request.dart';
-import '../../providers/driver_provider.dart';
 import '../../providers/request_status.dart';
-import '../../providers/socket_provider.dart';
 import 'styles.dart';
 
-class CustomerRequestComming extends ConsumerStatefulWidget {
-  const CustomerRequestComming({Key? key}) : super(key: key);
+class CustomerRequestGoing extends ConsumerStatefulWidget {
+  const CustomerRequestGoing({Key? key}) : super(key: key);
 
-  static String name = 'CustomerRequestComming';
-  static String path = '/customer/request/comming';
+  static String name = 'CustomerRequestGoing';
+  static String path = '/customer/request/going';
 
   @override
-  ConsumerState<CustomerRequestComming> createState() =>
-      _CustomerRequestCommingState();
+  ConsumerState<CustomerRequestGoing> createState() =>
+      _CustomerRequestGoingState();
 }
 
-class _CustomerRequestCommingState
-    extends ConsumerState<CustomerRequestComming> {
+class _CustomerRequestGoingState extends ConsumerState<CustomerRequestGoing> {
   @override
   Widget build(BuildContext context) {
     final requestStatusNotifier = ref.read(requestStatusProvider.notifier);
@@ -80,12 +81,13 @@ class _CustomerRequestCommingState
             child: Row(
               children: <Widget>[
                 // ClipRRect(
-                //     borderRadius: BorderRadius.circular(15),
-                //     child: Image.network(
-                //         customerRequest.customer_infor.user_information.avatar,
-                //         width: 60,
-                //         height: 60,
-                //         fit: BoxFit.cover)),
+                //   borderRadius: BorderRadius.circular(15),
+                //   child: Image.network(
+                //       customerRequest.customer_infor.user_information.avatar,
+                //       width: 60,
+                //       height: 60,
+                //       fit: BoxFit.cover),
+                // ),
                 ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: const Image(
@@ -193,7 +195,7 @@ class _CustomerRequestCommingState
                 child: ElevatedButton(
                     onPressed: () {
                       socketManager.publish(
-                          'driver-comming',
+                          'driver-going',
                           jsonEncode(DriverSubmit(
                               user_id: customerRequest
                                   .customer_infor.user_information.phonenumber,
@@ -220,7 +222,7 @@ class _CustomerRequestCommingState
                     },
                     style: ThemeButton.acceptButton2,
                     child: const Center(
-                      child: Text('ĐÃ ĐẾN ĐIỂM ĐÓN',
+                      child: Text('KẾT THÚC HÀNH TRÌNH',
                           style: ThemeText.acceptButtonText),
                     )),
               ),
@@ -238,7 +240,7 @@ class _CustomerRequestCommingState
               ),
             ),
             child: const Center(
-                child: Text('Đang đón khách',
+                child: Text('Đang di chuyển',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 17,

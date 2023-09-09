@@ -166,12 +166,85 @@ const server = app.run(4600, async () => {
             const id = driverSubmit.user_id;
 
             customerList[id]?.socket.emit('moving driver', JSON.stringify(driverSubmit));
-        });
+        }); 
 
         socket.on('driver-comming', (message: string) => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
             const id = driverSubmit.user_id;
             customerList[id]?.socket.emit('comming driver', JSON.stringify(driverSubmit.driver));
+        });
+
+        socket.on('driver-ready', (message: string) => {
+            const driverSubmit = JSON.parse(message) as DriverSubmit;
+            const id = driverSubmit.user_id;
+            customerList[id]?.socket.emit('comming driver', JSON.stringify(driverSubmit.driver));
+        });
+
+        socket.on('driver-going', (message: string) => {
+            const driverSubmit = JSON.parse(message) as DriverSubmit;
+            const id = driverSubmit.user_id;
+            customerList[id]?.socket.emit('comming driver', JSON.stringify(driverSubmit.driver));
+        });
+
+        socket.on('driver-reject', (message: string) => {
+            const driverSubmit = JSON.parse(message) as DriverSubmit;
+            const id = driverSubmit.user_id;
+            customerList[id]?.socket.emit('reject driver', JSON.stringify(driverSubmit.driver));
+        });
+
+        socket.on('driver-cancel', async (message: string) => {
+            const driverSubmit = JSON.parse(message) as DriverSubmit;
+            const history_id = driverSubmit.history_id;
+            const id = driverSubmit.user_id;
+            
+            const driverInfor = await driverModel.findOne({ phonenumber: driverSubmit.driver.phonenumber }).select('_id');
+
+            if (driverInfor) {
+                const history = await BookingHistory.findById(history_id);
+
+                if (history) {
+                    history.driver = new mongoose.Types.ObjectId(driverInfor._id);
+                    history.status = 'Đã hủy';
+
+                    await history.save();
+
+                    const customerInfo = customerList[id]?.infor;
+                    const customer_id = customerInfo.user_information.phonenumber;
+
+                    const request: CallCenterRequest = {
+                        _id: history_id,
+                        driver_name: driverSubmit.driver.name,
+                        driver_phonenumber: driverSubmit.driver.phonenumber,
+                        vehicle_number: driverSubmit.driver.vehicle.number,
+                        vehicle_name: driverSubmit.driver.vehicle.name,
+                        vehicle_color: driverSubmit.driver.vehicle.color,
+                        customer_name: customerInfo.user_information.name,
+                        customer_phonenumber: customerInfo.user_information.phonenumber,
+                        vehicle_type: customerInfo.user_information.service,
+                        origin: customerInfo.departure_information.address,
+                        destination: customerInfo.arrival_information.address,
+                        note: '',
+                        time: '',
+                        local_time: '',
+                        state: 'Đã hủy',
+                        origin_latlng: {
+                            lat: +customerInfo.departure_information.latitude,
+                            lng: +customerInfo.departure_information.longitude,
+                        },
+                        destination_latlng: {
+                            lat: +customerInfo.arrival_information.latitude,
+                            lng: +customerInfo.arrival_information.longitude,
+                        },
+                    };
+
+                    await rabbitmq.publish('tracking', JSON.stringify(request));    
+                    if (stateDriver[customer_id]) {
+                        delete stateDriver[customer_id];
+                    }
+                }
+            }
+
+            customerList[id]?.socket.emit('cancel driver', JSON.stringify(driverSubmit.driver));
         });
 
         socket.on('disconnect', () => {

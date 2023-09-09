@@ -1,4 +1,5 @@
 import * as jwt from 'jsonwebtoken';
+import { SignOptions } from 'jsonwebtoken';
 
 interface JWT {
     secret: string;
@@ -16,7 +17,7 @@ class JsonWebToken implements JWT {
         this.secret = secret ?? process.env.JWT_SECRET as string ?? 'KabGo-Auth-Server-Secret-152421';
     }
 
-    createToken(payload: any, options?: jwt.SignOptions): string {
+    createToken(payload: any, options?: SignOptions): string {
         return jwt.sign(payload, this.secret, options);
     }
 

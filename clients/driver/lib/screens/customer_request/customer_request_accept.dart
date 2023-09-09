@@ -166,7 +166,7 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                   const Icon(FontAwesomeIcons.solidClock,
                       size: 19, color: Color(0xFFF86C1D)),
                   const SizedBox(width: 8),
-                  Text(customerRequest.customer_infor.time,
+                  Text(customerRequest.duration_time,
                       style: ThemeText.locationDurationDetails),
                 ],
               ),

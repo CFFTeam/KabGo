@@ -79,7 +79,7 @@ const server = app.run(4501, async () => {
                     longitude: data.destination_latlng.lng,
                 },
                 time: data.local_time,
-                status: "Đang điều phối",
+                state: "Đang điều phối",
                 frequency: existedBooking.length + 1,
                 price: data.price,
                 related_employee: new mongoose.Types.ObjectId(data.related_employee),
@@ -90,16 +90,16 @@ const server = app.run(4501, async () => {
             rabbitMQ.publish('gps-coordinates', JSON.stringify({
                 _id: newBooking._id,    
                 ...data,
-                status: "Đang điều phối"
+                state: "Đang điều phối"
             })); 
 
             rabbitMQ.publish('tracking', JSON.stringify({
                 _id: newBooking._id,    
                 ...data,
-                status: "Đang điều phối"
-                // status: "Đang tiến hành"
-                // status: "Hoàn thành"
-                // status: "Đã hủy"
+                state: "Đang điều phối"
+                // state: "Đang tiến hành"
+                // state: "Hoàn thành"
+                // state: "Đã hủy"
             }))
         })
     })

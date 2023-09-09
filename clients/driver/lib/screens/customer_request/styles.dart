@@ -55,6 +55,20 @@ abstract class ThemeText {
     fontWeight: FontWeight.bold,
     color: Color(0xFFFFFFFF),
   );
+
+  static const TextStyle saleText = TextStyle(
+    fontFamily: 'Montserrat',
+    fontSize: 13,
+    fontWeight: FontWeight.w600,
+    color: Color(0xFF787878),
+  );
+
+  static const TextStyle priceText = TextStyle(
+    fontFamily: 'Montserrat',
+    fontSize: 22,
+    fontWeight: FontWeight.bold,
+    color: Color(0xFFF86C1D),
+  );
 }
 
 abstract class ThemeButton {

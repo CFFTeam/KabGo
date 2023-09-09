@@ -122,6 +122,31 @@ class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
     }
   }
 
+  Future<void> acceptRequest() async {
+    
+    Directions? direct = await DirectionRepository(dio: Dio()).getDirection(
+        origin: LatLng(
+            double.parse(state.customer_infor.departure_information.latitude),
+            double.parse(state.customer_infor.departure_information.longitude)),
+
+        destination: LatLng(
+            double.parse(state.customer_infor.arrival_information.latitude),
+            double.parse(
+                state.customer_infor.arrival_information.longitude)));
+
+    if (!mounted) return;
+
+    state = CustomerRequestDetails(
+        direction: direct!,
+        customer_infor: state.customer_infor,
+        duration_distance: direct.totalDistance!,
+        duration_time: direct.totalDuration!,
+        currentLocation: LocationPostion(
+          latitude: currentLocation.latitude,
+          longitude: currentLocation.longitude,
+        ));
+  }
+
   void cancelRequest() {
     if (!mounted) return;
 
