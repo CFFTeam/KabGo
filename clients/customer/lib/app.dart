@@ -85,6 +85,11 @@ class App extends ConsumerWidget {
     }
 
     return MaterialApp(
+      // localizationsDelegates: const [
+      //   GlobalMaterialLocalizations.delegate,
+      //   GlobalWidgetsLocalizations.delegate,
+      //   GlobalCupertinoLocalizations.delegate,
+      // ],
       supportedLocales: const [
         Locale('en', ''),
         Locale('vn', ''), // arabic, no country code

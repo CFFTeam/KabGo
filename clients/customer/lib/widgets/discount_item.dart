@@ -58,7 +58,7 @@ class DiscountItem extends ConsumerWidget {
           const SizedBox(
             height: 12,
           ),
-          Image.asset('assets/discount_item_line.png'),
+          Image.asset('lib/assets/discount_item_line.png'),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,

@@ -14,10 +14,12 @@ import 'package:driver/screens/home_dashboard/home_dashboard.dart';
 import 'package:driver/screens/home_income/home_income.dart';
 import 'package:driver/screens/home_screen/index.dart';
 import 'package:driver/screens/home_wallet/home_wallet.dart';
+import 'package:driver/screens/route_screen/route_screen.dart';
 import 'package:driver/screens/splash_screen/index.dart';
 import 'package:driver/screens/welcome_screen/index.dart';
 import 'package:driver/widgets/driver_panel/driver_panel.dart';
 import 'package:driver/widgets/home_panel/home_panel.dart';
+import 'package:driver/widgets/route_panel/route_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -31,6 +33,8 @@ final _shellStatusKey =
     GlobalKey<NavigatorState>(debugLabel: 'Shell Status Navigator');
 final _shellDriverKey =
     GlobalKey<NavigatorState>(debugLabel: 'Shell Driver Navigator');
+final _shellRouteKey =
+    GlobalKey<NavigatorState>(debugLabel: 'Shell Route Navigator');
 
 final routerProvider = Provider<GoRouter>((ref) {
   // final appState = ref.watch(appNotifierProvider);
@@ -120,6 +124,29 @@ final routerProvider = Provider<GoRouter>((ref) {
                         ]),
                   ]),
               ShellRoute(
+                  navigatorKey: _shellRouteKey,
+                  parentNavigatorKey: _shellkey,
+                  pageBuilder: (context, state, child) =>
+                      buildPageWithSlideUpTransition(
+                          context: context,
+                          key: state.pageKey,
+                          child: RoutePanel(child: child),
+                          transitionDuration:
+                              const Duration(milliseconds: 800)),
+                  routes: [
+                    GoRoute(
+                      parentNavigatorKey: _shellRouteKey,
+                      name: RouteScreen.name,
+                      path: RouteScreen.path,
+                      pageBuilder: (context, state) => NoTransitionPage(
+                        // context: context,
+                        key: state.pageKey,
+                        child: const RouteScreen(),
+                        // transitionDuration: const Duration(milliseconds: 800)
+                      ),
+                    )
+                  ]),
+              ShellRoute(
                   navigatorKey: _shellDriverKey,
                   parentNavigatorKey: _shellkey,
                   pageBuilder: (context, state, child) =>
@@ -204,8 +231,6 @@ final routerProvider = Provider<GoRouter>((ref) {
             if (driverDetailsNotifier.hasValue) {
               return HomeDashboard.path;
             }
-
-            print('cmmmmm');
 
             Dio dio = Dio();
             dio
