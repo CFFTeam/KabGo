@@ -52,7 +52,7 @@ const initialSidebarState: InitialSidebarState = {
   mainMenuData: [
     {
         img: Dashboard,
-        url: "/",
+        url: "/dashboard",
         name: "Dashboard",
         imgFill: DashboardFill,
         active: true
@@ -80,21 +80,21 @@ const initialSidebarState: InitialSidebarState = {
     },
     {
         img: Service,
-        url: "/",
+        url: "/dashboard",
         name: "Dịch vụ",
         imgFill: ServiceFill,
         active: false
     },
     {
         img: Vehicle,
-        url: "/",
+        url: "/dashboard",
         name: "Loại Phương Tiện",
         imgFill: VehicleFill,
         active: false
     },
     {
         img: Invoice,
-        url: "/",
+        url: "/dashboard",
         name: "Hóa Đơn",
         imgFill: InvoiceFill,
         active: false

@@ -52,14 +52,28 @@ const server = app.run(4502, async ()=>{
     });
 
     await rabbitmq.consume('tracking', (message: string) => {
-        // const data = JSON.parse(message);
+        const data = JSON.parse(message);
+        let messageSend;
         console.log('---------------------');
         console.log('Queue get from s3: ', message);
         if (message !== null) {
             io.emit('Tracking Queue', message);
+            if(data.state==="Đang điều phối"){
+                messageSend = "Vui lòng chờ giây lát, chúng tôi đang điều phối chuyến xe cho tài xế gần nhất."
+            }
+            if(data.state==="Đang tiến hành"){
+                messageSend = "Đã tìm được tài xế. Tài xế sẽ đến đón bạn trong ít phút."
+            }
+            if(data.state==="Hoàn thành"){
+                messageSend = "Chuyến đi đã hoàn thành. Cám ơn bạn đã sử dụng dịch vụ của chúng tôi."
+            }
+            if(data.state==="Đã hủy"){
+                messageSend = "Chuyến đi đã bị hủy. Xin lỗi bạn vì sự bất tiện này."
+            }
+            console.log(messageSend);
             // client.messages
             // .create({
-            //     body: message,
+            //     body: messageSend,
             //     from: '+14259545906',
             //     to: '+84888821312'
             // })
