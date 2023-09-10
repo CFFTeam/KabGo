@@ -49,17 +49,21 @@ const CallReceiptHandlerPage: React.FC = () => {
                 const data = JSON.parse(message);
                 console.log('my data: ', data);
                 const receivedBookingInformation = {
-                    _id: data._id,
-                    name: data.customer_name,
-                    phoneNumber: data.customer_phonenumber,
-                    vehicleType: data.vehicle_type,
-                    origin: data.origin,
-                    destination: data.destination,
-                    note: data.note,
-                    time: data.time,
-                    state: data.state,
-                    originLatLng: data.origin_latlng,
-                    destinationLatLng: data.destination_latlng
+                    _id: data?._id,
+                    name: data?.customer_name,
+                    phoneNumber: data?.customer_phonenumber,
+                    vehicleType: data?.vehicle_type,
+                    origin: data?.origin,
+                    destination: data?.destination,
+                    note: data?.note,
+                    time: data?.time,
+                    localTime: data?.local_time,
+                    bookingTime: data?.booking_time,
+                    scheduledBookingTime_HH: data?.scheduledBookingTime_HH,
+                    scheduledBookingTime_MM: data?.scheduledBookingTime_MM,
+                    state: data?.state,
+                    originLatLng: data?.origin_latlng,
+                    destinationLatLng: data?.destination_latlng
                 }
                 setReceivedBookingInformation(receivedBookingInformation);
             })

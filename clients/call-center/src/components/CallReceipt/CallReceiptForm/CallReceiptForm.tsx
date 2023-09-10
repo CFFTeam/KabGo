@@ -13,6 +13,7 @@ import Overlay from '@components/Overlay/Overlay';
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 import axios from 'axios';
 import { formatDate } from '@utils/formatDate';
+import toast, { Toaster } from "react-hot-toast";
 
 const CallReceiptForm: React.FC = () => {  
     // calling Google map API service
@@ -22,7 +23,28 @@ const CallReceiptForm: React.FC = () => {
         language: 'vi',
         region: 'vn',
     })
-    const [isPhoneNumberEnteredComeplete, setIsPhoneNumberEnteredComeplete] = useState<boolean>(false);
+
+    // define toast style properties
+    const styleSuccess = {
+        style: {
+          border: "2px solid #28a745",
+          padding: "10px",
+          color: "#28a745",
+          fontWeight: "500",
+        },
+        duration: 1500,
+      };
+    
+      const styleError = {
+        style: {
+          border: "2px solid red",
+          padding: "10px",
+          color: "red",
+          fontWeight: "500",
+        },
+        duration: 4000,
+      };
+
     const [loadingSpinner, setLoadingSpinner] = useState<boolean>(false);
     const [isAM, setIsAm] = useState(true);
     const dispatch = useAppDispatch();
@@ -79,18 +101,18 @@ const CallReceiptForm: React.FC = () => {
                     response.data.data.mostRecentBookings.forEach((item: any) => {
                         const formattedDate = formatDate(item.time);
                         let mostRecentBooking = {
-                            _id: item._id,
-                            bookingTime: formattedDate,
-                            departureAddress: item.destination.address,
-                            arrivalAddress: item.original.address,
-                            vehicleType: item.service_info[0].name,
+                            _id: item?._id,
+                            bookingTime: formattedDate || '',
+                            departureAddress: item.destination?.address,
+                            arrivalAddress: item.original?.address,
+                            vehicleType: item.service_info[0]?.name,
                             originLatLng: {
-                                lat: item.original.latitude,
-                                lng: item.original.longitude
+                                lat: item.original?.latitude,
+                                lng: item.original?.longitude
                             },
                             destinationLatLng: {
-                                lat: item.destination.latitude,
-                                lng: item.destination.longitude,
+                                lat: item.destination?.latitude,
+                                lng: item.destination?.longitude,
                             }
                         };
                         mostRecentBookingList.push(mostRecentBooking);
@@ -126,7 +148,7 @@ const CallReceiptForm: React.FC = () => {
         try {
             console.log('handle submit form');
             const date = new Date() ;
-            const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+            const formattedDate = `${date.getDate()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
             const bookingTime = `${scheduledBookingTime_HH_Ref.current?.value}:${scheduledBookingTime_MM_Ref.current?.value} ${isAM ? "AM" : 
         "PM"} - ${formattedDate}`;
             const formData = {
@@ -139,8 +161,10 @@ const CallReceiptForm: React.FC = () => {
                 state: "Chờ xử lý",
                 origin_latlng: bookingInformation.originLatLng,
                 destination_latlng: bookingInformation.destinationLatLng,
-                time: (scheduledBookingTime_HH_Ref.current?.value !== '' || scheduledBookingTime_MM_Ref.current?.value)  ? bookingTime : formatDate(new Date().toISOString()),
-                local_time: new Date(date.getTime() + (7 * 60 * 60 * 1000)).toISOString()
+                local_time: new Date(date.getTime() + (7 * 60 * 60 * 1000)).toISOString(),
+                booking_time: scheduledBookingTime_HH_Ref.current?.value && scheduledBookingTime_MM_Ref.current?.value ? bookingTime : formatDate(new Date()),
+                scheduledBookingTime_HH: scheduledBookingTime_HH_Ref.current?.value || '',
+                scheduledBookingTime_MM: scheduledBookingTime_MM_Ref.current?.value || '',
             
                 // ----- static data -----
                 // customer_name: 'Khoa Nguyễn',
@@ -158,15 +182,21 @@ const CallReceiptForm: React.FC = () => {
                 //     lat: 10.7628356, 
                 //     lng: 106.6824824
                 // },
-                // time: "12:30 PM - 01/09/2023",
                 // local_time: new Date(date.getTime() + (7 * 60 * 60 * 1000)).toISOString()
+                // booking_time: "12:30 PM - 01/09/2023",
             }
             // call axios service
             const response = await axiosClient.post(`${process.env.REACT_APP_API_URI_S1}/v1/locating/call-receipt` as string, formData);
-            console.log('response: ', response);
-        } catch (error) {
-            console.log(error);
-
+            if (response.status.toString() === 'success') {
+                toast.success('Cuốc xe đã được chuyển tiếp', styleSuccess);
+            }
+            else {
+                toast.error('Điều phối thất bại', styleError);
+            }
+        } catch (err: any) {
+            console.log(err);
+            console.log('error triggered');
+            toast.error("Thông tin thiếu hoặc không hợp lệ", styleError);
         }
     }
 

@@ -21,12 +21,13 @@ class LocatingController implements Controller {
         _id: new mongoose.Types.ObjectId(),
         ...req.body as CallReceiptDto,
         };      
+        rabbitMQ.publish('locating', JSON.stringify(data));
         res.status(200).json({
             status: 'success',
+            message: "Cuốc xe đã được chuyển tiếp để xử lý",
             data
         })  
 
-        rabbitMQ.publish('locating', JSON.stringify(data));
     }
 
     getMostFrequentBookingAddresses = async (req: Request, res: Response, next: NextFunction) => {
