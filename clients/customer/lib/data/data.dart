@@ -1,4 +1,5 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../functions/setHexColor.dart';
 import '../models/location_model.dart';
@@ -40,6 +41,12 @@ List<Map<String, Object>> favoriteLocationData = [
       color: HexColor('4891FE'),
     ),
     'title': 'Home',
+    'location': LocationModel(
+      placeId: 'ChIJEzDP7kYldTERmF-E3bGdo6w',
+      structuredFormatting: StructuredFormatting(
+          mainText: '25 Đào Trí', secondaryText: 'Phú Thuận, Quận 7, TP.HCM'),
+      postion: const LatLng(10.7143033, 106.7430681),
+    ),
   },
   {
     'icon': FaIcon(
@@ -47,6 +54,14 @@ List<Map<String, Object>> favoriteLocationData = [
       color: HexColor('F8C647'),
     ),
     'title': 'Office',
+    'location': LocationModel(
+      placeId: 'ChIJEQnz-MIndTERzRrJ-HNQrDY',
+      structuredFormatting: StructuredFormatting(
+          mainText: 'Landmark 81',
+          secondaryText:
+              'Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, TP.HCM'),
+      postion: const LatLng(10.7949932, 106.7218215),
+    )
   },
   {
     'icon': FaIcon(
@@ -54,6 +69,14 @@ List<Map<String, Object>> favoriteLocationData = [
       color: HexColor('FF2E2E'),
     ),
     'title': 'School',
+    'location': LocationModel(
+      placeId: 'ChIJ3eH0BhwvdTERPZpT1PEAOQQ',
+      structuredFormatting: StructuredFormatting(
+          mainText:
+              'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM',
+          secondaryText: 'Đường Nguyễn Văn Cừ, phường 4, Quận 5, TP.HCM'),
+      postion: const LatLng(10.7628356, 106.6824824),
+    )
   },
   {
     'icon': FaIcon(
@@ -61,6 +84,13 @@ List<Map<String, Object>> favoriteLocationData = [
       color: HexColor('FC77FF'),
     ),
     'title': 'Favor',
+    'location': LocationModel(
+      placeId: 'ChIJybh1lrcvdTERAVt6EpkLlEE',
+      structuredFormatting: StructuredFormatting(
+          mainText: 'Chuk Tea & Coffee',
+          secondaryText: 'Đường An Dương Vương, phường 3, Quận 5, TP.HCM'),
+      postion: const LatLng(10.7586445, 106.6775209),
+    )
   },
 ];
 
