@@ -138,9 +138,6 @@ form.call-receipt-form  > div.form-body > div.forward-btn > button:hover {
     cursor: pointer;
 }
 
-form.call-receipt-form > div.form-body > div.input > div.pick-up-time > label.day-night-toggle-btn {
-    background-color: aqua;
-}
 
 /* default effect */
 form.call-receipt-form > div.form-body > div.input > div.pick-up-time > label.day-night-toggle-btn > span.circle {
@@ -187,6 +184,7 @@ form.call-receipt-form > div.form-body > div.input > div.pick-up-time > label.da
 }
 
 
+
 /* toggle when clicking */
 
 form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[type="checkbox"]:checked + label.day-night-toggle-btn {
@@ -195,7 +193,7 @@ form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[ty
 }
 
 
-form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[type="checkbox"]:checked + label.day-night-toggle-btn > span.circle{
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[type="checkbox"]:checked + label.day-night-toggle-btn > span.circle {
     left: 0;
     margin-left: 0.6rem;
     position: absolute;
@@ -212,3 +210,105 @@ form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[ty
 form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[type="checkbox"]:checked + label.day-night-toggle-btn > .moon-icon {
    display: block;
 }
+
+/* -------------------- default displaying if the data sent from server exists -------------------- */
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > label.day-night-toggle-btn.dayColour {
+    background-color: #F76707;
+}
+
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > label.day-night-toggle-btn.nightColour {
+    background-color: #364FC7 !important;
+    width: 15rem !important;
+}
+
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > label.day-night-toggle-btn.nightColour > span.circle {
+    left: 0;
+    margin-left: 0.6rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    background-color: #fff;
+    display: block;
+}
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > label.day-night-toggle-btn.nightColour > .moon-icon {
+    display: block;
+}
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > label.day-night-toggle-btn > span.circle_2 {
+    right: 0;
+    margin-right: 0.6rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    background-color: #fff;
+    display: none;
+}
+
+
+
+ /* toggle when clicking Case 1: dayColour (default displaying) */
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[type="checkbox"]:checked + label.day-night-toggle-btn.dayColour {
+    background-color: #364FC7;
+    width: 15rem;
+}
+
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[type="checkbox"]:checked + label.day-night-toggle-btn.dayColour > span.circle{
+    left: 0;
+    margin-left: 0.6rem;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    background-color: #fff;
+    display: block;
+}
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[type="checkbox"]:checked + label.day-night-toggle-btn.dayColour > .moon-icon {
+   display: block;
+}
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[type="checkbox"]:checked + label.day-night-toggle-btn.dayColour > span.circle_2 {
+    display: none;
+}
+
+
+/* toggle when clicking Case 2: nightColour (default displaying) */
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[type="checkbox"]:checked + label.day-night-toggle-btn.nightColour {
+    background-color: #F76707 !important;
+}
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[type="checkbox"]:checked + label.day-night-toggle-btn.nightColour > .moon-icon {
+    display: none;
+ }
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[type="checkbox"]:checked + label.day-night-toggle-btn.nightColour > span.circle {
+    display: none;
+}
+
+form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[type="checkbox"]:checked + label.day-night-toggle-btn > span.circle_2 {
+    display: block;
+}
+
+
+
+
+
+
+

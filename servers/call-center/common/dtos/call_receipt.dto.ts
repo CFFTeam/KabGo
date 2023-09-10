@@ -1,27 +1,28 @@
-import { IsString, IsNotEmpty } from "class-validator";
+import { IsString, IsNotEmpty, Contains, NotContains } from "class-validator";
 
 class CallReceiptDto {
 	constructor(obj: any) {
 		Object.assign(this, obj);
 	}
-	@IsNotEmpty({ message: "name is required" })
-	@IsString({ message: "name must be a string" })
+	@IsNotEmpty({ message: "Tên không được rỗng" })
+	@IsString({ message: "Tên phải là chuỗi" })
 	public customer_name: string | any;
 
-	@IsNotEmpty({ message: "phone number is required" })
-	@IsString({ message: "phone number must be a string" })
+	@IsNotEmpty({ message: "Số điện thoại không được rỗng" })
+	@IsString({ message: "Số điện thoại phải là chuỗi" })
 	public customer_phonenumber: string | any;
 
-    @IsNotEmpty({ message: "vehicle type is required" })
-	@IsString({ message: "vehicle type must be a string" })
+    @IsNotEmpty({ message: "Lựa chọn loại xe không được rỗng" })
+	@IsString({ message: "Lựa chọn loại xe phải là chuỗi" })
+	@NotContains("Chọn loại xe", {message: "Lựa chọn loại xe không hợp lệ"})
 	public vehicle_type: string | any;
 
-    @IsNotEmpty({ message: "original address is required" })
-	@IsString({ message: "original address must be a string" })
+    @IsNotEmpty({ message: "Địa chỉ đón không được rỗng" })
+	@IsString({ message: "Địa chỉ đón phải là chuỗi" })
 	public origin: string | any;
 
-    @IsNotEmpty({ message: "destination address is required" })
-	@IsString({ message: "destination address must be a string" })
+    @IsNotEmpty({ message: "Địa chỉ đến không được rỗng" })
+	@IsString({ message: "Địa chỉ đón phải là chuỗi" })
 	public destination: string | any;
 }
 

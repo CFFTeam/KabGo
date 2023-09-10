@@ -111,7 +111,14 @@ nav.nav-bar > div.authenticate-section > span.avatar {
     height: 50px;
     background-color: aqua;
     border-radius: 50%;
-    background-image: url("../../assets/images/Khoa.jpg");
-    background-size: cover;
+    /* background-image: url("../../assets/images/Khoa.jpg"); */
+    /* background-size: cover; */
     border: 2px solid #383838;
+}
+
+nav.nav-bar > div.authenticate-section > span.avatar > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
