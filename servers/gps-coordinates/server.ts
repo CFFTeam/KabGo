@@ -13,6 +13,7 @@ import Driver from '@common/interfaces/driver';
 import driverModel from '@common/models/driver.model';
 import BookingHistory from '@common/models/booking_history.model';
 import mongoose from 'mongoose';
+import { DriverNearest, RideService } from '@common/utils/notification.observer';
 
 process.on('uncaughtException', (err: Error) => {
     console.error('Uncaught Exception. Shutting down...');
@@ -35,12 +36,14 @@ const app = new Application({
     },
 });
 
-const driverList: any = {};
+// const driverList: any = {};
+const rideService = new RideService();
 const customerList: any = {};
 const stateDriver: any = {};
 
 const server = app.run(4600, async () => {
     socket.init(server);
+    console.log(rideService.observers);
     socket.getIO().on('connection', (socket: any) => {
         socket.on('join', (message: string) => {
             const driver = JSON.parse(message) as Driver;
@@ -48,10 +51,8 @@ const server = app.run(4600, async () => {
 
             socket.phonenumber = _id;
 
-            driverList[socket.phonenumber] = {
-                socket: socket,
-                infor: driver,
-            };
+            rideService.addObserver(new DriverNearest(socket, driver));
+            console.log(rideService.observers);
         });
 
         socket.on('booking-car', async (message: string) => {
@@ -81,7 +82,7 @@ const server = app.run(4600, async () => {
                     latitude: customer.arrival_information.latitude,
                 },
                 time: new Date().toISOString(),
-                status: 'điều phối', //điều phối | tiến hành | hủy | hoàn thành
+                status: 'Đang điều phối', //điều phối | tiến hành | hủy | hoàn thành
                 frequency: '1',
                 price: customer.price,
                 vehicle: _service?.id,
@@ -89,39 +90,9 @@ const server = app.run(4600, async () => {
                 // coupon: new mongoose.Types.ObjectId('64e73b79646803068e5c21f7'),
             });
 
-            let drivers: any = [];
+            console.log(bookingData);
 
-            for (const id in driverList) {
-                const distance = haversineDistance(
-                    {
-                        latitude: +customer.departure_information.latitude,
-                        longitude: +customer.departure_information.longitude,
-                    },
-                    {
-                        latitude: driverList[id].infor.coordinate.latitude,
-                        longitude: driverList[id].infor.coordinate.longitude,
-                    }
-                );
-                console.log('DISTANCE: ', distance);
-                if (distance <= 1.5) {
-                    driverList[id].infor.distance = distance;
-                    drivers = [...drivers, { ...driverList[id] }];
-                }
-            }
-
-            const nearestDriver = drivers?.sort((a: any, b: any) => b.distance - a.distance).slice(0, 5);
-
-            const finalDrivers = nearestDriver.map((el: any) => {
-                el.socket.emit(
-                    'customer-request',
-                    JSON.stringify({ ...customer, history_id: bookingData._id.toString() })
-                );
-                delete el.socket;
-
-                return el;
-            });
-
-            socket.emit('send drivers', JSON.stringify(finalDrivers));
+            rideService.bookRide(socket, customer, bookingData);
         });
 
         socket.on('driver-accept', async (message: string) => {
@@ -203,12 +174,83 @@ const server = app.run(4600, async () => {
         socket.on('driver-comming', (message: string) => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
             const id = driverSubmit.user_id;
-            customerList[id]?.socket.emit('comming driver', JSON.stringify(driverSubmit.driver));
+            customerList[id]?.socket.emit('comming driver', JSON.stringify(driverSubmit));
+        });
+
+        // socket.on('driver-ready', (message: string) => {
+        //     const driverSubmit = JSON.parse(message) as DriverSubmit;
+        //     const id = driverSubmit.user_id;
+        //     customerList[id]?.socket.emit('ready driver', JSON.stringify(driverSubmit));
+        // });
+
+        socket.on('driver-reject', (message: string) => {
+            const driverSubmit = JSON.parse(message) as DriverSubmit;
+            const id = driverSubmit.user_id;
+            customerList[id]?.socket.emit('reject driver', JSON.stringify(driverSubmit.driver));
+        });
+
+        socket.on('driver-cancel', async (message: string) => {
+            const driverSubmit = JSON.parse(message) as DriverSubmit;
+            const history_id = driverSubmit.history_id;
+            const id = driverSubmit.user_id;
+
+            const driverInfor = await driverModel
+                .findOne({ phonenumber: driverSubmit.driver.phonenumber })
+                .select('_id');
+
+            if (driverInfor) {
+                const history = await BookingHistory.findById(history_id);
+
+                if (history) {
+                    history.driver = new mongoose.Types.ObjectId(driverInfor._id);
+                    history.status = 'Đã hủy';
+
+                    await history.save();
+
+                    const customerInfo = customerList[id]?.infor;
+                    const customer_id = customerInfo.user_information.phonenumber;
+
+                    const request: CallCenterRequest = {
+                        _id: history_id,
+                        driver_name: driverSubmit.driver.name,
+                        driver_phonenumber: driverSubmit.driver.phonenumber,
+                        vehicle_number: driverSubmit.driver.vehicle.number,
+                        vehicle_name: driverSubmit.driver.vehicle.name,
+                        vehicle_color: driverSubmit.driver.vehicle.color,
+                        customer_name: customerInfo.user_information.name,
+                        customer_phonenumber: customerInfo.user_information.phonenumber,
+                        vehicle_type: customerInfo.user_information.service,
+                        origin: customerInfo.departure_information.address,
+                        destination: customerInfo.arrival_information.address,
+                        note: '',
+                        time: '',
+                        local_time: '',
+                        state: 'Đã hủy',
+                        origin_latlng: {
+                            lat: +customerInfo.departure_information.latitude,
+                            lng: +customerInfo.departure_information.longitude,
+                        },
+                        destination_latlng: {
+                            lat: +customerInfo.arrival_information.latitude,
+                            lng: +customerInfo.arrival_information.longitude,
+                        },
+                    };
+
+                    await rabbitmq.publish('tracking', JSON.stringify(request));
+                    if (stateDriver[customer_id]) {
+                        delete stateDriver[customer_id];
+                    }
+                }
+            }
+
+            customerList[id]?.socket.emit('cancel driver', JSON.stringify(driverSubmit.driver));
         });
 
         socket.on('disconnect', () => {
-            delete driverList[socket.phonenumber];
-
+            // delete driverList[socket.phonenumber];
+            rideService.removeObserver(
+                rideService.observers.find((value) => value.socket.phonenumber == socket.phonenumber)
+            );
             console.log('Client disconnected');
         });
     });
@@ -220,21 +262,21 @@ const server = app.run(4600, async () => {
 
         let drivers: any = [];
 
-        for (const id in driverList) {
+        for (const value of rideService.observers) {
             const distance = haversineDistance(
                 {
                     latitude: +request.origin_latlng.lat,
                     longitude: +request.origin_latlng.lng,
                 },
                 {
-                    latitude: driverList[id].infor.coordinate.latitude,
-                    longitude: driverList[id].infor.coordinate.longitude,
+                    latitude: +value.infor.coordinate.latitude,
+                    longitude: +value.infor.coordinate.longitude,
                 }
             );
 
             if (distance <= 1.5) {
-                driverList[id].infor.distance = distance;
-                drivers = [...drivers, { ...driverList[id] }];
+                value.infor.distance = distance;
+                drivers = [...drivers, value];
             }
         }
 

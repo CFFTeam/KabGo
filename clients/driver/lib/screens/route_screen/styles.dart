@@ -31,8 +31,9 @@ abstract class ThemeText {
 
   static const TextStyle headingTitle = TextStyle(
     fontFamily: 'Montserrat',
-    fontSize: 15,
-    fontWeight: FontWeight.w600,
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: Color(0xFFF86C1D),
   );
   
   static const TextStyle locationDetails = TextStyle(

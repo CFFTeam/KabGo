@@ -81,7 +81,6 @@ const DashboardTable: React.FC = () => {
       console.log("Socket initialized");
       socket.on("Tracking Queue", (message: string) => {
         const data = JSON.parse(message);
-        console.log('data: ', data);
         setReceivedBookingInformation(data);
       });
     }
@@ -92,20 +91,19 @@ const DashboardTable: React.FC = () => {
     if(getBookingByID === undefined){
       const newObj = {
         _id: receivedBookingInformation._id,
-        customer: receivedBookingInformation.customer_name,
+        customer: receivedBookingInformation.customer_phonenumber,
         driver: "",
         time: receivedBookingInformation.time,
         vehicleType: receivedBookingInformation.vehicle_type,
-        status: receivedBookingInformation.status,
+        status: receivedBookingInformation.state,
         arrivalAddress: receivedBookingInformation.destination,
       };
-      console.log('newObj: ', newObj);  
       if(newObj._id!==undefined){
         dispatch(dashboardActions.addDashboardInformation(newObj));
       }
     }
     else{
-      dispatch(dashboardActions.updateStateInformation([initData.indexOf(getBookingByID), receivedBookingInformation.status, receivedBookingInformation.driver]));
+      dispatch(dashboardActions.updateStateInformation([initData.indexOf(getBookingByID), receivedBookingInformation.state, receivedBookingInformation.driver_phonenumber]));
     }
   }, [receivedBookingInformation])
 

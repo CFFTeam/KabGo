@@ -8,18 +8,23 @@ import 'package:driver/providers/driver_provider.dart';
 import 'package:driver/screens/customer_request/customer_request.dart';
 import 'package:driver/screens/customer_request/customer_request_accept.dart';
 import 'package:driver/screens/customer_request/customer_request_comming.dart';
+import 'package:driver/screens/customer_request/customer_request_ongoing.dart';
+import 'package:driver/screens/customer_request/customer_request_ready.dart';
 import 'package:driver/screens/home_dashboard/home_dashboard.dart';
 import 'package:driver/screens/home_income/home_income.dart';
 import 'package:driver/screens/home_screen/index.dart';
 import 'package:driver/screens/home_wallet/home_wallet.dart';
+import 'package:driver/screens/route_screen/route_screen.dart';
 import 'package:driver/screens/splash_screen/index.dart';
 import 'package:driver/screens/welcome_screen/index.dart';
 import 'package:driver/widgets/driver_panel/driver_panel.dart';
 import 'package:driver/widgets/home_panel/home_panel.dart';
+import 'package:driver/widgets/route_panel/route_panel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '.env.dart';
 import 'animations/animation.dart';
 
 final _key = GlobalKey<NavigatorState>(debugLabel: 'Main Navigator');
@@ -28,6 +33,8 @@ final _shellStatusKey =
     GlobalKey<NavigatorState>(debugLabel: 'Shell Status Navigator');
 final _shellDriverKey =
     GlobalKey<NavigatorState>(debugLabel: 'Shell Driver Navigator');
+final _shellRouteKey =
+    GlobalKey<NavigatorState>(debugLabel: 'Shell Route Navigator');
 
 final routerProvider = Provider<GoRouter>((ref) {
   // final appState = ref.watch(appNotifierProvider);
@@ -117,6 +124,29 @@ final routerProvider = Provider<GoRouter>((ref) {
                         ]),
                   ]),
               ShellRoute(
+                  navigatorKey: _shellRouteKey,
+                  parentNavigatorKey: _shellkey,
+                  pageBuilder: (context, state, child) =>
+                      buildPageWithSlideUpTransition(
+                          context: context,
+                          key: state.pageKey,
+                          child: RoutePanel(child: child),
+                          transitionDuration:
+                              const Duration(milliseconds: 800)),
+                  routes: [
+                    GoRoute(
+                      parentNavigatorKey: _shellRouteKey,
+                      name: RouteScreen.name,
+                      path: RouteScreen.path,
+                      pageBuilder: (context, state) => NoTransitionPage(
+                        // context: context,
+                        key: state.pageKey,
+                        child: const RouteScreen(),
+                        // transitionDuration: const Duration(milliseconds: 800)
+                      ),
+                    )
+                  ]),
+              ShellRoute(
                   navigatorKey: _shellDriverKey,
                   parentNavigatorKey: _shellkey,
                   pageBuilder: (context, state, child) =>
@@ -125,7 +155,7 @@ final routerProvider = Provider<GoRouter>((ref) {
                           key: state.pageKey,
                           child: DriverPanel(child: child),
                           transitionDuration:
-                              const Duration(milliseconds: 300)),
+                              const Duration(milliseconds: 800)),
                   routes: [
                     GoRoute(
                       parentNavigatorKey: _shellDriverKey,
@@ -160,6 +190,28 @@ final routerProvider = Provider<GoRouter>((ref) {
                         // transitionDuration: const Duration(milliseconds: 800)
                       ),
                     ),
+                    GoRoute(
+                      parentNavigatorKey: _shellDriverKey,
+                      name: CustomerRequestReady.name,
+                      path: CustomerRequestReady.path,
+                      pageBuilder: (context, state) => NoTransitionPage(
+                        // context: context,
+                        key: state.pageKey,
+                        child: const CustomerRequestReady(),
+                        // transitionDuration: const Duration(milliseconds: 800)
+                      ),
+                    ),
+                    GoRoute(
+                      parentNavigatorKey: _shellDriverKey,
+                      name: CustomerRequestGoing.name,
+                      path: CustomerRequestGoing.path,
+                      pageBuilder: (context, state) => NoTransitionPage(
+                        // context: context,
+                        key: state.pageKey,
+                        child: const CustomerRequestGoing(),
+                        // transitionDuration: const Duration(milliseconds: 800)
+                      ),
+                    ),
                   ])
             ])
       ],
@@ -176,28 +228,29 @@ final routerProvider = Provider<GoRouter>((ref) {
 
         if (isSplash) {
           if (isAuth) {
-
             if (driverDetailsNotifier.hasValue) {
               return HomeDashboard.path;
             }
-            
+
             Dio dio = Dio();
-            dio.post(
-                'http://192.168.2.95:4100/v1/driver/register',
-                data: jsonEncode(DriverAccount(
-                        avatar: authState.value!.photoURL!,
-                        name: authState.value!.displayName!,
-                        phonenumber: '',
-                        email: authState.value!.email!,
-                        begin_day: DateTime.now().toString(),
-                        social: true)
-                    .toJson())).then((response) => {
-                      if (response.statusCode == 200) {
-                        ref
-                            .read(driverDetailsProvider.notifier)
-                            .setDriverDetails(DriverDetails.fromJson(response.data))
-                      }
-                    });  
+            dio
+                .post("http://${ip}:4100/v1/driver/register",
+                    data: jsonEncode(DriverAccount(
+                            avatar: authState.value!.photoURL!,
+                            name: authState.value!.displayName!,
+                            phonenumber: '',
+                            email: authState.value!.email!,
+                            begin_day: DateTime.now().toString(),
+                            social: true)
+                        .toJson()))
+                .then((response) {
+              print(response);
+              if (response.statusCode == 200) {
+                ref
+                    .read(driverDetailsProvider.notifier)
+                    .setDriverDetails(DriverDetails.fromJson(response.data));
+              }
+            });
 
             return null;
           }

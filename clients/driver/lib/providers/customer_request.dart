@@ -7,6 +7,7 @@ import 'package:driver/models/customer_request.dart';
 import 'package:driver/models/direction_model.dart';
 import 'package:driver/models/location.dart';
 import 'package:driver/providers/current_location.dart';
+import 'package:driver/providers/route_provider.dart';
 import 'package:driver/providers/socket_provider.dart';
 import 'package:driver/data/direction_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -54,9 +55,11 @@ class CustomerRequestDetails {
 
 class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
   final SocketClient _socket;
+  final RouteListNotifier _routeListNotifier;
   final LocationPostion currentLocation;
 
-  CustomerRequestNotifier(this._socket, this.currentLocation)
+  CustomerRequestNotifier(
+      this._socket, this.currentLocation, this._routeListNotifier)
       : super(CustomerRequestDetails(
             customer_infor: CustomerRequest(
               price: "",
@@ -109,8 +112,10 @@ class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
 
         if (!mounted) return;
 
+        _routeListNotifier.setRoute(direct!.routeDirectionList!);
+
         state = CustomerRequestDetails(
-            direction: direct!,
+            direction: direct,
             customer_infor: customerReq,
             duration_distance: direct.totalDistance!,
             duration_time: direct.totalDuration!,
@@ -120,6 +125,32 @@ class CustomerRequestNotifier extends StateNotifier<CustomerRequestDetails> {
             ));
       });
     }
+  }
+
+  Future<Directions?> acceptRequest() async {
+    Directions? direct = await DirectionRepository(dio: Dio()).getDirection(
+        origin: LatLng(
+            double.parse(state.customer_infor.departure_information.latitude),
+            double.parse(state.customer_infor.departure_information.longitude)),
+        destination: LatLng(
+            double.parse(state.customer_infor.arrival_information.latitude),
+            double.parse(state.customer_infor.arrival_information.longitude)));
+
+    if (!mounted) return direct;
+
+    _routeListNotifier.setRoute(direct!.routeDirectionList!);
+
+    state = CustomerRequestDetails(
+        direction: direct,
+        customer_infor: state.customer_infor,
+        duration_distance: direct.totalDistance!,
+        duration_time: direct.totalDuration!,
+        currentLocation: LocationPostion(
+          latitude: currentLocation.latitude,
+          longitude: currentLocation.longitude,
+        ));
+
+    return direct;
   }
 
   void cancelRequest() {
@@ -173,5 +204,6 @@ final customerRequestProvider =
       ref.read(socketClientProvider.notifier),
       LocationPostion(
           latitude: currentLocation.latitude,
-          longitude: currentLocation.longitude));
+          longitude: currentLocation.longitude),
+      ref.read(routeListProvider.notifier));
 });

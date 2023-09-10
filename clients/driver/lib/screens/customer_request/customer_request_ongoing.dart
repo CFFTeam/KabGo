@@ -1,4 +1,15 @@
+import 'dart:convert';
+
+import 'package:driver/models/customer_booking.dart';
+import 'package:driver/models/driver.dart';
+import 'package:driver/models/location.dart';
+import 'package:driver/models/vehicle.dart';
+import 'package:driver/providers/current_location.dart';
+import 'package:driver/providers/direction_provider.dart';
+import 'package:driver/providers/driver_provider.dart';
+import 'package:driver/providers/socket_provider.dart';
 import 'package:driver/screens/customer_request/customer_request_ready.dart';
+import 'package:driver/screens/home_dashboard/home_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,23 +19,28 @@ import 'package:driver/providers/customer_request.dart';
 import 'package:driver/providers/request_status.dart';
 import 'styles.dart';
 
-class CustomerRequestComming extends ConsumerStatefulWidget {
-  const CustomerRequestComming({Key? key}) : super(key: key);
+class CustomerRequestGoing extends ConsumerStatefulWidget {
+  const CustomerRequestGoing({Key? key}) : super(key: key);
 
-  static String name = 'CustomerRequestComming';
-  static String path = '/customer/request/comming';
+  static String name = 'CustomerRequestGoing';
+  static String path = '/customer/request/going';
 
   @override
-  ConsumerState<CustomerRequestComming> createState() =>
-      _CustomerRequestCommingState();
+  ConsumerState<CustomerRequestGoing> createState() =>
+      _CustomerRequestGoingState();
 }
 
-class _CustomerRequestCommingState
-    extends ConsumerState<CustomerRequestComming> {
+class _CustomerRequestGoingState extends ConsumerState<CustomerRequestGoing> {
   @override
   Widget build(BuildContext context) {
     final requestStatusNotifier = ref.read(requestStatusProvider.notifier);
+    final currentLocation =
+        ref.read(currentLocationProvider.notifier).currentLocation();
+
+    final driverDetails = ref.read(driverDetailsProvider);
+
     final customerRequest = ref.watch(customerRequestProvider);
+    final socketManager = ref.read(socketClientProvider.notifier);
 
     return Container(
       decoration: const BoxDecoration(
@@ -68,12 +84,13 @@ class _CustomerRequestCommingState
                 child: Row(
                   children: <Widget>[
                     // ClipRRect(
-                    //     borderRadius: BorderRadius.circular(15),
-                    //     child: Image.network(
-                    //         customerRequest.customer_infor.user_information.avatar,
-                    //         width: 60,
-                    //         height: 60,
-                    //         fit: BoxFit.cover)),
+                    //   borderRadius: BorderRadius.circular(15),
+                    //   child: Image.network(
+                    //       customerRequest.customer_infor.user_information.avatar,
+                    //       width: 60,
+                    //       height: 60,
+                    //       fit: BoxFit.cover),
+                    // ),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: const Image(
@@ -183,12 +200,41 @@ class _CustomerRequestCommingState
                   Expanded(
                     child: ElevatedButton(
                         onPressed: () {
-                          requestStatusNotifier.readyRequest();
-                          context.go(CustomerRequestReady.path);
+                          socketManager.publish(
+                              'driver-success',
+                              jsonEncode(DriverSubmit(
+                                  user_id: customerRequest.customer_infor
+                                      .user_information.phonenumber,
+                                  history_id:
+                                      customerRequest.customer_infor.history_id,
+                                  driver: Driver(
+                                      driverDetails.avatar,
+                                      driverDetails.name,
+                                      driverDetails.phonenumber,
+                                      Vehicle(
+                                          name: "Honda Wave RSX",
+                                          brand: "Honda",
+                                          type: "Xe máy",
+                                          color: "Xanh đen",
+                                          number: "68S164889"),
+                                      LocationPostion(
+                                          latitude: currentLocation.latitude,
+                                          longitude: currentLocation.longitude),
+                                      currentLocation.heading,
+                                      5.0),
+                                  directions: []).toJson()));
+                          requestStatusNotifier.cancelRequest();
+                          ref
+                              .read(customerRequestProvider.notifier)
+                              .cancelRequest();
+                          ref
+                              .read(directionProvider.notifier)
+                              .setDirection(false);
+                          context.go(HomeDashboard.path);
                         },
                         style: ThemeButton.acceptButton2,
                         child: const Center(
-                          child: Text('ĐÃ ĐẾN ĐIỂM ĐÓN',
+                          child: Text('KẾT THÚC HÀNH TRÌNH',
                               style: ThemeText.acceptButtonText),
                         )),
                   ),
@@ -206,7 +252,7 @@ class _CustomerRequestCommingState
                   ),
                 ),
                 child: const Center(
-                    child: Text('Đang đón khách',
+                    child: Text('Đang di chuyển',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 17,

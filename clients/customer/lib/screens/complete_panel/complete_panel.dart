@@ -1,22 +1,28 @@
+import 'package:customer/providers/stepProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../functions/setHexColor.dart';
+import '../../models/driver_model.dart';
+import '../../providers/driverProvider.dart';
 
-class CompletePanel extends StatefulWidget {
+class CompletePanel extends ConsumerStatefulWidget {
   const CompletePanel({Key? key}) : super(key: key);
 
   @override
   _CompletePanelState createState() => _CompletePanelState();
 }
 
-class _CompletePanelState extends State<CompletePanel> {
+class _CompletePanelState extends ConsumerState<CompletePanel> {
   var rating = -1;
   final inputController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    DriverModel driverModel = ref.read(driverProvider);
+
     return Container(
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 255, 255, 255),
@@ -53,12 +59,14 @@ class _CompletePanelState extends State<CompletePanel> {
                   Container(
                     width: 64,
                     height: 64,
+                    clipBehavior: Clip.hardEdge,
                     decoration: const BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.all(
                         Radius.circular(10),
                       ),
                     ),
+                    child: Image.network(driverModel.avatar!),
                   ),
                   const SizedBox(
                     width: 12,
@@ -69,11 +77,11 @@ class _CompletePanelState extends State<CompletePanel> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        const SizedBox(
+                        SizedBox(
                           width: 170,
                           child: Text(
-                            'Trần Gia Huy',
-                            style: TextStyle(
+                            driverModel.name!,
+                            style: const TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w700,
                               fontSize: 18,
@@ -84,8 +92,7 @@ class _CompletePanelState extends State<CompletePanel> {
                         SizedBox(
                           width: 170,
                           child: Text(
-                            // driverModel.vehicle['name'],
-                            'Toyota Vios',
+                            driverModel.vehicle['name'],
                             style: TextStyle(
                               color: HexColor('6A6A6A'),
                               fontWeight: FontWeight.w700,
@@ -115,16 +122,16 @@ class _CompletePanelState extends State<CompletePanel> {
                             width: 4,
                           ),
                           ...List.generate(
-                            5,
-                            (index) => Container(
-                              margin: const EdgeInsets.only(bottom: 3, left: 2),
-                              child: const FaIcon(
-                                FontAwesomeIcons.solidStar,
-                                color: Color.fromARGB(255, 245, 221, 4),
-                                size: 14,
-                              ),
-                            ),
-                          ),
+                              5,
+                              (index) => const Padding(
+                                    padding:
+                                        EdgeInsets.only(bottom: 3, left: 2),
+                                    child: FaIcon(
+                                      FontAwesomeIcons.solidStar,
+                                      color: Color.fromARGB(255, 245, 221, 4),
+                                      size: 14,
+                                    ),
+                                  ))
                         ],
                       ),
                       const SizedBox(
@@ -141,8 +148,7 @@ class _CompletePanelState extends State<CompletePanel> {
                           ),
                         ),
                         child: Text(
-                          // driverModel.vehicle['number'],
-                          '54C1-4525.12',
+                          driverModel.vehicle['number'],
                           style: Theme.of(context).textTheme.displayMedium,
                         ),
                       ),
@@ -269,7 +275,9 @@ class _CompletePanelState extends State<CompletePanel> {
                 width: double.infinity,
                 height: 54,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ref.read(stepProvider.notifier).setStep('home');
+                  },
                   child: Text('hoàn tất'.toUpperCase(),
                       style: Theme.of(context).textTheme.labelMedium),
                 ),

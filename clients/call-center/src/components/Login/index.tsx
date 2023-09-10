@@ -70,36 +70,35 @@ const Login: React.FC = () => {
       clearBorderRed(emptyName);
       toast.error("Vui lòng nhập đầy đủ thông tin", styleError);
     } else {
-        axios
-          .post(`${process.env.REACT_APP_AUTH_API_URI}/v1/call-center/login`, getFormData)
-          .then((res) => {
-            if (res.data.status === "success") {
-              authStorage.authenticate({
-                ...res.data.data.employee_info,
-                access_token: res.data.data.access_token
-              })
-              toast.success("Đăng nhập thành công", styleSuccess);
-            } else {
-              toast.error(res.data.message, styleError);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      // toast.success("Đăng nhập thành công", styleSuccess);
-      setTimeout(function () {
-        // navigate("/dashboard");
-        if (authStorage.getAuthData()?.role === "Receptionist") {
-          navigate("/call-receipt");
-        }
-        else if (authStorage.getAuthData()?.role === "Coordinator") {
-          navigate("/call-receipt-handle");
-        }
-        else if (authStorage.getAuthData()?.role === "Supervisor") {
-          navigate("/dashboard");
-        }
-        else navigate("/");
-      }, 1500);
+      axios
+        .post(
+          `${process.env.REACT_APP_AUTH_API_URI}/v1/call-center/login`,
+          getFormData
+        )
+        .then((res) => {
+          if (res.data.status === "success") {
+            authStorage.authenticate({
+              ...res.data.data.employee_info,
+              access_token: res.data.data.access_token,
+            });
+            toast.success("Đăng nhập thành công", styleSuccess);
+            setTimeout(function () {
+              // navigate("/dashboard");
+              if (authStorage.getAuthData()?.role === "Receptionist") {
+                navigate("/call-receipt");
+              } else if (authStorage.getAuthData()?.role === "Coordinator") {
+                navigate("/call-receipt-handle");
+              } else if (authStorage.getAuthData()?.role === "Supervisor") {
+                navigate("/dashboard");
+              } else navigate("/");
+            }, 1500);
+          } else {
+            toast.error(res.data.message, styleError);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
 

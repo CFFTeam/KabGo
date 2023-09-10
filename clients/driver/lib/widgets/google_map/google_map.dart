@@ -4,13 +4,19 @@ import 'dart:typed_data';
 
 import 'package:driver/models/location.dart';
 import 'package:driver/providers/current_location.dart';
+import 'package:driver/providers/direction_provider.dart';
+import 'package:driver/providers/route_provider.dart';
 import 'package:driver/providers/socket_provider.dart';
+import 'package:driver/screens/customer_request/customer_request_comming.dart';
+import 'package:driver/screens/customer_request/customer_request_ongoing.dart';
+import 'package:driver/screens/route_screen/route_screen.dart';
 import 'package:driver/utils/Image.dart';
 import 'package:driver/widgets/icon_button/icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../models/customer_booking.dart';
@@ -47,6 +53,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
   final Set<Circle> _circles = {};
   final Set<Marker> _markers = {};
   Set<Polyline> _polyline = {};
+  // static bool compassNotifier.setDirection(false);
 
   late BitmapDescriptor currentLocationIcon;
   late BitmapDescriptor driverIcon;
@@ -102,30 +109,48 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
       {double rotate = 0.0}) {
     final requestStatus = ref.watch(requestStatusProvider);
 
-    if (requestStatus == RequestStatus.comming) {
+    if (requestStatus == RequestStatus.comming ||
+        requestStatus == RequestStatus.ongoing) {
+      final compass = ref.read(directionProvider);
+
       setState(() {
         _markers.add(_createMarker(
             'my_location',
             'Vị trí của tôi',
             LatLng(currentPosition.latitude, currentPosition.longitude),
             driverIcon,
-            rotate: rotate));
+            rotate: compass ? rotate : 180));
         _circles.clear();
       });
+
+      if (compass == false) {
+        double cameraBearing = (rotate < 0) ? rotate - 180.0 : rotate - 180;
+
+        _mapController.animateCamera(CameraUpdate.newCameraPosition(
+            CameraPosition(
+                target:
+                    LatLng(currentPosition.latitude, currentPosition.longitude),
+                zoom: 20,
+                tilt: 90.0,
+                bearing: cameraBearing)));
+      }
       return;
     }
 
-    setState(() {
-      _markers.add(_createMarker(
-          'my_location',
-          'Vị trí của tôi',
-          LatLng(currentPosition.latitude, currentPosition.longitude),
-          currentLocationIcon));
+    if (requestStatus == RequestStatus.waiting ||
+        requestStatus == RequestStatus.accepted) {
+      setState(() {
+        _markers.add(_createMarker(
+            'my_location',
+            'Vị trí của tôi',
+            LatLng(currentPosition.latitude, currentPosition.longitude),
+            currentLocationIcon));
 
-      _circles.add(_createCircle('my_location',
-          LatLng(currentPosition.latitude, currentPosition.longitude),
-          radius: currentPosition.accuracy));
-    });
+        _circles.add(_createCircle('my_location',
+            LatLng(currentPosition.latitude, currentPosition.longitude),
+            radius: currentPosition?.accuracy));
+      });
+    }
   }
 
   void _moveToCurrent() {
@@ -191,15 +216,36 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
             BitmapDescriptor.fromBytes(bytes.buffer.asUint8List()));
   }
 
+  double calculateBearing(
+      LocationPostion currentLocation, LocationPostion destinationPosition) {
+    final bearing = math.atan2(
+        math.sin(math.pi *
+            (destinationPosition.longitude - currentLocation.longitude) /
+            180.0),
+        math.cos(math.pi * currentLocation.latitude / 180.0) *
+                math.tan(math.pi * destinationPosition.latitude / 180.0) -
+            math.sin(math.pi * currentLocation.latitude / 180.0) *
+                math.cos(math.pi *
+                    (destinationPosition.longitude -
+                        currentLocation.longitude) /
+                    180.0));
+
+    return bearing * 180.0 / math.pi;
+  }
+
   @override
   Widget build(BuildContext context) {
     final bool active = ref.watch(socketClientProvider);
     final requestStatus = ref.watch(requestStatusProvider);
     final driverDetails = ref.read(driverDetailsProvider);
+    final customerRequest = ref.watch(customerRequestProvider);
+    final customerRequestNotifier = ref.watch(customerRequestProvider.notifier);
+
+    final compass = ref.watch(directionProvider);
+    final compassNotifier = ref.read(directionProvider.notifier);
+    final routesList = ref.watch(routeListProvider);
 
     if (active) {
-      final customerRequest = ref.watch(customerRequestProvider);
-
       if (customerRequest.hasValue()) {
         if (requestStatus == RequestStatus.accepted) {
           final LocationPostion customerLocation = LocationPostion(
@@ -251,9 +297,79 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
           }
         }
 
-        if (requestStatus == RequestStatus.comming &&
+        if (requestStatus == RequestStatus.ready && running == false) {
+          customerRequestNotifier.acceptRequest().then((value) {
+            _info = value!;
+
+            ref.read(socketClientProvider.notifier).publish(
+                'driver-comming',
+                jsonEncode(DriverSubmit(
+                        user_id: customerRequest
+                            .customer_infor.user_information.phonenumber,
+                        history_id: customerRequest.customer_infor.history_id,
+                        driver: Driver(
+                            driverDetails.avatar,
+                            driverDetails.name,
+                            driverDetails.phonenumber,
+                            Vehicle(
+                                name: "Honda Wave RSX",
+                                brand: "Honda",
+                                type: "Xe máy",
+                                color: "Xanh đen",
+                                number: "68S164889"),
+                            LocationPostion(
+                                latitude:
+                                    ref.read(currentLocationProvider).latitude,
+                                longitude: ref
+                                    .read(currentLocationProvider)
+                                    .longitude),
+                            ref.read(currentLocationProvider).heading,
+                            5.0),
+                        directions: value.polylinePoints!)
+                    .toJson()));
+
+            _polyline = {
+              Polyline(
+                  polylineId: const PolylineId('customer_direction'),
+                  color: const Color.fromARGB(255, 255, 113, 36),
+                  width: 8,
+                  points: value.polylinePoints!
+                      .map((e) => LatLng(e.latitude, e.longitude))
+                      .toList())
+            };
+
+            _markers.addAll({
+              // _createMarker(
+              //     'customer_location',
+              //     'Vị trí khách hàng',
+              //     LatLng(customerRequest.currentLocation.latitude,
+              //         customerRequest.currentLocation.longitude),
+              //     departureLocationIcon),
+
+              _createMarker(
+                  'destination_location',
+                  'Điểm đến  khách hàng',
+                  LatLng(
+                      double.parse(customerRequest
+                          .customer_infor.arrival_information.latitude),
+                      double.parse(customerRequest
+                          .customer_infor.arrival_information.longitude)),
+                  BitmapDescriptor.defaultMarkerWithHue(
+                      BitmapDescriptor.hueOrange)),
+            });
+
+            running = true;
+            compassNotifier.setDirection(false);
+            process = 0;
+          });
+        }
+
+        if ((requestStatus == RequestStatus.comming ||
+                requestStatus == RequestStatus.ongoing) &&
             running == true &&
             _info != null) {
+          running = false;
+
           LocationPostion current_location = LocationPostion(
               latitude:
                   customerRequest.direction.polylinePoints![process].latitude,
@@ -266,105 +382,105 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
               longitude: customerRequest.direction.polylinePoints![process + 1]
                   .longitude); // Replace with your destination's coordinates
 
-          final bearing = math.atan2(
-              math.sin(math.pi *
-                  (destinationPosition.longitude - current_location.longitude) /
-                  180.0),
-              math.cos(math.pi * current_location.latitude / 180.0) *
-                      math.tan(math.pi * destinationPosition.latitude / 180.0) -
-                  math.sin(math.pi * current_location.latitude / 180.0) *
-                      math.cos(math.pi *
-                          (destinationPosition.longitude -
-                              current_location.longitude) /
-                          180.0));
-
-          double rotate = bearing * 180.0 / math.pi;
+          double rotate =
+              calculateBearing(current_location, destinationPosition);
 
           _updateIconCurrentLocation(current_location, rotate: rotate);
 
-          Timer.periodic(const Duration(seconds: 1), (timer) {
-            if (_info == null ||
-                requestStatus == RequestStatus.waiting ||
-                process >=
-                    customerRequest.direction.polylinePoints!.length - 1) {
-              timer.cancel();
-              return;
-            }
+          Future.delayed(const Duration(milliseconds: 2000), () {
+            Timer.periodic(const Duration(milliseconds: 1000), (timer) {
+              if (_info == null ||
+                  requestStatus == RequestStatus.waiting ||
+                  requestStatus == RequestStatus.ready ||
+                  process >=
+                      customerRequest.direction.polylinePoints!.length - 1) {
+                timer.cancel();
 
-            if (process <
-                customerRequest.direction.polylinePoints!.length - 1) {
-              process++;
+                if (compass == true) {
+                  // context.go(RouteScreen.path);
+                } else {
+                  if (requestStatus == RequestStatus.comming) {
+                    context.go(CustomerRequestComming.path);
+                  } else if (requestStatus == RequestStatus.ongoing) {
+                    context.go(CustomerRequestGoing.path);
+                  }
+                }
 
-              LocationPostion current_location = LocationPostion(
-                  latitude: customerRequest
-                      .direction.polylinePoints![process].latitude,
-                  longitude: customerRequest
-                      .direction.polylinePoints![process].longitude);
+                compassNotifier.setDirection(true);
+                 _mapController.animateCamera(CameraUpdate.newLatLngBounds(
+                      customerRequest.direction.bounds!, 100.0));
+                return;
+              }
 
-              final destinationPosition = LocationPostion(
-                  latitude: customerRequest
-                      .direction.polylinePoints![process - 1].latitude,
-                  longitude: customerRequest
-                      .direction
-                      .polylinePoints![process - 1]
-                      .longitude); // Replace with your destination's coordinates
+              if (process <
+                  customerRequest.direction.polylinePoints!.length - 1) {
+                process++;
 
-              final bearing = math.atan2(
-                  math.sin(math.pi *
-                      (destinationPosition.longitude -
-                          current_location.longitude) /
-                      180.0),
-                  math.cos(math.pi * current_location.latitude / 180.0) *
-                          math.tan(
-                              math.pi * destinationPosition.latitude / 180.0) -
-                      math.sin(math.pi * current_location.latitude / 180.0) *
-                          math.cos(math.pi *
-                              (destinationPosition.longitude -
-                                  current_location.longitude) /
-                              180.0));
+                LocationPostion current_location = LocationPostion(
+                    latitude: customerRequest
+                        .direction.polylinePoints![process].latitude,
+                    longitude: customerRequest
+                        .direction.polylinePoints![process].longitude);
 
-              double rotate = bearing * 180.0 / math.pi;
+                final destinationPosition = LocationPostion(
+                    latitude: customerRequest
+                        .direction.polylinePoints![process - 1].latitude,
+                    longitude: customerRequest
+                        .direction
+                        .polylinePoints![process - 1]
+                        .longitude); // Replace with your destination's coordinates
 
-              // _info!.polylinePoints.removeAt(0);
+                double rotate =
+                    calculateBearing(current_location, destinationPosition);
 
-              _polyline = {
-                Polyline(
-                    polylineId: const PolylineId('customer_direction'),
-                    color: const Color.fromARGB(255, 255, 113, 36),
-                    width: 8,
-                    points: _info!.polylinePoints!
-                        .map((e) => LatLng(e.latitude, e.longitude))
-                        .toList()
-                        .sublist(process, _info!.polylinePoints!.length))
-              };
+                if (routesList.isNotEmpty) {
+                  for (int i = 0; i < routesList.length; ++i) {
+                    if (routesList[i].index == process) {
+                      ref.read(routeProvider.notifier).setRoute(routesList[i]);
+                    }
+                  }
+                }
 
-              _updateIconCurrentLocation(current_location, rotate: rotate);
+                // _info!.polylinePoints.removeAt(0);
 
-              ref.read(socketClientProvider.notifier).publish(
-                  'driver-moving',
-                  jsonEncode(DriverSubmit(
-                    user_id: customerRequest
-                        .customer_infor.user_information.phonenumber,
-                    history_id: customerRequest.customer_infor.history_id,
-                    driver: Driver(
-                        driverDetails.avatar,
-                        driverDetails.name,
-                        driverDetails.phonenumber,
-                        Vehicle(
-                            name: "Honda Wave RSX",
-                            brand: "Honda",
-                            type: "Xe máy",
-                            color: "Xanh đen",
-                            number: "68S164889"),
-                        current_location,
-                        rotate,
-                        5.0),
-                    directions: _info!.polylinePoints!
-                        .sublist(process, _info!.polylinePoints!.length),
-                  ).toJson()));
-            }
+                _polyline = {
+                  Polyline(
+                      polylineId: const PolylineId('customer_direction'),
+                      color: const Color.fromARGB(255, 255, 113, 36),
+                      width: 8,
+                      points: _info!.polylinePoints!
+                          .map((e) => LatLng(e.latitude, e.longitude))
+                          .toList()
+                          .sublist(process, _info!.polylinePoints!.length))
+                };
+
+                _updateIconCurrentLocation(current_location, rotate: rotate);
+
+                ref.read(socketClientProvider.notifier).publish(
+                    'driver-moving',
+                    jsonEncode(DriverSubmit(
+                      user_id: customerRequest
+                          .customer_infor.user_information.phonenumber,
+                      history_id: customerRequest.customer_infor.history_id,
+                      driver: Driver(
+                          driverDetails.avatar,
+                          driverDetails.name,
+                          driverDetails.phonenumber,
+                          Vehicle(
+                              name: "Honda Wave RSX",
+                              brand: "Honda",
+                              type: "Xe máy",
+                              color: "Xanh đen",
+                              number: "68S164889"),
+                          current_location,
+                          rotate,
+                          5.0),
+                      directions: _info!.polylinePoints!
+                          .sublist(process, _info!.polylinePoints!.length),
+                    ).toJson()));
+              }
+            });
           });
-          running = false;
         }
       }
 
@@ -416,6 +532,37 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                 icon: const Icon(FontAwesomeIcons.locationCrosshairs,
                     color: Color(0xFFFF772B)),
                 onPressed: _moveToCurrent,
+              ),
+            )),
+      if (requestStatus == RequestStatus.comming ||
+          requestStatus == RequestStatus.ongoing)
+        Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+              padding: const EdgeInsets.only(bottom: 120, right: 3),
+              child: CIconButton(
+                elevation: 1,
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.grey[500],
+                padding: const EdgeInsets.all(12),
+                icon: const Icon(FontAwesomeIcons.solidCompass,
+                    color: Color(0xFFFF772B)),
+                onPressed: () {
+                  if (compass == true) {
+                    context.go(RouteScreen.path);
+                  } else {
+                    if (requestStatus == RequestStatus.comming) {
+                      context.go(CustomerRequestComming.path);
+                    } else if (requestStatus == RequestStatus.ongoing) {
+                      context.go(CustomerRequestGoing.path);
+                    }
+                  }
+
+                  compassNotifier.toggleDirection();
+
+                  _mapController.animateCamera(CameraUpdate.newLatLngBounds(
+                      customerRequest.direction.bounds!, 100.0));
+                },
               ),
             )),
     ]);
