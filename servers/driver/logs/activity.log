@@ -1119,3 +1119,7 @@
 [API.Driver][Sat, 09 Sep 2023 11:41:54 GMT] Server is running on port 4200 
 [API.Driver][Sat, 09 Sep 2023 11:41:55 GMT] Connected to database successfully 
 >>>>>>> e077a0f62eae0ed4ca9a7e0acf62f7bee37ea385
+[API.Driver][Sun, 10 Sep 2023 05:58:32 GMT] Setting up request middleware... 
+[API.Driver][Sun, 10 Sep 2023 05:58:32 GMT] Server is starting... 
+[API.Driver][Sun, 10 Sep 2023 05:58:32 GMT] Server is running on port 4200 
+[API.Driver][Sun, 10 Sep 2023 05:58:33 GMT] Connected to database successfully 

@@ -1077,3 +1077,7 @@
 [API.Customer][Sat, 09 Sep 2023 11:41:52 GMT] Server is running on port 4300 
 [API.Customer][Sat, 09 Sep 2023 11:41:53 GMT] Connected to database successfully 
 >>>>>>> e077a0f62eae0ed4ca9a7e0acf62f7bee37ea385
+[API.Customer][Sun, 10 Sep 2023 05:58:31 GMT] Setting up request middleware... 
+[API.Customer][Sun, 10 Sep 2023 05:58:31 GMT] Server is starting... 
+[API.Customer][Sun, 10 Sep 2023 05:58:31 GMT] Server is running on port 4300 
+[API.Customer][Sun, 10 Sep 2023 05:58:32 GMT] Connected to database successfully 

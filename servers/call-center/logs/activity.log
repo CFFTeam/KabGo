@@ -2616,3 +2616,8 @@
 [API.Call Center][Sat, 09 Sep 2023 10:24:36 GMT] object 
 [API.Call Center][Sat, 09 Sep 2023 10:24:36 GMT] data from client-s1:  [object Object] 
 >>>>>>> e077a0f62eae0ed4ca9a7e0acf62f7bee37ea385
+[API.Call Center][Sun, 10 Sep 2023 05:58:32 GMT] Setting up request middleware... 
+[API.Call Center][Sun, 10 Sep 2023 05:58:32 GMT] Server is starting... 
+[API.Call Center][Sun, 10 Sep 2023 05:58:32 GMT] Server is running on port 4500 
+[API.Call Center][Sun, 10 Sep 2023 05:58:32 GMT] Connected to database successfully 
+[API.Call Center][Sun, 10 Sep 2023 06:00:42 GMT] Could not connect to the rabbit mq Error: connect ETIMEDOUT 192.168.2.171:5672 
