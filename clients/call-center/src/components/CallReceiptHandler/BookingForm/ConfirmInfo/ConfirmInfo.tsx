@@ -11,7 +11,7 @@ import Overlay from "@components/Overlay/Overlay";
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 import { Coordination, FinalBookingInformation, BookingInformation } from "@store/reducers/callReceiptHandlerSlice";
 import { formatAsVietnameseCurrency } from "@utils/formatCurrent";
-
+import { authStorage } from "@utils/storage";
 
 const ConfirmInfo: React.FC = () => {
     const navigate = useNavigate();
@@ -96,7 +96,7 @@ const ConfirmInfo: React.FC = () => {
             distance: finalBookingInformation.distance,
             duration: finalBookingInformation.duration,
             price: finalBookingInformation.price,
-            related_employee: "64f0c03d9e9037d91cce0d7e",
+            related_employee: authStorage?.getAuthData()?._id || '',
         });
 
         // update new booking information (update the state of this booking information)

@@ -93,11 +93,11 @@ const GuestInfo: React.FC = () => {
 
                             <input id = "hidden-check-box" className="hidden-check-box" type = "checkbox" hidden>
                             </input>
-                            <label htmlFor = "hidden-check-box" className={styles["day-night-toggle-btn"]} >
-                                <span className={styles["circle"]}>
-                                </span>
-                            <SunIcon className = {styles["sun-icon"]}/>
+                            <label htmlFor = "hidden-check-box" className={`${styles["day-night-toggle-btn"]} ${guestInformation?.bookingTime.toString().includes('AM') ? `${styles["dayColour"]}` : `${styles["nightColour"]}`}`} >
+                                <span className={styles["circle"]}/>
+                                <span className={styles["circle_2"]}/>
                             <MoonIcon className = {styles["moon-icon"]}/>
+                            <SunIcon className = {styles["sun-icon"]}/>
                             </label>
                         </div>
                         
