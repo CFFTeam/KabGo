@@ -145,9 +145,11 @@ class _InputCustomState extends State<InputCustom> {
             ),
           ),
           hideOnLoading: true,
-          onSuggestionSelected: (suggestion) {
+          onSuggestionSelected: (suggestion) async {
             suggestion.structuredFormatting!.formatSecondaryText();
             inputController.text = suggestion.structuredFormatting!.mainText!;
+            print(suggestion.placeId);
+            print(await suggestion.getLocation());
             widget.choosePoint(suggestion);
           },
           itemBuilder: (ctx, suggestion) {

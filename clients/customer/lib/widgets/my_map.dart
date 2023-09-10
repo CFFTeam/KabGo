@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:customer/providers/reject_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,11 +10,13 @@ import '../functions/determinePosition.dart';
 import '../functions/getBytesFromAsset.dart';
 import '../functions/networkUtility.dart';
 import '../functions/setAddressByPosition.dart';
+import '../models/customer_model.dart';
 import '../models/driver_model.dart';
 import '../models/location_model.dart';
 import '../models/route_model.dart';
 import '../providers/arrivalLocationProvider.dart';
 import '../providers/currentLocationProvider.dart';
+import '../providers/customerProvider.dart';
 import '../providers/departureLocationProvider.dart';
 import '../providers/driverProvider.dart';
 import '../providers/locationPickerInMap.dart';
@@ -277,6 +280,13 @@ class _MyMapState extends ConsumerState<MyMap> {
   }
 
   void drawDriver() async {
+    RouteModel routeModel = ref.read(routeProvider);
+    BitmapDescriptor bitmapDescriptor =
+        (routeModel.service == 'Xe máy' || routeModel.service == 'Xe tay ga')
+            ? BitmapDescriptor.fromBytes(
+                await getBytesFromAsset('lib/assets/bike_image.png', 75))
+            : BitmapDescriptor.fromBytes(
+                await getBytesFromAsset('lib/assets/car_image.png', 60));
     for (dynamic i in parsedValue) {
       markers.add(
         Marker(
@@ -287,9 +297,7 @@ class _MyMapState extends ConsumerState<MyMap> {
           position: LatLng(
               double.parse(i['infor']['coordinate']['latitude'].toString()),
               double.parse(i['infor']['coordinate']['longitude'].toString())),
-          icon: BitmapDescriptor.fromBytes(
-            await getBytesFromAsset('lib/assets/bike_image.png', 75),
-          ),
+          icon: bitmapDescriptor,
         ),
       );
     }
@@ -316,7 +324,13 @@ class _MyMapState extends ConsumerState<MyMap> {
         ),
       );
     }
-
+    RouteModel routeModel = ref.read(routeProvider);
+    BitmapDescriptor bitmapDescriptor =
+        (routeModel.service == 'Xe máy' || routeModel.service == 'Xe tay ga')
+            ? BitmapDescriptor.fromBytes(
+                await getBytesFromAsset('lib/assets/bike_image.png', 75))
+            : BitmapDescriptor.fromBytes(
+                await getBytesFromAsset('lib/assets/car_image.png', 60));
     markers.add(
       Marker(
         rotation: double.parse(driverModel.rotation.toString()),
@@ -325,9 +339,7 @@ class _MyMapState extends ConsumerState<MyMap> {
         position: LatLng(
             double.parse(driverModel.coordinate['latitude'].toString()),
             double.parse(driverModel.coordinate['longitude'].toString())),
-        icon: BitmapDescriptor.fromBytes(
-          await getBytesFromAsset('lib/assets/bike_image.png', 75),
-        ),
+        icon: bitmapDescriptor,
       ),
     );
 
@@ -409,7 +421,13 @@ class _MyMapState extends ConsumerState<MyMap> {
     DriverModel driverModel = ref.read(driverProvider);
     markers.removeWhere(
         (element) => element.markerId == const MarkerId('driverLocation'));
-
+    RouteModel routeModel = ref.read(routeProvider);
+    BitmapDescriptor bitmapDescriptor =
+        (routeModel.service == 'Xe máy' || routeModel.service == 'Xe tay ga')
+            ? BitmapDescriptor.fromBytes(
+                await getBytesFromAsset('lib/assets/bike_image.png', 75))
+            : BitmapDescriptor.fromBytes(
+                await getBytesFromAsset('lib/assets/car_image.png', 60));
     markers.add(
       Marker(
         rotation: double.parse(driverModel.rotation.toString()),
@@ -418,9 +436,7 @@ class _MyMapState extends ConsumerState<MyMap> {
         position: LatLng(
             double.parse(driverModel.coordinate['latitude'].toString()),
             double.parse(driverModel.coordinate['longitude'].toString())),
-        icon: BitmapDescriptor.fromBytes(
-          await getBytesFromAsset('lib/assets/bike_image.png', 75),
-        ),
+        icon: bitmapDescriptor,
       ),
     );
 
@@ -452,6 +468,13 @@ class _MyMapState extends ConsumerState<MyMap> {
     DriverModel driverModel = ref.read(driverProvider);
     // markers.removeWhere(
     //     (element) => element.markerId == const MarkerId('driverLocation'));
+    RouteModel routeModel = ref.read(routeProvider);
+    BitmapDescriptor bitmapDescriptor =
+        (routeModel.service == 'Xe máy' || routeModel.service == 'Xe tay ga')
+            ? BitmapDescriptor.fromBytes(
+                await getBytesFromAsset('lib/assets/bike_image.png', 75))
+            : BitmapDescriptor.fromBytes(
+                await getBytesFromAsset('lib/assets/car_image.png', 60));
     markers.clear();
     markers.add(
       Marker(
@@ -460,9 +483,7 @@ class _MyMapState extends ConsumerState<MyMap> {
         anchor: const Offset(0.5, 0.5),
         position: LatLng(double.parse(listValue[0]['lat'].toString()),
             double.parse(listValue[0]['longitude'].toString())),
-        icon: BitmapDescriptor.fromBytes(
-          await getBytesFromAsset('lib/assets/bike_image.png', 75),
-        ),
+        icon: bitmapDescriptor,
       ),
     );
     LocationModel arrival = ref.read(arrivalLocationProvider);
@@ -500,6 +521,17 @@ class _MyMapState extends ConsumerState<MyMap> {
 
   String? action;
 
+  Future<void> bookCar() async {
+    SocketClient socketClient = ref.read(socketClientProvider.notifier);
+    LocationModel departure = ref.read(departureLocationProvider);
+    LocationModel arrival = ref.read(arrivalLocationProvider);
+    RouteModel routeModel = ref.read(routeProvider);
+    CustomerModel customerModel = ref.read(customerProvider);
+    socketClient.emitBookingCar(departure, arrival, routeModel, customerModel);
+    ref.read(stepProvider.notifier).setStep('find_driver');
+    ref.read(mapProvider.notifier).setMapAction('FIND_DRIVER');
+  }
+
   @override
   void initState() {
     super.initState();
@@ -518,6 +550,11 @@ class _MyMapState extends ConsumerState<MyMap> {
       dynamic parsed = json.decode(value).cast<String, dynamic>();
       ref.read(driverProvider.notifier).setDriver(DriverModel.fromMap(parsed));
       ref.read(mapProvider.notifier).setMapAction('WAIT_DRIVER');
+    });
+
+    socketClient.subscribe('reject driver', (dynamic value) {
+      print('------------------------------------- reject driver');
+      bookCar();
     });
 
     socketClient.subscribe('moving driver', (dynamic value) {

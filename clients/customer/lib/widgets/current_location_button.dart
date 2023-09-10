@@ -11,7 +11,7 @@ class CurrentLocationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      height: 50,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
         boxShadow: const [

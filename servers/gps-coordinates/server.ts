@@ -13,7 +13,7 @@ import Driver from '@common/interfaces/driver';
 import driverModel from '@common/models/driver.model';
 import BookingHistory from '@common/models/booking_history.model';
 import mongoose from 'mongoose';
-import { DriverNearest, RideService } from '@common/utils/notification.observer';
+import { DriverNotify, RideService } from '@common/utils/notification.observer';
 
 process.on('uncaughtException', (err: Error) => {
     console.error('Uncaught Exception. Shutting down...');
@@ -39,6 +39,7 @@ const app = new Application({
 // const driverList: any = {};
 const rideService = new RideService();
 const customerList: any = {};
+const rejectList: any = {};
 const stateDriver: any = {};
 
 const server = app.run(4600, async () => {
@@ -51,7 +52,7 @@ const server = app.run(4600, async () => {
 
             socket.phonenumber = _id;
 
-            rideService.addObserver(new DriverNearest(socket, driver));
+            rideService.addObserver(new DriverNotify(socket, driver));
             console.log(rideService.observers);
         });
 
@@ -63,6 +64,13 @@ const server = app.run(4600, async () => {
                 infor: customer,
                 socket: socket,
             };
+
+            let existedBooking = await BookingHistory.find({
+                $and: [
+                    { 'original.address': customer.departure_information.address },
+                    { 'destination.address': customer.arrival_information.address },
+                ],
+            });
 
             const _service = await serviceModel.findOne({ name: customer.service });
             const _customer = await customerModel.findOne({ email: customer.user_information.email });
@@ -83,7 +91,7 @@ const server = app.run(4600, async () => {
                 },
                 time: new Date().toISOString(),
                 status: 'Đang điều phối', //điều phối | tiến hành | hủy | hoàn thành
-                frequency: '1',
+                frequency: existedBooking.length + 1,
                 price: customer.price,
                 vehicle: _service?.id,
                 note: '',
@@ -92,7 +100,7 @@ const server = app.run(4600, async () => {
 
             console.log(bookingData);
 
-            rideService.bookRide(socket, customer, bookingData);
+            rideService.bookRide(socket, customer, bookingData, rejectList);
         });
 
         socket.on('driver-accept', async (message: string) => {
@@ -177,16 +185,19 @@ const server = app.run(4600, async () => {
             customerList[id]?.socket.emit('comming driver', JSON.stringify(driverSubmit));
         });
 
-        // socket.on('driver-ready', (message: string) => {
-        //     const driverSubmit = JSON.parse(message) as DriverSubmit;
-        //     const id = driverSubmit.user_id;
-        //     customerList[id]?.socket.emit('ready driver', JSON.stringify(driverSubmit));
-        // });
+        socket.on('driver-success', (message: string) => {
+            const driverSubmit = JSON.parse(message) as DriverSubmit;
+            const id = driverSubmit.user_id;
+            customerList[id]?.socket.emit('success driver', JSON.stringify(driverSubmit));
+        });
 
         socket.on('driver-reject', (message: string) => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
             const id = driverSubmit.user_id;
-            customerList[id]?.socket.emit('reject driver', JSON.stringify(driverSubmit.driver));
+            console.log('driver-reject', rejectList[id]);
+            if (rejectList[id]) rejectList[id] = [...rejectList[id], driverSubmit.driver.phonenumber];
+            else rejectList[id] = [driverSubmit.driver.phonenumber];
+            customerList[id]?.socket.emit('reject driver');
         });
 
         socket.on('driver-cancel', async (message: string) => {
