@@ -1,7 +1,7 @@
 import styles from "./GuestInfo.module.css";
 import {ReactComponent as SunIcon} from "@assets/svg/CallReceipt/sun.svg";
 import {ReactComponent as MoonIcon} from "@assets/svg/CallReceipt/moon.svg";
-import {useState, useRef} from 'react';
+import {useState, useRef} from 'react'; 
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from '@hooks/ReduxHooks';
 import {callReceiptHandlerActions} from "@store/reducers/callReceiptHandlerSlice";
@@ -83,12 +83,12 @@ const GuestInfo: React.FC = () => {
                             </span>
                         </label>
                         <div className = {styles["pick-up-time"]} style = {{display: 'flex', gap: "1rem"}}>
-                            <input value = "12" ref = {scheduledBookingTime_HH_Ref} type = "text" placeholder = "HH" style = {{fontFamily: 'Montserrat', width: "6.5rem", borderRadius: "8px", border: "1px solid #ced4da", backgroundColor: '#e9ecef', height: "1rem", padding: "1.8rem", outline: 'none'}}>
+                            <input value = {guestInformation?.scheduledBookingTime_HH} ref = {scheduledBookingTime_HH_Ref} type = "text" placeholder = "HH" style = {{fontFamily: 'Montserrat', width: "6.5rem", borderRadius: "8px", border: "1px solid #ced4da", backgroundColor: '#e9ecef', height: "1rem", padding: "1.8rem", outline: 'none'}}>
                             </input>
                             <span style = {{fontWeight: 600, fontSize: "2.5rem"}}>
                                 :
                             </span>
-                            <input value = "30" ref = {scheduledBookingTime_MM_Ref} type = "text" placeholder = "MM" style = {{fontFamily: 'Montserrat', width: "8rem", borderRadius: "8px", border: "1px solid #ced4da", backgroundColor: '#e9ecef', height: "1rem", padding: "1.8rem", outline: 'none'}}>
+                            <input value = {guestInformation?.scheduledBookingTime_MM} ref = {scheduledBookingTime_MM_Ref} type = "text" placeholder = "MM" style = {{fontFamily: 'Montserrat', width: "8rem", borderRadius: "8px", border: "1px solid #ced4da", backgroundColor: '#e9ecef', height: "1rem", padding: "1.8rem", outline: 'none'}}>
                             </input>
 
                             <input id = "hidden-check-box" className="hidden-check-box" type = "checkbox" hidden>

@@ -7,16 +7,6 @@ import io, { Socket } from 'socket.io-client';
 import { useAppSelector, useAppDispatch } from "@hooks/ReduxHooks";
 import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSlice";
 
-interface CallReceiptData {
-    _id: string,
-    phoneNumber: string,
-    date: string,
-    time: string,
-    vehicleType: string,
-    status: string,
-    arrivalAddress: string,
-}
-
 const CallReceiptTable: React.FC = () => {
     // const [socket, setSocket] = useState<Socket | null>(null);
     // const [receivedMessages, setReceivedMessages] = useState<string[]>([]);
@@ -53,8 +43,10 @@ const CallReceiptTable: React.FC = () => {
             origin: guestInformation?.origin || '',
             destination: guestInformation?.destination || '',
             note: guestInformation?.note || '',
-            time: guestInformation?.time || '',
             localTime: guestInformation?.localTime || '',
+            bookingTime: guestInformation?.bookingTime || '',
+            scheduledBookingTime_HH: guestInformation?.scheduledBookingTime_HH || '',
+            scheduledBookingTime_MM: guestInformation?.scheduledBookingTime_MM || '',
             state: guestInformation?.state || '',   
             originLatLng: guestInformation?.originLatLng || {},
             destinationLatLng: guestInformation?.destinationLatLng || {},
@@ -184,7 +176,7 @@ const CallReceiptTable: React.FC = () => {
                             <tr key ={el._id} onClick = {() => handleItemClick(el._id)}>
                                 <td className ={styles["client"]}>0903861515</td>
                                 <td className = {styles["date-time"]}>
-                                {el.time}
+                                {el.bookingTime as any}
                                 </td>
                                 <td className = {styles["vehicle-type"]} style = {{textAlign: "center"}}>
                                     {el.vehicleType}

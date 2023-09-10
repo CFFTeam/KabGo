@@ -10,12 +10,19 @@ export const formatDate = (localTime: any) => {
     timeZone: "Asia/Ho_Chi_Minh",
     hour: "2-digit",
     minute: "2-digit",
-    }) + " - " + localDate.toLocaleDateString("en-US", {
+    }) + " - " + swapDayAndMonth(localDate.toLocaleDateString("en-US", {
     timeZone: "Asia/Ho_Chi_Minh",
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
-    });
+    }));
 
     return formattedDate;
 }
+
+
+// Hàm để đổi chỗ ngày và tháng trong định dạng "DD/MM/YYYY"
+export const swapDayAndMonth = (dateString: string) => {
+    const [day, month, year] = dateString.split("/");
+    return `${month}/${day}/${year}`;
+  }
