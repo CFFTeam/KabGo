@@ -70,6 +70,7 @@
   },
   {
     "featureType": "poi",
+    "elementType": "geometry",
     "stylers": [
       {
         "visibility": "off"
@@ -78,10 +79,10 @@
   },
   {
     "featureType": "poi",
-    "elementType": "geometry",
+    "elementType": "labels.icon",
     "stylers": [
       {
-        "visibility": "off"
+        "weight": 2
       }
     ]
   },
