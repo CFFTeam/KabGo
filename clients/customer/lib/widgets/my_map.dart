@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:customer/providers/reject_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -121,11 +120,29 @@ class _MyMapState extends ConsumerState<MyMap> {
     setState(() {});
   }
 
-  void getCurrentLocation() async {
+  void getNewCurrentLocation() async {
     currentLocation = await determinePosition();
     ref
         .read(currentLocationProvider.notifier)
         .setCurrentLocation(currentLocation!);
+    markers.remove(const MarkerId('currentLocation'));
+    markers.add(Marker(
+      anchor: const Offset(0.5, 0.5),
+      markerId: const MarkerId('currentLocation'),
+      position: currentLocation!,
+      icon: BitmapDescriptor.fromBytes(
+          await getBytesFromAsset('lib/assets/my_location.png', 250)),
+    ));
+    googleMapController.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(target: currentLocation!, zoom: 16.5),
+      ),
+    );
+    setState(() {});
+  }
+
+  void getCurrentLocation() async {
+    currentLocation = ref.read(currentLocationProvider);
     markers.remove(const MarkerId('currentLocation'));
     markers.add(Marker(
       anchor: const Offset(0.5, 0.5),
@@ -536,6 +553,7 @@ class _MyMapState extends ConsumerState<MyMap> {
   void initState() {
     super.initState();
 
+    getNewCurrentLocation();
     getFirstCurrentPosition();
 
     SocketClient socketClient = ref.read(socketClientProvider.notifier);
@@ -602,9 +620,10 @@ class _MyMapState extends ConsumerState<MyMap> {
       builder: (context, ref, child) {
         ref.listen(mapProvider, (previous, next) {
           if (next == 'GET_CURRENT_LOCATION') {
-            getCurrentLocation();
+            getNewCurrentLocation();
             ref.read(mapProvider.notifier).setMapAction('');
           } else if (next == 'SET_DEFAULT') {
+            getCurrentLocation();
             ref.read(mapProvider.notifier).setMapAction('');
             setState(() {
               padding = 100;
@@ -641,7 +660,13 @@ class _MyMapState extends ConsumerState<MyMap> {
             });
             moveToPosition();
           } else if (next == 'DRAW_ROUTE') {
-            padding = 370;
+            if (previous == 'LOCATION_PICKER') {
+              setState(() {
+                padding = 370;
+              });
+            } else {
+              padding = 370;
+            }
             drawRoute();
           } else if (next == 'CREATE_TRIP') {
           } else if (next == 'FIND_DRIVER') {
@@ -652,7 +677,7 @@ class _MyMapState extends ConsumerState<MyMap> {
             padding = 190;
             findDriver();
           } else if (next == 'WAIT_DRIVER') {
-            padding = 225;
+            padding = 228;
             ref.read(mapProvider.notifier).setMapAction('');
             ref.read(stepProvider.notifier).setStep('wait_driver');
             drawRouteDriver();
