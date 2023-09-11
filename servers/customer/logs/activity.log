@@ -1228,3 +1228,7 @@
 >>>>>>> master
 >>>>>>> master
 >>>>>>> 7d142bbdc0085bfa97b66f50862b5d9fada26b83
+[API.Customer][Mon, 11 Sep 2023 04:28:03 GMT] Setting up request middleware... 
+[API.Customer][Mon, 11 Sep 2023 04:28:03 GMT] Server is starting... 
+[API.Customer][Mon, 11 Sep 2023 04:28:03 GMT] Server is running on port 4300 
+[API.Customer][Mon, 11 Sep 2023 04:28:04 GMT] Connected to database successfully 

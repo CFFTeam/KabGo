@@ -4122,3 +4122,8 @@
 [API.Call Center][Mon, 11 Sep 2023 03:12:41 GMT] Server is running on port 4500 
 [API.Call Center][Mon, 11 Sep 2023 03:12:42 GMT] Connected to database successfully 
 [API.Call Center][Mon, 11 Sep 2023 03:14:51 GMT] Could not connect to the rabbit mq Error: connect ETIMEDOUT 192.168.2.167:5672 
+[API.Call Center][Mon, 11 Sep 2023 04:28:08 GMT] Setting up request middleware... 
+[API.Call Center][Mon, 11 Sep 2023 04:28:08 GMT] Server is starting... 
+[API.Call Center][Mon, 11 Sep 2023 04:28:08 GMT] Server is running on port 4500 
+[API.Call Center][Mon, 11 Sep 2023 04:28:08 GMT] Connected to database successfully 
+[API.Call Center][Mon, 11 Sep 2023 04:30:19 GMT] Could not connect to the rabbit mq Error: connect ETIMEDOUT 192.168.2.167:5672 

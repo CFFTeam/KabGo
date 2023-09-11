@@ -49,15 +49,25 @@ const Sidebar: React.FC = () => {
         toast.error("Tài khoản không có quyền truy cập. Vui lòng chọn tài khoản khác.", styleError);
       } 
       else{
+        navigate(link);
         onChangeActive([index, "main-menu"]);
       }
     }
-    if(link==="/call-receipt-handle"){
+    else if(link==="/call-receipt-handle"){
       if(authStorage.getAuthData().role!=="Coordinator"){
         toast.error("Tài khoản không có quyền truy cập. Vui lòng chọn tài khoản khác.", styleError);
       }
       else{
+        navigate(link);
         onChangeActive([index, "main-menu"]);
+      }
+    }
+    else{
+      if(authStorage.getAuthData().role==="Supervisor"){
+        navigate("/dashboard");
+      }
+      else if(authStorage.getAuthData().role==="Coordinator"){
+        navigate("/call-receipt-handle");
       }
     }
     // navigate(link);
