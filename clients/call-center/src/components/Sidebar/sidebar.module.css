@@ -42,6 +42,7 @@
     border: 1px solid #FFB393;
     border-left: 0.8rem solid #F86C1D;
     border-radius: 0 0.5rem 0.5rem 0;
+    cursor: pointer;
 }
 
 .sidebar-img{
