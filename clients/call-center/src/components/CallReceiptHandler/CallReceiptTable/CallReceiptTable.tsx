@@ -1,11 +1,12 @@
 import styles from "./CallReceiptTable.module.css";
 import {ReactComponent as SearchIcon} from "@assets/svg/CallReceiptHandler/search-icn.svg";
 import {ReactComponent as CancelIcon} from "@assets/svg/CallReceiptHandler/cancel-icn.svg";
-import {useState, useEffect} from "react";
+import {useState, useEffect, ReactEventHandler} from "react";
 import {useNavigate} from "react-router-dom";
 import io, { Socket } from 'socket.io-client';
 import { useAppSelector, useAppDispatch } from "@hooks/ReduxHooks";
 import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSlice";
+import { BookingInformation } from "@store/reducers/callReceiptHandlerSlice";
 
 const CallReceiptTable: React.FC = () => {
     // const [socket, setSocket] = useState<Socket | null>(null);
@@ -78,8 +79,18 @@ const CallReceiptTable: React.FC = () => {
         //     distance: '',
         //     duration: '',
         //     price: 0
-
         // }));
+    }
+
+    const handleCancelButtonClick = (id: string, event: React.MouseEvent<HTMLSpanElement>) => {
+        // Prevent the click event from propagating to the table row
+        event.stopPropagation();
+        // update new booking information (update the state of this booking information)
+        const newBookingInformation = callReceiptData.map((item) => 
+        (item._id  === id) 
+        ? {...item, state: "Đã hủy"} : item);
+        // update new booking information
+        dispatch(callReceiptHandlerActions.updateBookingInformation(newBookingInformation as BookingInformation[]));
     }
 
 
@@ -193,7 +204,7 @@ const CallReceiptTable: React.FC = () => {
                                 </td>
                                 {el.state === "Chờ xử lý" ? 
                                  <td className = {styles["button"]}>
-                                    <button className={styles["cancel-btn"]}>
+                                    <button className={styles["cancel-btn"]} onClick = {(event) => handleCancelButtonClick(el._id, event)}>
                                         <CancelIcon className = {styles["cancel-icn"]} />
                                     </button>
                                  </td> : <td></td>
