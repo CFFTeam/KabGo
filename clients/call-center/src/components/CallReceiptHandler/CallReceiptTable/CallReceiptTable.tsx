@@ -1,21 +1,12 @@
 import styles from "./CallReceiptTable.module.css";
 import {ReactComponent as SearchIcon} from "@assets/svg/CallReceiptHandler/search-icn.svg";
 import {ReactComponent as CancelIcon} from "@assets/svg/CallReceiptHandler/cancel-icn.svg";
-import {useState, useEffect} from "react";
+import {useState, useEffect, ReactEventHandler} from "react";
 import {useNavigate} from "react-router-dom";
 import io, { Socket } from 'socket.io-client';
 import { useAppSelector, useAppDispatch } from "@hooks/ReduxHooks";
 import { callReceiptHandlerActions } from "@store/reducers/callReceiptHandlerSlice";
-
-interface CallReceiptData {
-    _id: string,
-    phoneNumber: string,
-    date: string,
-    time: string,
-    vehicleType: string,
-    status: string,
-    arrivalAddress: string,
-}
+import { BookingInformation } from "@store/reducers/callReceiptHandlerSlice";
 
 const CallReceiptTable: React.FC = () => {
     // const [socket, setSocket] = useState<Socket | null>(null);
@@ -45,49 +36,61 @@ const CallReceiptTable: React.FC = () => {
         navigate(`/booking-page/${id}`);
         const guestInformation = callReceiptData.find((item) => item._id === id);
         // used with google api key
+        dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
+            _id: guestInformation?._id || '',
+            name: guestInformation?.name || '',
+            phoneNumber: guestInformation?.phoneNumber || '',
+            vehicleType: guestInformation?.vehicleType || '',
+            origin: guestInformation?.origin || '',
+            destination: guestInformation?.destination || '',
+            note: guestInformation?.note || '',
+            localTime: guestInformation?.localTime || '',
+            bookingTime: guestInformation?.bookingTime || '',
+            scheduledBookingTime_HH: guestInformation?.scheduledBookingTime_HH || '',
+            scheduledBookingTime_MM: guestInformation?.scheduledBookingTime_MM || '',
+            state: guestInformation?.state || '',   
+            originLatLng: guestInformation?.originLatLng || {},
+            destinationLatLng: guestInformation?.destinationLatLng || {},
+            distance: '',
+            duration: '',
+            price: 0
+        }));
+
+        // static data
         // dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
-        //     _id: guestInformation?._id || '',
-        //     name: guestInformation?.name || '',
-        //     phoneNumber: guestInformation?.phoneNumber || '',
-        //     vehicleType: guestInformation?.vehicleType || '',
-        //     origin: guestInformation?.origin || '',
-        //     destination: guestInformation?.destination || '',
-        //     note: guestInformation?.note || '',
-        //     time: guestInformation?.time || '',
-        //     localTime: guestInformation?.local_time || '',
-        //     state: guestInformation?.state || '',   
-        //     originLatLng: guestInformation?.originLatLng || {},
-        //     destinationLatLng: guestInformation?.destinationLatLng || {},
+        //     _id: guestInformation?._id || '64f9ca9541b8fa780d5a2127',
+        //     name: 'Khoa Nguyễn',
+        //     phoneNumber: '0903861515',
+        //     vehicleType: "Ô tô (2-4 chỗ)",
+        //     origin: "Chung cư 24/16 Võ Oanh (Chung cư C1 cũ), Võ Oanh, Phường 25, Bình Thạnh, Thành phố Hồ Chí Minh",
+        //     destination: "Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh",
+        //     note:"Gần chung ủy ban nhân dân phường 25",
+        //     time: guestInformation?.time || '2023-09-06T10:00:00.000+00:00',
+        //     localTime: "2023-09-06T10:00:00Z",
+        //     state: "Chờ xử lý",
+        //     originLatLng: {
+        //         lat: 10.8441125, 
+        //         lng: 106.7407742
+        //     },
+        //     destinationLatLng:  {
+        //         lat: 10.7628356, 
+        //         lng: 106.6824824
+        //     },
         //     distance: '',
         //     duration: '',
         //     price: 0
         // }));
+    }
 
-        // static data
-        dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
-            _id: guestInformation?._id || '64f9ca9541b8fa780d5a2127',
-            name: 'Khoa Nguyễn',
-            phoneNumber: '0903861515',
-            vehicleType: "Ô tô (2-4 chỗ)",
-            origin: "Chung cư 24/16 Võ Oanh (Chung cư C1 cũ), Võ Oanh, Phường 25, Bình Thạnh, Thành phố Hồ Chí Minh",
-            destination: "Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh",
-            note:"Gần chung ủy ban nhân dân phường 25",
-            time: guestInformation?.time || '2023-09-06T10:00:00.000+00:00',
-            localTime: "2023-09-06T10:00:00Z",
-            state: "Chờ xử lý",
-            originLatLng: {
-                lat: 10.8441125, 
-                lng: 106.7407742
-            },
-            destinationLatLng:  {
-                lat: 10.7628356, 
-                lng: 106.6824824
-            },
-            distance: '',
-            duration: '',
-            price: 0
-
-        }));
+    const handleCancelButtonClick = (id: string, event: React.MouseEvent<HTMLSpanElement>) => {
+        // Prevent the click event from propagating to the table row
+        event.stopPropagation();
+        // update new booking information (update the state of this booking information)
+        const newBookingInformation = callReceiptData.map((item) => 
+        (item._id  === id) 
+        ? {...item, state: "Đã hủy"} : item);
+        // update new booking information
+        dispatch(callReceiptHandlerActions.updateBookingInformation(newBookingInformation as BookingInformation[]));
     }
 
 
@@ -184,7 +187,7 @@ const CallReceiptTable: React.FC = () => {
                             <tr key ={el._id} onClick = {() => handleItemClick(el._id)}>
                                 <td className ={styles["client"]}>0903861515</td>
                                 <td className = {styles["date-time"]}>
-                                {el.time}
+                                {el.bookingTime as any}
                                 </td>
                                 <td className = {styles["vehicle-type"]} style = {{textAlign: "center"}}>
                                     {el.vehicleType}
@@ -201,7 +204,7 @@ const CallReceiptTable: React.FC = () => {
                                 </td>
                                 {el.state === "Chờ xử lý" ? 
                                  <td className = {styles["button"]}>
-                                    <button className={styles["cancel-btn"]}>
+                                    <button className={styles["cancel-btn"]} onClick = {(event) => handleCancelButtonClick(el._id, event)}>
                                         <CancelIcon className = {styles["cancel-icn"]} />
                                     </button>
                                  </td> : <td></td>

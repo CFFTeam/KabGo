@@ -207,3 +207,34 @@ form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[ty
 form.call-receipt-form > div.form-body > div.input > div.pick-up-time > input[type="checkbox"]:checked + label.day-night-toggle-btn > .moon-icon {
    display: block;
 }
+
+
+div.loading-form {
+    z-index: 200;
+    position: fixed;
+    width: 60rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+div.loading-form {
+    height: 20rem;
+}
+
+div.loading-form  > div.content {
+    display: flex;
+    gap: 3rem;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+div.loading-form  > div.content > span.text {
+    font-weight: 600;
+    font-size: 2.4rem;
+    color: #F86C1D;
+}

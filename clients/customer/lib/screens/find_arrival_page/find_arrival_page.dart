@@ -40,10 +40,15 @@ class FindArrivalPage extends ConsumerWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text('Chọn điểm đến',
             style: Theme.of(context).textTheme.titleLarge),
         elevation: 0,
+        shadowColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: Colors.transparent,
+        scrolledUnderElevation: 0.0,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -156,14 +161,42 @@ class FindArrivalPage extends ConsumerWidget {
                 )
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 12),
             /////////////////////////////////////////////////// FAVORITE ARRIVAL
-            Text(
-              'Các địa điểm yêu thích',
-              style: Theme.of(context).textTheme.titleMedium,
+            Row(
+              children: [
+                Text(
+                  'Các địa điểm yêu thích',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                const Spacer(),
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size.zero, // Set this
+                    shape: const StadiumBorder(),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 9,
+                      vertical: 6,
+                    ),
+                  ),
+                  onPressed: () {},
+                  icon: const FaIcon(
+                    FontAwesomeIcons.plus,
+                    color: Colors.white,
+                    size: 15,
+                  ),
+                  label: Text(
+                    'Thêm'.toUpperCase(),
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600),
+                  ),
+                )
+              ],
             ),
             const SizedBox(
-              height: 16,
+              height: 8,
             ),
             SizedBox(
               width: double.infinity,
@@ -171,8 +204,17 @@ class FindArrivalPage extends ConsumerWidget {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: favoriteLocationData.length,
-                itemBuilder: (context, index) => FavoriteLocationItem(
-                  data: favoriteLocationData[index],
+                itemBuilder: (context, index) => InkWell(
+                  onTap: () {
+                    ref
+                        .read(arrivalLocationProvider.notifier)
+                        .setArrivalLocation(favoriteLocationData[index]
+                            ['location'] as LocationModel);
+                    chooseArrival();
+                  },
+                  child: FavoriteLocationItem(
+                    data: favoriteLocationData[index],
+                  ),
                 ),
               ),
             ),

@@ -97,40 +97,26 @@ const PlaceInfo: React.FC = () => {
    
     // Used to calculate logic related & render the direction of a route based on the starting address and the destination address
     const calculateRoute = async () => {
-        // if (window.google.maps) {
-        //    const directionService = new window.google.maps.DirectionsService();
-        //    console.log('direction service: ', directionService);
-        //    console.log('guestInformation: ', guestInformation);
-        //     const results = await directionService.route({
-        //         origin: new window.google.maps.LatLng(guestInformation.originLatLng.lat, guestInformation.originLatLng.lng),
-        //         destination: new window.google.maps.LatLng(guestInformation.destinationLatLng.lat, guestInformation.destinationLatLng.lng), 
-        //         travelMode: window.google.maps.TravelMode.DRIVING
-        //     })
+        if (window.google.maps) {
+           const directionService = new window.google.maps.DirectionsService();
+           console.log('direction service: ', directionService);
+           console.log('guestInformation: ', guestInformation);
+            const results = await directionService.route({
+                origin: new window.google.maps.LatLng(guestInformation.originLatLng.lat, guestInformation.originLatLng.lng),
+                destination: new window.google.maps.LatLng(guestInformation.destinationLatLng.lat, guestInformation.destinationLatLng.lng), 
+                travelMode: window.google.maps.TravelMode.DRIVING
+            })
            
-        //     setDirectionsResponse(results);
+            setDirectionsResponse(results);
 
-        //     // calculate distance, duration & price
-        //     const distance = results.routes[0].legs[0].distance?.text || '13,6 km';
-        //     const duration = results.routes[0].legs[0].duration?.text || '36 phút';
-        //     // handle price
-        //     const distanceValue = parseFloat(distance.replace(',', '.').split(' ')[0]); // convert to number (13,6 km -> 13.6)
-        //     const price = calculatePrice(distanceValue) || 0;
-        //     console.log('price after handling: ', price);
-
-        //     dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
-        //         ...finalBookingInformation,
-        //         distance: distance,
-        //         duration: duration,
-        //         price: price,
-        //     }))
-        // }
-
-        // handle fake data - delete when done
-        const distance = '13,6 km';
-            const duration = '36 phút';
+            // calculate distance, duration & price
+            const distance = results.routes[0].legs[0].distance?.text || '';
+            const duration = results.routes[0].legs[0].duration?.text || '';
             // handle price
             const distanceValue = parseFloat(distance.replace(',', '.').split(' ')[0]); // convert to number (13,6 km -> 13.6)
+            console.log('distance value: ', distanceValue);
             const price = calculatePrice(distanceValue) || 0;
+            console.log('price: ', price);
             const formattedPrice = formatAsVietnameseCurrency(price);
             dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
                 ...finalBookingInformation,
@@ -138,6 +124,21 @@ const PlaceInfo: React.FC = () => {
                 duration: duration,
                 price: formattedPrice,
             }))
+        }
+
+        // handle fake data - delete when done
+        // const distance = '13,6 km';
+        //     const duration = '36 phút';
+        //     // handle price
+        //     const distanceValue = parseFloat(distance.replace(',', '.').split(' ')[0]); // convert to number (13,6 km -> 13.6)
+        //     const price = calculatePrice(distanceValue) || 0;
+        //     const formattedPrice = formatAsVietnameseCurrency(price);
+        //     dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
+        //         ...finalBookingInformation,
+        //         distance: distance,
+        //         duration: duration,
+        //         price: formattedPrice,
+        //     }))
     }
 
     // handle button click

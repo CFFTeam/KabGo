@@ -31,8 +31,10 @@ export interface FinalBookingInformation {
     origin: string; // departure address
     destination: string; // arrival address
     note: string;
-    time: string;
     localTime: Date | string;
+    bookingTime: Date | string;
+    scheduledBookingTime_HH: string;
+    scheduledBookingTime_MM: string;
     state: string;
     originLatLng: Coordination | any;
     destinationLatLng: Coordination | any;
@@ -49,8 +51,10 @@ export interface BookingInformation {
     origin: string;
     destination: string;
     note: string;
-    time: string;
     localTime: Date | string;
+    bookingTime: Date | string;
+    scheduledBookingTime_HH: string;
+    scheduledBookingTime_MM: string;
     state: string;
     originLatLng: Coordination;
     destinationLatLng: Coordination;
@@ -84,8 +88,10 @@ const initialCallReceiptHandlerState: callReceiptHandlerState = {
         origin: '',
         destination: '',
         note: '',
-        time: '',
         localTime: '',
+        bookingTime: '',
+        scheduledBookingTime_HH: '',
+        scheduledBookingTime_MM: '',
         state: '',
         originLatLng: {
             lat: 0,

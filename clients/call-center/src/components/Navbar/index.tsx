@@ -9,7 +9,9 @@ import {ReactComponent as NotificationIcon} from "@assets/svg/Navbar/notificatio
 import {ReactComponent as SettingIcon} from "@assets/svg/Navbar/setting-icn.svg";
 import {ReactComponent as LogoutIcon} from "@assets/svg/Navbar/logout-icn.svg";
 import { authStorage } from '@utils/storage';
+import toast, { Toaster } from "react-hot-toast";
 import KhoaImg from "@assets/images/Khoa.jpg";
+import CaptainImg from "@assets/images/Captain.jpg";
  
 const Navbar: React.FC = () => {
     const navigate = useNavigate();
@@ -17,6 +19,27 @@ const Navbar: React.FC = () => {
     const urlData: string[] = ['/', '/dashboard', '/call-receipt-handle', '/booking-page', '/statistic', '/report', 'team-member', 'contact', 'feedback'];
     const titleData: string[] = ['Dashboard', 'Dashboard', 'Xử lý cuộc gọi', 'Xử lý điều phối', 'Thống kê', 'Báo cáo', 'Thành viên', 'Liên hệ', 'Đánh giá']
     
+    const styleSuccess = {
+        style: {
+          border: "2px solid #28a745",
+          padding: "10px",
+          color: "#28a745",
+          fontWeight: "500",
+        },
+        duration: 1500,
+      };
+    
+      const styleError = {
+        style: {
+          border: "2px solid red",
+          padding: "10px",
+          color: "red",
+          fontWeight: "500",
+        },
+        duration: 4000,
+      };
+
+      
     const findTitleFromLocation = () => {
         const titleIndex = urlData.indexOf(location.pathname);
         if (titleIndex === -1) return 'Dashboard'; // if not found title data
@@ -33,7 +56,9 @@ const Navbar: React.FC = () => {
 
     const handleLogout = () => {
         authStorage.logout();
-        navigate('/');
+        toast.success("Đăng xuất thành công", styleSuccess);
+        setTimeout(() =>  navigate('/'), 1500);
+       
     }
 
     return (
@@ -73,14 +98,16 @@ const Navbar: React.FC = () => {
            <div className={styles["authenticate-section"]}>
                 <div className={styles["info"]}>
                     <span className={styles["name"]}>
-                        Khoa Nguyen
+                       {authStorage?.getAuthData()?.name || 'Khoa Nguyen'}
                     </span>
                     <span className={styles["role"]}>
                         Điều phối viên
                     </span>
                 </div>
                 <span className={styles["avatar"]}>
-                    {/* <img src= {KhoaImg} alt= "avatar-img" /> */}
+                    {authStorage?.getAuthData()?.role === "Coordinator" && <img src= {KhoaImg} alt= "avatar-img" /> }
+                    {authStorage?.getAuthData()?.role === "Supervisor" && <img src= {CaptainImg} alt= "avatar-img" /> }
+                    {/* <img src= {KhoaImg} alt= "avatar-img" />                                      */}
                 </span>
            </div>
         </nav>
