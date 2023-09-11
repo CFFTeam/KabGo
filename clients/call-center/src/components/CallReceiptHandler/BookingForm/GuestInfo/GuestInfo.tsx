@@ -1,7 +1,7 @@
 import styles from "./GuestInfo.module.css";
 import {ReactComponent as SunIcon} from "@assets/svg/CallReceipt/sun.svg";
 import {ReactComponent as MoonIcon} from "@assets/svg/CallReceipt/moon.svg";
-import {useState, useRef} from 'react';
+import {useState, useRef} from 'react'; 
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from '@hooks/ReduxHooks';
 import {callReceiptHandlerActions} from "@store/reducers/callReceiptHandlerSlice";
@@ -72,8 +72,8 @@ const GuestInfo: React.FC = () => {
                             <option value = "Chọn loại xe" disabled selected>Chọn loại xe</option>
                             <option value = "Xe máy">Xe máy</option>
                             <option value = "Xe tay ga">Xe tay ga</option>
-                            <option value = "Ô tô (2-4) chỗ">Ô tô (2-4) chỗ</option>
-                            <option value = "Ô tô (7-9) chỗ">Ô tô (7-9) chỗ</option>
+                            <option value = "Ô tô (2-4 chỗ)">Ô tô (2-4 chỗ)</option>
+                            <option value = "Ô tô (7-9 chỗ)">Ô tô (7-9 chỗ)</option>
                         </select>
                     </div>
                     <div className={styles["input"]}>
@@ -83,21 +83,21 @@ const GuestInfo: React.FC = () => {
                             </span>
                         </label>
                         <div className = {styles["pick-up-time"]} style = {{display: 'flex', gap: "1rem"}}>
-                            <input value = "12" ref = {scheduledBookingTime_HH_Ref} type = "text" placeholder = "HH" style = {{fontFamily: 'Montserrat', width: "6.5rem", borderRadius: "8px", border: "1px solid #ced4da", backgroundColor: '#e9ecef', height: "1rem", padding: "1.8rem", outline: 'none'}}>
+                            <input value = {guestInformation?.scheduledBookingTime_HH} ref = {scheduledBookingTime_HH_Ref} type = "text" placeholder = "HH" style = {{fontFamily: 'Montserrat', width: "6.5rem", borderRadius: "8px", border: "1px solid #ced4da", backgroundColor: '#e9ecef', height: "1rem", padding: "1.8rem", outline: 'none'}}>
                             </input>
                             <span style = {{fontWeight: 600, fontSize: "2.5rem"}}>
                                 :
                             </span>
-                            <input value = "30" ref = {scheduledBookingTime_MM_Ref} type = "text" placeholder = "MM" style = {{fontFamily: 'Montserrat', width: "8rem", borderRadius: "8px", border: "1px solid #ced4da", backgroundColor: '#e9ecef', height: "1rem", padding: "1.8rem", outline: 'none'}}>
+                            <input value = {guestInformation?.scheduledBookingTime_MM} ref = {scheduledBookingTime_MM_Ref} type = "text" placeholder = "MM" style = {{fontFamily: 'Montserrat', width: "8rem", borderRadius: "8px", border: "1px solid #ced4da", backgroundColor: '#e9ecef', height: "1rem", padding: "1.8rem", outline: 'none'}}>
                             </input>
 
                             <input id = "hidden-check-box" className="hidden-check-box" type = "checkbox" hidden>
                             </input>
-                            <label htmlFor = "hidden-check-box" className={styles["day-night-toggle-btn"]} >
-                                <span className={styles["circle"]}>
-                                </span>
-                            <SunIcon className = {styles["sun-icon"]}/>
+                            <label htmlFor = "hidden-check-box" className={`${styles["day-night-toggle-btn"]} ${guestInformation?.bookingTime.toString().includes('AM') ? `${styles["dayColour"]}` : `${styles["nightColour"]}`}`} >
+                                <span className={styles["circle"]}/>
+                                <span className={styles["circle_2"]}/>
                             <MoonIcon className = {styles["moon-icon"]}/>
+                            <SunIcon className = {styles["sun-icon"]}/>
                             </label>
                         </div>
                         

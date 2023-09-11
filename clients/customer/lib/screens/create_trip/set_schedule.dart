@@ -1,3 +1,4 @@
+import 'package:customer/providers/reject_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -93,33 +94,33 @@ class _SetScheduleState extends ConsumerState<SetSchedule> {
     socketClient.emitBookingCar(departure, arrival, routeModel, customerModel);
     ref.read(stepProvider.notifier).setStep('find_driver');
     ref.read(mapProvider.notifier).setMapAction('FIND_DRIVER');
-
-    // var dio = Dio();
-    // var response = await dio.request(
-    //   'http://192.168.2.165:4600/user/booking-car',
-    //   data: json.encode({
-    //     "data": {"message": "Dat xe thanh cong!"}
-    //   }),
-    //   options: Options(
-    //     method: 'POST',
-    //   ),
-    // );
-
-    // if (response.statusCode == 200) {
-    //   print(json.encode(response.data));
-    // } else {
-    //   print(response.statusMessage);
-    // }
-
-    // IO.Socket socket = IO.io('http://192.168.2.165:4600');
-    // socket.onConnect((_) {
-    //   print('connect');
-    //   socket.emit('msg', 'test');
-    // });
-    // socket.on('event', (data) => print(data));
-    // socket.onDisconnect((_) => print('disconnect'));
-    // socket.on('fromServer', (_) => print(_));
   }
+
+  // var dio = Dio();
+  // var response = await dio.request(
+  //   'http://192.168.2.165:4600/user/booking-car',
+  //   data: json.encode({
+  //     "data": {"message": "Dat xe thanh cong!"}
+  //   }),
+  //   options: Options(
+  //     method: 'POST',
+  //   ),
+  // );
+
+  // if (response.statusCode == 200) {
+  //   print(json.encode(response.data));
+  // } else {
+  //   print(response.statusMessage);
+  // }
+
+  // IO.Socket socket = IO.io('http://192.168.2.165:4600');
+  // socket.onConnect((_) {
+  //   print('connect');
+  //   socket.emit('msg', 'test');
+  // });
+  // socket.on('event', (data) => print(data));
+  // socket.onDisconnect((_) => print('disconnect'));
+  // socket.on('fromServer', (_) => print(_));
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,9 @@
+import 'dart:convert';
+
+import 'package:driver/models/customer_booking.dart';
+import 'package:driver/models/driver.dart';
+import 'package:driver/models/location.dart';
+import 'package:driver/providers/socket_provider.dart';
 import 'package:driver/screens/home_dashboard/home_dashboard.dart';
 import 'package:driver/screens/route_screen/route_screen.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +11,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../models/vehicle.dart';
+import '../../providers/current_location.dart';
 import '../../providers/customer_request.dart';
+import '../../providers/driver_provider.dart';
 import '../../providers/request_status.dart';
 import 'styles.dart';
 
@@ -26,7 +35,9 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
     final requestStatusNotifier = ref.read(requestStatusProvider.notifier);
     final customerRequestNotifier = ref.read(customerRequestProvider.notifier);
     final customerRequest = ref.watch(customerRequestProvider);
-
+    final driverDetails = ref.read(driverDetailsProvider);
+    final currentLocation =
+        ref.read(currentLocationProvider.notifier).currentLocation();
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
       decoration: const BoxDecoration(
@@ -76,30 +87,41 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                                     overflow: TextOverflow.ellipsis)),
                             Row(
                               children: <Widget>[
-                                if (customerRequest.customer_infor.user_information.rank.toLowerCase() == 'đồng')
-                                const Image(
-                                    image: AssetImage(
-                                        'lib/assets/icons/bronze.png'),
-                                    width: 20),
-                                if (customerRequest.customer_infor.user_information.rank.toLowerCase() == 'bạc')
-                                const Image(
-                                    image: AssetImage(
-                                        'lib/assets/icons/silver.png'),
-                                    width: 20),
-                                if (customerRequest.customer_infor.user_information.rank.toLowerCase() == 'vàng')
-                                const Image(
-                                    image: AssetImage(
-                                        'lib/assets/icons/gold.png'),
-                                    width: 20),
-                                if (customerRequest.customer_infor.user_information.rank.toLowerCase() == 'kim cương')
-                                const Image(
-                                    image: AssetImage(
-                                        'lib/assets/icons/diamon.png'),
-                                    width: 20),
+                                if (customerRequest
+                                        .customer_infor.user_information.rank
+                                        .toLowerCase() ==
+                                    'đồng')
+                                  const Image(
+                                      image: AssetImage(
+                                          'lib/assets/icons/bronze.png'),
+                                      width: 20),
+                                if (customerRequest
+                                        .customer_infor.user_information.rank
+                                        .toLowerCase() ==
+                                    'bạc')
+                                  const Image(
+                                      image: AssetImage(
+                                          'lib/assets/icons/silver.png'),
+                                      width: 20),
+                                if (customerRequest
+                                        .customer_infor.user_information.rank
+                                        .toLowerCase() ==
+                                    'vàng')
+                                  const Image(
+                                      image: AssetImage(
+                                          'lib/assets/icons/gold.png'),
+                                      width: 20),
+                                if (customerRequest
+                                        .customer_infor.user_information.rank
+                                        .toLowerCase() ==
+                                    'kim cương')
+                                  const Image(
+                                      image: AssetImage(
+                                          'lib/assets/icons/diamon.png'),
+                                      width: 20),
                                 const SizedBox(width: 10),
                                 Text(
-                                    "Hạng ${customerRequest
-                                        .customer_infor.user_information.rank.toLowerCase()}",
+                                    "Hạng ${customerRequest.customer_infor.user_information.rank.toLowerCase()}",
                                     style: ThemeText.ranking),
                               ],
                             )
@@ -115,7 +137,9 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                                     size: 15, color: Color(0xFFF86C1D)),
                                 const SizedBox(width: 6),
                                 Text(
-                                    customerRequest.customer_infor.user_information
+                                    customerRequest
+                                        .customer_infor
+                                        .user_information
                                         .default_payment_method,
                                     style: ThemeText.bookingDetails),
                               ],
@@ -159,7 +183,8 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                       const Icon(FontAwesomeIcons.locationArrow,
                           size: 23, color: Color(0xFFF86C1D)),
                       const SizedBox(width: 6),
-                      Text('Lộ trình ${customerRequest.customer_infor.distance}',
+                      Text(
+                          'Lộ trình ${customerRequest.customer_infor.distance}',
                           style: ThemeText.locationDurationDetails),
                     ],
                   ),
@@ -179,7 +204,8 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  const Text('Thông tin hành trình', style: ThemeText.headingTitle),
+                  const Text('Thông tin hành trình',
+                      style: ThemeText.headingTitle),
                   const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -254,17 +280,41 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                 //   ),
                 // ),
                 ElevatedButton(
-                  onPressed: () {
-                    requestStatusNotifier.cancelRequest();
-                    customerRequestNotifier.cancelRequest();
-              
-                    context.go(HomeDashboard.path);
-                  },
-                  style: ThemeButton.cancelButton,
-                  child: const Center(
-                    child: Icon(FontAwesomeIcons.xmark, color: Color(0xFFF42525)),
-                  )
-                ),
+                    onPressed: () {
+                      requestStatusNotifier.cancelRequest();
+                      customerRequestNotifier.cancelRequest();
+
+                      ref.read(socketClientProvider.notifier).publish(
+                          'driver-reject',
+                          jsonEncode(DriverSubmit(
+                              user_id: customerRequest
+                                  .customer_infor.user_information.phonenumber,
+                              history_id:
+                                  customerRequest.customer_infor.history_id,
+                              driver: Driver(
+                                  driverDetails.avatar,
+                                  driverDetails.name,
+                                  driverDetails.phonenumber,
+                                  Vehicle(
+                                      name: "Honda Wave RSX",
+                                      brand: "Honda",
+                                      type: "Xe máy",
+                                      color: "Xanh đen",
+                                      number: "68S164889"),
+                                  LocationPostion(
+                                      latitude: currentLocation.latitude,
+                                      longitude: currentLocation.longitude),
+                                  currentLocation.heading,
+                                  5.0),
+                              directions: []).toJson()));
+
+                      context.go(HomeDashboard.path);
+                    },
+                    style: ThemeButton.cancelButton,
+                    child: const Center(
+                      child: Icon(FontAwesomeIcons.xmark,
+                          color: Color(0xFFF42525)),
+                    )),
                 const SizedBox(width: 16),
                 Expanded(
                   child: ElevatedButton(
@@ -274,7 +324,8 @@ class _CustomerRequestAcceptState extends ConsumerState<CustomerRequestAccept> {
                       },
                       style: ThemeButton.acceptButton2,
                       child: const Center(
-                        child: Text('XÁC NHẬN', style: ThemeText.acceptButtonText),
+                        child:
+                            Text('XÁC NHẬN', style: ThemeText.acceptButtonText),
                       )),
                 ),
               ])

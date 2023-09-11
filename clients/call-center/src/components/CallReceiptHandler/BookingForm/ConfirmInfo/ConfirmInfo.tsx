@@ -11,7 +11,7 @@ import Overlay from "@components/Overlay/Overlay";
 import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 import { Coordination, FinalBookingInformation, BookingInformation } from "@store/reducers/callReceiptHandlerSlice";
 import { formatAsVietnameseCurrency } from "@utils/formatCurrent";
-
+import { authStorage } from "@utils/storage";
 
 const ConfirmInfo: React.FC = () => {
     const navigate = useNavigate();
@@ -54,8 +54,10 @@ const ConfirmInfo: React.FC = () => {
             origin: '',
             destination: '',
             note: '',
-            time: '',
             localTime: '',
+            bookingTime: '',
+            scheduledBookingTime_HH: '',
+            scheduledBookingTime_MM: '',
             state: '',
             originLatLng: {
                 lat: 0,
@@ -87,22 +89,19 @@ const ConfirmInfo: React.FC = () => {
             origin: finalBookingInformation.origin,
             destination: finalBookingInformation.destination,
             note: finalBookingInformation.note,
-            time: finalBookingInformation.time,
             local_time: finalBookingInformation.localTime,
+            time: finalBookingInformation.bookingTime,
             origin_latlng: finalBookingInformation.originLatLng,
             destination_latlng: finalBookingInformation.destinationLatLng,
             distance: finalBookingInformation.distance,
             duration: finalBookingInformation.duration,
             price: finalBookingInformation.price,
-            related_employee: "64f0c03d9e9037d91cce0d7e",
+            related_employee: authStorage?.getAuthData()?._id || '',
         });
 
-        // remove the old item and update the new one
-        // let newBookingInformation = bookingInformation.filter((item) => item.phoneNumber !== finalBookingInformation.phoneNumber) as BookingInformation[];
-        const thisBookingInformationIndex = bookingInformation.findIndex((item) => item.phoneNumber === finalBookingInformation.phoneNumber);
         // update new booking information (update the state of this booking information)
         const newBookingInformation = bookingInformation.map((item) => 
-            (item.phoneNumber  === finalBookingInformation.phoneNumber && item.time === finalBookingInformation.time) 
+            (item._id  === finalBookingInformation._id) 
             ? {...item, state: "Hoàn thành"} : item);
         // update new booking information
         dispatch(callReceiptHandlerActions.updateBookingInformation(newBookingInformation as BookingInformation[]));

@@ -63,6 +63,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           if (next == 'home') {
             minHeightPanel = 230;
             maxHeightPanel = 230;
+            getCurrentLocationButton = true;
             currentPage = const HomePanel();
           } else if (next == 'find_arrival') {
             minHeightPanel = 468;
@@ -141,7 +142,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   duration: const Duration(milliseconds: 80),
                   alignment: Alignment(
                       0.92,
-                      0.88 -
+                      0.92 -
                           ((minHeightPanel * 2) /
                               MediaQuery.of(context).size.height)),
                   child: CurrentLocationButton(getCurrentLocation: () {

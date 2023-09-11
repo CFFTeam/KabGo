@@ -1,21 +1,18 @@
 import Driver from '@common/interfaces/driver';
 import haversineDistance from './haversineDistance';
 
-// Định nghĩa interface cho Observer
 interface Observer {
     infor: Driver;
     socket: any;
     update(customer: any, bookingData: any): void;
 }
 
-// Định nghĩa interface cho Subject (chủ thể)
 interface Subject {
     addObserver(observer: Observer): void;
     removeObserver(observer: Observer): void;
-    notifyObservers(customer: any, bookingData: any): void;
+    notifyObservers(customer: any, bookingData: any, rejectList: any): void;
 }
 
-// Triển khai lớp cho Subject
 export class RideService implements Subject {
     public observers: Observer[] = [];
 
@@ -31,7 +28,7 @@ export class RideService implements Subject {
         }
     }
 
-    notifyObservers(customer: any, bookingData: any): any {
+    notifyObservers(customer: any, bookingData: any, rejectList: any): any {
         let drivers: any = [];
 
         for (const value of this.observers) {
@@ -45,10 +42,26 @@ export class RideService implements Subject {
                     longitude: +value.infor.coordinate.longitude,
                 }
             );
-            console.log('DISTANCE: ', distance);
+
             if (distance <= 1.5) {
+                let check: Boolean = true;
                 value.infor.distance = distance;
-                drivers = [...drivers, value];
+                for (const i in rejectList) {
+                    console.log('rejectList[i]=', i);
+                    console.log('customer phone number =', customer.user_information.phonenumber);
+                    console.log('rejectList: ', rejectList[i]);
+                    console.log('\n');
+                    if (i == customer.user_information.phonenumber) {
+                        for (const j of rejectList[i]) {
+                            console.log('========== rejectList[i][j] = ', j);
+                            console.log('========== value socket phone number = ', value.socket.phonenumber);
+                            if (j == value.socket.phonenumber) {
+                                check = false;
+                            }
+                        }
+                    }
+                }
+                if (check) drivers = [...drivers, value];
             }
         }
 
@@ -63,14 +76,13 @@ export class RideService implements Subject {
         return finalDrivers;
     }
 
-    // Đây là một phương thức ứng dụng trong trường hợp đặt xe
-    bookRide(socket: any, customer: any, bookingData: any): void {
-        const finalDrivers = this.notifyObservers(customer, bookingData);
+    bookRide(socket: any, customer: any, bookingData: any, rejectList: any): void {
+        const finalDrivers = this.notifyObservers(customer, bookingData, rejectList);
         socket.emit('send drivers', JSON.stringify(finalDrivers));
     }
 }
 
-export class DriverNearest implements Observer {
+export class DriverNotify implements Observer {
     constructor(public socket: any, public infor: Driver) {}
 
     update(customer: any, bookingData: any): void {
