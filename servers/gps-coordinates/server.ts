@@ -89,7 +89,7 @@ const server = app.run(4600, async () => {
                     longitude: customer.arrival_information.longitude,
                     latitude: customer.arrival_information.latitude,
                 },
-                time: new Date().toISOString(),
+                time: new Date(new Date().getTime() + 7 * 60 * 60000).toISOString(),
                 status: 'Đang điều phối', //điều phối | tiến hành | hủy | hoàn thành
                 frequency: existedBooking.length + 1,
                 price: customer.price,
@@ -98,7 +98,7 @@ const server = app.run(4600, async () => {
                 // coupon: new mongoose.Types.ObjectId('64e73b79646803068e5c21f7'),
             });
 
-            console.log(bookingData);
+            console.log(bookingData.time);
 
             rideService.bookRide(socket, customer, bookingData, rejectList);
         });
