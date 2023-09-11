@@ -2643,3 +2643,8 @@
 [API.Call Center][Sun, 10 Sep 2023 06:40:51 GMT] Server is running on port 4500 
 [API.Call Center][Sun, 10 Sep 2023 06:40:51 GMT] Connected to the rabbit mq successfully 
 [API.Call Center][Sun, 10 Sep 2023 06:40:52 GMT] Connected to database successfully 
+[API.Call Center][Mon, 11 Sep 2023 03:05:15 GMT] Setting up request middleware... 
+[API.Call Center][Mon, 11 Sep 2023 03:05:15 GMT] Server is starting... 
+[API.Call Center][Mon, 11 Sep 2023 03:05:15 GMT] Server is running on port 4500 
+[API.Call Center][Mon, 11 Sep 2023 03:05:15 GMT] Could not connect to the rabbit mq Error: Socket closed abruptly during opening handshake 
+[API.Call Center][Mon, 11 Sep 2023 03:05:16 GMT] Connected to database successfully 
