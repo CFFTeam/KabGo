@@ -93,7 +93,7 @@ const DashboardTable: React.FC = () => {
         _id: receivedBookingInformation._id,
         customer: receivedBookingInformation.customer_phonenumber,
         driver: "",
-        time: receivedBookingInformation.time,
+        time: receivedBookingInformation.booking_time,
         vehicleType: receivedBookingInformation.vehicle_type,
         status: receivedBookingInformation.state,
         arrivalAddress: receivedBookingInformation.destination,

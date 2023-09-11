@@ -87,10 +87,10 @@ const PlaceInfo: React.FC = () => {
         else if (finalBookingInformation.vehicleType === "Xe tay ga") {
             return roundToThousands(distanceConvertedValue * 6.3);
         }
-        else if (finalBookingInformation.vehicleType === "Ô tô (2-4 chỗ)") {
+        else if (finalBookingInformation.vehicleType === "Xe Ô tô con") {
             return roundToThousands(distanceConvertedValue * 11.8);
         }
-        else if (finalBookingInformation.vehicleType === "Ô tô (7-9 chỗ)") {
+        else if (finalBookingInformation.vehicleType === "Xe Ô tô") {
             return roundToThousands(distanceConvertedValue * 13.8);
         }
     }
@@ -99,8 +99,6 @@ const PlaceInfo: React.FC = () => {
     const calculateRoute = async () => {
         if (window.google.maps) {
            const directionService = new window.google.maps.DirectionsService();
-           console.log('direction service: ', directionService);
-           console.log('guestInformation: ', guestInformation);
             const results = await directionService.route({
                 origin: new window.google.maps.LatLng(guestInformation.originLatLng.lat, guestInformation.originLatLng.lng),
                 destination: new window.google.maps.LatLng(guestInformation.destinationLatLng.lat, guestInformation.destinationLatLng.lng), 
@@ -114,9 +112,7 @@ const PlaceInfo: React.FC = () => {
             const duration = results.routes[0].legs[0].duration?.text || '';
             // handle price
             const distanceValue = parseFloat(distance.replace(',', '.').split(' ')[0]); // convert to number (13,6 km -> 13.6)
-            console.log('distance value: ', distanceValue);
             const price = calculatePrice(distanceValue) || 0;
-            console.log('price: ', price);
             const formattedPrice = formatAsVietnameseCurrency(price);
             dispatch(callReceiptHandlerActions.updateFinalBookingInformation({
                 ...finalBookingInformation,

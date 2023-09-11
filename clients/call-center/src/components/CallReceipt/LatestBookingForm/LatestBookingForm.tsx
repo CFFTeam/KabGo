@@ -50,6 +50,7 @@ const LatestBookingForm: React.FC = () => {
     const bookingInformation = useAppSelector((state) => state.callReceipt.bookingInformation);
     const mostRecentBookings =  useAppSelector((state) => state.callReceipt.mostRecentBookings);
 
+    console.log('most recent booking information: ', mostRecentBookings);
     const handleRowClick = (rowData: any) => {
         dispatch(callReceiptActions.updateBookingInformation({
             ...bookingInformation,

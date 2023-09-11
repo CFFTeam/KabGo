@@ -14,6 +14,7 @@ import LoadingSpinner from "@components/LoadingSpinner/LoadingSpinner";
 import axios from 'axios';
 import { formatDate } from '@utils/formatDate';
 import toast, { Toaster } from "react-hot-toast";
+import { authStorage } from '@utils/storage';
 
 const CallReceiptForm: React.FC = () => {  
     // calling Google map API service
@@ -103,8 +104,8 @@ const CallReceiptForm: React.FC = () => {
                         let mostRecentBooking = {
                             _id: item?._id,
                             bookingTime: formattedDate || '',
-                            departureAddress: item.destination?.address,
-                            arrivalAddress: item.original?.address,
+                            departureAddress: item.original?.address,
+                            arrivalAddress: item.destination?.address,
                             vehicleType: item.service_info[0]?.name,
                             originLatLng: {
                                 lat: item.original?.latitude,
@@ -165,6 +166,7 @@ const CallReceiptForm: React.FC = () => {
                 booking_time: scheduledBookingTime_HH_Ref.current?.value && scheduledBookingTime_MM_Ref.current?.value ? bookingTime : formatDate(new Date()),
                 scheduledBookingTime_HH: scheduledBookingTime_HH_Ref.current?.value || '',
                 scheduledBookingTime_MM: scheduledBookingTime_MM_Ref.current?.value || '',
+                related_employee: authStorage?.getAuthData()?._id || '',
             
                 // ----- static data -----
                 // customer_name: 'Khoa Nguyễn',
@@ -184,6 +186,7 @@ const CallReceiptForm: React.FC = () => {
                 // },
                 // local_time: new Date(date.getTime() + (7 * 60 * 60 * 1000)).toISOString()
                 // booking_time: "12:30 PM - 01/09/2023",
+                // related_employee: ''
             }
             // call axios service
             const response = await axiosClient.post(`${process.env.REACT_APP_API_URI_S1}/v1/locating/call-receipt` as string, formData);
@@ -250,8 +253,8 @@ const CallReceiptForm: React.FC = () => {
                         <option value = "Chọn loại xe" disabled selected>Chọn loại xe</option>
                         <option value = "Xe máy">Xe máy</option>
                         <option value = "Xe tay ga">Xe tay ga</option>
-                        <option value = "Ô tô (2-4 chỗ)">Ô tô (2-4 chỗ)</option>
-                        <option value = "Ô tô (7-9 chỗ)">Ô tô (7-9 chỗ)</option>
+                        <option value = "Xe Ô tô con">Xe Ô tô con</option>
+                        <option value = "Xe Ô tô">Xe Ô tô</option>
                     </select>
                 </div>
                 <div className={styles["input"]}>

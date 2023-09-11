@@ -90,7 +90,7 @@ const ConfirmInfo: React.FC = () => {
             destination: finalBookingInformation.destination,
             note: finalBookingInformation.note,
             local_time: finalBookingInformation.localTime,
-            time: finalBookingInformation.bookingTime,
+            booking_time: finalBookingInformation.bookingTime,
             origin_latlng: finalBookingInformation.originLatLng,
             destination_latlng: finalBookingInformation.destinationLatLng,
             distance: finalBookingInformation.distance,
