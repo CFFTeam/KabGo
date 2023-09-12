@@ -34,14 +34,14 @@ const PlacesAutocomplete = (props: PlacesAutocompleteProps) => {
                 setPlaceHolderTextChange(props.defaultValue);
                 setValue(props.defaultValue, false);
             } 
-            else setPlaceHolderTextChange("Nhập địa chỉ đến...");
+            else setPlaceHolderTextChange("Nhập địa chỉ đón...");
         }
         else {
             if (props.defaultValue) {
                 setPlaceHolderTextChange(props.defaultValue);
                 setValue(props.defaultValue, false);
             }
-            else setPlaceHolderTextChange("Nhập địa chỉ đón...");
+            else setPlaceHolderTextChange("Nhập địa chỉ đến...");
         }
     }, [props.defaultValue]);
 
