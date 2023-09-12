@@ -99,10 +99,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             getCurrentLocationButton = false;
             currentPage = const FindDriver();
           } else if (next == 'wait_driver') {
-            maxHeightPanel = 480;
+            maxHeightPanel = 550;
             minHeightPanel = 175;
             currentPage = const WaitDriverPanel();
           } else if (next == 'comming_driver') {
+            maxHeightPanel = 480;
           } else if (next == 'moving') {
           } else if (next == 'complete') {
             minHeightPanel = 568;

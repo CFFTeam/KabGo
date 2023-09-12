@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:customer/providers/auth_provider.dart';
-import 'package:customer/providers/bookingHistoryProvider.dart';
 import 'package:customer/providers/customerProvider.dart';
 import 'package:customer/providers/stepProvider.dart';
 import 'package:customer/screens/home_screen.dart';
@@ -13,11 +12,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import 'functions/setHexColor.dart';
 import 'models/customer_model.dart';
-import 'models/location_model.dart';
 
 class App extends ConsumerWidget {
   const App({Key? key}) : super(key: key);

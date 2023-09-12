@@ -10,7 +10,6 @@ import '../../functions/setHexColor.dart';
 import '../../models/location_model.dart';
 import '../../providers/arrivalLocationProvider.dart';
 import '../../providers/auth_provider.dart';
-import '../../providers/bookingHistoryProvider.dart';
 import '../../providers/currentLocationProvider.dart';
 import '../../providers/departureLocationProvider.dart';
 import '../../providers/locationPickerInMap.dart';

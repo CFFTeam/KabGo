@@ -110184,3 +110184,1702 @@
 [API.Authentication][Tue, 12 Sep 2023 11:46:25 GMT] Connected to database successfully 
 >>>>>>> master
 >>>>>>> 64da543c05314b18af133a2377a258ac9b81ef73
+[API.Authentication][Tue, 12 Sep 2023 14:20:19 GMT] Setting up request middleware... 
+[API.Authentication][Tue, 12 Sep 2023 14:20:19 GMT] Server is starting... 
+[API.Authentication][Tue, 12 Sep 2023 14:20:19 GMT] Server is running on port 4100 
+[API.Authentication][Tue, 12 Sep 2023 14:20:20 GMT] Connected to database successfully 
+[API.Authentication][Tue, 12 Sep 2023 14:21:57 GMT] [object Object] 
+[API.Authentication][Tue, 12 Sep 2023 14:21:57 GMT] {
+  _id: new ObjectId("64e741543ce0d32a53a60469"),
+  avatar: '',
+  name: 'Khang',
+  email: 'khangduy017@gmail.com',
+  phonenumber: '0976975548',
+  dob: '21/04/2002',
+  home_address: '1647 Phạm Thế Hiển, phường 6, quận 8, TP.HCM',
+  type: 'VIP',
+  default_payment_method: 'VISA',
+  rank: 'Đồng',
+  distance: '20',
+  password: '$2y$10$yDCEfKMoM4TzQTu7Eu7ue.8hk8vWXJUJ6Dkk41Cx/SfdHWwaWDlxW',
+  active: '26/8/2023',
+  lock: false
+} 
+[API.Authentication][Tue, 12 Sep 2023 14:21:58 GMT] {
+  original: {
+    address: '227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6824817,
+    latitude: 10.762835
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, TP.HCM',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("650062643d7d0397b721e91b"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-12T20:06:44.929Z,
+  status: 'Đang tiến hành',
+  frequency: 4,
+  distance: '9.0 km',
+  price: '85.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  note: '',
+  coupon: new ObjectId("64e73b79646803068e5c21f9"),
+  createdAt: 2023-09-12T13:06:44.936Z,
+  updatedAt: 2023-09-12T13:06:47.936Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6824817,
+    latitude: 10.762835
+  },
+  destination: {
+    address: '195 Đường Nam Kỳ Khởi Nghĩa, Võ Thị Sáu, Quận 3, TP.HCM',
+    longitude: 106.6867482,
+    latitude: 10.7867824
+  },
+  _id: new ObjectId("65005f9eb1f0f54976488af6"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-12T19:54:54.217Z,
+  status: 'Đang điều phối',
+  frequency: 1,
+  distance: '4,6 km',
+  price: '22.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-12T12:54:54.236Z,
+  updatedAt: 2023-09-12T12:54:54.236Z,
+  __v: 0
+},{
+  original: {
+    address: '227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6824817,
+    latitude: 10.762835
+  },
+  destination: {
+    address: '16/102 Đ. Nguyễn Thiện Thuật, Phường 2, Quận 3, TP.HCM',
+    longitude: 106.68234162032604,
+    latitude: 10.766071015919964
+  },
+  _id: new ObjectId("65004bd58c25c0ebf34ae916"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-12T18:30:29.238Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  distance: '0,4 km',
+  price: '2.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-12T11:30:29.264Z,
+  updatedAt: 2023-09-12T11:30:36.720Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6824817,
+    latitude: 10.762835
+  },
+  destination: {
+    address: '827B Đ. Trần Hưng Đạo, Khu phố 6, Quận 5, TP.HCM',
+    longitude: 106.68057404458523,
+    latitude: 10.755094077797342
+  },
+  _id: new ObjectId("65002838f2a5108bd3cd5452"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-12T15:58:32.838Z,
+  status: 'Đang tiến hành',
+  frequency: 16,
+  distance: '1,6 km',
+  price: '22.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6f"),
+  note: '',
+  createdAt: 2023-09-12T08:58:32.841Z,
+  updatedAt: 2023-09-12T08:58:36.978Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6824817,
+    latitude: 10.762835
+  },
+  destination: {
+    address: '97 Đ. Lê Hồng Phong, Phường 2, Quận 5, TP.HCM',
+    longitude: 106.67879574000835,
+    latitude: 10.755104947555045
+  },
+  _id: new ObjectId("64ff775626a65ead91cfc3a2"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-12T03:23:50.663Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '9.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  note: '',
+  createdAt: 2023-09-11T20:23:50.669Z,
+  updatedAt: 2023-09-11T20:23:53.148Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6824817,
+    latitude: 10.762835
+  },
+  destination: {
+    address: 'Chuk Tea & Coffee, Đường An Dương Vương, phường 3, Quận 5, TP.HCM',
+    longitude: 106.6775209,
+    latitude: 10.7586445
+  },
+  _id: new ObjectId("64ff765526a65ead91cfc392"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-12T03:19:33.807Z,
+  status: 'Đang tiến hành',
+  frequency: 2,
+  price: '6.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  note: '',
+  createdAt: 2023-09-11T20:19:33.812Z,
+  updatedAt: 2023-09-11T20:19:37.790Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '1706 Phạm Thế Hiển, Phường 6, Quận 8, Thành phố Hồ Chí Minh',
+    longitude: 106.652985,
+    latitude: 10.7390417
+  },
+  destination: {
+    address: '107 Đ. Trần Hưng Đạo, Phường 6, Quận 5, TP.HCM',
+    longitude: 106.66755359619856,
+    latitude: 10.752479725002324
+  },
+  _id: new ObjectId("64ff739a26a65ead91cfc382"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-12T03:07:54.472Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '18.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-11T20:07:54.503Z,
+  updatedAt: 2023-09-11T20:07:57.167Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '004 Đ. Tạ Quang Bửu, Phường 6, Quận 8, TP.HCM',
+    longitude: 106.6543633,
+    latitude: 10.7339883
+  },
+  destination: {
+    address: 'SWE / G-Town 2, Đường Nguyễn Hồng Đào, phường 14, Tân Bình, TP.HCM',
+    longitude: 106.6428381,
+    latitude: 10.7958221
+  },
+  _id: new ObjectId("64ff4a1c9f8563ae90e59a06"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-12T00:10:52.948Z,
+  status: 'Đang tiến hành',
+  frequency: 5,
+  price: '47.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-11T17:10:52.952Z,
+  updatedAt: 2023-09-11T17:10:56.306Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '004 Đ. Tạ Quang Bửu, Phường 6, Quận 8, TP.HCM',
+    longitude: 106.6543633,
+    latitude: 10.7339883
+  },
+  destination: {
+    address: '12 Đường Phan Văn Trị, Phường 7, Gò Vấp, TP.HCM',
+    longitude: 106.6892817,
+    latitude: 10.8271138
+  },
+  _id: new ObjectId("64ff1f6b71f7549b7b4c9750"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-11T21:08:43.833Z,
+  status: 'Đang tiến hành',
+  frequency: 6,
+  price: '78.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-11T14:08:43.851Z,
+  updatedAt: 2023-09-11T14:08:49.455Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '195 Đường Nam Kỳ Khởi Nghĩa, Võ Thị Sáu, Quận 3, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6867482,
+    latitude: 10.7867824
+  },
+  _id: new ObjectId("64fef17508d5a86e0d0939f0"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  time: 2023-09-11T17:52:37.008Z,
+  frequency: 5,
+  createdAt: 2023-09-11T10:52:37.177Z,
+  updatedAt: 2023-09-11T10:52:37.177Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: 'SWE / G-Town 2, Đường Nguyễn Hồng Đào, phường 14, Tân Bình, Thành phố Hồ Chí Minh',
+    longitude: 106.6428381,
+    latitude: 10.7958221
+  },
+  _id: new ObjectId("64fef07708d5a86e0d0939d9"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  time: 2023-09-11T17:48:23.382Z,
+  frequency: 1,
+  price: '102.000đ',
+  createdAt: 2023-09-11T10:48:29.310Z,
+  updatedAt: 2023-09-11T10:48:29.310Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '184 Đ. Lê Lai, Phường Phạm Ngũ Lão, Quận 1, TP.HCM',
+    longitude: 106.69097162783146,
+    latitude: 10.768756395148891
+  },
+  _id: new ObjectId("64fe364508fb8d966065be73"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-10T21:33:57.519Z,
+  status: 'Đang điều phối',
+  frequency: 4,
+  price: '15.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  note: '',
+  createdAt: 2023-09-10T21:33:57.524Z,
+  updatedAt: 2023-09-10T21:33:57.524Z,
+  __v: 0
+},{
+  original: {
+    address: '155 Đường Hùng Vương, phường 2, Quận 5, TP.HCM',
+    longitude: 106.6751801,
+    latitude: 10.7611815
+  },
+  destination: {
+    address: 'Chung cư ngô gia tự, Đường Lê Hồng Phong, phường 2, Quận 5, TP.HCM',
+    longitude: 106.6787581,
+    latitude: 10.7559879
+  },
+  _id: new ObjectId("64fe03d39be292f8b01298f5"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-10T17:58:43.543Z,
+  status: 'Đang tiến hành',
+  frequency: 2,
+  price: '6.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-10T17:58:43.549Z,
+  updatedAt: 2023-09-10T17:58:47.280Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: 'Top Zone Hair Salon, Lũy Bán Bích, Phường Tân Thành, Tân Phú, Thành phố Hồ Chí Minh',
+    longitude: 106.636726,
+    latitude: 10.787297
+  },
+  destination: {
+    address: '25 Đào Trí, Phú Thuận, Quận 7, TP.HCM',
+    longitude: 106.7430681,
+    latitude: 10.7143033
+  },
+  _id: new ObjectId("64fded94d5b0cdb5d0e2f63f"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  related_employee: new ObjectId("64f0c03d9e9037d91cce0d7e"),
+  time: 2023-09-10T23:23:48.718Z,
+  frequency: 1,
+  price: '246.000đ',
+  createdAt: 2023-09-10T16:24:09.626Z,
+  updatedAt: 2023-09-10T16:24:09.626Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, TP.HCM',
+    longitude: 106.6867482,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("64fddc956c10e7a3994fd151"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  related_employee: new ObjectId("64f0c03d9e9037d91cce0d7e"),
+  time: 2023-09-10T22:11:17.308Z,
+  frequency: 6,
+  price: '19.000đ',
+  createdAt: 2023-09-10T15:11:26.091Z,
+  updatedAt: 2023-09-10T15:11:26.091Z,
+  __v: 0
+},{
+  original: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6867482,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("64fddba66c10e7a3994fd149"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  related_employee: new ObjectId("64f0c03d9e9037d91cce0d7e"),
+  time: 2023-09-10T22:07:18.572Z,
+  frequency: 1,
+  price: '19.000đ',
+  createdAt: 2023-09-10T15:07:29.959Z,
+  updatedAt: 2023-09-10T15:07:29.959Z,
+  __v: 0
+},{
+  original: {
+    address: 'Japanit matcha & coffee house, Đường Trần Hưng Đạo, Phạm Ngũ Lão, Quận 1, Thành phố Hồ Chí Minh',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("64fdc470fc6984ffde09d521"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  related_employee: new ObjectId("64f0c03d9e9037d91cce0d7e"),
+  time: null,
+  frequency: 3,
+  price: '7.000đ',
+  createdAt: 2023-09-10T13:31:03.941Z,
+  updatedAt: 2023-09-10T13:31:03.941Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: 'Japanit matcha & coffee house, Đường Trần Hưng Đạo, Phạm Ngũ Lão, Quận 1, Thành phố Hồ Chí Minh',
+    longitude: 106.6925706,
+    latitude: 10.7650837
+  },
+  _id: new ObjectId("64fdc0bbc189884cacc4280a"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-10T13:12:27.090Z,
+  status: 'Đang tiến hành',
+  frequency: 3,
+  price: '12.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-10T13:12:27.097Z,
+  updatedAt: 2023-09-10T13:12:35.117Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: 'Sân Bóng Đá HCA, Chu Văn An, phường 12, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.70323,
+    latitude: 10.8120531
+  },
+  _id: new ObjectId("64fdbc915847bd7c75e28c3c"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-10T12:54:41.724Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '98.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  note: '',
+  createdAt: 2023-09-10T12:54:41.751Z,
+  updatedAt: 2023-09-10T12:54:46.425Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: 'Cơm tấm Ba Ghiền, Đường Đặng Văn Ngữ, Phường 10 (Phú Nhuận), Phú Nhuận, Thành phố Hồ Chí Minh',
+    longitude: 106.6693573,
+    latitude: 10.7944422
+  },
+  destination: {
+    address: '196 Đường Nguyễn Thị Minh Khai, Vo Thi Sau Ward, Quận 3, TP.HCM',
+    longitude: 106.690917,
+    latitude: 10.7757677
+  },
+  _id: new ObjectId("64fcf671f4647bfe13e4f630"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  related_employee: new ObjectId("64f0c03d9e9037d91cce0d7e"),
+  time: null,
+  frequency: 2,
+  price: '20.000đ',
+  createdAt: 2023-09-09T22:49:38.539Z,
+  updatedAt: 2023-09-09T22:49:38.539Z,
+  __v: 0
+},{
+  original: {
+    address: 'Đống Đa, Phường 2, Tân Bình, Thành phố Hồ Chí Minh',
+    longitude: 106.665547,
+    latitude: 10.8088719
+  },
+  destination: {
+    address: 'Pizza Hut Xô Viết Nghệ Tĩnh, Xô Viết Nghệ Tĩnh, phường 17, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.709392,
+    latitude: 10.7951244
+  },
+  _id: new ObjectId("64fcf603f4647bfe13e4f62c"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  related_employee: new ObjectId("64f0c03d9e9037d91cce0d7e"),
+  time: null,
+  frequency: 1,
+  price: '102.000đ',
+  createdAt: 2023-09-09T22:47:43.942Z,
+  updatedAt: 2023-09-09T22:47:43.942Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '111 Đường Tân Sơn Nhì, Tân Sơn Nhì, Tân Phú, TP.HCM',
+    longitude: 106.6337167,
+    latitude: 10.8012526
+  },
+  _id: new ObjectId("64fce602daff4673dcbb1c19"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-09T21:39:14.062Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '56.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  note: '',
+  createdAt: 2023-09-09T21:39:14.067Z,
+  updatedAt: 2023-09-09T21:39:16.841Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, TP.HCM',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  _id: new ObjectId("64fce35bdaff4673dcbb1c0b"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-09T21:27:55.074Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '10.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  note: '',
+  createdAt: 2023-09-09T21:27:55.078Z,
+  updatedAt: 2023-09-09T21:27:57.667Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '299 Đ. An D. Vương, Phường 3, Quận 5, TP.HCM',
+    longitude: 106.68017506599426,
+    latitude: 10.759814809642759
+  },
+  _id: new ObjectId("64fce2f7daff4673dcbb1c04"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-09T21:26:15.955Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '6.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-09T21:26:16.008Z,
+  updatedAt: 2023-09-09T21:26:20.321Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '242, 109/18 Đ. Nguyễn Thiện Thuật, Phường 3, Quận 3, TP.HCM',
+    longitude: 106.67902372777462,
+    latitude: 10.77265613052836
+  },
+  _id: new ObjectId("64fcdba99f80f8a3b477d813"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-09T20:55:05.570Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '22.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  note: '',
+  createdAt: 2023-09-09T20:55:05.576Z,
+  updatedAt: 2023-09-09T20:55:08.158Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '45 Đ. Phạm Viết Chánh, Phường Nguyễn Cư Trinh, Quận 1, TP.HCM',
+    longitude: 106.68386746197939,
+    latitude: 10.766759408068678
+  },
+  destination: {
+    address: '477 P., 2 Hẻm 704 Nguyễn Đình Chiểu, Phường 2, Quận 3, TP.HCM',
+    longitude: 106.68185245245695,
+    latitude: 10.769639109942858
+  },
+  _id: new ObjectId("64fcc505362ed76dd4a8047d"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-09T19:18:29.748Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '3.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-09T19:18:29.753Z,
+  updatedAt: 2023-09-09T19:18:32.886Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '2 Đ. Nguyễn Văn Cừ, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh 700000',
+    longitude: 106.68370719999075,
+    latitude: 10.762872112728717
+  },
+  destination: {
+    address: '12 Nguyễn Văn Bảo, phường 4, Hồ Chí Minh, TP.HCM',
+    longitude: 106.6874994,
+    latitude: 10.8222053
+  },
+  _id: new ObjectId("64fcbc4653c1fbae2a40647a"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-09T18:41:10.271Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '56.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-09T18:41:10.294Z,
+  updatedAt: 2023-09-09T18:41:14.205Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '162 Đường Hà Tôn Quyền, phường 4, Quận 11, TP.HCM',
+    longitude: 106.6528135,
+    latitude: 10.7579211
+  },
+  _id: new ObjectId("64fcab4795de2e79d6f26d86"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-09T17:28:39.034Z,
+  status: 'Đang điều phối',
+  frequency: 1,
+  price: '21.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-09T17:28:39.039Z,
+  updatedAt: 2023-09-09T17:28:39.039Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '195 Đường Điện Biên Phủ, Phường 15, Bình Thạnh, TP.HCM',
+    longitude: 106.7052896,
+    latitude: 10.7996515
+  },
+  _id: new ObjectId("64fc886076fd19bd0e6e7814"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-09T14:59:44.816Z,
+  status: 'Đang điều phối',
+  frequency: 1,
+  price: '102.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6f"),
+  note: '',
+  createdAt: 2023-09-09T14:59:44.831Z,
+  updatedAt: 2023-09-09T14:59:44.831Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '1952 Phạm Thế Hiển, Phường 6, Quận 8, TP.HCM',
+    longitude: 106.6478495,
+    latitude: 10.7361804
+  },
+  _id: new ObjectId("64fb9014c7c575b90303436a"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-08T21:20:20.358Z,
+  status: 'Đang điều phối',
+  frequency: 1,
+  price: '42.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  note: '',
+  createdAt: 2023-09-08T21:20:20.362Z,
+  updatedAt: 2023-09-08T21:20:20.362Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '122 Đường Lê Lai, Bến Thành, Quận 1, TP.HCM',
+    longitude: 106.6921492,
+    latitude: 10.7695635
+  },
+  _id: new ObjectId("64fadb6c95c5ca56c65b3d55"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  driver: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  time: 2023-09-08T08:29:32.212Z,
+  status: 'điều phối',
+  frequency: 1,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-08T08:29:32.228Z,
+  updatedAt: 2023-09-08T08:29:32.228Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: 'Nha Be District Hospital, Lê Văn Lương, Phước Kiển, Nhà Bè, TP.HCM',
+    longitude: 106.704459,
+    latitude: 10.7044461
+  },
+  _id: new ObjectId("64fa1b88f7a746c4d01d8b11"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  driver: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  time: 2023-09-07T18:50:48.690Z,
+  status: 'điều phối',
+  frequency: 1,
+  price: '112.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  note: '',
+  createdAt: 2023-09-07T18:50:48.695Z,
+  updatedAt: 2023-09-07T18:50:48.695Z,
+  __v: 0
+},{
+  original: {
+    address: 'Đại học Sài Gòn, phường 3, Quận 5, TP.HCM',
+    longitude: 106.6823473200202,
+    latitude: 10.760730488674088
+  },
+  destination: {
+    address: 'Hiệp Thành, Quận 12, TP.HCM',
+    longitude: 106.6379724,
+    latitude: 10.8825023
+  },
+  _id: new ObjectId("64fa1b69f7a746c4d01d8b0e"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  driver: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  time: 2023-09-07T18:50:17.177Z,
+  status: 'điều phối',
+  frequency: 1,
+  price: '249.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  note: '',
+  createdAt: 2023-09-07T18:50:17.181Z,
+  updatedAt: 2023-09-07T18:50:17.181Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '225 Trường Chinh, Khu phố 2, Tân Thới Nhất, Quận 12, TP.HCM',
+    longitude: 106.6196527,
+    latitude: 10.8331372
+  },
+  _id: new ObjectId("64fa16cff7a746c4d01d8b08"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  driver: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  time: 2023-09-07T18:30:39.995Z,
+  status: 'điều phối',
+  frequency: 1,
+  price: '84.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  note: '',
+  createdAt: 2023-09-07T18:30:40.012Z,
+  updatedAt: 2023-09-07T18:30:40.012Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: 'Vạn Phúc Spa, Đường Số 7, Hiệp Bình Phước, Thủ Đức, TP.HCM',
+    longitude: 106.7094795,
+    latitude: 10.841351
+  },
+  _id: new ObjectId("64fa144bf7a746c4d01d8aff"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  driver: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  time: 2023-09-07T18:19:55.584Z,
+  status: 'điều phối',
+  frequency: 1,
+  price: '68.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-07T18:19:55.588Z,
+  updatedAt: 2023-09-07T18:19:55.588Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '225 Nguyễn Đình Chiểu, phường 5, Quận 3, TP.HCM',
+    longitude: 106.6859882,
+    latitude: 10.7739121
+  },
+  _id: new ObjectId("64fa123d2f12954bf5b0f828"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  driver: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  time: 2023-09-07T18:11:09.061Z,
+  status: 'điều phối',
+  frequency: 1,
+  price: '17.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  position: { '$position': 0 }
+},{
+  original: {
+    address: 'Đầm Sen, Lạc Long Quân, phường 3, Quận 11, TP.HCM',
+    longitude: 106.6418941,
+    latitude: 10.7660903
+  },
+  destination: {
+    address: '15 Đường Lê Thánh Tôn, Bến Nghé, Quận 1, TP.HCM',
+    longitude: 106.7056005,
+    latitude: 10.7809888
+  },
+  _id: new ObjectId("64fa1186923a19c4fb94f00e"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  driver: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  time: 2023-09-07T18:08:06.395Z,
+  status: 'điều phối',
+  frequency: 1,
+  price: '50.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-07T18:08:06.407Z,
+  updatedAt: 2023-09-07T18:08:06.407Z,
+  __v: 0
+} 
+[API.Authentication][Tue, 12 Sep 2023 14:22:31 GMT] Setting up request middleware... 
+[API.Authentication][Tue, 12 Sep 2023 14:22:31 GMT] Server is running on port 4100 
+[API.Authentication][Tue, 12 Sep 2023 14:22:31 GMT] Server is starting... 
+[API.Authentication][Tue, 12 Sep 2023 14:22:32 GMT] Connected to database successfully 
+[API.Authentication][Tue, 12 Sep 2023 14:43:17 GMT] Server is starting... 
+[API.Authentication][Tue, 12 Sep 2023 14:43:17 GMT] Setting up request middleware... 
+[API.Authentication][Tue, 12 Sep 2023 14:43:17 GMT] Server is running on port 4100 
+[API.Authentication][Tue, 12 Sep 2023 14:43:35 GMT] Connected to database successfully 
+[API.Authentication][Tue, 12 Sep 2023 14:45:40 GMT] Setting up request middleware... 
+[API.Authentication][Tue, 12 Sep 2023 14:45:40 GMT] Server is running on port 4100 
+[API.Authentication][Tue, 12 Sep 2023 14:45:40 GMT] Server is starting... 
+[API.Authentication][Tue, 12 Sep 2023 14:45:41 GMT] Connected to database successfully 
+[API.Authentication][Tue, 12 Sep 2023 14:53:07 GMT] {
+  original: {
+    address: '227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6824817,
+    latitude: 10.762835
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, TP.HCM',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("650062643d7d0397b721e91b"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-12T20:06:44.929Z,
+  status: 'Đang tiến hành',
+  frequency: 4,
+  distance: '9.0 km',
+  price: '85.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  note: '',
+  coupon: new ObjectId("64e73b79646803068e5c21f9"),
+  createdAt: 2023-09-12T13:06:44.936Z,
+  updatedAt: 2023-09-12T13:06:47.936Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6824817,
+    latitude: 10.762835
+  },
+  destination: {
+    address: '195 Đường Nam Kỳ Khởi Nghĩa, Võ Thị Sáu, Quận 3, TP.HCM',
+    longitude: 106.6867482,
+    latitude: 10.7867824
+  },
+  _id: new ObjectId("65005f9eb1f0f54976488af6"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-12T19:54:54.217Z,
+  status: 'Đang điều phối',
+  frequency: 1,
+  distance: '4,6 km',
+  price: '22.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-12T12:54:54.236Z,
+  updatedAt: 2023-09-12T12:54:54.236Z,
+  __v: 0
+},{
+  original: {
+    address: '227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6824817,
+    latitude: 10.762835
+  },
+  destination: {
+    address: '16/102 Đ. Nguyễn Thiện Thuật, Phường 2, Quận 3, TP.HCM',
+    longitude: 106.68234162032604,
+    latitude: 10.766071015919964
+  },
+  _id: new ObjectId("65004bd58c25c0ebf34ae916"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-12T18:30:29.238Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  distance: '0,4 km',
+  price: '2.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-12T11:30:29.264Z,
+  updatedAt: 2023-09-12T11:30:36.720Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6824817,
+    latitude: 10.762835
+  },
+  destination: {
+    address: '827B Đ. Trần Hưng Đạo, Khu phố 6, Quận 5, TP.HCM',
+    longitude: 106.68057404458523,
+    latitude: 10.755094077797342
+  },
+  _id: new ObjectId("65002838f2a5108bd3cd5452"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-12T15:58:32.838Z,
+  status: 'Đang tiến hành',
+  frequency: 16,
+  distance: '1,6 km',
+  price: '22.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6f"),
+  note: '',
+  createdAt: 2023-09-12T08:58:32.841Z,
+  updatedAt: 2023-09-12T08:58:36.978Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6824817,
+    latitude: 10.762835
+  },
+  destination: {
+    address: '97 Đ. Lê Hồng Phong, Phường 2, Quận 5, TP.HCM',
+    longitude: 106.67879574000835,
+    latitude: 10.755104947555045
+  },
+  _id: new ObjectId("64ff775626a65ead91cfc3a2"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-12T03:23:50.663Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '9.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  note: '',
+  createdAt: 2023-09-11T20:23:50.669Z,
+  updatedAt: 2023-09-11T20:23:53.148Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '227 Đ. Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6824817,
+    latitude: 10.762835
+  },
+  destination: {
+    address: 'Chuk Tea & Coffee, Đường An Dương Vương, phường 3, Quận 5, TP.HCM',
+    longitude: 106.6775209,
+    latitude: 10.7586445
+  },
+  _id: new ObjectId("64ff765526a65ead91cfc392"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-12T03:19:33.807Z,
+  status: 'Đang tiến hành',
+  frequency: 2,
+  price: '6.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  note: '',
+  createdAt: 2023-09-11T20:19:33.812Z,
+  updatedAt: 2023-09-11T20:19:37.790Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '1706 Phạm Thế Hiển, Phường 6, Quận 8, Thành phố Hồ Chí Minh',
+    longitude: 106.652985,
+    latitude: 10.7390417
+  },
+  destination: {
+    address: '107 Đ. Trần Hưng Đạo, Phường 6, Quận 5, TP.HCM',
+    longitude: 106.66755359619856,
+    latitude: 10.752479725002324
+  },
+  _id: new ObjectId("64ff739a26a65ead91cfc382"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-12T03:07:54.472Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '18.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-11T20:07:54.503Z,
+  updatedAt: 2023-09-11T20:07:57.167Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '004 Đ. Tạ Quang Bửu, Phường 6, Quận 8, TP.HCM',
+    longitude: 106.6543633,
+    latitude: 10.7339883
+  },
+  destination: {
+    address: 'SWE / G-Town 2, Đường Nguyễn Hồng Đào, phường 14, Tân Bình, TP.HCM',
+    longitude: 106.6428381,
+    latitude: 10.7958221
+  },
+  _id: new ObjectId("64ff4a1c9f8563ae90e59a06"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-12T00:10:52.948Z,
+  status: 'Đang tiến hành',
+  frequency: 5,
+  price: '47.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-11T17:10:52.952Z,
+  updatedAt: 2023-09-11T17:10:56.306Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '004 Đ. Tạ Quang Bửu, Phường 6, Quận 8, TP.HCM',
+    longitude: 106.6543633,
+    latitude: 10.7339883
+  },
+  destination: {
+    address: '12 Đường Phan Văn Trị, Phường 7, Gò Vấp, TP.HCM',
+    longitude: 106.6892817,
+    latitude: 10.8271138
+  },
+  _id: new ObjectId("64ff1f6b71f7549b7b4c9750"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-11T21:08:43.833Z,
+  status: 'Đang tiến hành',
+  frequency: 6,
+  price: '78.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-11T14:08:43.851Z,
+  updatedAt: 2023-09-11T14:08:49.455Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '195 Đường Nam Kỳ Khởi Nghĩa, Võ Thị Sáu, Quận 3, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6867482,
+    latitude: 10.7867824
+  },
+  _id: new ObjectId("64fef17508d5a86e0d0939f0"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  time: 2023-09-11T17:52:37.008Z,
+  frequency: 5,
+  createdAt: 2023-09-11T10:52:37.177Z,
+  updatedAt: 2023-09-11T10:52:37.177Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: 'SWE / G-Town 2, Đường Nguyễn Hồng Đào, phường 14, Tân Bình, Thành phố Hồ Chí Minh',
+    longitude: 106.6428381,
+    latitude: 10.7958221
+  },
+  _id: new ObjectId("64fef07708d5a86e0d0939d9"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  time: 2023-09-11T17:48:23.382Z,
+  frequency: 1,
+  price: '102.000đ',
+  createdAt: 2023-09-11T10:48:29.310Z,
+  updatedAt: 2023-09-11T10:48:29.310Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '184 Đ. Lê Lai, Phường Phạm Ngũ Lão, Quận 1, TP.HCM',
+    longitude: 106.69097162783146,
+    latitude: 10.768756395148891
+  },
+  _id: new ObjectId("64fe364508fb8d966065be73"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-10T21:33:57.519Z,
+  status: 'Đang điều phối',
+  frequency: 4,
+  price: '15.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  note: '',
+  createdAt: 2023-09-10T21:33:57.524Z,
+  updatedAt: 2023-09-10T21:33:57.524Z,
+  __v: 0
+},{
+  original: {
+    address: '155 Đường Hùng Vương, phường 2, Quận 5, TP.HCM',
+    longitude: 106.6751801,
+    latitude: 10.7611815
+  },
+  destination: {
+    address: 'Chung cư ngô gia tự, Đường Lê Hồng Phong, phường 2, Quận 5, TP.HCM',
+    longitude: 106.6787581,
+    latitude: 10.7559879
+  },
+  _id: new ObjectId("64fe03d39be292f8b01298f5"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-10T17:58:43.543Z,
+  status: 'Đang tiến hành',
+  frequency: 2,
+  price: '6.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-10T17:58:43.549Z,
+  updatedAt: 2023-09-10T17:58:47.280Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: 'Top Zone Hair Salon, Lũy Bán Bích, Phường Tân Thành, Tân Phú, Thành phố Hồ Chí Minh',
+    longitude: 106.636726,
+    latitude: 10.787297
+  },
+  destination: {
+    address: '25 Đào Trí, Phú Thuận, Quận 7, TP.HCM',
+    longitude: 106.7430681,
+    latitude: 10.7143033
+  },
+  _id: new ObjectId("64fded94d5b0cdb5d0e2f63f"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  related_employee: new ObjectId("64f0c03d9e9037d91cce0d7e"),
+  time: 2023-09-10T23:23:48.718Z,
+  frequency: 1,
+  price: '246.000đ',
+  createdAt: 2023-09-10T16:24:09.626Z,
+  updatedAt: 2023-09-10T16:24:09.626Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, TP.HCM',
+    longitude: 106.6867482,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("64fddc956c10e7a3994fd151"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  related_employee: new ObjectId("64f0c03d9e9037d91cce0d7e"),
+  time: 2023-09-10T22:11:17.308Z,
+  frequency: 6,
+  price: '19.000đ',
+  createdAt: 2023-09-10T15:11:26.091Z,
+  updatedAt: 2023-09-10T15:11:26.091Z,
+  __v: 0
+},{
+  original: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6867482,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("64fddba66c10e7a3994fd149"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  related_employee: new ObjectId("64f0c03d9e9037d91cce0d7e"),
+  time: 2023-09-10T22:07:18.572Z,
+  frequency: 1,
+  price: '19.000đ',
+  createdAt: 2023-09-10T15:07:29.959Z,
+  updatedAt: 2023-09-10T15:07:29.959Z,
+  __v: 0
+},{
+  original: {
+    address: 'Japanit matcha & coffee house, Đường Trần Hưng Đạo, Phạm Ngũ Lão, Quận 1, Thành phố Hồ Chí Minh',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("64fdc470fc6984ffde09d521"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  related_employee: new ObjectId("64f0c03d9e9037d91cce0d7e"),
+  time: null,
+  frequency: 3,
+  price: '7.000đ',
+  createdAt: 2023-09-10T13:31:03.941Z,
+  updatedAt: 2023-09-10T13:31:03.941Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: 'Japanit matcha & coffee house, Đường Trần Hưng Đạo, Phạm Ngũ Lão, Quận 1, Thành phố Hồ Chí Minh',
+    longitude: 106.6925706,
+    latitude: 10.7650837
+  },
+  _id: new ObjectId("64fdc0bbc189884cacc4280a"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-10T13:12:27.090Z,
+  status: 'Đang tiến hành',
+  frequency: 3,
+  price: '12.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-10T13:12:27.097Z,
+  updatedAt: 2023-09-10T13:12:35.117Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: 'Sân Bóng Đá HCA, Chu Văn An, phường 12, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.70323,
+    latitude: 10.8120531
+  },
+  _id: new ObjectId("64fdbc915847bd7c75e28c3c"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-10T12:54:41.724Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '98.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  note: '',
+  createdAt: 2023-09-10T12:54:41.751Z,
+  updatedAt: 2023-09-10T12:54:46.425Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: 'Cơm tấm Ba Ghiền, Đường Đặng Văn Ngữ, Phường 10 (Phú Nhuận), Phú Nhuận, Thành phố Hồ Chí Minh',
+    longitude: 106.6693573,
+    latitude: 10.7944422
+  },
+  destination: {
+    address: '196 Đường Nguyễn Thị Minh Khai, Vo Thi Sau Ward, Quận 3, TP.HCM',
+    longitude: 106.690917,
+    latitude: 10.7757677
+  },
+  _id: new ObjectId("64fcf671f4647bfe13e4f630"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  related_employee: new ObjectId("64f0c03d9e9037d91cce0d7e"),
+  time: null,
+  frequency: 2,
+  price: '20.000đ',
+  createdAt: 2023-09-09T22:49:38.539Z,
+  updatedAt: 2023-09-09T22:49:38.539Z,
+  __v: 0
+},{
+  original: {
+    address: 'Đống Đa, Phường 2, Tân Bình, Thành phố Hồ Chí Minh',
+    longitude: 106.665547,
+    latitude: 10.8088719
+  },
+  destination: {
+    address: 'Pizza Hut Xô Viết Nghệ Tĩnh, Xô Viết Nghệ Tĩnh, phường 17, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.709392,
+    latitude: 10.7951244
+  },
+  _id: new ObjectId("64fcf603f4647bfe13e4f62c"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  related_employee: new ObjectId("64f0c03d9e9037d91cce0d7e"),
+  time: null,
+  frequency: 1,
+  price: '102.000đ',
+  createdAt: 2023-09-09T22:47:43.942Z,
+  updatedAt: 2023-09-09T22:47:43.942Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '111 Đường Tân Sơn Nhì, Tân Sơn Nhì, Tân Phú, TP.HCM',
+    longitude: 106.6337167,
+    latitude: 10.8012526
+  },
+  _id: new ObjectId("64fce602daff4673dcbb1c19"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-09T21:39:14.062Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '56.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  note: '',
+  createdAt: 2023-09-09T21:39:14.067Z,
+  updatedAt: 2023-09-09T21:39:16.841Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, TP.HCM',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  _id: new ObjectId("64fce35bdaff4673dcbb1c0b"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-09T21:27:55.074Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '10.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  note: '',
+  createdAt: 2023-09-09T21:27:55.078Z,
+  updatedAt: 2023-09-09T21:27:57.667Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '299 Đ. An D. Vương, Phường 3, Quận 5, TP.HCM',
+    longitude: 106.68017506599426,
+    latitude: 10.759814809642759
+  },
+  _id: new ObjectId("64fce2f7daff4673dcbb1c04"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-09T21:26:15.955Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '6.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-09T21:26:16.008Z,
+  updatedAt: 2023-09-09T21:26:20.321Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '242, 109/18 Đ. Nguyễn Thiện Thuật, Phường 3, Quận 3, TP.HCM',
+    longitude: 106.67902372777462,
+    latitude: 10.77265613052836
+  },
+  _id: new ObjectId("64fcdba99f80f8a3b477d813"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-09T20:55:05.570Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '22.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  note: '',
+  createdAt: 2023-09-09T20:55:05.576Z,
+  updatedAt: 2023-09-09T20:55:08.158Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '45 Đ. Phạm Viết Chánh, Phường Nguyễn Cư Trinh, Quận 1, TP.HCM',
+    longitude: 106.68386746197939,
+    latitude: 10.766759408068678
+  },
+  destination: {
+    address: '477 P., 2 Hẻm 704 Nguyễn Đình Chiểu, Phường 2, Quận 3, TP.HCM',
+    longitude: 106.68185245245695,
+    latitude: 10.769639109942858
+  },
+  _id: new ObjectId("64fcc505362ed76dd4a8047d"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-09T19:18:29.748Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '3.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-09T19:18:29.753Z,
+  updatedAt: 2023-09-09T19:18:32.886Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '2 Đ. Nguyễn Văn Cừ, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh 700000',
+    longitude: 106.68370719999075,
+    latitude: 10.762872112728717
+  },
+  destination: {
+    address: '12 Nguyễn Văn Bảo, phường 4, Hồ Chí Minh, TP.HCM',
+    longitude: 106.6874994,
+    latitude: 10.8222053
+  },
+  _id: new ObjectId("64fcbc4653c1fbae2a40647a"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-09T18:41:10.271Z,
+  status: 'Đang tiến hành',
+  frequency: 1,
+  price: '56.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-09T18:41:10.294Z,
+  updatedAt: 2023-09-09T18:41:14.205Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75")
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '162 Đường Hà Tôn Quyền, phường 4, Quận 11, TP.HCM',
+    longitude: 106.6528135,
+    latitude: 10.7579211
+  },
+  _id: new ObjectId("64fcab4795de2e79d6f26d86"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-09T17:28:39.034Z,
+  status: 'Đang điều phối',
+  frequency: 1,
+  price: '21.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-09T17:28:39.039Z,
+  updatedAt: 2023-09-09T17:28:39.039Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '195 Đường Điện Biên Phủ, Phường 15, Bình Thạnh, TP.HCM',
+    longitude: 106.7052896,
+    latitude: 10.7996515
+  },
+  _id: new ObjectId("64fc886076fd19bd0e6e7814"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-09T14:59:44.816Z,
+  status: 'Đang điều phối',
+  frequency: 1,
+  price: '102.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6f"),
+  note: '',
+  createdAt: 2023-09-09T14:59:44.831Z,
+  updatedAt: 2023-09-09T14:59:44.831Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '1952 Phạm Thế Hiển, Phường 6, Quận 8, TP.HCM',
+    longitude: 106.6478495,
+    latitude: 10.7361804
+  },
+  _id: new ObjectId("64fb9014c7c575b90303436a"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  time: 2023-09-08T21:20:20.358Z,
+  status: 'Đang điều phối',
+  frequency: 1,
+  price: '42.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  note: '',
+  createdAt: 2023-09-08T21:20:20.362Z,
+  updatedAt: 2023-09-08T21:20:20.362Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '122 Đường Lê Lai, Bến Thành, Quận 1, TP.HCM',
+    longitude: 106.6921492,
+    latitude: 10.7695635
+  },
+  _id: new ObjectId("64fadb6c95c5ca56c65b3d55"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  driver: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  time: 2023-09-08T08:29:32.212Z,
+  status: 'điều phối',
+  frequency: 1,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-08T08:29:32.228Z,
+  updatedAt: 2023-09-08T08:29:32.228Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: 'Nha Be District Hospital, Lê Văn Lương, Phước Kiển, Nhà Bè, TP.HCM',
+    longitude: 106.704459,
+    latitude: 10.7044461
+  },
+  _id: new ObjectId("64fa1b88f7a746c4d01d8b11"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  driver: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  time: 2023-09-07T18:50:48.690Z,
+  status: 'điều phối',
+  frequency: 1,
+  price: '112.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  note: '',
+  createdAt: 2023-09-07T18:50:48.695Z,
+  updatedAt: 2023-09-07T18:50:48.695Z,
+  __v: 0
+},{
+  original: {
+    address: 'Đại học Sài Gòn, phường 3, Quận 5, TP.HCM',
+    longitude: 106.6823473200202,
+    latitude: 10.760730488674088
+  },
+  destination: {
+    address: 'Hiệp Thành, Quận 12, TP.HCM',
+    longitude: 106.6379724,
+    latitude: 10.8825023
+  },
+  _id: new ObjectId("64fa1b69f7a746c4d01d8b0e"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  driver: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  time: 2023-09-07T18:50:17.177Z,
+  status: 'điều phối',
+  frequency: 1,
+  price: '249.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  note: '',
+  createdAt: 2023-09-07T18:50:17.181Z,
+  updatedAt: 2023-09-07T18:50:17.181Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '225 Trường Chinh, Khu phố 2, Tân Thới Nhất, Quận 12, TP.HCM',
+    longitude: 106.6196527,
+    latitude: 10.8331372
+  },
+  _id: new ObjectId("64fa16cff7a746c4d01d8b08"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  driver: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  time: 2023-09-07T18:30:39.995Z,
+  status: 'điều phối',
+  frequency: 1,
+  price: '84.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  note: '',
+  createdAt: 2023-09-07T18:30:40.012Z,
+  updatedAt: 2023-09-07T18:30:40.012Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: 'Vạn Phúc Spa, Đường Số 7, Hiệp Bình Phước, Thủ Đức, TP.HCM',
+    longitude: 106.7094795,
+    latitude: 10.841351
+  },
+  _id: new ObjectId("64fa144bf7a746c4d01d8aff"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  driver: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  time: 2023-09-07T18:19:55.584Z,
+  status: 'điều phối',
+  frequency: 1,
+  price: '68.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-07T18:19:55.588Z,
+  updatedAt: 2023-09-07T18:19:55.588Z,
+  __v: 0
+},{
+  original: {
+    address: '7c Đ. Trần Phú, Phường 4, Quận 5, TP.HCM',
+    longitude: 106.6803633,
+    latitude: 10.7637867
+  },
+  destination: {
+    address: '225 Nguyễn Đình Chiểu, phường 5, Quận 3, TP.HCM',
+    longitude: 106.6859882,
+    latitude: 10.7739121
+  },
+  _id: new ObjectId("64fa123d2f12954bf5b0f828"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  driver: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  time: 2023-09-07T18:11:09.061Z,
+  status: 'điều phối',
+  frequency: 1,
+  price: '17.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  position: { '$position': 0 }
+},{
+  original: {
+    address: 'Đầm Sen, Lạc Long Quân, phường 3, Quận 11, TP.HCM',
+    longitude: 106.6418941,
+    latitude: 10.7660903
+  },
+  destination: {
+    address: '15 Đường Lê Thánh Tôn, Bến Nghé, Quận 1, TP.HCM',
+    longitude: 106.7056005,
+    latitude: 10.7809888
+  },
+  _id: new ObjectId("64fa1186923a19c4fb94f00e"),
+  customer: new ObjectId("64e741543ce0d32a53a60469"),
+  driver: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  time: 2023-09-07T18:08:06.395Z,
+  status: 'điều phối',
+  frequency: 1,
+  price: '50.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6c"),
+  note: '',
+  createdAt: 2023-09-07T18:08:06.407Z,
+  updatedAt: 2023-09-07T18:08:06.407Z,
+  __v: 0
+} 
+[API.Authentication][Tue, 12 Sep 2023 14:53:39 GMT] Server is starting... 
+[API.Authentication][Tue, 12 Sep 2023 14:53:39 GMT] Setting up request middleware... 
+[API.Authentication][Tue, 12 Sep 2023 14:53:39 GMT] Server is running on port 4100 
+[API.Authentication][Tue, 12 Sep 2023 14:53:40 GMT] Connected to database successfully 
+[API.Authentication][Tue, 12 Sep 2023 15:13:21 GMT] Setting up request middleware... 
+[API.Authentication][Tue, 12 Sep 2023 15:13:21 GMT] Server is starting... 
+[API.Authentication][Tue, 12 Sep 2023 15:13:21 GMT] Server is running on port 4100 
+[API.Authentication][Tue, 12 Sep 2023 15:13:22 GMT] Connected to database successfully 
+[API.Authentication][Tue, 12 Sep 2023 16:01:01 GMT] Setting up request middleware... 
+[API.Authentication][Tue, 12 Sep 2023 16:01:01 GMT] Server is starting... 
+[API.Authentication][Tue, 12 Sep 2023 16:01:01 GMT] Server is running on port 4100 
+[API.Authentication][Tue, 12 Sep 2023 16:01:02 GMT] Connected to database successfully 
+[API.Authentication][Tue, 12 Sep 2023 17:44:23 GMT] Setting up request middleware... 
+[API.Authentication][Tue, 12 Sep 2023 17:44:23 GMT] Server is starting... 
+[API.Authentication][Tue, 12 Sep 2023 17:44:23 GMT] Server is running on port 4100 
+[API.Authentication][Tue, 12 Sep 2023 17:44:24 GMT] Connected to database successfully 

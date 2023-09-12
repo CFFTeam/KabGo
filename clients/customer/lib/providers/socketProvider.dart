@@ -78,6 +78,45 @@ class SocketClient extends StateNotifier<void> {
       ),
     );
   }
+
+  void emitCancelBooing(LocationModel depature, LocationModel arrival,
+      RouteModel routeModel, CustomerModel customerModel) {
+    socket.emit(
+      "customer-cancel",
+      jsonEncode(
+        {
+          'user_information': {
+            "avatar": customerModel.avatar,
+            "name": customerModel.name,
+            "email": customerModel.email,
+            "phonenumber": customerModel.phonenumber,
+            "dob": customerModel.dob,
+            "home_address": customerModel.home_address,
+            "type": customerModel.type,
+            "default_payment_method": customerModel.default_payment_method,
+            "rank": customerModel.rank,
+          },
+          'departure_information': {
+            'address':
+                '${depature.structuredFormatting!.mainText}, ${depature.structuredFormatting!.secondaryText}',
+            'latitude': depature.postion!.latitude.toString(),
+            'longitude': depature.postion!.longitude.toString(),
+          },
+          'arrival_information': {
+            'address':
+                '${arrival.structuredFormatting!.mainText}, ${arrival.structuredFormatting!.secondaryText}',
+            'latitude': arrival.postion!.latitude.toString(),
+            'longitude': arrival.postion!.longitude.toString(),
+          },
+          "service": routeModel.service,
+          'price': routeModel.price,
+          'distance': routeModel.distance,
+          'time': convertTimeFormat(routeModel.time!),
+          // 'coupon': routeModel.coupon
+        },
+      ),
+    );
+  }
 }
 
 final socketClientProvider =
