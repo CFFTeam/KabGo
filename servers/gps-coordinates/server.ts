@@ -75,30 +75,56 @@ const server = app.run(4600, async () => {
             const _customer = await customerModel.findOne({ email: customer.user_information.email });
             
             const controllers = new UserController();
-            const bookingData = await controllers.createBooking({
-                customer: _customer?.id,
-                // driver: '',
-                // related_employee: new mongoose.Types.ObjectId('64e99fffdb83ce30945a0f4d'),
-                original: {
-                    address: customer.departure_information.address,
-                    longitude: customer.departure_information.longitude,
-                    latitude: customer.departure_information.latitude,
-                },
-                destination: {
-                    address: customer.arrival_information.address,
-                    longitude: customer.arrival_information.longitude,
-                    latitude: customer.arrival_information.latitude,
-                },
-                time: new Date(new Date().getTime() + 7 * 60 * 60000).toISOString(),
-                status: 'Đang điều phối', //điều phối | tiến hành | hủy | hoàn thành
-                frequency: existedBooking.length + 1,
-                price: customer.price,
-                distance: customer.distance,
-                duration: customer.time,
-                vehicle: _service?.id,
-                note: '',
-                coupon: customer.coupon,
-            });
+            const data =
+                customer.coupon != ''
+                    ? {
+                          customer: _customer?.id,
+                          // driver: '',
+                          // related_employee: new mongoose.Types.ObjectId('64e99fffdb83ce30945a0f4d'),
+                          original: {
+                              address: customer.departure_information.address,
+                              longitude: customer.departure_information.longitude,
+                              latitude: customer.departure_information.latitude,
+                          },
+                          destination: {
+                              address: customer.arrival_information.address,
+                              longitude: customer.arrival_information.longitude,
+                              latitude: customer.arrival_information.latitude,
+                          },
+                          time: new Date(new Date().getTime() + 7 * 60 * 60000).toISOString(),
+                          status: 'Đang điều phối', //điều phối | tiến hành | hủy | hoàn thành
+                          frequency: existedBooking.length + 1,
+                          price: customer.price,
+                          distance: customer.distance,
+                          duration: customer.time,
+                          vehicle: _service?.id,
+                          note: '',
+                          coupon: customer.coupon,
+                      }
+                    : {
+                          customer: _customer?.id,
+                          // driver: '',
+                          // related_employee: new mongoose.Types.ObjectId('64e99fffdb83ce30945a0f4d'),
+                          original: {
+                              address: customer.departure_information.address,
+                              longitude: customer.departure_information.longitude,
+                              latitude: customer.departure_information.latitude,
+                          },
+                          destination: {
+                              address: customer.arrival_information.address,
+                              longitude: customer.arrival_information.longitude,
+                              latitude: customer.arrival_information.latitude,
+                          },
+                          time: new Date(new Date().getTime() + 7 * 60 * 60000).toISOString(),
+                          status: 'Đang điều phối', //điều phối | tiến hành | hủy | hoàn thành
+                          frequency: existedBooking.length + 1,
+                          price: customer.price,
+                          distance: customer.distance,
+                          duration: customer.time,
+                          vehicle: _service?.id,
+                          note: '',
+                      };
+            const bookingData = await controllers.createBooking(data);
 
             const history = bookingData;
 
@@ -299,37 +325,39 @@ const server = app.run(4600, async () => {
         });
 
         socket.on('customer-cancel', async (message: string) => {
-            const driverSubmit = JSON.parse(message) as DriverSubmit;
-            const history_id = driverSubmit.history_id;
-            const id = driverSubmit.user_id;
+            const driverSubmit = JSON.parse(message) as User;
+            console.log(driverSubmit);
 
-            const driverInfor = await driverModel
-                .findOne({ phonenumber: driverSubmit.driver.phonenumber })
-                .select('_id');
+            // const history_id = driverSubmit.history_id;
+            // const id = driverSubmit.user_id;
 
-            if (driverInfor) {
-                const history = await BookingHistory.findById(history_id);
+            // const driverInfor = await driverModel
+            //     .findOne({ phonenumber: driverSubmit.driver.phonenumber })
+            //     .select('_id');
 
-                if (history) {
-                    history.status = 'Đã hủy';
+            // if (driverInfor) {
+            //     const history = await BookingHistory.findById(history_id);
 
-                    await history.save();
+            //     if (history) {
+            //         history.status = 'Đã hủy';
 
-                    const customerInfo = customerList[id]?.infor;
-                    const customer_id = customerInfo.user_information.phonenumber;
+            //         await history.save();
 
-                    if (stateDriver[customer_id]) {
-                        stateDriver[customer_id].state = 'Đã hủy';
-                    }
+            //         const customerInfo = customerList[id]?.infor;
+            //         const customer_id = customerInfo.user_information.phonenumber;
 
-                    await rabbitmq.publish('tracking', JSON.stringify(stateDriver[customer_id]));
-                    if (stateDriver[customer_id]) {
-                        delete stateDriver[customer_id];
-                    }
-                }
-            }
+            //         if (stateDriver[customer_id]) {
+            //             stateDriver[customer_id].state = 'Đã hủy';
+            //         }
 
-            customerList[id]?.socket?.emit('cancel driver', JSON.stringify(driverSubmit.driver));
+            //         await rabbitmq.publish('tracking', JSON.stringify(stateDriver[customer_id]));
+            //         if (stateDriver[customer_id]) {
+            //             delete stateDriver[customer_id];
+            //         }
+            //     }
+            // }
+
+            // customerList[id]?.socket?.emit('cancel driver', JSON.stringify(driverSubmit.driver));
         });
 
         socket.on('disconnect', () => {

@@ -7832,6 +7832,23 @@
 [API.Call Center][Tue, 12 Sep 2023 11:46:57 GMT] Connected to the rabbit mq successfully 
 [API.Call Center][Tue, 12 Sep 2023 11:46:58 GMT] Connected to database successfully 
 >>>>>>> 64da543c05314b18af133a2377a258ac9b81ef73
+<<<<<<< HEAD
+[API.Call Center][Tue, 12 Sep 2023 14:20:19 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 14:20:19 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 14:20:19 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 14:20:21 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 14:21:34 GMT] Could not connect to the rabbit mq Error: connect ECONNREFUSED 192.168.1.108:5672 
+[API.Call Center][Tue, 12 Sep 2023 16:01:00 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 16:01:00 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 16:01:00 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 16:01:01 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 16:02:15 GMT] Could not connect to the rabbit mq Error: connect ECONNREFUSED 192.168.1.108:5672 
+[API.Call Center][Tue, 12 Sep 2023 17:44:23 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 17:44:23 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 17:44:23 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 17:44:24 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 17:45:38 GMT] Could not connect to the rabbit mq Error: connect ECONNREFUSED 192.168.1.108:5672 
+=======
 >>>>>>> e9414c7443a054393be9f3b235813250ea957146
 [API.Call Center][Tue, 12 Sep 2023 15:13:51 GMT] Setting up request middleware... 
 [API.Call Center][Tue, 12 Sep 2023 15:13:51 GMT] Server is starting... 
@@ -9093,6 +9110,7 @@
 [API.Call Center][Tue, 12 Sep 2023 16:53:02 GMT] Server is starting... 
 [API.Call Center][Tue, 12 Sep 2023 16:53:02 GMT] Connected to the rabbit mq successfully 
 [API.Call Center][Tue, 12 Sep 2023 16:53:03 GMT] Connected to database successfully 
+<<<<<<< HEAD
 [API.Call Center][Tue, 12 Sep 2023 16:56:46 GMT] Setting up request middleware... 
 [API.Call Center][Tue, 12 Sep 2023 16:56:46 GMT] Server is starting... 
 [API.Call Center][Tue, 12 Sep 2023 16:56:46 GMT] Server is running on port 4500 
@@ -9263,3 +9281,6 @@
 [API.Call Center][Tue, 12 Sep 2023 18:01:21 GMT] phone_number sent from call-center s1 client:  [object Object] 
 [API.Call Center][Tue, 12 Sep 2023 18:01:52 GMT] Data sent from client-s1:  [object Object] 
 [API.Call Center][Tue, 12 Sep 2023 18:01:52 GMT] existed Booking:   
+=======
+>>>>>>> master
+>>>>>>> 8a69b36f3dc466ccade8061869c62a31267674c3

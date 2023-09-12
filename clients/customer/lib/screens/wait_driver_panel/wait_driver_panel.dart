@@ -6,13 +6,17 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../functions/convertTimeFormat.dart';
 import '../../functions/setHexColor.dart';
+import '../../models/customer_model.dart';
 import '../../models/driver_model.dart';
 import '../../models/location_model.dart';
 import '../../models/route_model.dart';
 import '../../providers/arrivalLocationProvider.dart';
+import '../../providers/customerProvider.dart';
 import '../../providers/departureLocationProvider.dart';
 import '../../providers/driverProvider.dart';
+import '../../providers/mapProvider.dart';
 import '../../providers/routeProvider.dart';
+import '../../providers/socketProvider.dart';
 import '../../providers/stepProvider.dart';
 
 class WaitDriverPanel extends ConsumerStatefulWidget {
@@ -23,6 +27,7 @@ class WaitDriverPanel extends ConsumerStatefulWidget {
 }
 
 class _WaitDriverPanelState extends ConsumerState<WaitDriverPanel> {
+  bool cancelButton = true;
   Widget widgetText = Text(
     'Tài xế của bạn đang đến...',
     style: GoogleFonts.montserrat(
@@ -99,6 +104,7 @@ class _WaitDriverPanelState extends ConsumerState<WaitDriverPanel> {
                           textAlign: TextAlign.start,
                         );
                       } else if (next == 'comming_driver') {
+                        cancelButton = false;
                         showDriverNotification(driverModel);
                         widgetText = Text(
                           'Tài xế của bạn đã đến',
@@ -413,6 +419,32 @@ class _WaitDriverPanelState extends ConsumerState<WaitDriverPanel> {
                 ),
               ],
             ),
+            if (cancelButton)
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                margin: const EdgeInsets.only(top: 30),
+                width: double.infinity,
+                height: 54,
+                child: ElevatedButton(
+                  onPressed: () {
+                    SocketClient socketClient =
+                        ref.read(socketClientProvider.notifier);
+                    LocationModel departure =
+                        ref.read(departureLocationProvider);
+                    LocationModel arrival = ref.read(arrivalLocationProvider);
+                    RouteModel routeModel = ref.read(routeProvider);
+                    CustomerModel customerModel = ref.read(customerProvider);
+                    socketClient.emitCancelBooing(
+                        departure, arrival, routeModel, customerModel);
+                    ref.read(stepProvider.notifier).setStep('home');
+                    ref.read(mapProvider.notifier).setMapAction('SET_DEFAULT');
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 251, 60, 46)),
+                  child: Text('hủy chuyến'.toUpperCase(),
+                      style: Theme.of(context).textTheme.labelMedium),
+                ),
+              ),
           ],
         ),
       ),

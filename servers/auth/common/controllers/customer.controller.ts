@@ -55,9 +55,7 @@ class customerAuthController implements Controller {
     });
 
     public getBookingHistory = async (req: Request, res: Response, next: NextFunction) => {
-        console.log(req.body);
         const customer = await customerModel.findOne({ email: req.body.email });
-        console.log(customer);
         const historyList = await bookingHistory.find({ customer: customer?._id.toString() }).sort('-_id');
 
         const _historyList: any = [];
@@ -68,7 +66,6 @@ class customerAuthController implements Controller {
             }
             if (check) _historyList.push(historyList[i]);
         }
-        console.log(_historyList);
 
         return res.status(200).json({
             status: 'success',

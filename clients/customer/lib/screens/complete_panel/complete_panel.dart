@@ -1,3 +1,4 @@
+import 'package:customer/providers/routeProvider.dart';
 import 'package:customer/providers/stepProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -277,6 +278,7 @@ class _CompletePanelState extends ConsumerState<CompletePanel> {
                 child: ElevatedButton(
                   onPressed: () {
                     ref.read(stepProvider.notifier).setStep('home');
+                    ref.read(routeProvider.notifier).setCoupon('');
                   },
                   child: Text('hoàn tất'.toUpperCase(),
                       style: Theme.of(context).textTheme.labelMedium),

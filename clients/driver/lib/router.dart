@@ -97,17 +97,17 @@ final routerProvider = Provider<GoRouter>((ref) {
                                     const Duration(milliseconds: 800)),
                         routes: [
                           GoRoute(
-                              parentNavigatorKey: _shellStatusKey,
-                              name: HomeVehicle.name,
-                              path: HomeVehicle.path,
-                              pageBuilder: (context, state) =>
-                                  buildPageWithDefaultTransition(
-                                    context: context,
-                                    key: state.pageKey,
-                                    child: const HomeVehicle(),
-                                    transitionDuration:
-                                        const Duration(milliseconds: 800),
-                                  ),
+                            parentNavigatorKey: _shellStatusKey,
+                            name: HomeVehicle.name,
+                            path: HomeVehicle.path,
+                            pageBuilder: (context, state) =>
+                                buildPageWithDefaultTransition(
+                              context: context,
+                              key: state.pageKey,
+                              child: const HomeVehicle(),
+                              transitionDuration:
+                                  const Duration(milliseconds: 800),
+                            ),
                           ),
                           GoRoute(
                               parentNavigatorKey: _shellStatusKey,
