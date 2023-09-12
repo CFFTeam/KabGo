@@ -98,7 +98,44 @@ const server = app.run(4600, async () => {
                 // coupon: new mongoose.Types.ObjectId('64e73b79646803068e5c21f7'),
             });
 
-            console.log(bookingData);
+            const history = bookingData;
+
+            if (history) {
+                const customerInfo = customerList[_id]?.infor;
+
+                const [date, time, pm] = new Date().toLocaleString('en', { timeZone: 'Asia/Ho_Chi_Minh' }).split(' ');
+                const [h, m, _] = time.split(':');
+
+                const [month, day, year] = date.split('/');
+
+                const local_time = `${h}:${m} ${pm} - ${day}/${month}/${year.replace(',', '')}`;
+
+                const request: CallCenterRequest = {
+                    _id: history._id.toString(),
+                    customer_name: customerInfo.user_information.name,
+                    customer_phonenumber: customerInfo.user_information.phonenumber,
+                    vehicle_type: customerInfo.service,
+                    origin: customerInfo.departure_information.address,
+                    destination: customerInfo.arrival_information.address,
+                    note: '',
+                    local_time: local_time,
+                    time: local_time,
+                    state: 'Đang điều phối',
+                    origin_latlng: {
+                        lat: +customerInfo.departure_information.latitude,
+                        lng: +customerInfo.departure_information.longitude,
+                    },
+                    destination_latlng: {
+                        lat: +customerInfo.arrival_information.latitude,
+                        lng: +customerInfo.arrival_information.longitude,
+                    },
+                };
+
+                const customer_id = customerInfo.user_information.phonenumber;
+                stateDriver[_id] = { ...request };
+
+                await rabbitmq.publish('tracking', JSON.stringify(stateDriver[customer_id]));
+            }
 
             rideService.bookRide(socket, customer, bookingData, rejectList);
         });
@@ -135,6 +172,15 @@ const server = app.run(4600, async () => {
 
                     const customerInfo = customerList[id]?.infor;
 
+                    const [date, time, pm] = new Date()
+                        .toLocaleString('en', { timeZone: 'Asia/Ho_Chi_Minh' })
+                        .split(' ');
+                    const [h, m, _] = time.split(':');
+
+                    const [month, day, year] = date.split('/');
+
+                    const local_time = `${h}:${m} ${pm} - ${day}/${month}/${year.replace(',', '')}`;
+
                     const request: CallCenterRequest = {
                         _id: history_id,
                         driver_name: driverSubmit.driver.name,
@@ -144,12 +190,12 @@ const server = app.run(4600, async () => {
                         vehicle_color: driverSubmit.driver.vehicle.color,
                         customer_name: customerInfo.user_information.name,
                         customer_phonenumber: customerInfo.user_information.phonenumber,
-                        vehicle_type: customerInfo.user_information.service,
+                        vehicle_type: customerInfo.service,
                         origin: customerInfo.departure_information.address,
                         destination: customerInfo.arrival_information.address,
                         note: '',
-                        time: '',
-                        local_time: '',
+                        local_time: local_time,
+                        time: new Date().toISOString(),
                         state: 'Đang tiến hành',
                         origin_latlng: {
                             lat: +customerInfo.departure_information.latitude,
@@ -185,9 +231,18 @@ const server = app.run(4600, async () => {
             customerList[id]?.socket.emit('comming driver', JSON.stringify(driverSubmit));
         });
 
-        socket.on('driver-success', (message: string) => {
+        socket.on('driver-success', async (message: string) => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
             const id = driverSubmit.user_id;
+
+            if (stateDriver[id]) {
+                stateDriver[id].state = 'Hoàn thành';
+
+                await rabbitmq.publish('tracking', JSON.stringify(stateDriver[id]));
+
+                delete stateDriver[id];
+            }
+
             customerList[id]?.socket.emit('success driver', JSON.stringify(driverSubmit));
         });
 
@@ -220,34 +275,12 @@ const server = app.run(4600, async () => {
 
                     const customerInfo = customerList[id]?.infor;
                     const customer_id = customerInfo.user_information.phonenumber;
+                    
+                    if (stateDriver[customer_id]) {
+                        stateDriver[customer_id].state = 'Đã hủy';
+                    }
 
-                    const request: CallCenterRequest = {
-                        _id: history_id,
-                        driver_name: driverSubmit.driver.name,
-                        driver_phonenumber: driverSubmit.driver.phonenumber,
-                        vehicle_number: driverSubmit.driver.vehicle.number,
-                        vehicle_name: driverSubmit.driver.vehicle.name,
-                        vehicle_color: driverSubmit.driver.vehicle.color,
-                        customer_name: customerInfo.user_information.name,
-                        customer_phonenumber: customerInfo.user_information.phonenumber,
-                        vehicle_type: customerInfo.user_information.service,
-                        origin: customerInfo.departure_information.address,
-                        destination: customerInfo.arrival_information.address,
-                        note: '',
-                        time: '',
-                        local_time: '',
-                        state: 'Đã hủy',
-                        origin_latlng: {
-                            lat: +customerInfo.departure_information.latitude,
-                            lng: +customerInfo.departure_information.longitude,
-                        },
-                        destination_latlng: {
-                            lat: +customerInfo.arrival_information.latitude,
-                            lng: +customerInfo.arrival_information.longitude,
-                        },
-                    };
-
-                    await rabbitmq.publish('tracking', JSON.stringify(request));
+                    await rabbitmq.publish('tracking', JSON.stringify(stateDriver[customer_id]));
                     if (stateDriver[customer_id]) {
                         delete stateDriver[customer_id];
                     }

@@ -438,6 +438,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap>
             });
 
             running = true;
+            step = 1;
             compassNotifier.setDirection(false);
             process = 0;
           });

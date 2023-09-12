@@ -15,7 +15,7 @@ List<PointLatLng> interpolateCoordinates(
   final double latStep = (endLat - startLat) / numberOfPoints;
   final double lngStep = (endLng - startLng) / numberOfPoints;
 
-  for (double i = 0; i <= 1; i += 0.01) {
+  for (double i = 0; i <= 1; i += 0.05) {
     final double interpolatedLat = startLat + i * latStep;
     final double interpolatedLng = startLng + i * lngStep;
     coordinates.add(PointLatLng(interpolatedLat, interpolatedLng));

@@ -16,6 +16,7 @@ import 'package:driver/screens/home_screen/index.dart';
 import 'package:driver/screens/home_wallet/home_wallet.dart';
 import 'package:driver/screens/route_screen/route_screen.dart';
 import 'package:driver/screens/splash_screen/index.dart';
+import 'package:driver/screens/vehicle_screen/vehicle_screen.dart';
 import 'package:driver/screens/welcome_screen/index.dart';
 import 'package:driver/widgets/driver_panel/driver_panel.dart';
 import 'package:driver/widgets/home_panel/home_panel.dart';
@@ -95,6 +96,19 @@ final routerProvider = Provider<GoRouter>((ref) {
                                 transitionDuration:
                                     const Duration(milliseconds: 800)),
                         routes: [
+                          GoRoute(
+                              parentNavigatorKey: _shellStatusKey,
+                              name: HomeVehicle.name,
+                              path: HomeVehicle.path,
+                              pageBuilder: (context, state) =>
+                                  buildPageWithDefaultTransition(
+                                    context: context,
+                                    key: state.pageKey,
+                                    child: const HomeVehicle(),
+                                    transitionDuration:
+                                        const Duration(milliseconds: 800),
+                                  ),
+                          ),
                           GoRoute(
                               parentNavigatorKey: _shellStatusKey,
                               name: HomeWallet.name,
