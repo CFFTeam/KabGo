@@ -1,2 +1,2 @@
-const String googleAPIKey = 'AIzaSyBgkEzD0BqqTj6A0JSHt_XWt9gBqC-uFF4';
-const String ip = '192.168.2.61';
+const String googleAPIKey = 'AIzaSyDQVARJoKH_nW1MOxPH8zRfZ9Uyz5CoiWo';
+const String ip = '192.168.2.180';

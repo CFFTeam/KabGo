@@ -93,12 +93,56 @@ const server = app.run(4600, async () => {
                 status: 'Đang điều phối', //điều phối | tiến hành | hủy | hoàn thành
                 frequency: existedBooking.length + 1,
                 price: customer.price,
+                distance: customer.distance,
+                duration: customer.time,
                 vehicle: _service?.id,
                 note: '',
                 // coupon: new mongoose.Types.ObjectId('64e73b79646803068e5c21f7'),
             });
 
-            console.log(bookingData.time);
+            const history = bookingData;
+
+            if (history) {
+                const customerInfo = customerList[_id]?.infor;
+
+                const [date, time, pm] = new Date().toLocaleString('en', { timeZone: 'Asia/Ho_Chi_Minh' }).split(' ');
+                const [h, m, _] = time.split(':');
+
+                const [month, day, year] = date.split('/');
+
+                const local_time = `${h}:${m} ${pm} - ${day}/${month}/${year.replace(',', '')}`;
+
+                const request: CallCenterRequest = {
+                    _id: history._id.toString(),
+                    customer_name: customerInfo.user_information.name,
+                    customer_phonenumber: customerInfo.user_information.phonenumber,
+                    vehicle_type: customerInfo.service,
+                    origin: customerInfo.departure_information.address,
+                    destination: customerInfo.arrival_information.address,
+                    note: '',
+                    price: customerInfo.price,
+                    distance: customerInfo.distance,
+                    duration: customerInfo.time,
+                    local_time: new Date(
+                        new Date().toLocaleString('en', { timeZone: 'Asia/Ho_Chi_Minh' })
+                    ).toISOString(),
+                    booking_time: local_time,
+                    state: 'Đang điều phối',
+                    origin_latlng: {
+                        lat: +customerInfo.departure_information.latitude,
+                        lng: +customerInfo.departure_information.longitude,
+                    },
+                    destination_latlng: {
+                        lat: +customerInfo.arrival_information.latitude,
+                        lng: +customerInfo.arrival_information.longitude,
+                    },
+                };
+
+                const customer_id = customerInfo.user_information.phonenumber;
+                stateDriver[_id] = { ...request };
+
+                await rabbitmq.publish('tracking', JSON.stringify(stateDriver[customer_id]));
+            }
 
             rideService.bookRide(socket, customer, bookingData, rejectList);
         });
@@ -135,6 +179,15 @@ const server = app.run(4600, async () => {
 
                     const customerInfo = customerList[id]?.infor;
 
+                    const [date, time, pm] = new Date()
+                        .toLocaleString('en', { timeZone: 'Asia/Ho_Chi_Minh' })
+                        .split(' ');
+                    const [h, m, _] = time.split(':');
+
+                    const [month, day, year] = date.split('/');
+
+                    const local_time = `${h}:${m} ${pm} - ${day}/${month}/${year.replace(',', '')}`;
+
                     const request: CallCenterRequest = {
                         _id: history_id,
                         driver_name: driverSubmit.driver.name,
@@ -144,12 +197,17 @@ const server = app.run(4600, async () => {
                         vehicle_color: driverSubmit.driver.vehicle.color,
                         customer_name: customerInfo.user_information.name,
                         customer_phonenumber: customerInfo.user_information.phonenumber,
-                        vehicle_type: customerInfo.user_information.service,
+                        vehicle_type: customerInfo.service,
                         origin: customerInfo.departure_information.address,
                         destination: customerInfo.arrival_information.address,
+                        price: customerInfo.price,
+                        distance: customerInfo.distance,
+                        duration: customerInfo.time,
                         note: '',
-                        time: '',
-                        local_time: '',
+                        local_time: new Date(
+                            new Date().toLocaleString('en', { timeZone: 'Asia/Ho_Chi_Minh' })
+                        ).toISOString(),
+                        booking_time: local_time,
                         state: 'Đang tiến hành',
                         origin_latlng: {
                             lat: +customerInfo.departure_information.latitude,
@@ -168,7 +226,7 @@ const server = app.run(4600, async () => {
                 }
             }
 
-            customerList[id]?.socket.emit('submit driver', JSON.stringify(driverSubmit.driver));
+            customerList[id]?.socket?.emit('submit driver', JSON.stringify(driverSubmit.driver));
         });
 
         socket.on('driver-moving', (message: string) => {
@@ -176,31 +234,71 @@ const server = app.run(4600, async () => {
 
             const id = driverSubmit.user_id;
 
-            customerList[id]?.socket.emit('moving driver', JSON.stringify(driverSubmit));
+            customerList[id]?.socket?.emit('moving driver', JSON.stringify(driverSubmit));
         });
 
         socket.on('driver-comming', (message: string) => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
             const id = driverSubmit.user_id;
-            customerList[id]?.socket.emit('comming driver', JSON.stringify(driverSubmit));
+            customerList[id]?.socket?.emit('comming driver', JSON.stringify(driverSubmit));
         });
 
-        socket.on('driver-success', (message: string) => {
+        socket.on('driver-success', async (message: string) => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
             const id = driverSubmit.user_id;
-            customerList[id]?.socket.emit('success driver', JSON.stringify(driverSubmit));
+
+            if (stateDriver[id]) {
+                stateDriver[id].state = 'Hoàn thành';
+
+                await rabbitmq.publish('tracking', JSON.stringify(stateDriver[id]));
+
+                delete stateDriver[id];
+            }
+
+            customerList[id]?.socket?.emit('success driver', JSON.stringify(driverSubmit));
         });
 
-        socket.on('driver-reject', (message: string) => {
+        socket.on('driver-reject', async (message: string) => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
             const id = driverSubmit.user_id;
-            console.log('driver-reject', rejectList[id]);
+            const history_id = driverSubmit.history_id;
+
             if (rejectList[id]) rejectList[id] = [...rejectList[id], driverSubmit.driver.phonenumber];
             else rejectList[id] = [driverSubmit.driver.phonenumber];
-            customerList[id]?.socket.emit('reject driver');
+
+            const driverInfor = await driverModel
+                .findOne({ phonenumber: driverSubmit.driver.phonenumber })
+                .select('_id');
+
+            if (driverInfor) {
+                const history = await BookingHistory.findById(history_id);
+
+                if (history) {
+                    delete history.driver;
+                    history.status = 'Đang điều phối';
+
+                    await history.save();
+
+                    const customerInfo = customerList[id]?.infor;
+                    const customer_id = customerInfo.user_information.phonenumber;
+
+                    if (stateDriver[customer_id]) {
+                        stateDriver[customer_id].state = 'Đang điều phối';
+                        stateDriver[customer_id].driver_name = '';
+                        stateDriver[customer_id].driver_phonenumber = '';
+                        stateDriver[customer_id].vehicle_number = '';
+                        stateDriver[customer_id].vehicle_name = '';
+                        stateDriver[customer_id].vehicle_color = '';
+                    }
+
+                    await rabbitmq.publish('tracking', JSON.stringify(stateDriver[customer_id]));
+                }
+            }
+
+            customerList[id]?.socket?.emit('reject driver');
         });
 
-        socket.on('driver-cancel', async (message: string) => {
+        socket.on('customer-cancel', async (message: string) => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
             const history_id = driverSubmit.history_id;
             const id = driverSubmit.user_id;
@@ -213,7 +311,6 @@ const server = app.run(4600, async () => {
                 const history = await BookingHistory.findById(history_id);
 
                 if (history) {
-                    history.driver = new mongoose.Types.ObjectId(driverInfor._id);
                     history.status = 'Đã hủy';
 
                     await history.save();
@@ -221,48 +318,28 @@ const server = app.run(4600, async () => {
                     const customerInfo = customerList[id]?.infor;
                     const customer_id = customerInfo.user_information.phonenumber;
 
-                    const request: CallCenterRequest = {
-                        _id: history_id,
-                        driver_name: driverSubmit.driver.name,
-                        driver_phonenumber: driverSubmit.driver.phonenumber,
-                        vehicle_number: driverSubmit.driver.vehicle.number,
-                        vehicle_name: driverSubmit.driver.vehicle.name,
-                        vehicle_color: driverSubmit.driver.vehicle.color,
-                        customer_name: customerInfo.user_information.name,
-                        customer_phonenumber: customerInfo.user_information.phonenumber,
-                        vehicle_type: customerInfo.user_information.service,
-                        origin: customerInfo.departure_information.address,
-                        destination: customerInfo.arrival_information.address,
-                        note: '',
-                        time: '',
-                        local_time: '',
-                        state: 'Đã hủy',
-                        origin_latlng: {
-                            lat: +customerInfo.departure_information.latitude,
-                            lng: +customerInfo.departure_information.longitude,
-                        },
-                        destination_latlng: {
-                            lat: +customerInfo.arrival_information.latitude,
-                            lng: +customerInfo.arrival_information.longitude,
-                        },
-                    };
+                    if (stateDriver[customer_id]) {
+                        stateDriver[customer_id].state = 'Đã hủy';
+                    }
 
-                    await rabbitmq.publish('tracking', JSON.stringify(request));
+                    await rabbitmq.publish('tracking', JSON.stringify(stateDriver[customer_id]));
                     if (stateDriver[customer_id]) {
                         delete stateDriver[customer_id];
                     }
                 }
             }
 
-            customerList[id]?.socket.emit('cancel driver', JSON.stringify(driverSubmit.driver));
+            customerList[id]?.socket?.emit('cancel driver', JSON.stringify(driverSubmit.driver));
         });
 
         socket.on('disconnect', () => {
-            // delete driverList[socket.phonenumber];
-            rideService.removeObserver(
-                rideService.observers.find((value) => value.socket.phonenumber == socket.phonenumber)
-            );
-            console.log('Client disconnected');
+            if (socket?.phonenumber) {
+                // delete driverList[socket.phonenumber];
+                rideService.removeObserver(
+                    rideService.observers.find((value) => value.socket.phonenumber == socket.phonenumber)
+                );
+                console.log('Client disconnected');
+            }
         });
     });
 
@@ -316,15 +393,16 @@ const server = app.run(4600, async () => {
                 longitude: `${request.destination_latlng.lng}`,
             },
             service: request.vehicle_type,
-            price: '160.000đ',
-            distance: '36.5km',
-            time: '35 phút',
+            price: request.price,
+            distance: request.distance,
+            time: request.duration,
         };
 
+        customerList[request.customer_phonenumber] = { infor: { ...customer }, socket: null };
         stateDriver[request.customer_phonenumber] = { ...request };
 
         nearestDriver.map((el: any) => {
-            el.socket.emit('customer-request', JSON.stringify(customer));
+            el.socket?.emit('customer-request', JSON.stringify({ ...customer, history_id: request._id.toString() }));
             delete el.socket;
 
             return el;

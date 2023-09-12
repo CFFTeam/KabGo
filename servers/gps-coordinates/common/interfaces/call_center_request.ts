@@ -12,9 +12,12 @@ export interface CallCenterRequest {
     origin: string,
     destination: string,
     note: string,
-    time: string,
+    booking_time: string,
     local_time: string,
     state: string,
+    distance: string,
+    duration: string,
+    price: string,
     origin_latlng: {
         lat: number,
         lng: number

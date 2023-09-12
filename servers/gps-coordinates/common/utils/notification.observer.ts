@@ -78,7 +78,7 @@ export class RideService implements Subject {
 
     bookRide(socket: any, customer: any, bookingData: any, rejectList: any): void {
         const finalDrivers = this.notifyObservers(customer, bookingData, rejectList);
-        socket.emit('send drivers', JSON.stringify(finalDrivers));
+        socket?.emit('send drivers', JSON.stringify(finalDrivers));
     }
 }
 
@@ -86,7 +86,7 @@ export class DriverNotify implements Observer {
     constructor(public socket: any, public infor: Driver) {}
 
     update(customer: any, bookingData: any): void {
-        this.socket.emit('customer-request', JSON.stringify({ ...customer, history_id: bookingData._id.toString() }));
+        this.socket?.emit('customer-request', JSON.stringify({ ...customer, history_id: bookingData._id.toString() }));
     }
 }
 
