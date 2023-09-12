@@ -45,9 +45,11 @@ interface TopKpiData {
 
 interface InitialDashboardState {
   categoryData: CategoryData[];
+  isDoneCategoryData: boolean;
   tasklistData: TasklistData;
   topKpiData: TopKpiData[];
   chartData: ChartData;
+  isDoneChartData: boolean;
 }
 
 const initialDashboardState: InitialDashboardState = {
@@ -78,10 +80,14 @@ const initialDashboardState: InitialDashboardState = {
     },
   ],
 
+  isDoneCategoryData: false,
+
   chartData: {
     xLabels: ["March", "April", "May", "June", "July", "August", "September"],
     yLabels: [],
   },
+
+  isDoneChartData: false, 
 
   tasklistData: {
     numberOfTasks: 4,
@@ -143,6 +149,7 @@ const dashboardSlice = createSlice({
       for (let i = 0; i < state.categoryData.length; i++) {
         state.categoryData[i].number = action.payload[i];
       }
+      state.isDoneCategoryData = true;
     },
     updateTasklistState(state, action: PayloadAction<number>) {
       state.tasklistData.tasklistChild[action.payload].check =
@@ -163,6 +170,7 @@ const dashboardSlice = createSlice({
     },
     updateRevenue(state, action: PayloadAction<number[]>){
       state.chartData.yLabels = [...action.payload];
+      state.isDoneChartData = true;
     }
   },
 });
