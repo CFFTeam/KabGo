@@ -1455,8 +1455,26 @@
 [API.Driver][Tue, 12 Sep 2023 16:15:54 GMT] Connected to database successfully 
 >>>>>>> e488ed9 (update firebase)
 >>>>>>> fa969801da6a6a4e630464f12747c2319eac2d76
+<<<<<<< HEAD
+[API.Driver][Tue, 12 Sep 2023 16:56:42 GMT] Setting up request middleware... 
+[API.Driver][Tue, 12 Sep 2023 16:56:42 GMT] Server is starting... 
+[API.Driver][Tue, 12 Sep 2023 16:56:42 GMT] Server is running on port 4200 
+[API.Driver][Tue, 12 Sep 2023 16:56:43 GMT] Connected to database successfully 
+[API.Driver][Tue, 12 Sep 2023 17:08:44 GMT] Setting up request middleware... 
+[API.Driver][Tue, 12 Sep 2023 17:08:44 GMT] Server is starting... 
+[API.Driver][Tue, 12 Sep 2023 17:08:44 GMT] Server is running on port 4200 
+[API.Driver][Tue, 12 Sep 2023 17:08:45 GMT] Connected to database successfully 
+[API.Driver][Tue, 12 Sep 2023 17:11:42 GMT] Server is starting... 
+[API.Driver][Tue, 12 Sep 2023 17:11:42 GMT] Setting up request middleware... 
+[API.Driver][Tue, 12 Sep 2023 17:11:42 GMT] Server is running on port 4200 
+[API.Driver][Tue, 12 Sep 2023 17:11:43 GMT] Connected to database successfully 
+=======
 >>>>>>> master
+<<<<<<< HEAD
 [API.Driver][Tue, 12 Sep 2023 19:06:37 GMT] Setting up request middleware... 
 [API.Driver][Tue, 12 Sep 2023 19:06:37 GMT] Server is starting... 
 [API.Driver][Tue, 12 Sep 2023 19:06:37 GMT] Server is running on port 4200 
 [API.Driver][Tue, 12 Sep 2023 19:06:38 GMT] Connected to database successfully 
+=======
+>>>>>>> 8a69b36f3dc466ccade8061869c62a31267674c3
+>>>>>>> master

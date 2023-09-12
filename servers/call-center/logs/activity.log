@@ -9110,4 +9110,177 @@
 [API.Call Center][Tue, 12 Sep 2023 16:53:02 GMT] Server is starting... 
 [API.Call Center][Tue, 12 Sep 2023 16:53:02 GMT] Connected to the rabbit mq successfully 
 [API.Call Center][Tue, 12 Sep 2023 16:53:03 GMT] Connected to database successfully 
+<<<<<<< HEAD
+[API.Call Center][Tue, 12 Sep 2023 16:56:46 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 16:56:46 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 16:56:46 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 16:56:46 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 16:56:47 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 17:08:51 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 17:08:51 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 17:08:51 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 17:08:51 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 17:08:52 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 17:11:02 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 17:11:02 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 17:11:02 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 17:11:02 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 17:11:03 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 17:11:37 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 17:11:37 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 17:11:37 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 17:11:37 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 17:11:37 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 17:12:11 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 17:12:11 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 17:14:42 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 17:14:42 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 17:15:04 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 17:15:04 GMT] existed Booking:  {
+  original: {
+    address: 'Đại Học Sư Phạm - 280 An Dương Vương, Đường An Dương Vương, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6825942,
+    latitude: 10.7609868
+  },
+  destination: {
+    address: 'Mì Cay Sasin Trần Hưng Đạo, Đường Trần Hưng Đạo, Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh',
+    longitude: 106.6910212,
+    latitude: 10.7634175
+  },
+  _id: new ObjectId("6500937661107613b8a43105"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '1,6 km',
+  duration: '5 phút',
+  time: 2023-09-12T23:36:06.571Z,
+  frequency: 1,
+  price: '19.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T16:36:19.355Z,
+  updatedAt: 2023-09-12T16:36:22.121Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+} 
+[API.Call Center][Tue, 12 Sep 2023 17:15:04 GMT] calculated price s1:  10.000đ 
+[API.Call Center][Tue, 12 Sep 2023 17:18:01 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 17:18:01 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 17:18:55 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 17:18:55 GMT] existed Booking:   
+[API.Call Center][Tue, 12 Sep 2023 17:34:43 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 17:34:43 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 17:35:06 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 17:35:06 GMT] existed Booking:  {
+  original: {
+    address: 'Đại Học Sư Phạm - 280 An Dương Vương, Đường An Dương Vương, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6825942,
+    latitude: 10.7609868
+  },
+  destination: {
+    address: 'Mì Cay Sasin Trần Hưng Đạo, Đường Trần Hưng Đạo, Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh',
+    longitude: 106.6910212,
+    latitude: 10.7634175
+  },
+  _id: new ObjectId("6500937661107613b8a43105"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '1,6 km',
+  duration: '5 phút',
+  time: 2023-09-12T23:36:06.571Z,
+  frequency: 1,
+  price: '19.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T16:36:19.355Z,
+  updatedAt: 2023-09-12T16:36:22.121Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Đại Học Sư Phạm - 280 An Dương Vương, Đường An Dương Vương, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6825942,
+    latitude: 10.7609868
+  },
+  destination: {
+    address: 'Mì Cay Sasin Trần Hưng Đạo, Đường Trần Hưng Đạo, Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh',
+    longitude: 106.6910212,
+    latitude: 10.7634175
+  },
+  _id: new ObjectId("65009c98a97c611297956204"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,6 km',
+  duration: '5 phút',
+  time: 2023-09-13T00:15:04.069Z,
+  frequency: 2,
+  price: '10.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  createdAt: 2023-09-12T17:15:04.573Z,
+  updatedAt: 2023-09-12T17:15:12.410Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+} 
+[API.Call Center][Tue, 12 Sep 2023 17:35:06 GMT] calculated price s1:  19.000đ 
+[API.Call Center][Tue, 12 Sep 2023 17:59:16 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 17:59:16 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 18:00:29 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 18:00:29 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 18:01:04 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 18:01:04 GMT] existed Booking:  {
+  original: {
+    address: 'Đại Học Sư Phạm - 280 An Dương Vương, Đường An Dương Vương, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6825942,
+    latitude: 10.7609868
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("65008fb261107613b8a430f7"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '0,3 km',
+  duration: '1 phút',
+  time: 2023-09-12T23:20:02.319Z,
+  frequency: 1,
+  price: '4.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T16:20:29.649Z,
+  updatedAt: 2023-09-12T16:20:29.649Z,
+  __v: 0
+},{
+  original: {
+    address: 'Đại Học Sư Phạm - 280 An Dương Vương, Đường An Dương Vương, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6825942,
+    latitude: 10.7609868
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("6500930261107613b8a430fd"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '0,3 km',
+  duration: '1 phút',
+  time: 2023-09-12T23:34:10.084Z,
+  frequency: 2,
+  price: '4.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T16:34:10.546Z,
+  updatedAt: 2023-09-12T16:34:13.191Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+} 
+[API.Call Center][Tue, 12 Sep 2023 18:01:04 GMT] calculated price s1:  2.000đ 
+[API.Call Center][Tue, 12 Sep 2023 18:01:20 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 18:01:21 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 18:01:52 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 18:01:52 GMT] existed Booking:   
+=======
 >>>>>>> master
+>>>>>>> 8a69b36f3dc466ccade8061869c62a31267674c3
