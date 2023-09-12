@@ -118,8 +118,8 @@ const server = app.run(4600, async () => {
                     origin: customerInfo.departure_information.address,
                     destination: customerInfo.arrival_information.address,
                     note: '',
-                    local_time: local_time,
-                    time: local_time,
+                    local_time: new Date(new Date().toLocaleString('en', { timeZone: 'Asia/Ho_Chi_Minh' })).toISOString(),
+                    booking_time: local_time,
                     state: 'Đang điều phối',
                     origin_latlng: {
                         lat: +customerInfo.departure_information.latitude,
@@ -194,8 +194,8 @@ const server = app.run(4600, async () => {
                         origin: customerInfo.departure_information.address,
                         destination: customerInfo.arrival_information.address,
                         note: '',
-                        local_time: local_time,
-                        time: new Date().toISOString(),
+                        local_time: new Date(new Date().toLocaleString('en', { timeZone: 'Asia/Ho_Chi_Minh' })).toISOString(),
+                        booking_time: local_time,
                         state: 'Đang tiến hành',
                         origin_latlng: {
                             lat: +customerInfo.departure_information.latitude,
