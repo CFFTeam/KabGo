@@ -1,2 +1,2 @@
-String APIKey = 'AIzaSyDbXYXLTxUoMvKXGd_wX8D432Bn-QGlHtQ';
-String ip = '192.168.1.30';
+String APIKey = 'AIzaSyA6D_kw5-6l1MjqwwTaSdyo7RW-1aqKDtc';
+String ip = '192.168.2.5';
