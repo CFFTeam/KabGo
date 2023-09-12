@@ -9302,3 +9302,8 @@
 [API.Call Center][Tue, 12 Sep 2023 20:44:25 GMT] Server is running on port 4500 
 [API.Call Center][Tue, 12 Sep 2023 20:44:25 GMT] Could not connect to the rabbit mq Error: connect ECONNREFUSED 192.168.2.180:5672 
 [API.Call Center][Tue, 12 Sep 2023 20:44:25 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 21:49:36 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 21:49:36 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 21:49:36 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 21:49:36 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 21:49:36 GMT] Connected to database successfully 
