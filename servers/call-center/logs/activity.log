@@ -6820,3 +6820,970 @@
 >>>>>>> fedefdd69132ec7ec3e8f6b879dd17c9c7a40ab4
 >>>>>>> ecdb7239463a6a3238caf0c0a9da471dc85696e4
 >>>>>>> master
+[API.Call Center][Tue, 12 Sep 2023 11:50:16 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 11:50:16 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 11:50:16 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 11:50:16 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 11:50:17 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 11:52:27 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 11:52:28 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 11:53:55 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 11:53:55 GMT] existed Booking:   
+[API.Call Center][Tue, 12 Sep 2023 12:20:14 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 12:20:14 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 12:20:14 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 12:20:14 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 12:20:16 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 12:20:25 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 12:20:25 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 12:20:25 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 12:20:25 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 12:20:26 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 12:28:31 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 12:28:31 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 12:28:31 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 12:28:31 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 12:28:32 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 12:51:17 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 12:51:17 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 12:52:07 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 12:52:07 GMT] existed Booking:   
+[API.Call Center][Tue, 12 Sep 2023 12:58:41 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 12:58:41 GMT] existed Booking:   
+[API.Call Center][Tue, 12 Sep 2023 13:03:43 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:03:43 GMT] existed Booking:   
+[API.Call Center][Tue, 12 Sep 2023 13:06:21 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 13:06:21 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:06:46 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:06:46 GMT] existed Booking:  {
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: "Three O'clock, Đường Nguyễn Thị Minh Khai, phường 2, Quận 3, Thành phố Hồ Chí Minh",
+    longitude: 106.6835928,
+    latitude: 10.7677324
+  },
+  _id: new ObjectId("650061afb737568121fc7e03"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '2,3 km',
+  duration: '8 phút',
+  time: 2023-09-12T20:03:43.712Z,
+  frequency: 1,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  createdAt: 2023-09-12T13:03:50.531Z,
+  updatedAt: 2023-09-12T13:03:57.459Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+} 
+[API.Call Center][Tue, 12 Sep 2023 13:06:47 GMT] calculated price s1:  27.000đ 
+[API.Call Center][Tue, 12 Sep 2023 13:10:56 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 13:10:56 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:10:56 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 13:10:58 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:11:02 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:11:03 GMT] existed Booking:  {
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: "Three O'clock, Đường Nguyễn Thị Minh Khai, phường 2, Quận 3, Thành phố Hồ Chí Minh",
+    longitude: 106.6835928,
+    latitude: 10.7677324
+  },
+  _id: new ObjectId("650061afb737568121fc7e03"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '2,3 km',
+  duration: '8 phút',
+  time: 2023-09-12T20:03:43.712Z,
+  frequency: 1,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  createdAt: 2023-09-12T13:03:50.531Z,
+  updatedAt: 2023-09-12T13:03:57.459Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: "Three O'clock, Đường Nguyễn Thị Minh Khai, phường 2, Quận 3, Thành phố Hồ Chí Minh",
+    longitude: 106.6835928,
+    latitude: 10.7677324
+  },
+  _id: new ObjectId("65006266b737568121fc7e07"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '2,3 km',
+  duration: '8 phút',
+  time: 2023-09-12T20:06:46.796Z,
+  frequency: 2,
+  price: '27.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:06:47.335Z,
+  updatedAt: 2023-09-12T13:06:55.141Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+} 
+[API.Call Center][Tue, 12 Sep 2023 13:11:05 GMT] calculated price s1:  27.000đ 
+[API.Call Center][Tue, 12 Sep 2023 13:12:35 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 13:12:35 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:12:35 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 13:12:35 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:12:35 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 13:12:36 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:12:55 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 13:12:56 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:12:56 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 13:12:56 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:12:57 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 13:12:57 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:12:57 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 13:12:57 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:12:59 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 13:13:00 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:13:08 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:13:08 GMT] existed Booking:  {
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: "Three O'clock, Đường Nguyễn Thị Minh Khai, phường 2, Quận 3, Thành phố Hồ Chí Minh",
+    longitude: 106.6835928,
+    latitude: 10.7677324
+  },
+  _id: new ObjectId("650061afb737568121fc7e03"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '2,3 km',
+  duration: '8 phút',
+  time: 2023-09-12T20:03:43.712Z,
+  frequency: 1,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  createdAt: 2023-09-12T13:03:50.531Z,
+  updatedAt: 2023-09-12T13:03:57.459Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: "Three O'clock, Đường Nguyễn Thị Minh Khai, phường 2, Quận 3, Thành phố Hồ Chí Minh",
+    longitude: 106.6835928,
+    latitude: 10.7677324
+  },
+  _id: new ObjectId("65006266b737568121fc7e07"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '2,3 km',
+  duration: '8 phút',
+  time: 2023-09-12T20:06:46.796Z,
+  frequency: 2,
+  price: '27.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:06:47.335Z,
+  updatedAt: 2023-09-12T13:06:55.141Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: "Three O'clock, Đường Nguyễn Thị Minh Khai, phường 2, Quận 3, Thành phố Hồ Chí Minh",
+    longitude: 106.6835928,
+    latitude: 10.7677324
+  },
+  _id: new ObjectId("65006366b737568121fc7e11"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '2,3 km',
+  duration: '8 phút',
+  time: 2023-09-12T20:11:02.909Z,
+  frequency: 3,
+  price: '27.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:11:05.297Z,
+  updatedAt: 2023-09-12T13:11:05.297Z,
+  __v: 0
+} 
+[API.Call Center][Tue, 12 Sep 2023 13:13:08 GMT] calculated price s1:  27.000đ 
+[API.Call Center][Tue, 12 Sep 2023 13:20:04 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:20:04 GMT] existed Booking:  {
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: "Three O'clock, Đường Nguyễn Thị Minh Khai, phường 2, Quận 3, Thành phố Hồ Chí Minh",
+    longitude: 106.6835928,
+    latitude: 10.7677324
+  },
+  _id: new ObjectId("650061afb737568121fc7e03"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '2,3 km',
+  duration: '8 phút',
+  time: 2023-09-12T20:03:43.712Z,
+  frequency: 1,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  createdAt: 2023-09-12T13:03:50.531Z,
+  updatedAt: 2023-09-12T13:03:57.459Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: "Three O'clock, Đường Nguyễn Thị Minh Khai, phường 2, Quận 3, Thành phố Hồ Chí Minh",
+    longitude: 106.6835928,
+    latitude: 10.7677324
+  },
+  _id: new ObjectId("65006266b737568121fc7e07"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '2,3 km',
+  duration: '8 phút',
+  time: 2023-09-12T20:06:46.796Z,
+  frequency: 2,
+  price: '27.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:06:47.335Z,
+  updatedAt: 2023-09-12T13:06:55.141Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: "Three O'clock, Đường Nguyễn Thị Minh Khai, phường 2, Quận 3, Thành phố Hồ Chí Minh",
+    longitude: 106.6835928,
+    latitude: 10.7677324
+  },
+  _id: new ObjectId("65006366b737568121fc7e11"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '2,3 km',
+  duration: '8 phút',
+  time: 2023-09-12T20:11:02.909Z,
+  frequency: 3,
+  price: '27.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:11:05.297Z,
+  updatedAt: 2023-09-12T13:11:05.297Z,
+  __v: 0
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: "Three O'clock, Đường Nguyễn Thị Minh Khai, phường 2, Quận 3, Thành phố Hồ Chí Minh",
+    longitude: 106.6835928,
+    latitude: 10.7677324
+  },
+  _id: new ObjectId("650063e4b737568121fc7e27"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '2,3 km',
+  duration: '8 phút',
+  time: 2023-09-12T20:13:08.016Z,
+  frequency: 4,
+  price: '27.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:13:08.903Z,
+  updatedAt: 2023-09-12T13:13:19.748Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+} 
+[API.Call Center][Tue, 12 Sep 2023 13:20:05 GMT] calculated price s1:  27.000đ 
+[API.Call Center][Tue, 12 Sep 2023 13:21:50 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:21:51 GMT] existed Booking:   
+[API.Call Center][Tue, 12 Sep 2023 13:25:13 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:25:14 GMT] existed Booking:  {
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("650065eeb737568121fc7e33"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:21:50.959Z,
+  frequency: 1,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:22:05.219Z,
+  updatedAt: 2023-09-12T13:22:08.879Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+} 
+[API.Call Center][Tue, 12 Sep 2023 13:25:16 GMT] calculated price s1:  14.000đ 
+[API.Call Center][Tue, 12 Sep 2023 13:25:24 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:25:24 GMT] existed Booking:  {
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: "Three O'clock, Đường Nguyễn Thị Minh Khai, phường 2, Quận 3, Thành phố Hồ Chí Minh",
+    longitude: 106.6835928,
+    latitude: 10.7677324
+  },
+  _id: new ObjectId("650061afb737568121fc7e03"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '2,3 km',
+  duration: '8 phút',
+  time: 2023-09-12T20:03:43.712Z,
+  frequency: 1,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  createdAt: 2023-09-12T13:03:50.531Z,
+  updatedAt: 2023-09-12T13:03:57.459Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: "Three O'clock, Đường Nguyễn Thị Minh Khai, phường 2, Quận 3, Thành phố Hồ Chí Minh",
+    longitude: 106.6835928,
+    latitude: 10.7677324
+  },
+  _id: new ObjectId("65006266b737568121fc7e07"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '2,3 km',
+  duration: '8 phút',
+  time: 2023-09-12T20:06:46.796Z,
+  frequency: 2,
+  price: '27.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:06:47.335Z,
+  updatedAt: 2023-09-12T13:06:55.141Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: "Three O'clock, Đường Nguyễn Thị Minh Khai, phường 2, Quận 3, Thành phố Hồ Chí Minh",
+    longitude: 106.6835928,
+    latitude: 10.7677324
+  },
+  _id: new ObjectId("65006366b737568121fc7e11"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '2,3 km',
+  duration: '8 phút',
+  time: 2023-09-12T20:11:02.909Z,
+  frequency: 3,
+  price: '27.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:11:05.297Z,
+  updatedAt: 2023-09-12T13:11:05.297Z,
+  __v: 0
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: "Three O'clock, Đường Nguyễn Thị Minh Khai, phường 2, Quận 3, Thành phố Hồ Chí Minh",
+    longitude: 106.6835928,
+    latitude: 10.7677324
+  },
+  _id: new ObjectId("650063e4b737568121fc7e27"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '2,3 km',
+  duration: '8 phút',
+  time: 2023-09-12T20:13:08.016Z,
+  frequency: 4,
+  price: '27.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:13:08.903Z,
+  updatedAt: 2023-09-12T13:13:19.748Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: "Three O'clock, Đường Nguyễn Thị Minh Khai, phường 2, Quận 3, Thành phố Hồ Chí Minh",
+    longitude: 106.6835928,
+    latitude: 10.7677324
+  },
+  _id: new ObjectId("65006584b737568121fc7e2d"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '2,3 km',
+  duration: '8 phút',
+  time: 2023-09-12T20:20:04.187Z,
+  frequency: 5,
+  price: '27.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:20:05.039Z,
+  updatedAt: 2023-09-12T13:20:05.039Z,
+  __v: 0
+} 
+[API.Call Center][Tue, 12 Sep 2023 13:25:25 GMT] calculated price s1:  27.000đ 
+[API.Call Center][Tue, 12 Sep 2023 13:25:40 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 13:25:42 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 13:25:42 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:25:42 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:25:50 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:25:51 GMT] existed Booking:  {
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("650065eeb737568121fc7e33"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:21:50.959Z,
+  frequency: 1,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:22:05.219Z,
+  updatedAt: 2023-09-12T13:22:08.879Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("650066b9b737568121fc7e35"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:25:13.921Z,
+  frequency: 2,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:25:16.030Z,
+  updatedAt: 2023-09-12T13:25:16.030Z,
+  __v: 0
+} 
+[API.Call Center][Tue, 12 Sep 2023 13:25:54 GMT] calculated price s1:  14.000đ 
+[API.Call Center][Tue, 12 Sep 2023 13:27:03 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:27:03 GMT] existed Booking:  {
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("650065eeb737568121fc7e33"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:21:50.959Z,
+  frequency: 1,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:22:05.219Z,
+  updatedAt: 2023-09-12T13:22:08.879Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("650066b9b737568121fc7e35"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:25:13.921Z,
+  frequency: 2,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:25:16.030Z,
+  updatedAt: 2023-09-12T13:25:16.030Z,
+  __v: 0
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("650066deb737568121fc7e45"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:25:49.984Z,
+  frequency: 3,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:25:54.803Z,
+  updatedAt: 2023-09-12T13:25:54.803Z,
+  __v: 0
+} 
+[API.Call Center][Tue, 12 Sep 2023 13:27:03 GMT] calculated price s1:  14.000đ 
+[API.Call Center][Tue, 12 Sep 2023 13:35:19 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:35:20 GMT] existed Booking:  {
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("650065eeb737568121fc7e33"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:21:50.959Z,
+  frequency: 1,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:22:05.219Z,
+  updatedAt: 2023-09-12T13:22:08.879Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("650066b9b737568121fc7e35"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:25:13.921Z,
+  frequency: 2,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:25:16.030Z,
+  updatedAt: 2023-09-12T13:25:16.030Z,
+  __v: 0
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("650066deb737568121fc7e45"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:25:49.984Z,
+  frequency: 3,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:25:54.803Z,
+  updatedAt: 2023-09-12T13:25:54.803Z,
+  __v: 0
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("65006727b737568121fc7e4b"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:27:03.388Z,
+  frequency: 4,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:27:03.990Z,
+  updatedAt: 2023-09-12T13:27:09.707Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+} 
+[API.Call Center][Tue, 12 Sep 2023 13:35:20 GMT] calculated price s1:  14.000đ 
+[API.Call Center][Tue, 12 Sep 2023 13:38:52 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:38:53 GMT] existed Booking:  {
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("650065eeb737568121fc7e33"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:21:50.959Z,
+  frequency: 1,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:22:05.219Z,
+  updatedAt: 2023-09-12T13:22:08.879Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("650066b9b737568121fc7e35"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:25:13.921Z,
+  frequency: 2,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:25:16.030Z,
+  updatedAt: 2023-09-12T13:25:16.030Z,
+  __v: 0
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("650066deb737568121fc7e45"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:25:49.984Z,
+  frequency: 3,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:25:54.803Z,
+  updatedAt: 2023-09-12T13:25:54.803Z,
+  __v: 0
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("65006727b737568121fc7e4b"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:27:03.388Z,
+  frequency: 4,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:27:03.990Z,
+  updatedAt: 2023-09-12T13:27:09.707Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("65006917b737568121fc7e51"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:35:19.572Z,
+  frequency: 5,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:35:20.732Z,
+  updatedAt: 2023-09-12T13:35:28.933Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+} 
+[API.Call Center][Tue, 12 Sep 2023 13:38:56 GMT] calculated price s1:  14.000đ 
+[API.Call Center][Tue, 12 Sep 2023 13:42:22 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 13:42:22 GMT] existed Booking:  {
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("650065eeb737568121fc7e33"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:21:50.959Z,
+  frequency: 1,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:22:05.219Z,
+  updatedAt: 2023-09-12T13:22:08.879Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("650066b9b737568121fc7e35"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:25:13.921Z,
+  frequency: 2,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:25:16.030Z,
+  updatedAt: 2023-09-12T13:25:16.030Z,
+  __v: 0
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("650066deb737568121fc7e45"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:25:49.984Z,
+  frequency: 3,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:25:54.803Z,
+  updatedAt: 2023-09-12T13:25:54.803Z,
+  __v: 0
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("65006727b737568121fc7e4b"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:27:03.388Z,
+  frequency: 4,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:27:03.990Z,
+  updatedAt: 2023-09-12T13:27:09.707Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("65006917b737568121fc7e51"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:35:19.572Z,
+  frequency: 5,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:35:20.732Z,
+  updatedAt: 2023-09-12T13:35:28.933Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+},{
+  original: {
+    address: 'Three O’clock Coffee, Đường Trần Hưng Đạo, phường 1, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6818454,
+    latitude: 10.7552455
+  },
+  destination: {
+    address: 'Trường Đại học Khoa học Tự nhiên - Đại học Quốc gia TP.HCM, Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6824824,
+    latitude: 10.7628356
+  },
+  _id: new ObjectId("650069ecb737568121fc7e57"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,2 km',
+  duration: '5 phút',
+  time: 2023-09-12T20:38:51.980Z,
+  frequency: 6,
+  price: '14.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T13:38:56.769Z,
+  updatedAt: 2023-09-12T13:39:06.843Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+} 
+[API.Call Center][Tue, 12 Sep 2023 13:42:22 GMT] calculated price s1:  14.000đ 

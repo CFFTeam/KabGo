@@ -18,6 +18,7 @@ export interface IBookingHistory {
       latitude: number
     },
     distance: string,
+    duration: string,
     time: Date,
     status: string, // điều phối | tiến hành | hủy | hoàn thành
     frequency: number,
@@ -65,6 +66,9 @@ const BookingHistorySchema = new mongoose.Schema<IBookingHistory>({
         }
     },
     distance: {
+        type: String,
+    },
+    duration: {
         type: String,
     },
     time: {

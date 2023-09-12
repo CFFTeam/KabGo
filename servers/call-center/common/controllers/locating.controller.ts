@@ -81,6 +81,7 @@ class LocatingController implements Controller {
                     longitude: existingDestinationLatLng.lng,
                 },
                 distance: existedBooking[0].distance,
+                duration: existedBooking[0].duration,
                 time: data?.local_time,
                 state: 'Đang điều phối',
                 frequency: existedBooking.length + 1,
@@ -98,6 +99,8 @@ class LocatingController implements Controller {
                     destination_latlng: existingDestinationLatLng,
                     state: 'Đang điều phối',
                     price: price,
+                    distance: newBooking.distance,
+                    duration: newBooking.duration,
                 })
             );
 
@@ -113,6 +116,8 @@ class LocatingController implements Controller {
                     // state: "Hoàn thành"
                     // state: "Đã hủy",
                     price: price,
+                    distance: newBooking.distance,
+                    duration: newBooking.duration,
                 })
             );
         }

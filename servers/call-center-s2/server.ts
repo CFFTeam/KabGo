@@ -80,6 +80,7 @@ const server = app.run(4501, async () => {
                     longitude: data.destination_latlng.lng,
                 },
                 distance: data.distance,
+                duration: data.duration,
                 time: data.local_time,
                 state: 'Đang điều phối',
                 frequency: existedBooking.length + 1,
