@@ -24,6 +24,7 @@ interface User {
     price: string;
     distance: string;
     time: string;
+    coupon?: string;
 }
 
 export default User;

@@ -8,6 +8,8 @@ class RouteModel {
   String? time;
   String service = '';
   String price = '';
+  String coupon = '';
+  String paymentMethod = 'Tiền mặt';
 
   RouteModel({
     this.departureLocation,

@@ -74,6 +74,7 @@ const server = app.run(4600, async () => {
 
             const _service = await serviceModel.findOne({ name: customer.service });
             const _customer = await customerModel.findOne({ email: customer.user_information.email });
+            
             const controllers = new UserController();
             const bookingData = await controllers.createBooking({
                 customer: _customer?.id,
@@ -93,9 +94,11 @@ const server = app.run(4600, async () => {
                 status: 'Đang điều phối', //điều phối | tiến hành | hủy | hoàn thành
                 frequency: existedBooking.length + 1,
                 price: customer.price,
+                distance: customer.distance,
+                duration: customer.time,
                 vehicle: _service?.id,
                 note: '',
-                // coupon: new mongoose.Types.ObjectId('64e73b79646803068e5c21f7'),
+                coupon: customer.coupon,
             });
 
             const history = bookingData;
@@ -118,6 +121,9 @@ const server = app.run(4600, async () => {
                     origin: customerInfo.departure_information.address,
                     destination: customerInfo.arrival_information.address,
                     note: '',
+                    price: customerInfo.price,
+                    distance: customerInfo.distance,
+                    duration: customerInfo.time,
                     local_time: new Date(
                         new Date().toLocaleString('en', { timeZone: 'Asia/Ho_Chi_Minh' })
                     ).toISOString(),
@@ -195,6 +201,9 @@ const server = app.run(4600, async () => {
                         vehicle_type: customerInfo.service,
                         origin: customerInfo.departure_information.address,
                         destination: customerInfo.arrival_information.address,
+                        price: customerInfo.price,
+                        distance: customerInfo.distance,
+                        duration: customerInfo.time,
                         note: '',
                         local_time: new Date(
                             new Date().toLocaleString('en', { timeZone: 'Asia/Ho_Chi_Minh' })
@@ -218,7 +227,7 @@ const server = app.run(4600, async () => {
                 }
             }
 
-            customerList[id]?.socket.emit('submit driver', JSON.stringify(driverSubmit.driver));
+            customerList[id]?.socket?.emit('submit driver', JSON.stringify(driverSubmit.driver));
         });
 
         socket.on('driver-moving', (message: string) => {
@@ -226,13 +235,13 @@ const server = app.run(4600, async () => {
 
             const id = driverSubmit.user_id;
 
-            customerList[id]?.socket.emit('moving driver', JSON.stringify(driverSubmit));
+            customerList[id]?.socket?.emit('moving driver', JSON.stringify(driverSubmit));
         });
 
         socket.on('driver-comming', (message: string) => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
             const id = driverSubmit.user_id;
-            customerList[id]?.socket.emit('comming driver', JSON.stringify(driverSubmit));
+            customerList[id]?.socket?.emit('comming driver', JSON.stringify(driverSubmit));
         });
 
         socket.on('driver-success', async (message: string) => {
@@ -247,7 +256,7 @@ const server = app.run(4600, async () => {
                 delete stateDriver[id];
             }
 
-            customerList[id]?.socket.emit('success driver', JSON.stringify(driverSubmit));
+            customerList[id]?.socket?.emit('success driver', JSON.stringify(driverSubmit));
         });
 
         socket.on('driver-reject', async (message: string) => {
@@ -287,7 +296,7 @@ const server = app.run(4600, async () => {
                 }
             }
 
-            customerList[id]?.socket.emit('reject driver');
+            customerList[id]?.socket?.emit('reject driver');
         });
 
         socket.on('customer-cancel', async (message: string) => {
@@ -321,15 +330,17 @@ const server = app.run(4600, async () => {
                 }
             }
 
-            customerList[id]?.socket.emit('cancel driver', JSON.stringify(driverSubmit.driver));
+            customerList[id]?.socket?.emit('cancel driver', JSON.stringify(driverSubmit.driver));
         });
 
         socket.on('disconnect', () => {
-            // delete driverList[socket.phonenumber];
-            rideService.removeObserver(
-                rideService.observers.find((value) => value.socket.phonenumber == socket.phonenumber)
-            );
-            console.log('Client disconnected');
+            if (socket?.phonenumber) {
+                // delete driverList[socket.phonenumber];
+                rideService.removeObserver(
+                    rideService.observers.find((value) => value.socket.phonenumber == socket.phonenumber)
+                );
+                console.log('Client disconnected');
+            }
         });
     });
 
@@ -383,15 +394,16 @@ const server = app.run(4600, async () => {
                 longitude: `${request.destination_latlng.lng}`,
             },
             service: request.vehicle_type,
-            price: '160.000đ',
-            distance: '36.5km',
-            time: '35 phút',
+            price: request.price,
+            distance: request.distance,
+            time: request.duration,
         };
 
+        customerList[request.customer_phonenumber] = { infor: { ...customer }, socket: null };
         stateDriver[request.customer_phonenumber] = { ...request };
 
         nearestDriver.map((el: any) => {
-            el.socket.emit('customer-request', JSON.stringify(customer));
+            el.socket?.emit('customer-request', JSON.stringify({ ...customer, history_id: request._id.toString() }));
             delete el.socket;
 
             return el;

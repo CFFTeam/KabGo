@@ -1,3 +1,4 @@
+import 'package:customer/providers/coupon_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,7 +7,7 @@ import 'package:intl/intl.dart';
 import '../functions/setHexColor.dart';
 import '../providers/routeProvider.dart';
 
-class CarCardItem extends ConsumerWidget {
+class CarCardItem extends ConsumerStatefulWidget {
   const CarCardItem(
       {Key? key,
       required this.isChosen,
@@ -19,30 +20,37 @@ class CarCardItem extends ConsumerWidget {
   final String distance;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    if (isChosen) {
+  _CarCardItemState createState() => _CarCardItemState();
+}
+
+class _CarCardItemState extends ConsumerState<CarCardItem> {
+  double coupon = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.isChosen) {
       ref.read(routeProvider.notifier).setPrice(
-          '${convertDistanceToMeters(data['price/m']!, distance).replaceAll(',', '.')}đ');
-      ref.read(routeProvider.notifier).setService(data['name']!);
+          '${convertDistanceToMeters(widget.data['price/m']!, widget.distance, coupon).replaceAll(',', '.')}đ');
+      ref.read(routeProvider.notifier).setService(widget.data['name']!);
     }
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
       decoration: BoxDecoration(
-        color: isChosen ? HexColor('FFF0EA') : HexColor('FCFCFC'),
+        color: widget.isChosen ? HexColor('FFF0EA') : HexColor('FCFCFC'),
         borderRadius: const BorderRadius.all(
           Radius.circular(12),
         ),
         border: Border.all(
           width: 1,
-          color: isChosen ? HexColor('F86C1D') : HexColor('EEEEEE'),
+          color: widget.isChosen ? HexColor('F86C1D') : HexColor('EEEEEE'),
         ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Image.asset(
-            data['image'].toString(),
+            widget.data['image'].toString(),
             height: 56,
           ),
           const SizedBox(
@@ -52,7 +60,7 @@ class CarCardItem extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                data['name'].toString(),
+                widget.data['name'].toString(),
                 style: GoogleFonts.montserrat(
                     color: HexColor('F86C1D'),
                     fontWeight: FontWeight.w600,
@@ -62,33 +70,67 @@ class CarCardItem extends ConsumerWidget {
                 height: 4,
               ),
               Text(
-                data['description'].toString(),
+                widget.data['description'].toString(),
                 style: Theme.of(context).textTheme.displaySmall,
               ),
             ],
           ),
           const Spacer(),
-          Text(
-            '${convertDistanceToMeters(data['price/m']!, distance).replaceAll(',', '.')}đ',
-            style: GoogleFonts.montserrat(
-              color: HexColor('F86C1D'),
-              fontWeight: FontWeight.w600,
-              fontSize: 18,
-            ),
+          Consumer(
+            builder: (BuildContext context, WidgetRef ref, Widget? child) {
+              ref.listen(couponProvider, (previous, next) {
+                print('chay vao day');
+                setState(() {
+                  coupon = next;
+                });
+              });
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  if (coupon > 0)
+                    Text(
+                      '${convertDistanceToMeters(widget.data['price/m']!, widget.distance, 0).replaceAll(',', '.')}đ',
+                      style: GoogleFonts.montserrat(
+                          decoration: TextDecoration.lineThrough,
+                          color: HexColor('6A6A6A'),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14),
+                    ),
+                  if (coupon > 0)
+                    const SizedBox(
+                      height: 6,
+                    ),
+                  Text(
+                    '${convertDistanceToMeters(widget.data['price/m']!, widget.distance, coupon).replaceAll(',', '.')}đ',
+                    style: GoogleFonts.montserrat(
+                      color: HexColor('F86C1D'),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ],
       ),
     );
   }
 
-  String convertDistanceToMeters(String price, String distanceString) {
+  String convertDistanceToMeters(
+      String price, String distanceString, double coupon) {
     String value = '';
     double distanceValue = double.parse(distanceString.split(' ')[0]);
     String distanceUnit = distanceString.split(' ')[1];
     if (distanceUnit == 'km') {
       distanceValue *= 1000; // 1 km = 1000 m
     }
-    value = (((double.parse(data['price/m'].toString()) * distanceValue) / 1000)
+
+    double couponValue = coupon == 0 ? 1 : 1 - coupon;
+    value = (((double.parse(widget.data['price/m'].toString()) *
+                        distanceValue *
+                        couponValue) /
+                    1000)
                 .roundToDouble() *
             1000)
         .toStringAsFixed(0);

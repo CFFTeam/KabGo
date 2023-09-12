@@ -21,7 +21,7 @@ class DirectionRepository {
       'destination': '${destination.latitude},${destination.longitude}',
       'language': 'vi',
       'key': googleAPIKey,
-    }); 
+    });
 
     if (response.statusCode == 200) {
       if ((response.data['routes'] as List).isEmpty) return null;

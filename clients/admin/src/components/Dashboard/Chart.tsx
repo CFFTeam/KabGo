@@ -13,15 +13,13 @@ import { useEffect } from "react";
 const Chart: React.FC = () => {
   const dispatch = useAppDispatch();
   const chartData = useAppSelector((state) => state.dashboard.chartData);
+  const isDoneChartData = useAppSelector(
+    (state) => state.dashboard.isDoneCategoryData
+  );
   let sumRevenue: string = chartData.yLabels
     .reduce((partialSum, a) => partialSum + a, 0)
     .toLocaleString("it-IT", { style: "currency", currency: "VND" });
   sumRevenue = sumRevenue.slice(0, sumRevenue.length - 3);
-  const getRevenue = [100000, 400000, 100000, 1200000, 600000, 800000, 100000];
-  // const getRevenue = [1200000, 5000000, 100000, 1260000, 100000, 900000, 4500000];
-  useEffect(() => {
-    dispatch(dashboardActions.updateRevenue(getRevenue));
-  }, []);
 
   return (
     <div className={styles["chart-container"]}>
@@ -32,20 +30,32 @@ const Chart: React.FC = () => {
         <div className={styles["el-title"]}>Time line</div>
         <div className={styles["el-title"]}>Giờ làm</div>
       </div>
-      <div className={styles["chart-content"]}>
-        <div className={styles["total-revenue"]}>
-          <div className={styles["title-info"]}>
-            <div className={styles["title"]}>TỔNG DOANH THU HÀNG THÁNG</div>
-            <Info />
+      {!isDoneChartData ? (
+        <div className={styles["chart-content-loading"]}>
+          {" "}
+          <BeatLoader
+            color="#F86C1D"
+            margin={2}
+            size={12}
+            speedMultiplier={0.5}
+          />
+        </div>
+      ) : (
+        <div className={styles["chart-content"]}>
+          <div className={styles["total-revenue"]}>
+            <div className={styles["title-info"]}>
+              <div className={styles["title"]}>TỔNG DOANH THU HÀNG THÁNG</div>
+              <Info />
+            </div>
+            <div className={styles["revenue"]}>{sumRevenue}</div>
+            <div className={styles["currency"]}>VNĐ</div>
           </div>
-          <div className={styles["revenue"]}>{sumRevenue}</div>
-          <div className={styles["currency"]}>VNĐ</div>
+          <div className={styles["chart-revenue"]}>
+            <LineGraph />
+            <RevenueSignature className={styles["revenue-sign"]} />
+          </div>
         </div>
-        <div className={styles["chart-revenue"]}>
-          <LineGraph />
-          <RevenueSignature className={styles["revenue-sign"]} />
-        </div>
-      </div>
+      )}
     </div>
   );
 };

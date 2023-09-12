@@ -475,8 +475,6 @@ class _GoogleMapState extends ConsumerState<KGoogleMap>
               bearing: rotate));
 
           Future.delayed(const Duration(milliseconds: 2000), () {
-            print("GO HERE");
-
             if (routesList.isNotEmpty) {
               fetchAddress(routesList[step].startLocation.latitude,
                       routesList[step].startLocation.longitude)
@@ -492,6 +490,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap>
                   process >=
                       customerRequest.direction.polylinePoints!.length - 1) {
                 timer.cancel();
+
+                step = 0;
 
                 if (compass == true) {
                   // context.go(RouteScreen.path);
@@ -721,12 +721,16 @@ class _GoogleMapState extends ConsumerState<KGoogleMap>
                                   const SizedBox(
                                     width: 6,
                                   ),
-                                  Text(
-                                    extractStreetNames(route.instruction)[0],
-                                    style: const TextStyle(
-                                        color: Color(0xFFFFFFFF),
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 18),
+                                  SizedBox(
+                                    width: 210,
+                                    child: Text(
+                                      extractStreetNames(route.instruction)[0],
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                          color: Color(0xFFFFFFFF),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 18),
+                                    ),
                                   )
                                 ],
                               )

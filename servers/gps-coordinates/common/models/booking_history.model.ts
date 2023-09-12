@@ -20,10 +20,12 @@ export interface IBookingHistory {
     time: Date;
     status: string; //điều phối | tiến hành | hủy | hoàn thành
     frequency: number;
+    distance?: string;
     price: string;
     vehicle?: mongoose.Types.ObjectId;
     note: string;
     coupon?: mongoose.Types.ObjectId;
+    duration?: string;
 }
 
 const BookingHistorySchema = new mongoose.Schema<IBookingHistory>(
@@ -84,6 +86,9 @@ const BookingHistorySchema = new mongoose.Schema<IBookingHistory>(
             type: Number,
             required: true,
         },
+        distance: {
+            type: String,
+        },
         price: {
             type: String,
             required: true,
@@ -96,10 +101,13 @@ const BookingHistorySchema = new mongoose.Schema<IBookingHistory>(
         note: {
             type: String,
         },
-        // coupon: {
-        //     type: mongoose.Schema.Types.ObjectId,
-        //     ref: 'Coupon'
-        // }
+        coupon: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Coupon',
+        },
+        duration: {
+            type: String,
+        },
     },
     {
         timestamps: true,

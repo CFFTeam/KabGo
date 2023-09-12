@@ -3,6 +3,7 @@ import { NextFunction, Request, Response, Router } from 'express';
 
 import customerModel, { Customer } from '../models/customer.model';
 import driverModel, { Driver } from '../models/driver.model';
+import bookingHistoryModel, { IBookingHistory } from '../models/booking_history.model';
 import Controller from '@common/interfaces/controller';
 import { BadRequestException } from '@common/utils/exceptions';
 
@@ -17,7 +18,8 @@ class DashboardController implements Controller {
     private getInitData = async (req: Request, res: Response, next: NextFunction) => {
         const allCustomers = await customerModel.find();
         const allDrivers = await driverModel.find();
-        res.json({ success: true, status: 200, data: {allCustomers, allDrivers} });
+        const allBookingHistories = await bookingHistoryModel.find();
+        res.json({ success: true, status: 200, data: {allCustomers, allDrivers, allBookingHistories} });
     };
 }
 

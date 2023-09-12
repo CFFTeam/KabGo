@@ -37,28 +37,6 @@ class App extends ConsumerWidget {
     );
 
     if (response.statusCode == 200) {
-      for (var entry in response.data!['history']) {
-        // print(entry['destination']['address']);
-        // print(entry['destination']['latitude']);
-        // print(entry['destination']['longitude']);
-        // print('=========================================================');
-        int firstCommaIndex = entry['destination']['address'].indexOf(',');
-        StructuredFormatting structuredFormatting = StructuredFormatting(
-            mainText: entry['destination']['address']
-                .substring(0, firstCommaIndex)
-                .trim(),
-            secondaryText: entry['destination']['address']
-                .substring(firstCommaIndex + 1)
-                .trim());
-        structuredFormatting.formatSecondaryText();
-        LocationModel locationModel = LocationModel(
-            placeId: '',
-            structuredFormatting: structuredFormatting,
-            postion: LatLng(entry['destination']['latitude'],
-                entry['destination']['longitude']));
-        ref.read(bookingHistoryProvider.notifier).addLocation(locationModel);
-      }
-
       dynamic parsed =
           json.decode(response.data!['info']).cast<String, dynamic>();
       ref
