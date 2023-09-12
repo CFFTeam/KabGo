@@ -52,8 +52,7 @@ const server = app.run(4600, async () => {
 
             socket.phonenumber = _id;
 
-            rideService.addObserver(new DriverNotify(socket, driver));
-            console.log(rideService.observers);
+            rideService.addObserver(new DriverNotify(socket, {...driver}));
         });
 
         socket.on('booking-car', async (message: string) => {
@@ -74,6 +73,7 @@ const server = app.run(4600, async () => {
 
             const _service = await serviceModel.findOne({ name: customer.service });
             const _customer = await customerModel.findOne({ email: customer.user_information.email });
+            
             const controllers = new UserController();
             const bookingData = await controllers.createBooking({
                 customer: _customer?.id,
@@ -401,11 +401,8 @@ const server = app.run(4600, async () => {
         customerList[request.customer_phonenumber] = { infor: { ...customer }, socket: null };
         stateDriver[request.customer_phonenumber] = { ...request };
 
-        nearestDriver.map((el: any) => {
+        nearestDriver.forEach((el: any) => {
             el.socket?.emit('customer-request', JSON.stringify({ ...customer, history_id: request._id.toString() }));
-            delete el.socket;
-
-            return el;
         });
     });
 });
