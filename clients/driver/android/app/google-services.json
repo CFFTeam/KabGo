@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "725272202247",
-    "project_id": "kabgorelease",
-    "storage_bucket": "kabgorelease.appspot.com"
+    "project_number": "507174634794",
+    "project_id": "kabgorelease-277c3",
+    "storage_bucket": "kabgorelease-277c3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:725272202247:android:e31a2068000ab941fbaea2",
+        "mobilesdk_app_id": "1:507174634794:android:661e304462240fd8e08a53",
         "android_client_info": {
           "package_name": "com.example.driver"
         }
       },
       "oauth_client": [
         {
-          "client_id": "725272202247-j59mkh77facksubia3na3dbuhu02u4q8.apps.googleusercontent.com",
+          "client_id": "507174634794-eipb2b4rfsls00gau1ckok3a725qr7c3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.driver",
+            "certificate_hash": "11c21f39c4e575b4fb01e6babdb6b571b0a9016c"
+          }
+        },
+        {
+          "client_id": "507174634794-992pcpmgo96dq65elu88rbd95104ovu1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD3djO1oPAntyXAU4sfRt4VtmTEngz9hUQ"
+          "current_key": "AIzaSyBawZDtWztck6LMDaTGQ5Zkv9GpwlUflsY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "725272202247-db4krra847di0r5k5kqkgttjtm2p9p6l.apps.googleusercontent.com",
+              "client_id": "507174634794-992pcpmgo96dq65elu88rbd95104ovu1.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
