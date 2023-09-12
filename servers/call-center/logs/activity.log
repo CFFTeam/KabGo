@@ -4127,3 +4127,13 @@
 [API.Call Center][Mon, 11 Sep 2023 04:28:08 GMT] Server is running on port 4500 
 [API.Call Center][Mon, 11 Sep 2023 04:28:08 GMT] Connected to database successfully 
 [API.Call Center][Mon, 11 Sep 2023 04:30:19 GMT] Could not connect to the rabbit mq Error: connect ETIMEDOUT 192.168.2.167:5672 
+[API.Call Center][Tue, 12 Sep 2023 07:31:09 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 07:31:09 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 07:31:09 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 07:31:10 GMT] Could not connect to the rabbit mq Error: connect EHOSTUNREACH 192.168.2.167:5672 
+[API.Call Center][Tue, 12 Sep 2023 07:31:10 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:04:06 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 08:04:06 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 08:04:06 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 08:04:06 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:04:07 GMT] Connected to database successfully 
