@@ -118,7 +118,9 @@ const server = app.run(4600, async () => {
                     origin: customerInfo.departure_information.address,
                     destination: customerInfo.arrival_information.address,
                     note: '',
-                    local_time: new Date(new Date().toLocaleString('en', { timeZone: 'Asia/Ho_Chi_Minh' })).toISOString(),
+                    local_time: new Date(
+                        new Date().toLocaleString('en', { timeZone: 'Asia/Ho_Chi_Minh' })
+                    ).toISOString(),
                     booking_time: local_time,
                     state: 'Đang điều phối',
                     origin_latlng: {
@@ -194,7 +196,9 @@ const server = app.run(4600, async () => {
                         origin: customerInfo.departure_information.address,
                         destination: customerInfo.arrival_information.address,
                         note: '',
-                        local_time: new Date(new Date().toLocaleString('en', { timeZone: 'Asia/Ho_Chi_Minh' })).toISOString(),
+                        local_time: new Date(
+                            new Date().toLocaleString('en', { timeZone: 'Asia/Ho_Chi_Minh' })
+                        ).toISOString(),
                         booking_time: local_time,
                         state: 'Đang tiến hành',
                         origin_latlng: {
@@ -246,16 +250,47 @@ const server = app.run(4600, async () => {
             customerList[id]?.socket.emit('success driver', JSON.stringify(driverSubmit));
         });
 
-        socket.on('driver-reject', (message: string) => {
+        socket.on('driver-reject', async (message: string) => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
             const id = driverSubmit.user_id;
-            console.log('driver-reject', rejectList[id]);
+            const history_id = driverSubmit.history_id;
+
             if (rejectList[id]) rejectList[id] = [...rejectList[id], driverSubmit.driver.phonenumber];
             else rejectList[id] = [driverSubmit.driver.phonenumber];
+
+            const driverInfor = await driverModel
+                .findOne({ phonenumber: driverSubmit.driver.phonenumber })
+                .select('_id');
+
+            if (driverInfor) {
+                const history = await BookingHistory.findById(history_id);
+
+                if (history) {
+                    delete history.driver;
+                    history.status = 'Đang điều phối';
+
+                    await history.save();
+
+                    const customerInfo = customerList[id]?.infor;
+                    const customer_id = customerInfo.user_information.phonenumber;
+
+                    if (stateDriver[customer_id]) {
+                        stateDriver[customer_id].state = 'Đang điều phối';
+                        stateDriver[customer_id].driver_name = '';
+                        stateDriver[customer_id].driver_phonenumber = '';
+                        stateDriver[customer_id].vehicle_number = '';
+                        stateDriver[customer_id].vehicle_name = '';
+                        stateDriver[customer_id].vehicle_color = '';
+                    }
+
+                    await rabbitmq.publish('tracking', JSON.stringify(stateDriver[customer_id]));
+                }
+            }
+
             customerList[id]?.socket.emit('reject driver');
         });
 
-        socket.on('driver-cancel', async (message: string) => {
+        socket.on('customer-cancel', async (message: string) => {
             const driverSubmit = JSON.parse(message) as DriverSubmit;
             const history_id = driverSubmit.history_id;
             const id = driverSubmit.user_id;
@@ -268,14 +303,13 @@ const server = app.run(4600, async () => {
                 const history = await BookingHistory.findById(history_id);
 
                 if (history) {
-                    history.driver = new mongoose.Types.ObjectId(driverInfor._id);
                     history.status = 'Đã hủy';
 
                     await history.save();
 
                     const customerInfo = customerList[id]?.infor;
                     const customer_id = customerInfo.user_information.phonenumber;
-                    
+
                     if (stateDriver[customer_id]) {
                         stateDriver[customer_id].state = 'Đã hủy';
                     }

@@ -1347,3 +1347,7 @@
 >>>>>>> ecdb7239463a6a3238caf0c0a9da471dc85696e4
 >>>>>>> master
 >>>>>>> master
+[API.Driver][Tue, 12 Sep 2023 11:19:42 GMT] Setting up request middleware... 
+[API.Driver][Tue, 12 Sep 2023 11:19:42 GMT] Server is starting... 
+[API.Driver][Tue, 12 Sep 2023 11:19:42 GMT] Server is running on port 4200 
+[API.Driver][Tue, 12 Sep 2023 11:19:42 GMT] Connected to database successfully 

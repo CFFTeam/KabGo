@@ -101682,3 +101682,7 @@
 >>>>>>> ecdb7239463a6a3238caf0c0a9da471dc85696e4
 >>>>>>> master
 >>>>>>> master
+[API.Authentication][Tue, 12 Sep 2023 11:19:46 GMT] Setting up request middleware... 
+[API.Authentication][Tue, 12 Sep 2023 11:19:46 GMT] Server is starting... 
+[API.Authentication][Tue, 12 Sep 2023 11:19:46 GMT] Server is running on port 4100 
+[API.Authentication][Tue, 12 Sep 2023 11:19:47 GMT] Connected to database successfully 
