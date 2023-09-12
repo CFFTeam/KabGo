@@ -6845,3 +6845,13 @@
 [API.Call Center][Tue, 12 Sep 2023 11:21:14 GMT] Server is running on port 4500 
 [API.Call Center][Tue, 12 Sep 2023 11:21:14 GMT] Connected to the rabbit mq successfully 
 [API.Call Center][Tue, 12 Sep 2023 11:21:15 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 11:46:22 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 11:46:22 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 11:46:22 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 11:46:22 GMT] Could not connect to the rabbit mq Error: Socket closed abruptly during opening handshake 
+[API.Call Center][Tue, 12 Sep 2023 11:46:25 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 11:46:57 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 11:46:57 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 11:46:57 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 11:46:57 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 11:46:58 GMT] Connected to database successfully 
