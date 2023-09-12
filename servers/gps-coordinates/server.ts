@@ -94,11 +94,12 @@ const server = app.run(4600, async () => {
                 frequency: existedBooking.length + 1,
                 price: customer.price,
                 vehicle: _service?.id,
+                distance: customer.distance,
                 note: '',
-                // coupon: new mongoose.Types.ObjectId('64e73b79646803068e5c21f7'),
+                coupon: customer.coupon,
             });
 
-            console.log(bookingData.time);
+            console.log(bookingData);
 
             rideService.bookRide(socket, customer, bookingData, rejectList);
         });
