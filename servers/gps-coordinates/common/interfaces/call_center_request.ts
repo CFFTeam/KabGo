@@ -15,6 +15,9 @@ export interface CallCenterRequest {
     booking_time: string,
     local_time: string,
     state: string,
+    distance: string,
+    duration: string,
+    price: string,
     origin_latlng: {
         lat: number,
         lng: number
