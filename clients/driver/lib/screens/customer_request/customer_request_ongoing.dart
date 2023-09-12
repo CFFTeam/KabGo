@@ -224,13 +224,18 @@ class _CustomerRequestGoingState extends ConsumerState<CustomerRequestGoing> {
                                       5.0),
                                   directions: []).toJson()));
                           requestStatusNotifier.cancelRequest();
-                          ref
+
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            ref
                               .read(customerRequestProvider.notifier)
                               .cancelRequest();
-                          ref
+
+                            ref
                               .read(directionProvider.notifier)
                               .setDirection(false);
-                          context.go(HomeDashboard.path);
+ 
+                            context.go(HomeDashboard.path);
+                          });
                         },
                         style: ThemeButton.acceptButton2,
                         child: const Center(

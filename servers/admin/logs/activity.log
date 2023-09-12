@@ -24584,3 +24584,7 @@
 =======
 >>>>>>> 8a69b36f3dc466ccade8061869c62a31267674c3
 >>>>>>> master
+[API.Admin][Tue, 12 Sep 2023 19:55:58 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 19:55:58 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 19:55:58 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 19:55:59 GMT] Connected to database successfully 

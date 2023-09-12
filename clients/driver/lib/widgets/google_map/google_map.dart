@@ -459,6 +459,9 @@ class _GoogleMapState extends ConsumerState<KGoogleMap>
 
             running = true;
             step = 1;
+            _movingPosition = LocationPostion(
+                latitude: _info!.polylinePoints!.first.latitude,
+                longitude: _info!.polylinePoints!.first.longitude);
             compassNotifier.setDirection(false);
             process = 0;
           });
@@ -793,8 +796,9 @@ class _GoogleMapState extends ConsumerState<KGoogleMap>
                 ),
               ),
             )),
-      if (requestStatus == RequestStatus.comming ||
-          requestStatus == RequestStatus.ongoing)
+      if ((requestStatus == RequestStatus.comming ||
+          requestStatus == RequestStatus.ongoing) && process <
+                      customerRequest.direction.polylinePoints!.length - 1)
         Align(
             alignment: Alignment.bottomRight,
             child: Container(
@@ -809,12 +813,6 @@ class _GoogleMapState extends ConsumerState<KGoogleMap>
                 onPressed: () {
                   if (compass == true) {
                     context.go(RouteScreen.path);
-                  } else {
-                    if (requestStatus == RequestStatus.comming) {
-                      context.go(CustomerRequestComming.path);
-                    } else if (requestStatus == RequestStatus.ongoing) {
-                      context.go(CustomerRequestGoing.path);
-                    }
                   }
 
                   compassNotifier.toggleDirection();
