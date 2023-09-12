@@ -74,6 +74,7 @@ const server = app.run(4600, async () => {
 
             const _service = await serviceModel.findOne({ name: customer.service });
             const _customer = await customerModel.findOne({ email: customer.user_information.email });
+            
             const controllers = new UserController();
             const bookingData = await controllers.createBooking({
                 customer: _customer?.id,

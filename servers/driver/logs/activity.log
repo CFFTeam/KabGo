@@ -1380,3 +1380,7 @@
 [API.Driver][Tue, 12 Sep 2023 11:46:24 GMT] Connected to database successfully 
 >>>>>>> master
 >>>>>>> 64da543c05314b18af133a2377a258ac9b81ef73
+[API.Driver][Tue, 12 Sep 2023 14:19:13 GMT] Setting up request middleware... 
+[API.Driver][Tue, 12 Sep 2023 14:19:13 GMT] Server is starting... 
+[API.Driver][Tue, 12 Sep 2023 14:19:13 GMT] Server is running on port 4200 
+[API.Driver][Tue, 12 Sep 2023 14:19:14 GMT] Connected to database successfully 

@@ -721,12 +721,16 @@ class _GoogleMapState extends ConsumerState<KGoogleMap>
                                   const SizedBox(
                                     width: 6,
                                   ),
-                                  Text(
-                                    extractStreetNames(route.instruction)[0],
-                                    style: const TextStyle(
-                                        color: Color(0xFFFFFFFF),
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 18),
+                                  SizedBox(
+                                    width: 210,
+                                    child: Text(
+                                      extractStreetNames(route.instruction)[0],
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                          color: Color(0xFFFFFFFF),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 18),
+                                    ),
                                   )
                                 ],
                               )
