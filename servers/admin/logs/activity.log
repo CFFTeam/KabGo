@@ -9549,6 +9549,7 @@
 >>>>>>> ecdb7239463a6a3238caf0c0a9da471dc85696e4
 >>>>>>> master
 >>>>>>> master
+<<<<<<< HEAD
 [API.Admin][Tue, 12 Sep 2023 11:14:02 GMT] Setting up request middleware... 
 [API.Admin][Tue, 12 Sep 2023 11:14:02 GMT] Server is starting... 
 [API.Admin][Tue, 12 Sep 2023 11:14:02 GMT] Server is running on port 4400 
@@ -9557,3 +9558,9 @@
 [API.Admin][Tue, 12 Sep 2023 11:19:56 GMT] Server is starting... 
 [API.Admin][Tue, 12 Sep 2023 11:19:56 GMT] Server is running on port 4400 
 [API.Admin][Tue, 12 Sep 2023 11:19:56 GMT] Connected to database successfully 
+=======
+[API.Admin][Tue, 12 Sep 2023 11:19:44 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 11:19:44 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 11:19:44 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 11:19:45 GMT] Connected to database successfully 
+>>>>>>> 97670b6fd2bd517b54a1b2abcdf57c1aa3158149
