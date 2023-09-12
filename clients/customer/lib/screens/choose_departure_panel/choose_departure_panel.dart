@@ -150,7 +150,8 @@ class _ChooseDeparturePanelState extends ConsumerState<ChooseDeparturePanel> {
                       LocationModel currentLocationModel =
                           await setAddressByPosition(
                               ref.read(currentLocationProvider));
-
+                      currentLocationModel.structuredFormatting!
+                          .formatSecondaryText();
                       ref
                           .read(departureLocationProvider.notifier)
                           .setDepartureLocation(currentLocationModel);

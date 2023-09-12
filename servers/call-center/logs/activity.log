@@ -9111,3 +9111,13 @@
 [API.Call Center][Tue, 12 Sep 2023 16:53:02 GMT] Connected to the rabbit mq successfully 
 [API.Call Center][Tue, 12 Sep 2023 16:53:03 GMT] Connected to database successfully 
 >>>>>>> master
+[API.Call Center][Tue, 12 Sep 2023 18:01:04 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 18:01:04 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 18:01:04 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 18:01:04 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 18:01:05 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 18:35:06 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 18:35:06 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 18:35:06 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 18:35:06 GMT] Could not connect to the rabbit mq Error: connect ECONNREFUSED 192.168.2.180:5672 
+[API.Call Center][Tue, 12 Sep 2023 18:35:07 GMT] Connected to database successfully 

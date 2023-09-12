@@ -7,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../.env.dart';
+
 class Authentication {
   Future<DriverDetails?> signInWithGoogle(BuildContext context) async {
     final googleSignIn = GoogleSignIn();
@@ -25,8 +27,7 @@ class Authentication {
           await FirebaseAuth.instance.signInWithCredential(credential);
 
       Dio dio = Dio();
-      final response = await dio.post(
-          'http://192.168.2.68:4100/v1/driver/register',
+      final response = await dio.post('http://$ip:4100/v1/driver/register',
           data: jsonEncode(DriverAccount(
                   avatar: userCredential.user!.photoURL!,
                   name: userCredential.user!.displayName!,
@@ -38,7 +39,7 @@ class Authentication {
 
       if (response.statusCode == 200) {
         return DriverDetails.fromJson(response.data);
-      } 
+      }
     } on FirebaseAuthException catch (e) {
       print(e.toString());
       // await showDialog(

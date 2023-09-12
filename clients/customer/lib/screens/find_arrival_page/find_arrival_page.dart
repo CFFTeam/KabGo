@@ -195,6 +195,8 @@ class _FindArrivalPageState extends ConsumerState<FindArrivalPage> {
                     LocationModel currentLocationModel =
                         await setAddressByPosition(
                             ref.read(currentLocationProvider));
+                    currentLocationModel.structuredFormatting!
+                        .formatSecondaryText();
                     ref
                         .read(arrivalLocationProvider.notifier)
                         .setArrivalLocation(currentLocationModel);

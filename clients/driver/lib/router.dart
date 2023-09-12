@@ -40,7 +40,7 @@ final _shellRouteKey =
 final routerProvider = Provider<GoRouter>((ref) {
   // final appState = ref.watch(appNotifierProvider);
   final authState = ref.watch(authProvider);
-  final driverDetails = ref.watch(driverDetailsProvider);
+  // final driverDetails = ref.watch(driverDetailsProvider);
   final driverDetailsNotifier = ref.read(driverDetailsProvider.notifier);
 
   return GoRouter(
