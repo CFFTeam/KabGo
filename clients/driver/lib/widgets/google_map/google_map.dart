@@ -1,7 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
+import 'dart:ui';
 
+import 'package:dio/dio.dart';
+import 'package:driver/.env.dart';
 import 'package:driver/models/location.dart';
 import 'package:driver/providers/current_location.dart';
 import 'package:driver/providers/direction_provider.dart';
@@ -37,40 +40,51 @@ class KGoogleMap extends ConsumerStatefulWidget {
   ConsumerState<KGoogleMap> createState() => _GoogleMapState();
 }
 
-class _GoogleMapState extends ConsumerState<KGoogleMap> {
+class _GoogleMapState extends ConsumerState<KGoogleMap>
+    with TickerProviderStateMixin {
   final Completer<GoogleMapController> _controller = Completer();
 
   late GoogleMapController _mapController;
-  late Position _currentPosition;
+  late AnimationController animationCircleController;
+  late AnimationController animationMarkerController;
+  Position? _currentPosition;
+  LocationPostion? _movingPosition;
 
   static bool running = true;
   static int process = 0;
+  static int step = 1;
+  static double currentRadius = 1;
 
   static const LatLng _center = LatLng(10.7552928, 106.3655788);
   static const CameraPosition _cameraPosition =
       CameraPosition(target: _center, zoom: 10, tilt: 0, bearing: 0);
 
-  final Set<Circle> _circles = {};
   final Set<Marker> _markers = {};
+  Marker? movingMarker;
   Set<Polyline> _polyline = {};
+
   // static bool compassNotifier.setDirection(false);
 
   late BitmapDescriptor currentLocationIcon;
   late BitmapDescriptor driverIcon;
+  late BitmapDescriptor destIcon;
   late BitmapDescriptor departureLocationIcon;
 
   Directions? _info;
 
-  Circle _createCircle(String? id, LatLng latLng, {double radius = 50}) {
+  Circle _createCircle(String? id, LatLng latLng,
+      {double radius = 50,
+      int strokeWidth = 1,
+      Color fillColor = const Color.fromRGBO(255, 100, 51, 0.15)}) {
     id ??= 'circle_id_${DateTime.now().millisecondsSinceEpoch}';
 
     return Circle(
       circleId: CircleId(id),
       center: latLng,
-      radius: radius == 0 ? radius * 1.5 : 50,
-      fillColor: const Color.fromRGBO(255, 100, 51, 0.15),
+      radius: radius > 0 ? radius * 4 : 50,
+      fillColor: fillColor,
       strokeColor: const Color.fromRGBO(255, 100, 51, 0.3),
-      strokeWidth: 1,
+      strokeWidth: strokeWidth,
     );
   }
 
@@ -78,7 +92,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
       String? id, String title, LatLng latLng, BitmapDescriptor icon,
       {double rotate = 0.0,
       Offset anchor = const Offset(0.5, 0.5),
-      double zIndex = 0.0}) {
+      double zIndex = 0.0,
+      bool flat = false}) {
     id ??= 'marker_id_${DateTime.now().millisecondsSinceEpoch}';
 
     return Marker(
@@ -87,6 +102,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         infoWindow: InfoWindow(title: title),
         rotation: rotate,
         anchor: anchor,
+        flat: flat,
         zIndex: zIndex,
         icon: icon);
   }
@@ -114,41 +130,39 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
       final compass = ref.read(directionProvider);
 
       setState(() {
-        _markers.add(_createMarker(
+        _movingPosition = currentPosition;
+        movingMarker = _createMarker(
             'my_location',
             'Vị trí của tôi',
             LatLng(currentPosition.latitude, currentPosition.longitude),
             driverIcon,
-            rotate: compass ? rotate : 180));
-        _circles.clear();
+            rotate: compass ? rotate : 180,
+            flat: true);
       });
 
-      if (compass == false) {
+      if (compass == false && running == false) {
         double cameraBearing = (rotate < 0) ? rotate - 180.0 : rotate - 180;
-
-        _mapController.animateCamera(CameraUpdate.newCameraPosition(
-            CameraPosition(
-                target:
-                    LatLng(currentPosition.latitude, currentPosition.longitude),
-                zoom: 20,
-                tilt: 90.0,
-                bearing: cameraBearing)));
+        _mapController.moveCamera(CameraUpdate.newCameraPosition(CameraPosition(
+            target: LatLng(currentPosition.latitude, currentPosition.longitude),
+            zoom: 20,
+            tilt: 90.0,
+            bearing: cameraBearing)));
       }
       return;
     }
 
     if (requestStatus == RequestStatus.waiting ||
         requestStatus == RequestStatus.accepted) {
+      _movingPosition = LocationPostion(
+          latitude: currentPosition.latitude,
+          longitude: currentPosition.longitude);
+
       setState(() {
         _markers.add(_createMarker(
             'my_location',
             'Vị trí của tôi',
             LatLng(currentPosition.latitude, currentPosition.longitude),
             currentLocationIcon));
-
-        _circles.add(_createCircle('my_location',
-            LatLng(currentPosition.latitude, currentPosition.longitude),
-            radius: currentPosition?.accuracy));
       });
     }
   }
@@ -162,8 +176,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
 
       _mapController.animateCamera(CameraUpdate.newCameraPosition(
           CameraPosition(
-              target:
-                  LatLng(_currentPosition.latitude, _currentPosition.longitude),
+              target: LatLng(
+                  _currentPosition!.latitude, _currentPosition!.longitude),
               zoom: 17,
               tilt: 0,
               bearing: 0)));
@@ -195,8 +209,54 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
 
   @override
   void dispose() {
+    animationCircleController.dispose();
     _mapController.dispose();
     super.dispose();
+  }
+
+  List<String> extractDirections(List<String> texts) {
+    List<String> directions = [];
+    for (String text in texts) {
+      RegExp regex = RegExp(r'<div .*>(.*)<\/div>');
+      Iterable<Match> matches = regex.allMatches(text);
+      for (Match match in matches) {
+        directions.add(match.group(1)!);
+      }
+    }
+    return directions;
+  }
+
+  List<String> extractStreetNames(String text) {
+    List<String> streetNames = [];
+    RegExp regex = RegExp(r'.*<b>(.*)<\/b>($|)');
+    Iterable<Match> matches = regex.allMatches(text);
+    for (Match match in matches) {
+      streetNames.add(match.group(1)!);
+    }
+    return streetNames;
+  }
+
+  String currentAddress = '';
+
+  Future<void> fetchAddress(double latitude, double longitude) async {
+    final response = await Dio().get(
+        "https://maps.googleapis.com/maps/api/geocode/json?",
+        queryParameters: {
+          "latlng": "$latitude,$longitude",
+          "language": "vi",
+          "key": googleAPIKey,
+        });
+
+    if (response.statusCode == 200) {
+      final results = response.data["results"];
+
+      if (results != null && results.isNotEmpty) {
+        final address = results[0]["address_components"][1]["long_name"];
+        currentAddress = address;
+      }
+    } else {
+      currentAddress = "Error fetching address";
+    }
   }
 
   @override
@@ -208,12 +268,45 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         .then((ByteData bytes) => currentLocationIcon =
             BitmapDescriptor.fromBytes(bytes.buffer.asUint8List()));
 
-    getBytesFromAsset('lib/assets/map/bike.png', 75).then(
+    getBytesFromAsset('lib/assets/map/driving.png', 65).then(
         (Uint8List bytes) => driverIcon = BitmapDescriptor.fromBytes(bytes));
 
     DefaultAssetBundle.of(context).load('lib/assets/map/original.png').then(
         (ByteData bytes) => departureLocationIcon =
             BitmapDescriptor.fromBytes(bytes.buffer.asUint8List()));
+
+    DefaultAssetBundle.of(context).load('lib/assets/map/destpoint.png').then(
+        (ByteData bytes) =>
+            destIcon = BitmapDescriptor.fromBytes(bytes.buffer.asUint8List()));
+
+    animationCircleController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1000), // Animation duration
+    )..addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          animationCircleController.reverse();
+        } else if (status == AnimationStatus.dismissed) {
+          animationCircleController.forward();
+        }
+      });
+
+    animationCircleController.addListener(() {
+      if (_controller.isCompleted) {
+        if ((ref.read(requestStatusProvider) == RequestStatus.comming ||
+            ref.read(requestStatusProvider) == RequestStatus.ongoing)) {
+          setState(() {
+            currentRadius = 1 + 1.2 * animationCircleController.value / 2;
+          });
+        } else if (ref.read(requestStatusProvider) != RequestStatus.ready &&
+            _currentPosition != null) {
+          setState(() {
+            currentRadius = _currentPosition!.accuracy;
+          });
+        }
+      }
+    });
+
+    animationCircleController.forward();
   }
 
   double calculateBearing(
@@ -231,6 +324,11 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                     180.0));
 
     return bearing * 180.0 / math.pi;
+  }
+
+  String removeHtmlTags(String input) {
+    RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
+    return input.replaceAll(exp, ' ').replaceAll('  ', ' ');
   }
 
   @override
@@ -284,14 +382,6 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                     LatLng(
                         customerLocation.latitude, customerLocation.longitude),
                     departureLocationIcon),
-
-                // _createMarker(
-                //     'destination_location',
-                //     'Điểm đến  khách hàng',
-                //     LatLng(destinationLocation.latitude,
-                //         destinationLocation.longitude),
-                //     BitmapDescriptor.defaultMarkerWithHue(
-                //         BitmapDescriptor.hueOrange)),
               });
             });
           }
@@ -339,26 +429,16 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
             };
 
             _markers.addAll({
-              // _createMarker(
-              //     'customer_location',
-              //     'Vị trí khách hàng',
-              //     LatLng(customerRequest.currentLocation.latitude,
-              //         customerRequest.currentLocation.longitude),
-              //     departureLocationIcon),
-
               _createMarker(
                   'destination_location',
-                  'Điểm đến  khách hàng',
-                  LatLng(
-                      double.parse(customerRequest
-                          .customer_infor.arrival_information.latitude),
-                      double.parse(customerRequest
-                          .customer_infor.arrival_information.longitude)),
-                  BitmapDescriptor.defaultMarkerWithHue(
-                      BitmapDescriptor.hueOrange)),
+                  'Điểm đến khách hàng',
+                  LatLng(value.polylinePoints!.last.latitude,
+                      value.polylinePoints!.last.longitude),
+                  destIcon),
             });
 
             running = true;
+            step = 1;
             compassNotifier.setDirection(false);
             process = 0;
           });
@@ -387,8 +467,25 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
 
           _updateIconCurrentLocation(current_location, rotate: rotate);
 
+          CameraUpdate.newCameraPosition(CameraPosition(
+              target:
+                  LatLng(current_location.latitude, current_location.longitude),
+              zoom: 20,
+              tilt: 90.0,
+              bearing: rotate));
+
           Future.delayed(const Duration(milliseconds: 2000), () {
-            Timer.periodic(const Duration(milliseconds: 1000), (timer) {
+            print("GO HERE");
+
+            if (routesList.isNotEmpty) {
+              fetchAddress(routesList[step].startLocation.latitude,
+                      routesList[step].startLocation.longitude)
+                  .then((value) {
+                ref.read(routeProvider.notifier).setRoute(routesList[step]);
+              });
+            }
+
+            Timer.periodic(const Duration(milliseconds: 50), (timer) {
               if (_info == null ||
                   requestStatus == RequestStatus.waiting ||
                   requestStatus == RequestStatus.ready ||
@@ -407,8 +504,9 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                 }
 
                 compassNotifier.setDirection(true);
-                 _mapController.animateCamera(CameraUpdate.newLatLngBounds(
-                      customerRequest.direction.bounds!, 100.0));
+                _mapController.animateCamera(CameraUpdate.newLatLngBounds(
+                    customerRequest.direction.bounds!, 100.0));
+
                 return;
               }
 
@@ -436,7 +534,17 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                 if (routesList.isNotEmpty) {
                   for (int i = 0; i < routesList.length; ++i) {
                     if (routesList[i].index == process) {
-                      ref.read(routeProvider.notifier).setRoute(routesList[i]);
+                      step++;
+                      if (step < routesList.length) {
+                        fetchAddress(routesList[step].startLocation.latitude,
+                                routesList[step].startLocation.longitude)
+                            .then((value) {
+                          ref
+                              .read(routeProvider.notifier)
+                              .setRoute(routesList[step]);
+                        });
+                      }
+                      break;
                     }
                   }
                 }
@@ -492,7 +600,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
           _markers.add(_createMarker(
               'my_location',
               'Vị trí của tôi',
-              LatLng(_currentPosition.latitude, _currentPosition.longitude),
+              LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
               currentLocationIcon));
           process = 0;
           running = true;
@@ -507,6 +615,9 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
       });
     }
 
+    final route = ref.watch(routeProvider);
+    final routeNotifier = ref.read(routeProvider.notifier);
+
     return Stack(children: <Widget>[
       GoogleMap(
         myLocationButtonEnabled: false,
@@ -515,8 +626,19 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
         zoomGesturesEnabled: true,
         onMapCreated: _onMapCreated,
         initialCameraPosition: _cameraPosition,
-        markers: _markers,
-        circles: _circles,
+        markers: {
+          ..._markers,
+          if ((requestStatus == RequestStatus.comming ||
+                  requestStatus == RequestStatus.ongoing) &&
+              movingMarker != null)
+            movingMarker!,
+        },
+        circles: {
+          if (_movingPosition != null)
+            _createCircle('my_location_animation',
+                LatLng(_movingPosition!.latitude, _movingPosition!.longitude),
+                radius: currentRadius)
+        },
         polylines: _polyline,
       ),
       if (requestStatus == RequestStatus.waiting)
@@ -532,6 +654,116 @@ class _GoogleMapState extends ConsumerState<KGoogleMap> {
                 icon: const Icon(FontAwesomeIcons.locationCrosshairs,
                     color: Color(0xFFFF772B)),
                 onPressed: _moveToCurrent,
+              ),
+            )),
+      if ((requestStatus == RequestStatus.comming ||
+              requestStatus == RequestStatus.ongoing) &&
+          compass == false &&
+          routeNotifier.hasValue)
+        Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: const Color(0xFFF86C1D),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        spreadRadius: 0,
+                        blurRadius: 3,
+                        offset: const Offset(0, 0))
+                  ],
+                ),
+                height: 145,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          const Icon(
+                            FontAwesomeIcons.arrowUp,
+                            size: 32,
+                            color: Color(0xFFFFFFFF),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                currentAddress,
+                                style: const TextStyle(
+                                    color: Color(0xFFFFFFFF),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 21),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Row(
+                                children: [
+                                  const Text(
+                                    'về hướng',
+                                    style: TextStyle(
+                                        color: Color(0xFFFFFFFF),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 14),
+                                  ),
+                                  const SizedBox(
+                                    width: 6,
+                                  ),
+                                  Text(
+                                    extractStreetNames(route.instruction)[0],
+                                    style: const TextStyle(
+                                        color: Color(0xFFFFFFFF),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                          const Spacer(),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          width: 0,
+                        ),
+                        SizedBox(
+                          width: 350,
+                          child: Text(
+                            removeHtmlTags(route.instruction),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
               ),
             )),
       if (requestStatus == RequestStatus.comming ||

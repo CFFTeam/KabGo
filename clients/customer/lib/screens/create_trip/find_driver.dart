@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../functions/setHexColor.dart';
+import '../../providers/mapProvider.dart';
+import '../../providers/stepProvider.dart';
 
-class FindDriver extends StatelessWidget {
+class FindDriver extends ConsumerWidget {
   const FindDriver({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: BoxDecoration(
         color: HexColor('fe8248'),
@@ -33,11 +36,17 @@ class FindDriver extends StatelessWidget {
                     fontSize: 18),
               ),
               const Spacer(),
-              const FaIcon(
-                FontAwesomeIcons.xmark,
-                size: 32,
-                color: Colors.white,
-              ),
+              // InkWell(
+              //   onTap: () {
+              //     ref.read(stepProvider.notifier).setStep('home');
+              //     ref.read(mapProvider.notifier).setMapAction('SET_DEFAULT');
+              //   },
+              //   child: const FaIcon(
+              //     FontAwesomeIcons.xmark,
+              //     size: 32,
+              //     color: Colors.white,
+              //   ),
+              // ),
               const SizedBox(
                 width: 15,
               ),

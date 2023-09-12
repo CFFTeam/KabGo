@@ -16,7 +16,7 @@ class SocketClient extends StateNotifier<bool> {
 
   _createSocket() {
     socket = io(
-      "ws://${ip}:4600/",
+      "ws://192.168.1.244:4600/",
       OptionBuilder()
           .setTransports(['websocket'])
           .disableAutoConnect()

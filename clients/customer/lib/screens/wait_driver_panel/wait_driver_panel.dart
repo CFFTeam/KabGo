@@ -63,12 +63,7 @@ class _WaitDriverPanelState extends ConsumerState<WaitDriverPanel> {
           ],
         ),
         padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
-        width: MediaQuery.of(context).size.width,
-        // height: 215,
-        // alignment: Alignment.topLeft,
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          // mainAxisSize: MainAxisSize.min,
           children: [
             Center(
               child: Container(

@@ -8657,6 +8657,24 @@
 =======
 [API.Admin][Sat, 09 Sep 2023 11:41:57 GMT] Connected to database successfully 
 >>>>>>> master
+<<<<<<< HEAD
+[API.Admin][Sun, 10 Sep 2023 11:36:55 GMT] Setting up request middleware... 
+[API.Admin][Sun, 10 Sep 2023 11:36:55 GMT] Server is starting... 
+[API.Admin][Sun, 10 Sep 2023 11:36:55 GMT] Server is running on port 4400 
+[API.Admin][Sun, 10 Sep 2023 11:36:56 GMT] Connected to database successfully 
+[API.Admin][Sun, 10 Sep 2023 18:39:13 GMT] Setting up request middleware... 
+[API.Admin][Sun, 10 Sep 2023 18:39:13 GMT] Server is starting... 
+[API.Admin][Sun, 10 Sep 2023 18:39:13 GMT] Server is running on port 4400 
+[API.Admin][Sun, 10 Sep 2023 18:39:14 GMT] Connected to database successfully 
+[API.Admin][Mon, 11 Sep 2023 09:09:43 GMT] Setting up request middleware... 
+[API.Admin][Mon, 11 Sep 2023 09:09:43 GMT] Server is starting... 
+[API.Admin][Mon, 11 Sep 2023 09:09:43 GMT] Server is running on port 4400 
+[API.Admin][Mon, 11 Sep 2023 09:09:44 GMT] Connected to database successfully 
+[API.Admin][Mon, 11 Sep 2023 09:11:30 GMT] Setting up request middleware... 
+[API.Admin][Mon, 11 Sep 2023 09:11:30 GMT] Server is starting... 
+[API.Admin][Mon, 11 Sep 2023 09:11:30 GMT] Server is running on port 4400 
+[API.Admin][Mon, 11 Sep 2023 09:11:31 GMT] Connected to database successfully 
+=======
 [API.Admin][Sat, 09 Sep 2023 20:51:02 GMT] Setting up request middleware... 
 [API.Admin][Sat, 09 Sep 2023 20:51:02 GMT] Server is starting... 
 [API.Admin][Sat, 09 Sep 2023 20:51:02 GMT] Server is running on port 4400 
@@ -8731,6 +8749,7 @@
 [API.Admin][Mon, 11 Sep 2023 04:28:07 GMT] Server is starting... 
 [API.Admin][Mon, 11 Sep 2023 04:28:07 GMT] Server is running on port 4400 
 [API.Admin][Mon, 11 Sep 2023 04:28:08 GMT] Connected to database successfully 
+<<<<<<< HEAD
 [API.Admin][Mon, 11 Sep 2023 09:56:42 GMT] Setting up request middleware... 
 [API.Admin][Mon, 11 Sep 2023 09:56:42 GMT] Server is starting... 
 [API.Admin][Mon, 11 Sep 2023 09:56:42 GMT] Server is running on port 4400 
@@ -8767,3 +8786,766 @@
 [API.Admin][Tue, 12 Sep 2023 08:53:49 GMT] Server is starting... 
 [API.Admin][Tue, 12 Sep 2023 08:53:49 GMT] Server is running on port 4400 
 [API.Admin][Tue, 12 Sep 2023 08:53:50 GMT] Connected to database successfully 
+=======
+<<<<<<< HEAD
+[API.Admin][Tue, 12 Sep 2023 07:31:08 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 07:31:08 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 07:31:08 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 07:31:09 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:24:43 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:24:43 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:24:43 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:24:44 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:24:53 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:24:53 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:24:53 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:24:54 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:25:06 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:25:06 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:25:06 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:25:07 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:27:14 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:27:14 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:27:14 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:27:15 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:27:29 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:27:29 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:27:29 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:27:30 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:27:39 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:27:39 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:27:39 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:27:40 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:28:01 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:28:01 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:28:01 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:28:07 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:28:07 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:28:07 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:28:08 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:28:13 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:28:13 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:28:13 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:28:14 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:28:25 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:28:25 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:28:25 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:28:26 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:33:09 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:33:09 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:33:09 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:33:10 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:33:39 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:33:39 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:33:39 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:33:40 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:33:46 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:33:46 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:33:46 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:33:46 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:33:53 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:33:53 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:33:53 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:33:54 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:33:59 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:33:59 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:33:59 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:34:00 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:34:08 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:34:08 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:34:08 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:34:09 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:35:15 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:35:15 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:35:15 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:35:16 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:36:34 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:36:34 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:36:34 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:37:04 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:37:04 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:37:04 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:37:05 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:37:13 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:37:13 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:37:13 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:37:15 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:38:42 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:38:42 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:38:42 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:38:43 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:40:43 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:40:43 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:40:43 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:40:44 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:42:32 GMT] customers:  {
+  _id: new ObjectId("64e741543ce0d32a53a60469"),
+  avatar: '',
+  name: 'Khang',
+  email: 'khangduy017@gmail.com',
+  phonenumber: '0976975548',
+  dob: '21/04/2002',
+  home_address: '1647 Phạm Thế Hiển, phường 6, quận 8, TP.HCM',
+  type: 'VIP',
+  default_payment_method: 'VISA',
+  rank: 'Đồng',
+  distance: '20',
+  password: '$2y$10$yDCEfKMoM4TzQTu7Eu7ue.8hk8vWXJUJ6Dkk41Cx/SfdHWwaWDlxW',
+  active: '26/8/2023',
+  lock: false
+},{
+  _id: new ObjectId("64e741543ce0d32a53a6046a"),
+  avatar: '',
+  name: 'Nguyễn',
+  email: 'nguyen@example.com',
+  phonenumber: '0987654321',
+  dob: '10/11/1995',
+  home_address: '123 Đường ABC, phường XYZ, quận LMN, TP.HCM',
+  type: 'STANDARD',
+  default_payment_method: 'VISA',
+  rank: 'Bạc',
+  distance: '10',
+  password: '$2y$10$NA7usAWLdXVeJbivusGBjO79w2SZTWviYGtbmkHiZ5p4lSVJcpea.',
+  active: '26/8/2023',
+  lock: false
+},{
+  _id: new ObjectId("64e741543ce0d32a53a6046b"),
+  avatar: '',
+  name: 'Trang',
+  email: 'trang@example.com',
+  phonenumber: '0912345678',
+  dob: '05/07/1988',
+  home_address: '987 Phố UVW, phường RST, quận XYZ, TP.HCM',
+  type: 'STANDARD',
+  default_payment_method: 'VISA',
+  rank: 'Bạc',
+  distance: '15',
+  password: '$2y$10$1yOq.RRBKkQ3eQJdX7cYNuezQrGdUvCFRcom4EPtA8mMN0d56dW1O',
+  active: '26/8/2023',
+  lock: false
+},{
+  _id: new ObjectId("64e741543ce0d32a53a6046c"),
+  avatar: '',
+  name: 'Minh',
+  email: 'minh@example.com',
+  phonenumber: '0965432187',
+  dob: '15/09/2000',
+  home_address: '456 Lê Lợi, phường KLM, quận NOP, TP.HCM',
+  type: 'VIP',
+  default_payment_method: 'VISA',
+  rank: 'Bạch Kim',
+  distance: '5',
+  password: '$2y$10$hW1lPncSa3AqrMEw5P90meyy5kfRhb1jKiW86sUu7aI9T3oWE5c0O',
+  active: '26/8/2023',
+  lock: false
+},{
+  _id: new ObjectId("64e741543ce0d32a53a6046d"),
+  avatar: '',
+  name: 'Linh',
+  email: 'linh@example.com',
+  phonenumber: '0932109876',
+  dob: '02/03/1992',
+  home_address: '789 Đường XYZ, phường ABC, quận DEF, TP.HCM',
+  type: 'STANDARD',
+  default_payment_method: 'VISA',
+  rank: 'Vàng',
+  distance: '8',
+  password: '$2y$10$JYeRUwb2COlELV5L93hbKe7XbxxidWeUz20AQbK2KIvRkTPWVc7/a',
+  active: '26/8/2023',
+  lock: false
+},{
+  type: 'STANDARD',
+  _id: new ObjectId("64f41a8c89fc50a697447dbc"),
+  name: 'Xanh',
+  email: 'xanh@gmail.com',
+  phonenumber: '123',
+  rank: 'Đồng',
+  active: '26/8/2023',
+  lock: true,
+  __v: 0
+},{
+  _id: new ObjectId("64f41ae2903774d04075d53a"),
+  name: 'Cải',
+  email: 'cai@gmail.com',
+  phonenumber: '123',
+  type: 'STANDARD',
+  rank: 'Đồng',
+  active: '26/8/2023',
+  lock: false,
+  __v: 0
+},{
+  _id: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  name: 'Khoa Nguyễn',
+  email: '',
+  phonenumber: '0903861515',
+  dob: '',
+  home_address: '',
+  type: 'STANDARD',
+  default_payment_method: '',
+  rank: 'Đồng',
+  active: '07/09/2023',
+  lock: false,
+  __v: 0
+},{
+  _id: new ObjectId("64fb13aedde3a3f5d440dbe6"),
+  name: 'Dinh Khang',
+  email: 'khangkn2211@gmail.com',
+  phonenumber: '0976975548',
+  dob: '',
+  home_address: '',
+  type: 'STANDARD',
+  default_payment_method: 'Tiền mặt',
+  rank: 'Đồng',
+  distance: '',
+  password: '',
+  active: '26/8/2023',
+  lock: false,
+  __v: 0,
+  avatar: ''
+} 
+[API.Admin][Tue, 12 Sep 2023 08:42:32 GMT] drivers:  {
+  _id: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Nguyễn Thị Hương',
+  email: 'huong.nguyen@example.com',
+  phonenumber: '0345678990',
+  rate: 4.8,
+  accept_rate: 95,
+  cancel_rate: 5,
+  begin_day: '2023-01-10',
+  day_income: 120,
+  week_income: 850,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("65002478012bf8cc5c89c608"),
+      name: 'tiền mặt',
+      balance: 40000
+    },
+    {
+      _id: new ObjectId("65002478012bf8cc5c89c609"),
+      name: 'thẻ tín dụng',
+      balance: 80000
+    },
+    {
+      _id: new ObjectId("65002478012bf8cc5c89c60a"),
+      name: 'zaloPay',
+      balance: 0
+    }
+  ],
+  vehicle: [
+    {
+      name: 'Wave Alpha 50cc',
+      brand: 'Honda',
+      category: 'Xe máy',
+      color: 'Đỏ',
+      service: new ObjectId("64e73bd0943e0646963ade6c"),
+      number: '51H49283'
+    },
+    {
+      name: 'Air Blade 125cc',
+      brand: 'Honda',
+      category: 'Xe tay ga',
+      color: 'Trắng',
+      service: new ObjectId("64e73bd0943e0646963ade6d"),
+      number: '37K63142'
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d7ab357ef17371d71b3b"),
+  avatar: 'https://example.com/avatar4.jpg',
+  name: 'Võ Thị Mai',
+  email: 'mai.vo@example.com',
+  phonenumber: '0456789012',
+  rate: 4.7,
+  accept_rate: 94,
+  cancel_rate: 6,
+  begin_day: '2023-04-15',
+  day_income: 150,
+  week_income: 1100,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("65002478012bf8cc5c89c60b"),
+      name: 'tiền mặt',
+      balance: 38000
+    },
+    {
+      _id: new ObjectId("65002478012bf8cc5c89c60c"),
+      name: 'thẻ tín dụng',
+      balance: 72000
+    },
+    {
+      _id: new ObjectId("65002478012bf8cc5c89c60d"),
+      name: 'zaloPay',
+      balance: 18000
+    }
+  ],
+  vehicle: [
+    {
+      name: 'Toyota Vios',
+      brand: 'Toyota',
+      category: 'Xe Ô tô con',
+      color: 'Bạc',
+      service: new ObjectId("64e73bd0943e0646963ade6e"),
+      number: '29H71543'
+    },
+    {
+      name: 'Toyota Innova',
+      brand: 'Toyota',
+      category: 'Xe Ô tô',
+      color: 'Đen',
+      service: new ObjectId("64e73bd0943e0646963ade6f"),
+      number: '42L80967'
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d7b1357ef17371d71b3c"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Trần Văn Nam',
+  email: 'nam.tran@example.com',
+  phonenumber: '0876543210',
+  rate: 4.6,
+  accept_rate: 92,
+  cancel_rate: 8,
+  begin_day: '2023-02-05',
+  day_income: 105,
+  week_income: 720,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("65002478012bf8cc5c89c60e"),
+      name: 'tiền mặt',
+      balance: 30000
+    },
+    {
+      _id: new ObjectId("65002478012bf8cc5c89c60f"),
+      name: 'thẻ tín dụng',
+      balance: 70000
+    },
+    {
+      _id: new ObjectId("65002478012bf8cc5c89c610"),
+      name: 'zaloPay',
+      balance: 25000
+    }
+  ],
+  vehicle: [
+    {
+      name: 'Scoopy 110cc',
+      brand: 'Honda',
+      category: 'Xe máy',
+      color: 'Trắng',
+      service: new ObjectId("64e73bd0943e0646963ade6c"),
+      number: '36E87142'
+    },
+    {
+      name: 'Winner X 150cc',
+      brand: 'Honda',
+      category: 'Xe tay ga',
+      color: 'Đen',
+      service: new ObjectId("64e73bd0943e0646963ade6d"),
+      number: '52D41579'
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f8ae6ad98e217169afec14"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  lock: false,
+  active: '26/8/2023',
+  account_balance: [],
+  vehicle: [],
+  __v: 0
+},{
+  _id: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  avatar: 'https://lh3.googleusercontent.com/a/AAcHTtcbSDuvEbfkrOROpwV-Skrg0LTuafA6KqR-Z9Tl48jV=s96-c',
+  name: 'Đức Minh Nguyễn',
+  email: 'ducminh68kg.mn@gmail.com',
+  phonenumber: '0778568685',
+  rate: 0,
+  accept_rate: 0,
+  cancel_rate: 0,
+  begin_day: '2023-09-07 19:27:13.083468',
+  day_income: 0,
+  week_income: 0,
+  lock: false,
+  active: '1694089465253',
+  social: true,
+  account_balance: [],
+  vehicle: [],
+  __v: 0
+},{
+  _id: new ObjectId("64fe3bc114de805053e35c86"),
+  avatar: 'https://lh3.googleusercontent.com/a/AAcHTtcupLgyzeY4CV6rdFQ3L93F77MqtdTFxyD9PluPtOG-=s96-c',
+  name: 'Duy Nguyễn',
+  email: 'khang0976975548@gmail.com',
+  phonenumber: '0976975549',
+  rate: 0,
+  accept_rate: 0,
+  cancel_rate: 0,
+  begin_day: '2023-09-11 04:57:21.361652',
+  day_income: 0,
+  week_income: 0,
+  lock: false,
+  active: '1694381100425',
+  social: true,
+  account_balance: [],
+  vehicle: [],
+  __v: 0
+} 
+[API.Admin][Tue, 12 Sep 2023 08:42:36 GMT] customers:  {
+  _id: new ObjectId("64e741543ce0d32a53a60469"),
+  avatar: '',
+  name: 'Khang',
+  email: 'khangduy017@gmail.com',
+  phonenumber: '0976975548',
+  dob: '21/04/2002',
+  home_address: '1647 Phạm Thế Hiển, phường 6, quận 8, TP.HCM',
+  type: 'VIP',
+  default_payment_method: 'VISA',
+  rank: 'Đồng',
+  distance: '20',
+  password: '$2y$10$yDCEfKMoM4TzQTu7Eu7ue.8hk8vWXJUJ6Dkk41Cx/SfdHWwaWDlxW',
+  active: '26/8/2023',
+  lock: false
+},{
+  _id: new ObjectId("64e741543ce0d32a53a6046a"),
+  avatar: '',
+  name: 'Nguyễn',
+  email: 'nguyen@example.com',
+  phonenumber: '0987654321',
+  dob: '10/11/1995',
+  home_address: '123 Đường ABC, phường XYZ, quận LMN, TP.HCM',
+  type: 'STANDARD',
+  default_payment_method: 'VISA',
+  rank: 'Bạc',
+  distance: '10',
+  password: '$2y$10$NA7usAWLdXVeJbivusGBjO79w2SZTWviYGtbmkHiZ5p4lSVJcpea.',
+  active: '26/8/2023',
+  lock: false
+},{
+  _id: new ObjectId("64e741543ce0d32a53a6046b"),
+  avatar: '',
+  name: 'Trang',
+  email: 'trang@example.com',
+  phonenumber: '0912345678',
+  dob: '05/07/1988',
+  home_address: '987 Phố UVW, phường RST, quận XYZ, TP.HCM',
+  type: 'STANDARD',
+  default_payment_method: 'VISA',
+  rank: 'Bạc',
+  distance: '15',
+  password: '$2y$10$1yOq.RRBKkQ3eQJdX7cYNuezQrGdUvCFRcom4EPtA8mMN0d56dW1O',
+  active: '26/8/2023',
+  lock: false
+},{
+  _id: new ObjectId("64e741543ce0d32a53a6046c"),
+  avatar: '',
+  name: 'Minh',
+  email: 'minh@example.com',
+  phonenumber: '0965432187',
+  dob: '15/09/2000',
+  home_address: '456 Lê Lợi, phường KLM, quận NOP, TP.HCM',
+  type: 'VIP',
+  default_payment_method: 'VISA',
+  rank: 'Bạch Kim',
+  distance: '5',
+  password: '$2y$10$hW1lPncSa3AqrMEw5P90meyy5kfRhb1jKiW86sUu7aI9T3oWE5c0O',
+  active: '26/8/2023',
+  lock: false
+},{
+  _id: new ObjectId("64e741543ce0d32a53a6046d"),
+  avatar: '',
+  name: 'Linh',
+  email: 'linh@example.com',
+  phonenumber: '0932109876',
+  dob: '02/03/1992',
+  home_address: '789 Đường XYZ, phường ABC, quận DEF, TP.HCM',
+  type: 'STANDARD',
+  default_payment_method: 'VISA',
+  rank: 'Vàng',
+  distance: '8',
+  password: '$2y$10$JYeRUwb2COlELV5L93hbKe7XbxxidWeUz20AQbK2KIvRkTPWVc7/a',
+  active: '26/8/2023',
+  lock: false
+},{
+  type: 'STANDARD',
+  _id: new ObjectId("64f41a8c89fc50a697447dbc"),
+  name: 'Xanh',
+  email: 'xanh@gmail.com',
+  phonenumber: '123',
+  rank: 'Đồng',
+  active: '26/8/2023',
+  lock: true,
+  __v: 0
+},{
+  _id: new ObjectId("64f41ae2903774d04075d53a"),
+  name: 'Cải',
+  email: 'cai@gmail.com',
+  phonenumber: '123',
+  type: 'STANDARD',
+  rank: 'Đồng',
+  active: '26/8/2023',
+  lock: false,
+  __v: 0
+},{
+  _id: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  name: 'Khoa Nguyễn',
+  email: '',
+  phonenumber: '0903861515',
+  dob: '',
+  home_address: '',
+  type: 'STANDARD',
+  default_payment_method: '',
+  rank: 'Đồng',
+  active: '07/09/2023',
+  lock: false,
+  __v: 0
+},{
+  _id: new ObjectId("64fb13aedde3a3f5d440dbe6"),
+  name: 'Dinh Khang',
+  email: 'khangkn2211@gmail.com',
+  phonenumber: '0976975548',
+  dob: '',
+  home_address: '',
+  type: 'STANDARD',
+  default_payment_method: 'Tiền mặt',
+  rank: 'Đồng',
+  distance: '',
+  password: '',
+  active: '26/8/2023',
+  lock: false,
+  __v: 0,
+  avatar: ''
+} 
+[API.Admin][Tue, 12 Sep 2023 08:42:36 GMT] drivers:  {
+  _id: new ObjectId("64f0d7a7357ef17371d71b3a"),
+  avatar: 'https://example.com/avatar1.jpg',
+  name: 'Nguyễn Thị Hương',
+  email: 'huong.nguyen@example.com',
+  phonenumber: '0345678990',
+  rate: 4.8,
+  accept_rate: 95,
+  cancel_rate: 5,
+  begin_day: '2023-01-10',
+  day_income: 120,
+  week_income: 850,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("6500247c012bf8cc5c89c613"),
+      name: 'tiền mặt',
+      balance: 40000
+    },
+    {
+      _id: new ObjectId("6500247c012bf8cc5c89c614"),
+      name: 'thẻ tín dụng',
+      balance: 80000
+    },
+    {
+      _id: new ObjectId("6500247c012bf8cc5c89c615"),
+      name: 'zaloPay',
+      balance: 0
+    }
+  ],
+  vehicle: [
+    {
+      name: 'Wave Alpha 50cc',
+      brand: 'Honda',
+      category: 'Xe máy',
+      color: 'Đỏ',
+      service: new ObjectId("64e73bd0943e0646963ade6c"),
+      number: '51H49283'
+    },
+    {
+      name: 'Air Blade 125cc',
+      brand: 'Honda',
+      category: 'Xe tay ga',
+      color: 'Trắng',
+      service: new ObjectId("64e73bd0943e0646963ade6d"),
+      number: '37K63142'
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d7ab357ef17371d71b3b"),
+  avatar: 'https://example.com/avatar4.jpg',
+  name: 'Võ Thị Mai',
+  email: 'mai.vo@example.com',
+  phonenumber: '0456789012',
+  rate: 4.7,
+  accept_rate: 94,
+  cancel_rate: 6,
+  begin_day: '2023-04-15',
+  day_income: 150,
+  week_income: 1100,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("6500247c012bf8cc5c89c616"),
+      name: 'tiền mặt',
+      balance: 38000
+    },
+    {
+      _id: new ObjectId("6500247c012bf8cc5c89c617"),
+      name: 'thẻ tín dụng',
+      balance: 72000
+    },
+    {
+      _id: new ObjectId("6500247c012bf8cc5c89c618"),
+      name: 'zaloPay',
+      balance: 18000
+    }
+  ],
+  vehicle: [
+    {
+      name: 'Toyota Vios',
+      brand: 'Toyota',
+      category: 'Xe Ô tô con',
+      color: 'Bạc',
+      service: new ObjectId("64e73bd0943e0646963ade6e"),
+      number: '29H71543'
+    },
+    {
+      name: 'Toyota Innova',
+      brand: 'Toyota',
+      category: 'Xe Ô tô',
+      color: 'Đen',
+      service: new ObjectId("64e73bd0943e0646963ade6f"),
+      number: '42L80967'
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f0d7b1357ef17371d71b3c"),
+  avatar: 'https://example.com/avatar2.jpg',
+  name: 'Trần Văn Nam',
+  email: 'nam.tran@example.com',
+  phonenumber: '0876543210',
+  rate: 4.6,
+  accept_rate: 92,
+  cancel_rate: 8,
+  begin_day: '2023-02-05',
+  day_income: 105,
+  week_income: 720,
+  lock: false,
+  account_balance: [
+    {
+      _id: new ObjectId("6500247c012bf8cc5c89c619"),
+      name: 'tiền mặt',
+      balance: 30000
+    },
+    {
+      _id: new ObjectId("6500247c012bf8cc5c89c61a"),
+      name: 'thẻ tín dụng',
+      balance: 70000
+    },
+    {
+      _id: new ObjectId("6500247c012bf8cc5c89c61b"),
+      name: 'zaloPay',
+      balance: 25000
+    }
+  ],
+  vehicle: [
+    {
+      name: 'Scoopy 110cc',
+      brand: 'Honda',
+      category: 'Xe máy',
+      color: 'Trắng',
+      service: new ObjectId("64e73bd0943e0646963ade6c"),
+      number: '36E87142'
+    },
+    {
+      name: 'Winner X 150cc',
+      brand: 'Honda',
+      category: 'Xe tay ga',
+      color: 'Đen',
+      service: new ObjectId("64e73bd0943e0646963ade6d"),
+      number: '52D41579'
+    }
+  ],
+  active: '26/8/2023'
+},{
+  _id: new ObjectId("64f8ae6ad98e217169afec14"),
+  name: '1',
+  email: '1',
+  phonenumber: '1',
+  lock: false,
+  active: '26/8/2023',
+  account_balance: [],
+  vehicle: [],
+  __v: 0
+},{
+  _id: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  avatar: 'https://lh3.googleusercontent.com/a/AAcHTtcbSDuvEbfkrOROpwV-Skrg0LTuafA6KqR-Z9Tl48jV=s96-c',
+  name: 'Đức Minh Nguyễn',
+  email: 'ducminh68kg.mn@gmail.com',
+  phonenumber: '0778568685',
+  rate: 0,
+  accept_rate: 0,
+  cancel_rate: 0,
+  begin_day: '2023-09-07 19:27:13.083468',
+  day_income: 0,
+  week_income: 0,
+  lock: false,
+  active: '1694089465253',
+  social: true,
+  account_balance: [],
+  vehicle: [],
+  __v: 0
+},{
+  _id: new ObjectId("64fe3bc114de805053e35c86"),
+  avatar: 'https://lh3.googleusercontent.com/a/AAcHTtcupLgyzeY4CV6rdFQ3L93F77MqtdTFxyD9PluPtOG-=s96-c',
+  name: 'Duy Nguyễn',
+  email: 'khang0976975548@gmail.com',
+  phonenumber: '0976975549',
+  rate: 0,
+  accept_rate: 0,
+  cancel_rate: 0,
+  begin_day: '2023-09-11 04:57:21.361652',
+  day_income: 0,
+  week_income: 0,
+  lock: false,
+  active: '1694381100425',
+  social: true,
+  account_balance: [],
+  vehicle: [],
+  __v: 0
+} 
+[API.Admin][Tue, 12 Sep 2023 08:43:41 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:43:41 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:43:41 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:43:42 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:43:46 GMT] customers:  9 
+[API.Admin][Tue, 12 Sep 2023 08:43:46 GMT] drivers:  6 
+[API.Admin][Tue, 12 Sep 2023 08:44:21 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:44:21 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:44:21 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:44:22 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 08:44:25 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 08:44:25 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 08:44:25 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 08:44:26 GMT] Connected to database successfully 
+=======
+>>>>>>> master
+<<<<<<< HEAD
+[API.Admin][Mon, 11 Sep 2023 17:34:15 GMT] Setting up request middleware... 
+[API.Admin][Mon, 11 Sep 2023 17:34:15 GMT] Server is starting... 
+[API.Admin][Mon, 11 Sep 2023 17:34:15 GMT] Server is running on port 4400 
+[API.Admin][Mon, 11 Sep 2023 17:34:16 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 07:48:45 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 07:48:45 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 07:48:45 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 07:48:46 GMT] Connected to database successfully 
+=======
+[API.Admin][Mon, 11 Sep 2023 12:24:50 GMT] Setting up request middleware... 
+[API.Admin][Mon, 11 Sep 2023 12:24:50 GMT] Server is starting... 
+[API.Admin][Mon, 11 Sep 2023 12:24:50 GMT] Server is running on port 4400 
+[API.Admin][Mon, 11 Sep 2023 12:24:51 GMT] Connected to database successfully 
+>>>>>>> ecdb7239463a6a3238caf0c0a9da471dc85696e4
+>>>>>>> master
+>>>>>>> master
