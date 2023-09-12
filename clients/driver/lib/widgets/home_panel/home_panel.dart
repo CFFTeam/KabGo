@@ -5,6 +5,7 @@ import 'package:driver/providers/customer_request.dart';
 import 'package:driver/providers/request_status.dart';
 import 'package:driver/providers/socket_provider.dart';
 import 'package:driver/screens/customer_request/customer_request.dart';
+import 'package:driver/screens/vehicle_screen/vehicle_screen.dart';
 import 'package:driver/widgets/icon_button/icon_button.dart';
 import 'package:driver/widgets/navigation/navigation.dart';
 import 'package:flutter/material.dart';
@@ -81,7 +82,9 @@ class _HomePanelState extends ConsumerState<HomePanel> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   CIconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // context.go(HomeVehicle.path);
+                      },
                       icon: Transform.rotate(
                           angle: 180 * math.pi / 180,
                           child: const Icon(FontAwesomeIcons.sliders,

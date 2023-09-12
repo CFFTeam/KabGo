@@ -1,7 +1,7 @@
+import 'package:customer/providers/routeProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/data.dart';
-import '../../providers/paymentProvider.dart';
 import '../../widgets/payment_method_item.dart';
 
 class ChoosePaymentMethod extends ConsumerStatefulWidget {
@@ -18,9 +18,7 @@ class _ChoosePaymentMethodState extends ConsumerState<ChoosePaymentMethod> {
   void setChoseItem(int index) {
     setState(() {
       chosenItem = index;
-      ref
-          .read(paymentProvider.notifier)
-          .setPaymentMethod((index + 1).toString());
+      ref.read(routeProvider.notifier).setPaymentMethod((index + 1).toString());
       widget.chooseItem(index + 1);
     });
   }
@@ -28,8 +26,8 @@ class _ChoosePaymentMethodState extends ConsumerState<ChoosePaymentMethod> {
   @override
   void initState() {
     // TODO: implement initState
-    if (ref.read(paymentProvider).paymentMethod.length == 1) {
-      chosenItem = int.parse(ref.read(paymentProvider).paymentMethod) - 1;
+    if (ref.read(routeProvider).paymentMethod.length == 1) {
+      chosenItem = int.parse(ref.read(routeProvider).paymentMethod) - 1;
     }
     super.initState();
   }

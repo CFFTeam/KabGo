@@ -7,6 +7,7 @@ import { Socket } from 'socket.io';
 import mongoose from 'mongoose';
 import BookingHistory from '@common/models/booking_history.model';
 import Customer from '@common/models/customer.model';
+import Service from '@common/models/service.model';
 
 process.on('uncaughtException', (err: Error) => {
     console.error('Uncaught Exception. Shutting down...');
@@ -61,7 +62,10 @@ const server = app.run(4501, async () => {
             let existedBooking = await BookingHistory.find({
                 $and: [{ 'original.address': data.origin }, { 'destination.address': data.destination }],
             });
-            console.log('existed booking: ', existedBooking);
+
+            // find corresponding vehicle_id of vehicle type
+            const service = await Service.findOne({ name: data.vehicle_type });
+            
             let newBooking = await BookingHistory.create({
                 _id: new mongoose.Types.ObjectId(data._id),
                 customer: customer._id,
@@ -75,15 +79,15 @@ const server = app.run(4501, async () => {
                     latitude: data.destination_latlng.lat,
                     longitude: data.destination_latlng.lng,
                 },
+                distance: data.distance,
                 time: data.local_time,
                 state: 'Đang điều phối',
                 frequency: existedBooking.length + 1,
+                vehicle: service?._id,
                 price: data.price,
                 related_employee: new mongoose.Types.ObjectId(data.related_employee),
             });
-            console.log('data sent from client-s2: ', data);
-            console.log('booking history: ', newBooking);
-
+            console.log('Data sent from client-s2: ', data);
             rabbitMQ.publish(
                 'gps-coordinates',
                 JSON.stringify({

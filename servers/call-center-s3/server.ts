@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import SocketManager from '@common/socket';
 import { Socket } from 'socket.io';
 const accountSid = 'AC2aa9972a3be5eec764feaa72b01825a8';
-const authToken = '6821b0833522a797c9944f9cca15d492';
+const authToken = 'c160385ab9b17d41673427ae4f698725';
 const client = require('twilio')(accountSid, authToken);
 
 process.on('uncaughtException', (err: Error) => {
@@ -44,7 +44,7 @@ const app = new Application({
 //     });
 // });
 
-const server = app.run(4502, async ()=>{
+const server = app.run(4502, async () => {
     const io = SocketManager.init(server);
 
     io.on('connection', (socket: Socket) => {
@@ -55,20 +55,20 @@ const server = app.run(4502, async ()=>{
         const data = JSON.parse(message);
         let messageSend;
         console.log('---------------------');
-        console.log('Queue get from s3: ', message);
+        console.log('Queue get from s3: ', data);
         if (message !== null) {
             io.emit('Tracking Queue', message);
-            if(data.state==="Đang điều phối"){
-                messageSend = "Vui lòng chờ giây lát, chúng tôi đang điều phối chuyến xe cho tài xế gần nhất."
+            if (data.state === 'Đang điều phối') {
+                messageSend = 'Vui lòng chờ giây lát, chúng tôi đang điều phối chuyến xe cho tài xế gần nhất.';
             }
-            if(data.state==="Đang tiến hành"){
-                messageSend = "Đã tìm được tài xế. Tài xế sẽ đến đón bạn trong ít phút."
+            if (data.state === 'Đang tiến hành'){
+                messageSend = `Đã tìm được tài xế. Tài xế sẽ đến đón bạn trong ít phút. Thông tin tài xế: ${data.driver_name}, Số điện thoại: ${data.driver_phonenumber}, Phương tiện: ${data.vehicle_name} (${data.vehicle_color}), Biển số xe: ${data.vehicle_number}.`;
             }
-            if(data.state==="Hoàn thành"){
-                messageSend = "Chuyến đi đã hoàn thành. Cám ơn bạn đã sử dụng dịch vụ của chúng tôi."
+            if (data.state === 'Hoàn thành') {
+                messageSend = 'Chuyến đi đã hoàn thành. Cám ơn bạn đã sử dụng dịch vụ của chúng tôi.';
             }
-            if(data.state==="Đã hủy"){
-                messageSend = "Chuyến đi đã bị hủy. Xin lỗi bạn vì sự bất tiện này."
+            if (data.state === 'Đã hủy') {
+                messageSend = 'Chuyến đi đã bị hủy. Xin lỗi bạn vì sự bất tiện này.';
             }
             console.log(messageSend);
             // client.messages

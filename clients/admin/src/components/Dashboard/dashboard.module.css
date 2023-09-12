@@ -84,6 +84,17 @@
     border-bottom: 3px solid #F86C1D
 }
 
+.chart-content-loading{
+    margin-top: 1rem;
+    height: 85%;
+    background: white;
+    border-radius: 0.8rem;
+    border: 2px solid #F0F0F0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .chart-content{
     margin-top: 1rem;
     height: 85%;

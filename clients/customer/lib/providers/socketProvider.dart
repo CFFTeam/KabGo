@@ -73,6 +73,7 @@ class SocketClient extends StateNotifier<void> {
           'price': routeModel.price,
           'distance': routeModel.distance,
           'time': convertTimeFormat(routeModel.time!),
+          'coupon': routeModel.coupon
         },
       ),
     );

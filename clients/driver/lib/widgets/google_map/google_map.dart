@@ -438,6 +438,7 @@ class _GoogleMapState extends ConsumerState<KGoogleMap>
             });
 
             running = true;
+            step = 1;
             compassNotifier.setDirection(false);
             process = 0;
           });
@@ -474,8 +475,6 @@ class _GoogleMapState extends ConsumerState<KGoogleMap>
               bearing: rotate));
 
           Future.delayed(const Duration(milliseconds: 2000), () {
-            print("GO HERE");
-
             if (routesList.isNotEmpty) {
               fetchAddress(routesList[step].startLocation.latitude,
                       routesList[step].startLocation.longitude)
@@ -491,6 +490,8 @@ class _GoogleMapState extends ConsumerState<KGoogleMap>
                   process >=
                       customerRequest.direction.polylinePoints!.length - 1) {
                 timer.cancel();
+
+                step = 0;
 
                 if (compass == true) {
                   // context.go(RouteScreen.path);

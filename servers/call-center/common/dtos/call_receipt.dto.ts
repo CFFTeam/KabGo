@@ -14,7 +14,7 @@ class CallReceiptDto {
 
     @IsNotEmpty({ message: "Lựa chọn loại xe không được rỗng" })
 	@IsString({ message: "Lựa chọn loại xe phải là chuỗi" })
-	@NotContains("Chọn loại xe", {message: "Lựa chọn loại xe không hợp lệ"})
+	@NotContains("Chọn loại xe", {message: "Vui lòng lựa chọn loại xe"})
 	public vehicle_type: string | any;
 
     @IsNotEmpty({ message: "Địa chỉ đón không được rỗng" })

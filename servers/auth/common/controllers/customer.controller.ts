@@ -24,6 +24,7 @@ class customerAuthController implements Controller {
 
     constructor() {
         this.router.post('/login', this.login);
+        this.router.post('/get-booking-history', this.getBookingHistory);
     }
 
     /// > LOGIN
@@ -31,25 +32,9 @@ class customerAuthController implements Controller {
         // get phone number, password of user
         const customer = await customerModel.findOne({ email: req.body.email });
         if (customer != null) {
-            const historyList = await bookingHistory.find({ customer: customer?._id.toString() }).sort('-_id');
-            // console.log(historyList.length);
-            // console.log(historyList);
-            const _historyList: any = [];
-            for (const i in historyList) {
-                let check: boolean = true;
-                for (const j in _historyList) {
-                    if (historyList[i].destination.address === _historyList[j].destination.address) check = false;
-                }
-                if (check) _historyList.push(historyList[i]);
-            }
-
-            // console.log('================= DIEM PHAN BIET: ', _historyList.length);
-            // console.log(_historyList);
-
             return res.status(200).json({
                 status: 'success',
                 info: JSON.stringify(customer),
-                history: _historyList,
                 // accessToken: accessToken,
             });
         } else {
@@ -65,11 +50,32 @@ class customerAuthController implements Controller {
                     email: req.body.email,
                     phonenumber: '0976975548',
                 }),
-                history: [],
-                // accessToken: accessToken,
             });
         }
     });
+
+    public getBookingHistory = async (req: Request, res: Response, next: NextFunction) => {
+        console.log(req.body);
+        const customer = await customerModel.findOne({ email: req.body.email });
+        console.log(customer);
+        const historyList = await bookingHistory.find({ customer: customer?._id.toString() }).sort('-_id');
+
+        const _historyList: any = [];
+        for (const i in historyList) {
+            let check: boolean = true;
+            for (const j in _historyList) {
+                if (historyList[i].destination.address === _historyList[j].destination.address) check = false;
+            }
+            if (check) _historyList.push(historyList[i]);
+        }
+        console.log(_historyList);
+
+        return res.status(200).json({
+            status: 'success',
+            history: _historyList,
+            // accessToken: accessToken,
+        });
+    };
 }
 
 export default customerAuthController;

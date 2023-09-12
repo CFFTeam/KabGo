@@ -93,7 +93,7 @@ const DashboardTable: React.FC = () => {
         _id: receivedBookingInformation._id,
         customer: receivedBookingInformation.customer_phonenumber,
         driver: "",
-        time: receivedBookingInformation.time,
+        time: receivedBookingInformation.booking_time,
         vehicleType: receivedBookingInformation.vehicle_type,
         status: receivedBookingInformation.state,
         arrivalAddress: receivedBookingInformation.destination,
@@ -168,31 +168,31 @@ const DashboardTable: React.FC = () => {
                     </div>
                     <div
                       onClick={() =>
-                        handleFilter("vehicle_title", "Ô tô (7-9 chỗ)")
+                        handleFilter("vehicle_title", "Xe máy")
                       }
                     >
-                      Ô tô (7-9 chỗ)
+                      Xe máy
                     </div>
                     <div
                       onClick={() =>
-                        handleFilter("vehicle_title", "Ô tô (2-4 chỗ)")
+                        handleFilter("vehicle_title", "Xe tay ga")
                       }
                     >
-                      Ô tô (2-4 chỗ)
+                      Xe tay ga
                     </div>
                     <div
                       onClick={() =>
-                        handleFilter("vehicle_title", "Xe máy (1 chỗ)")
+                        handleFilter("vehicle_title", "Xe Ô tô con")
                       }
                     >
-                      Xe máy (1 chỗ)
+                      Xe Ô tô con
                     </div>
                     <div
                       onClick={() =>
-                        handleFilter("vehicle_title", "Xe tay ga (1 chỗ)")
+                        handleFilter("vehicle_title", "Xe Ô tô")
                       }
                     >
-                      Xe tay ga (1 chỗ)
+                      Xe Ô tô
                     </div>
                   </div>
                 </div>
