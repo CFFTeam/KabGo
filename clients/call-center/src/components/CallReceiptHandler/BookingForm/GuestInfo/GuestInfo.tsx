@@ -72,8 +72,8 @@ const GuestInfo: React.FC = () => {
                             <option value = "Chọn loại xe" disabled selected>Chọn loại xe</option>
                             <option value = "Xe máy">Xe máy</option>
                             <option value = "Xe tay ga">Xe tay ga</option>
-                            <option value = "Ô tô (2-4 chỗ)">Ô tô (2-4 chỗ)</option>
-                            <option value = "Ô tô (7-9 chỗ)">Ô tô (7-9 chỗ)</option>
+                            <option value = "Xe Ô tô con">Xe Ô tô con</option>
+                            <option value = "Xe Ô tô">Xe Ô tô</option>
                         </select>
                     </div>
                     <div className={styles["input"]}>

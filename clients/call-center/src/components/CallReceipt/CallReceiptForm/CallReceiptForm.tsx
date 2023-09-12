@@ -68,7 +68,6 @@ const CallReceiptForm: React.FC = () => {
         setTimeout(() => {
             // get most frequent booking addresses
             axios.get(`${process.env.REACT_APP_API_URI_S1}/v1/locating/most-frequent-booking-addresses/${phoneNumberRef.current?.value}`).then(response => {
-                // console.log('response: ', response);
                 if (response.data.data.length > 0) {
                     let mostVisitedAddressList: MostVisitedAddress[] = [];
                     response.data.data.mostFrequentBookingAddresses.forEach((item: any) => {
@@ -83,7 +82,6 @@ const CallReceiptForm: React.FC = () => {
                         };
                         mostVisitedAddressList.push(mostVisitedAddress);
                     }) 
-                    // console.log('mostVisitedAddressList: ', mostVisitedAddressList);
                     setLoadingSpinner(true);
                     setTimeout(() => {
                         setLoadingSpinner(false);
@@ -96,7 +94,6 @@ const CallReceiptForm: React.FC = () => {
 
             // get recent bookings 
             axios.get(`${process.env.REACT_APP_API_URI_S1}/v1/locating/most-recent-bookings/${phoneNumberRef.current?.value}`).then(response => {
-                // console.log('response: ', response.data.data);
                 if (response.data.data.length > 0) {
                     let mostRecentBookingList: MostRecentBooking[] = [];
                     response.data.data.mostRecentBookings.forEach((item: any) => {
@@ -118,7 +115,6 @@ const CallReceiptForm: React.FC = () => {
                         };
                         mostRecentBookingList.push(mostRecentBooking);
                     }) 
-                    console.log('MostRecentBookingList: ', mostRecentBookingList);
                     setLoadingSpinner(true);
                     setTimeout(() => {
                         setLoadingSpinner(false);
@@ -150,8 +146,20 @@ const CallReceiptForm: React.FC = () => {
             console.log('handle submit form');
             const date = new Date() ;
             const formattedDate = `${date.getDate()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
-            const bookingTime = `${scheduledBookingTime_HH_Ref.current?.value}:${scheduledBookingTime_MM_Ref.current?.value} ${isAM ? "AM" : 
-        "PM"} - ${formattedDate}`;
+            let bookingTime = '';
+            if (scheduledBookingTime_HH_Ref.current?.value && scheduledBookingTime_MM_Ref.current?.value) {
+                bookingTime = `${scheduledBookingTime_HH_Ref.current?.value}:${scheduledBookingTime_MM_Ref.current?.value} ${isAM ? "AM" : 
+                "PM"} - ${formattedDate}`;
+            } else {
+                // Create a new Date object
+                const date = new Date();
+                // Adjust the time to UTC+7
+                date.setUTCHours(date.getUTCHours() + 7);
+                // Format the date as an ISO string
+                const isoDateString = date.toISOString();
+                bookingTime = formatDate(isoDateString);
+            }
+            
             const formData = {
                 customer_name: nameRef.current?.value || '',
                 customer_phonenumber: phoneNumberRef.current?.value || '',
@@ -163,7 +171,7 @@ const CallReceiptForm: React.FC = () => {
                 origin_latlng: bookingInformation.originLatLng,
                 destination_latlng: bookingInformation.destinationLatLng,
                 local_time: new Date(date.getTime() + (7 * 60 * 60 * 1000)).toISOString(),
-                booking_time: scheduledBookingTime_HH_Ref.current?.value && scheduledBookingTime_MM_Ref.current?.value ? bookingTime : formatDate(new Date()),
+                booking_time: bookingTime,
                 scheduledBookingTime_HH: scheduledBookingTime_HH_Ref.current?.value || '',
                 scheduledBookingTime_MM: scheduledBookingTime_MM_Ref.current?.value || '',
                 related_employee: authStorage?.getAuthData()?._id || '',

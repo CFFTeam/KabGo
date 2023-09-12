@@ -5710,3 +5710,1089 @@
 [API.Call Center][Mon, 11 Sep 2023 19:23:27 GMT] phone_number sent from call-center s1 client:  [object Object] 
 [API.Call Center][Mon, 11 Sep 2023 19:31:59 GMT] get most recent bookings function triggered 
 [API.Call Center][Mon, 11 Sep 2023 19:31:59 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:15:11 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 08:15:11 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 08:15:11 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 08:15:11 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:15:11 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:33:56 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 08:33:56 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 08:33:56 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 08:33:56 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:33:57 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:41:48 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 08:41:48 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 08:41:48 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 08:41:48 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:41:49 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:42:40 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 08:42:40 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 08:42:40 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 08:42:40 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:42:41 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:46:11 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 08:46:11 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 08:46:11 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:46:11 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:46:12 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:46:12 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:46:12 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:46:12 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 08:46:12 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 08:46:12 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 08:46:12 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:46:12 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 08:46:13 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 08:46:13 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:46:13 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 08:46:13 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:46:13 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 08:46:13 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:46:13 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 08:46:14 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:48:07 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 08:48:07 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 08:48:07 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 08:48:07 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:48:07 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:49:15 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 08:49:15 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 08:49:15 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 08:49:15 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:49:16 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:49:39 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 08:49:39 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:49:53 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:49:53 GMT] existed Booking:  {
+  original: {
+    address: 'THPT Gia Định, Võ Oanh, Phường 25, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7185804,
+    latitude: 10.8048952
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("64ff5f279630fa895285e992"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '1,7 km',
+  time: 2023-09-12T01:40:39.706Z,
+  frequency: 1,
+  price: '20.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-11T18:41:08.210Z,
+  updatedAt: 2023-09-11T18:41:08.210Z,
+  __v: 0
+},{
+  original: {
+    address: 'THPT Gia Định, Võ Oanh, Phường 25, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7185804,
+    latitude: 10.8048952
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("64ff5f619630fa895285e994"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,7 km',
+  time: 2023-09-12T01:41:37.563Z,
+  frequency: 2,
+  price: '20.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-11T18:41:37.778Z,
+  updatedAt: 2023-09-11T18:41:37.778Z,
+  __v: 0
+},{
+  original: {
+    address: 'THPT Gia Định, Võ Oanh, Phường 25, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7185804,
+    latitude: 10.8048952
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("64ff623d9630fa895285e99a"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,7 km',
+  time: 2023-09-12T01:53:49.486Z,
+  frequency: 3,
+  price: '20.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-11T18:53:49.725Z,
+  updatedAt: 2023-09-11T18:53:49.725Z,
+  __v: 0
+} 
+[API.Call Center][Tue, 12 Sep 2023 08:49:53 GMT] calculated price s1:  23.000đ 
+[API.Call Center][Tue, 12 Sep 2023 08:50:16 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:50:16 GMT] existed Booking:   
+[API.Call Center][Tue, 12 Sep 2023 08:53:51 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 08:53:51 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 08:53:51 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 08:53:51 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:53:52 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:54:24 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 08:54:24 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 08:54:24 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 08:54:24 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:54:25 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:54:50 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 08:54:50 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:54:57 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:54:57 GMT] existed Booking:  {
+  original: {
+    address: 'THPT Gia Định, Võ Oanh, Phường 25, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7185804,
+    latitude: 10.8048952
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("64ff5f279630fa895285e992"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '1,7 km',
+  time: 2023-09-12T01:40:39.706Z,
+  frequency: 1,
+  price: '20.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-11T18:41:08.210Z,
+  updatedAt: 2023-09-11T18:41:08.210Z,
+  __v: 0
+},{
+  original: {
+    address: 'THPT Gia Định, Võ Oanh, Phường 25, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7185804,
+    latitude: 10.8048952
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("64ff5f619630fa895285e994"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,7 km',
+  time: 2023-09-12T01:41:37.563Z,
+  frequency: 2,
+  price: '20.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-11T18:41:37.778Z,
+  updatedAt: 2023-09-11T18:41:37.778Z,
+  __v: 0
+},{
+  original: {
+    address: 'THPT Gia Định, Võ Oanh, Phường 25, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7185804,
+    latitude: 10.8048952
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("64ff623d9630fa895285e99a"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,7 km',
+  time: 2023-09-12T01:53:49.486Z,
+  frequency: 3,
+  price: '20.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-11T18:53:49.725Z,
+  updatedAt: 2023-09-11T18:53:49.725Z,
+  __v: 0
+},{
+  original: {
+    address: 'THPT Gia Định, Võ Oanh, Phường 25, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7185804,
+    latitude: 10.8048952
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500263144384afbb1eb6d36"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '1,7 km',
+  time: 2023-09-12T15:49:53.281Z,
+  frequency: 4,
+  price: '23.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6f"),
+  createdAt: 2023-09-12T08:49:53.595Z,
+  updatedAt: 2023-09-12T08:49:53.595Z,
+  __v: 0
+} 
+[API.Call Center][Tue, 12 Sep 2023 08:54:57 GMT] calculated price s1:  20.000đ 
+[API.Call Center][Tue, 12 Sep 2023 08:55:31 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:55:31 GMT] existed Booking:   
+[API.Call Center][Tue, 12 Sep 2023 08:56:43 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 08:56:43 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:56:43 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 08:56:44 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:56:56 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 08:56:56 GMT] existed Booking:  {
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500278375ce5c38dbc9b711"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '5,4 km',
+  time: 2023-09-12T15:55:31.589Z,
+  frequency: 1,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T08:56:16.755Z,
+  updatedAt: 2023-09-12T08:56:16.755Z,
+  __v: 0
+} 
+[API.Call Center][Tue, 12 Sep 2023 08:56:56 GMT] calculated price s1:  64.000đ 
+[API.Call Center][Tue, 12 Sep 2023 09:30:03 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:30:03 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:30:12 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:30:12 GMT] existed Booking:  {
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500278375ce5c38dbc9b711"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '5,4 km',
+  time: 2023-09-12T15:55:31.589Z,
+  frequency: 1,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T08:56:16.755Z,
+  updatedAt: 2023-09-12T08:56:16.755Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("650027d875ce5c38dbc9b717"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T15:56:56.046Z,
+  frequency: 2,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T08:56:56.466Z,
+  updatedAt: 2023-09-12T08:56:56.466Z,
+  __v: 0
+} 
+[API.Call Center][Tue, 12 Sep 2023 09:30:13 GMT] calculated price s1:  64.000đ 
+[API.Call Center][Tue, 12 Sep 2023 09:30:25 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:30:25 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:30:25 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:30:25 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:30:38 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:30:38 GMT] existed Booking:  {
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500278375ce5c38dbc9b711"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '5,4 km',
+  time: 2023-09-12T15:55:31.589Z,
+  frequency: 1,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T08:56:16.755Z,
+  updatedAt: 2023-09-12T08:56:16.755Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("650027d875ce5c38dbc9b717"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T15:56:56.046Z,
+  frequency: 2,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T08:56:56.466Z,
+  updatedAt: 2023-09-12T08:56:56.466Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("65002fa475ce5c38dbc9b71f"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:30:11.961Z,
+  frequency: 3,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:30:13.273Z,
+  updatedAt: 2023-09-12T09:30:13.273Z,
+  __v: 0
+} 
+[API.Call Center][Tue, 12 Sep 2023 09:30:39 GMT] calculated price s1:  64.000đ 
+[API.Call Center][Tue, 12 Sep 2023 09:30:43 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:30:43 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:30:43 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:30:43 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:31:02 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:31:02 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:31:02 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:31:02 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:31:02 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:31:02 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:31:02 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:31:02 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:32:16 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:32:16 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:32:16 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:32:16 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:32:22 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:32:23 GMT] existed Booking:  {
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500278375ce5c38dbc9b711"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '5,4 km',
+  time: 2023-09-12T15:55:31.589Z,
+  frequency: 1,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T08:56:16.755Z,
+  updatedAt: 2023-09-12T08:56:16.755Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("650027d875ce5c38dbc9b717"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T15:56:56.046Z,
+  frequency: 2,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T08:56:56.466Z,
+  updatedAt: 2023-09-12T08:56:56.466Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("65002fa475ce5c38dbc9b71f"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:30:11.961Z,
+  frequency: 3,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:30:13.273Z,
+  updatedAt: 2023-09-12T09:30:13.273Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("65002fbe75ce5c38dbc9b729"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:30:38.657Z,
+  frequency: 4,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:30:39.041Z,
+  updatedAt: 2023-09-12T09:30:39.041Z,
+  __v: 0
+} 
+[API.Call Center][Tue, 12 Sep 2023 09:32:23 GMT] calculated price s1:  64.000đ 
+[API.Call Center][Tue, 12 Sep 2023 09:32:52 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:32:53 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:32:53 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:32:53 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:33:08 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:33:08 GMT] existed Booking:  {
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500278375ce5c38dbc9b711"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '5,4 km',
+  time: 2023-09-12T15:55:31.589Z,
+  frequency: 1,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T08:56:16.755Z,
+  updatedAt: 2023-09-12T08:56:16.755Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("650027d875ce5c38dbc9b717"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T15:56:56.046Z,
+  frequency: 2,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T08:56:56.466Z,
+  updatedAt: 2023-09-12T08:56:56.466Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("65002fa475ce5c38dbc9b71f"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:30:11.961Z,
+  frequency: 3,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:30:13.273Z,
+  updatedAt: 2023-09-12T09:30:13.273Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("65002fbe75ce5c38dbc9b729"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:30:38.657Z,
+  frequency: 4,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:30:39.041Z,
+  updatedAt: 2023-09-12T09:30:39.041Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500302675ce5c38dbc9b73f"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:32:22.877Z,
+  frequency: 5,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:32:23.302Z,
+  updatedAt: 2023-09-12T09:32:23.302Z,
+  __v: 0
+} 
+[API.Call Center][Tue, 12 Sep 2023 09:33:09 GMT] calculated price s1:  64.000đ 
+[API.Call Center][Tue, 12 Sep 2023 09:36:34 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:36:34 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:38:29 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:38:29 GMT] existed Booking:  {
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500278375ce5c38dbc9b711"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '5,4 km',
+  time: 2023-09-12T15:55:31.589Z,
+  frequency: 1,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T08:56:16.755Z,
+  updatedAt: 2023-09-12T08:56:16.755Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("650027d875ce5c38dbc9b717"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T15:56:56.046Z,
+  frequency: 2,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T08:56:56.466Z,
+  updatedAt: 2023-09-12T08:56:56.466Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("65002fa475ce5c38dbc9b71f"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:30:11.961Z,
+  frequency: 3,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:30:13.273Z,
+  updatedAt: 2023-09-12T09:30:13.273Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("65002fbe75ce5c38dbc9b729"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:30:38.657Z,
+  frequency: 4,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:30:39.041Z,
+  updatedAt: 2023-09-12T09:30:39.041Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500302675ce5c38dbc9b73f"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:32:22.877Z,
+  frequency: 5,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:32:23.302Z,
+  updatedAt: 2023-09-12T09:32:23.302Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500305475ce5c38dbc9b749"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:33:08.551Z,
+  frequency: 6,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:33:09.304Z,
+  updatedAt: 2023-09-12T09:33:09.304Z,
+  __v: 0
+} 
+[API.Call Center][Tue, 12 Sep 2023 09:38:30 GMT] calculated price s1:  34.000đ 
+[API.Call Center][Tue, 12 Sep 2023 09:40:34 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:40:34 GMT] existed Booking:  {
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500278375ce5c38dbc9b711"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '5,4 km',
+  time: 2023-09-12T15:55:31.589Z,
+  frequency: 1,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T08:56:16.755Z,
+  updatedAt: 2023-09-12T08:56:16.755Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("650027d875ce5c38dbc9b717"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T15:56:56.046Z,
+  frequency: 2,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T08:56:56.466Z,
+  updatedAt: 2023-09-12T08:56:56.466Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("65002fa475ce5c38dbc9b71f"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:30:11.961Z,
+  frequency: 3,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:30:13.273Z,
+  updatedAt: 2023-09-12T09:30:13.273Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("65002fbe75ce5c38dbc9b729"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:30:38.657Z,
+  frequency: 4,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:30:39.041Z,
+  updatedAt: 2023-09-12T09:30:39.041Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500302675ce5c38dbc9b73f"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:32:22.877Z,
+  frequency: 5,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:32:23.302Z,
+  updatedAt: 2023-09-12T09:32:23.302Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500305475ce5c38dbc9b749"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:33:08.551Z,
+  frequency: 6,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:33:09.304Z,
+  updatedAt: 2023-09-12T09:33:09.304Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500319575ce5c38dbc9b751"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:38:29.773Z,
+  frequency: 7,
+  price: '34.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  createdAt: 2023-09-12T09:38:30.063Z,
+  updatedAt: 2023-09-12T09:38:30.063Z,
+  __v: 0
+} 
+[API.Call Center][Tue, 12 Sep 2023 09:40:34 GMT] calculated price s1:  34.000đ 
+[API.Call Center][Tue, 12 Sep 2023 09:40:46 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:40:46 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:40:46 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:40:46 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:40:52 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:40:52 GMT] existed Booking:  {
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500278375ce5c38dbc9b711"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '5,4 km',
+  time: 2023-09-12T15:55:31.589Z,
+  frequency: 1,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T08:56:16.755Z,
+  updatedAt: 2023-09-12T08:56:16.755Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("650027d875ce5c38dbc9b717"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T15:56:56.046Z,
+  frequency: 2,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T08:56:56.466Z,
+  updatedAt: 2023-09-12T08:56:56.466Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("65002fa475ce5c38dbc9b71f"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:30:11.961Z,
+  frequency: 3,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:30:13.273Z,
+  updatedAt: 2023-09-12T09:30:13.273Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("65002fbe75ce5c38dbc9b729"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:30:38.657Z,
+  frequency: 4,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:30:39.041Z,
+  updatedAt: 2023-09-12T09:30:39.041Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500302675ce5c38dbc9b73f"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:32:22.877Z,
+  frequency: 5,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:32:23.302Z,
+  updatedAt: 2023-09-12T09:32:23.302Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500305475ce5c38dbc9b749"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:33:08.551Z,
+  frequency: 6,
+  price: '64.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6e"),
+  createdAt: 2023-09-12T09:33:09.304Z,
+  updatedAt: 2023-09-12T09:33:09.304Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500319575ce5c38dbc9b751"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:38:29.773Z,
+  frequency: 7,
+  price: '34.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  createdAt: 2023-09-12T09:38:30.063Z,
+  updatedAt: 2023-09-12T09:38:30.063Z,
+  __v: 0
+},{
+  original: {
+    address: 'CGV Lý Chính Thắng, Lý Chính Thắng, phường 8, Quận 3, Thành phố Hồ Chí Minh',
+    longitude: 106.6856503,
+    latitude: 10.7891011
+  },
+  destination: {
+    address: 'Landmark 81, Đường Điện Biên Phủ, Vinhomes Tân Cảng, Phường 22, Bình Thạnh, Thành phố Hồ Chí Minh',
+    longitude: 106.7218215,
+    latitude: 10.7949932
+  },
+  _id: new ObjectId("6500321275ce5c38dbc9b757"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '5,4 km',
+  time: 2023-09-12T16:40:34.195Z,
+  frequency: 8,
+  price: '34.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  createdAt: 2023-09-12T09:40:34.555Z,
+  updatedAt: 2023-09-12T09:40:34.555Z,
+  __v: 0
+} 
+[API.Call Center][Tue, 12 Sep 2023 09:40:53 GMT] calculated price s1:  30.000đ 
+[API.Call Center][Tue, 12 Sep 2023 09:41:12 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:41:12 GMT] existed Booking:   
+[API.Call Center][Tue, 12 Sep 2023 09:46:08 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:46:08 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 09:46:08 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 09:46:08 GMT] phone_number sent from call-center s1 client:  [object Object] 
