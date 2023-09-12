@@ -4135,3 +4135,8 @@
 [API.Call Center][Mon, 11 Sep 2023 04:28:08 GMT] Connected to database successfully 
 [API.Call Center][Mon, 11 Sep 2023 04:30:19 GMT] Could not connect to the rabbit mq Error: connect ETIMEDOUT 192.168.2.167:5672 
 >>>>>>> fedefdd69132ec7ec3e8f6b879dd17c9c7a40ab4
+[API.Call Center][Tue, 12 Sep 2023 08:36:41 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 08:36:41 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 08:36:41 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 08:36:42 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:37:56 GMT] Could not connect to the rabbit mq Error: connect ECONNREFUSED 192.168.2.167:5672 

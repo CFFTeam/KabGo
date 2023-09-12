@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../functions/setHexColor.dart';
-import '../../providers/mapProvider.dart';
-import '../../providers/stepProvider.dart';
 
 class FindDriver extends ConsumerWidget {
   const FindDriver({Key? key}) : super(key: key);

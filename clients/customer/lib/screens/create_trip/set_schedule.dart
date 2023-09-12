@@ -8,6 +8,7 @@ import '../../models/customer_model.dart';
 import '../../models/location_model.dart';
 import '../../models/route_model.dart';
 import '../../providers/arrivalLocationProvider.dart';
+import '../../providers/coupon_provider.dart';
 import '../../providers/customerProvider.dart';
 import '../../providers/departureLocationProvider.dart';
 import '../../providers/mapProvider.dart';
@@ -35,6 +36,7 @@ class _SetScheduleState extends ConsumerState<SetSchedule> {
   String? _selectedTime;
   String? hour;
   String? minute;
+  dynamic listCoupon;
 
   void setTimeNow() {
     setState(() {
@@ -93,6 +95,7 @@ class _SetScheduleState extends ConsumerState<SetSchedule> {
     socketClient.emitBookingCar(departure, arrival, routeModel, customerModel);
     ref.read(stepProvider.notifier).setStep('find_driver');
     ref.read(mapProvider.notifier).setMapAction('FIND_DRIVER');
+    ref.read(couponProvider.notifier).setCoupon(0);
   }
 
   // var dio = Dio();
@@ -120,6 +123,12 @@ class _SetScheduleState extends ConsumerState<SetSchedule> {
   // socket.on('event', (data) => print(data));
   // socket.onDisconnect((_) => print('disconnect'));
   // socket.on('fromServer', (_) => print(_));
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,29 +1,84 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../data/data.dart';
 import '../../functions/setAddressByPosition.dart';
 import '../../functions/setHexColor.dart';
 import '../../models/location_model.dart';
 import '../../providers/arrivalLocationProvider.dart';
+import '../../providers/auth_provider.dart';
 import '../../providers/bookingHistoryProvider.dart';
 import '../../providers/currentLocationProvider.dart';
 import '../../providers/departureLocationProvider.dart';
 import '../../providers/locationPickerInMap.dart';
 import '../../providers/mapProvider.dart';
 import '../../providers/stepProvider.dart';
+import '../../utils/Google_Api_Key.dart';
 import '../../widgets/favorite_location_item.dart';
 import '../../widgets/input_custom.dart';
 import '../../widgets/recently_arrival_item.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class FindArrivalPage extends ConsumerWidget {
+class FindArrivalPage extends ConsumerStatefulWidget {
   const FindArrivalPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    print('===========> FIND_ARRIVAL_PAGE BUILD');
+  _FindArrivalPageState createState() => _FindArrivalPageState();
+}
 
-    List<LocationModel> bookingHistory = ref.read(bookingHistoryProvider);
+class _FindArrivalPageState extends ConsumerState<FindArrivalPage> {
+  List<LocationModel> bookingHistoryList = [];
+  void bookingHistory() async {
+    final authState = ref.read(authProvider);
+    var dio = Dio();
+    var response = await dio.request(
+      'http://$ip:4100/v1/customer-auth/get-booking-history',
+      data: json.encode({
+        'email': authState.value!.email,
+      }),
+      options: Options(
+        method: 'POST',
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      bookingHistoryList = [];
+      for (var entry in response.data!['history']) {
+        int firstCommaIndex = entry['destination']['address'].indexOf(',');
+        StructuredFormatting structuredFormatting = StructuredFormatting(
+            mainText: entry['destination']['address']
+                .substring(0, firstCommaIndex)
+                .trim(),
+            secondaryText: entry['destination']['address']
+                .substring(firstCommaIndex + 1)
+                .trim());
+        structuredFormatting.formatSecondaryText();
+        LocationModel locationModel = LocationModel(
+            placeId: '',
+            structuredFormatting: structuredFormatting,
+            postion: LatLng(entry['destination']['latitude'],
+                entry['destination']['longitude']));
+        bookingHistoryList.add(locationModel);
+      }
+      setState(() {});
+    } else {
+      print(response.statusMessage);
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    bookingHistory();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print('===========> FIND_ARRIVAL_PAGE BUILD');
 
     void chooseArrival() {
       ref.read(stepProvider.notifier).setStep('choose_departure');
@@ -228,29 +283,36 @@ class FindArrivalPage extends ConsumerWidget {
             const SizedBox(
               height: 16,
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: bookingHistory.length,
-                itemBuilder: (context, index) => Column(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        ref
-                            .read(arrivalLocationProvider.notifier)
-                            .setArrivalLocation(bookingHistory[index]);
-                        chooseArrival();
-                      },
-                      child: RecentlyArrivalItem(
-                        data: bookingHistory[index],
+            bookingHistoryList.isNotEmpty
+                ? Expanded(
+                    child: ListView.builder(
+                      itemCount: bookingHistoryList.length,
+                      itemBuilder: (context, index) => Column(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              ref
+                                  .read(arrivalLocationProvider.notifier)
+                                  .setArrivalLocation(
+                                      bookingHistoryList[index]);
+                              chooseArrival();
+                            },
+                            child: RecentlyArrivalItem(
+                              data: bookingHistoryList[index],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                        ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                  ],
-                ),
-              ),
-            ),
+                  )
+                : Expanded(
+                    child: Center(
+                        child: CircularProgressIndicator(
+                    color: HexColor('FE8248'),
+                  ))),
             const SizedBox(
               height: 75,
             ),

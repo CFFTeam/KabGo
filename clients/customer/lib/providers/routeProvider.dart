@@ -16,6 +16,14 @@ class RouteNotifier extends StateNotifier<RouteModel> {
   void setService(String value) {
     state.service = value;
   }
+
+  void setPaymentMethod(String value) {
+    state.paymentMethod = value;
+  }
+
+  void setCoupon(String value) {
+    state.coupon = value;
+  }
 }
 
 final routeProvider =
