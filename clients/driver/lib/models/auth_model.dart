@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:driver/.env.dart';
 import 'package:driver/models/driver_account.dart';
 import 'package:driver/models/driver_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';

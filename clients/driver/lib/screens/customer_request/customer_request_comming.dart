@@ -1,3 +1,4 @@
+import 'package:driver/providers/direction_provider.dart';
 import 'package:driver/screens/customer_request/customer_request_ready.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -184,7 +185,14 @@ class _CustomerRequestCommingState
                     child: ElevatedButton(
                         onPressed: () {
                           requestStatusNotifier.readyRequest();
-                          context.go(CustomerRequestReady.path);
+
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            ref
+                              .read(directionProvider.notifier)
+                              .setDirection(false);
+                              
+                            context.go(CustomerRequestReady.path);
+                          });
                         },
                         style: ThemeButton.acceptButton2,
                         child: const Center(

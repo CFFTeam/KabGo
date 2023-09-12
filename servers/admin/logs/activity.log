@@ -24565,7 +24565,18 @@
 [API.Admin][Tue, 12 Sep 2023 16:15:57 GMT] Connected to database successfully 
 >>>>>>> e488ed9 (update firebase)
 >>>>>>> fa969801da6a6a4e630464f12747c2319eac2d76
+<<<<<<< HEAD
+[API.Admin][Tue, 12 Sep 2023 16:56:45 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 16:56:45 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 16:56:45 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 16:56:45 GMT] Connected to database successfully 
+[API.Admin][Tue, 12 Sep 2023 17:08:42 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 17:08:42 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 17:08:42 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 17:08:43 GMT] Connected to database successfully 
+=======
 >>>>>>> master
+<<<<<<< HEAD
 [API.Admin][Tue, 12 Sep 2023 18:00:58 GMT] Setting up request middleware... 
 [API.Admin][Tue, 12 Sep 2023 18:00:58 GMT] Server is starting... 
 [API.Admin][Tue, 12 Sep 2023 18:00:58 GMT] Server is running on port 4400 
@@ -24574,3 +24585,17 @@
 [API.Admin][Tue, 12 Sep 2023 18:35:02 GMT] Server is starting... 
 [API.Admin][Tue, 12 Sep 2023 18:35:02 GMT] Server is running on port 4400 
 [API.Admin][Tue, 12 Sep 2023 18:35:03 GMT] Connected to database successfully 
+=======
+<<<<<<< HEAD
+[API.Admin][Tue, 12 Sep 2023 19:06:39 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 19:06:39 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 19:06:39 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 19:06:39 GMT] Connected to database successfully 
+=======
+>>>>>>> 8a69b36f3dc466ccade8061869c62a31267674c3
+>>>>>>> master
+[API.Admin][Tue, 12 Sep 2023 19:55:58 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 19:55:58 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 19:55:58 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 19:55:59 GMT] Connected to database successfully 
+>>>>>>> 635d3deab43f1e66654163cdcf3f3f2cba51a305
