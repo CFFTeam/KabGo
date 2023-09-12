@@ -4107,6 +4107,13 @@
 [API.Call Center][Sun, 10 Sep 2023 20:57:24 GMT] Server is running on port 4500 
 [API.Call Center][Sun, 10 Sep 2023 20:57:24 GMT] Connected to the rabbit mq successfully 
 [API.Call Center][Sun, 10 Sep 2023 20:57:25 GMT] Connected to database successfully 
+<<<<<<< HEAD
+[API.Call Center][Mon, 11 Sep 2023 12:24:53 GMT] Setting up request middleware... 
+[API.Call Center][Mon, 11 Sep 2023 12:24:53 GMT] Server is starting... 
+[API.Call Center][Mon, 11 Sep 2023 12:24:53 GMT] Server is running on port 4500 
+[API.Call Center][Mon, 11 Sep 2023 12:24:54 GMT] Connected to database successfully 
+[API.Call Center][Mon, 11 Sep 2023 12:26:08 GMT] Could not connect to the rabbit mq Error: connect ECONNREFUSED 192.168.2.167:5672 
+=======
 [API.Call Center][Sun, 10 Sep 2023 21:35:15 GMT] Setting up request middleware... 
 [API.Call Center][Sun, 10 Sep 2023 21:35:15 GMT] Server is starting... 
 [API.Call Center][Sun, 10 Sep 2023 21:35:15 GMT] Server is running on port 4500 
@@ -4127,3 +4134,17 @@
 [API.Call Center][Mon, 11 Sep 2023 04:28:08 GMT] Server is running on port 4500 
 [API.Call Center][Mon, 11 Sep 2023 04:28:08 GMT] Connected to database successfully 
 [API.Call Center][Mon, 11 Sep 2023 04:30:19 GMT] Could not connect to the rabbit mq Error: connect ETIMEDOUT 192.168.2.167:5672 
+<<<<<<< HEAD
+[API.Call Center][Tue, 12 Sep 2023 07:31:09 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 07:31:09 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 07:31:09 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 07:31:10 GMT] Could not connect to the rabbit mq Error: connect EHOSTUNREACH 192.168.2.167:5672 
+[API.Call Center][Tue, 12 Sep 2023 07:31:10 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:04:06 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 08:04:06 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 08:04:06 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 08:04:06 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 08:04:07 GMT] Connected to database successfully 
+=======
+>>>>>>> fedefdd69132ec7ec3e8f6b879dd17c9c7a40ab4
+>>>>>>> ecdb7239463a6a3238caf0c0a9da471dc85696e4

@@ -89,7 +89,7 @@ const server = app.run(4600, async () => {
                     longitude: customer.arrival_information.longitude,
                     latitude: customer.arrival_information.latitude,
                 },
-                time: new Date().toISOString(),
+                time: new Date(new Date().getTime() + 7 * 60 * 60000).toISOString(),
                 status: 'Đang điều phối', //điều phối | tiến hành | hủy | hoàn thành
                 frequency: existedBooking.length + 1,
                 price: customer.price,

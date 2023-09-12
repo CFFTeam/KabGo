@@ -47,14 +47,14 @@ export class RideService implements Subject {
                 let check: Boolean = true;
                 value.infor.distance = distance;
                 for (const i in rejectList) {
-                    console.log('rejectList[i]=', i);
-                    console.log('customer phone number =', customer.user_information.phonenumber);
-                    console.log('rejectList: ', rejectList[i]);
-                    console.log('\n');
+                    // console.log('rejectList[i]=', i);
+                    // console.log('customer phone number =', customer.user_information.phonenumber);
+                    // console.log('rejectList: ', rejectList[i]);
+                    // console.log('\n');
                     if (i == customer.user_information.phonenumber) {
                         for (const j of rejectList[i]) {
-                            console.log('========== rejectList[i][j] = ', j);
-                            console.log('========== value socket phone number = ', value.socket.phonenumber);
+                            // console.log('========== rejectList[i][j] = ', j);
+                            // console.log('========== value socket phone number = ', value.socket.phonenumber);
                             if (j == value.socket.phonenumber) {
                                 check = false;
                             }

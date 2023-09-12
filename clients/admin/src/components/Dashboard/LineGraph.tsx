@@ -30,7 +30,7 @@ const LineGraph: React.FC = () => {
   const labels: string[] = chartData.xLabels;
   const yLabels: number[] = chartData.yLabels;
   const stepRevenue: number = Math.max(...chartData.yLabels) / 4;
-  const maxRevenue: number = Math.min(15000000, Math.max(...chartData.yLabels) + stepRevenue); 
+  const maxRevenue: number = Math.min(1500000, Math.max(...chartData.yLabels) + stepRevenue); 
   const data = {
     labels,
     datasets: [

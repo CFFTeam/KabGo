@@ -17,7 +17,7 @@ const Chart: React.FC = () => {
     .reduce((partialSum, a) => partialSum + a, 0)
     .toLocaleString("it-IT", { style: "currency", currency: "VND" });
   sumRevenue = sumRevenue.slice(0, sumRevenue.length - 3);
-  const getRevenue = [1000000, 4000000, 1000000, 12000000, 6000000, 8000000, 1000000];
+  const getRevenue = [100000, 400000, 100000, 1200000, 600000, 800000, 100000];
   // const getRevenue = [1200000, 5000000, 100000, 1260000, 100000, 900000, 4500000];
   useEffect(() => {
     dispatch(dashboardActions.updateRevenue(getRevenue));

@@ -30,21 +30,6 @@ class DriverController implements Controller {
                 message: 'Email đã tồn tại',
             });
         } else {
-            // const obj = [{
-            //     name: "Wave Alpha 50cc",
-            //     brand: "Honda",
-            //     type: "Xe máy",
-            //     color: "Đỏ",
-            //     number: "51H49283"
-            // },
-            // {
-            //     name: "Wave Alpha 50cc",
-            //     brand: "Honda",
-            //     type: "Xe máy",
-            //     color: "Đỏ",
-            //     number: "51H49283"
-            // }];
-            // console.log(obj);
             const createAccountData = {
                 name: req.body.name,
                 email: req.body.email,

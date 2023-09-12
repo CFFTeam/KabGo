@@ -1,4 +1,3 @@
-import 'package:customer/providers/reject_list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -185,10 +184,16 @@ class _SetScheduleState extends ConsumerState<SetSchedule> {
                     fontSize: 18),
               ),
               const Spacer(),
-              const FaIcon(
-                FontAwesomeIcons.xmark,
-                size: 32,
-                color: Colors.white,
+              InkWell(
+                onTap: () {
+                  ref.read(stepProvider.notifier).setStep('home');
+                  ref.read(mapProvider.notifier).setMapAction('SET_DEFAULT');
+                },
+                child: const FaIcon(
+                  FontAwesomeIcons.xmark,
+                  size: 32,
+                  color: Colors.white,
+                ),
               ),
               const SizedBox(
                 width: 15,
