@@ -88,7 +88,6 @@ const server = app.run(4501, async () => {
                 related_employee: new mongoose.Types.ObjectId(data.related_employee),
             });
             console.log('Data sent from client-s2: ', data);
-
             rabbitMQ.publish(
                 'gps-coordinates',
                 JSON.stringify({

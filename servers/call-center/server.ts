@@ -11,7 +11,7 @@ process.on('uncaughtException', (err: Error) => {
     }, 3000);
 });
 
-dotenv.config({ path: './.env.local' });
+dotenv.config({ path: './.env.local' })
 
 const app = new Application({
     controllers: [new LocatingController()],    
