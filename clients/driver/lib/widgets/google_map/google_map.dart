@@ -12,6 +12,7 @@ import 'package:driver/providers/route_provider.dart';
 import 'package:driver/providers/socket_provider.dart';
 import 'package:driver/screens/customer_request/customer_request_comming.dart';
 import 'package:driver/screens/customer_request/customer_request_ongoing.dart';
+import 'package:driver/screens/home_dashboard/home_dashboard.dart';
 import 'package:driver/screens/route_screen/route_screen.dart';
 import 'package:driver/utils/Image.dart';
 import 'package:driver/widgets/icon_button/icon_button.dart';
@@ -343,6 +344,25 @@ class _GoogleMapState extends ConsumerState<KGoogleMap>
     final compassNotifier = ref.read(directionProvider.notifier);
     final routesList = ref.watch(routeListProvider);
 
+    ref.listen(socketClientProvider, (prev, next) {
+      if (next) {
+        ref.read(socketClientProvider.notifier).subscribe('customer-cancel',
+            (_) {
+          running = true;
+          ref.read(requestStatusProvider.notifier).cancelRequest();
+
+          Future.delayed(const Duration(milliseconds: 2000), () {
+            WidgetsBinding.instance.addPostFrameCallback((_) async {
+              context.go(HomeDashboard.path);
+
+              ref.read(customerRequestProvider.notifier).cancelRequest();
+              ref.read(directionProvider.notifier).setDirection(false);
+            });
+          });
+        });
+      }
+    });
+
     if (active) {
       if (customerRequest.hasValue()) {
         if (requestStatus == RequestStatus.accepted) {
@@ -602,6 +622,9 @@ class _GoogleMapState extends ConsumerState<KGoogleMap>
               'Vị trí của tôi',
               LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
               currentLocationIcon));
+          _movingPosition = LocationPostion(
+              latitude: _currentPosition!.latitude,
+              longitude: _currentPosition!.longitude);
           process = 0;
           running = true;
         });

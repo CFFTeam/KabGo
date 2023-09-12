@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:driver/.env.dart';
 import 'package:driver/models/driver_account.dart';
 import 'package:driver/models/driver_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -26,7 +27,7 @@ class Authentication {
 
       Dio dio = Dio();
       final response = await dio.post(
-          'http://192.168.2.68:4100/v1/driver/register',
+          'http://$ip:4100/v1/driver/register',
           data: jsonEncode(DriverAccount(
                   avatar: userCredential.user!.photoURL!,
                   name: userCredential.user!.displayName!,

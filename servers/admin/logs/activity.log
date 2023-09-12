@@ -24566,3 +24566,7 @@
 >>>>>>> e488ed9 (update firebase)
 >>>>>>> fa969801da6a6a4e630464f12747c2319eac2d76
 >>>>>>> master
+[API.Admin][Tue, 12 Sep 2023 19:06:39 GMT] Setting up request middleware... 
+[API.Admin][Tue, 12 Sep 2023 19:06:39 GMT] Server is starting... 
+[API.Admin][Tue, 12 Sep 2023 19:06:39 GMT] Server is running on port 4400 
+[API.Admin][Tue, 12 Sep 2023 19:06:39 GMT] Connected to database successfully 

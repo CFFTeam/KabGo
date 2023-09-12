@@ -52,7 +52,7 @@ const server = app.run(4600, async () => {
 
             socket.phonenumber = _id;
 
-            rideService.addObserver(new DriverNotify(socket, {...driver}));
+            rideService.addObserver(new DriverNotify(socket, { ...driver }));
         });
 
         socket.on('booking-car', async (message: string) => {
@@ -73,7 +73,7 @@ const server = app.run(4600, async () => {
 
             const _service = await serviceModel.findOne({ name: customer.service });
             const _customer = await customerModel.findOne({ email: customer.user_information.email });
-            
+
             const controllers = new UserController();
             const data =
                 customer.coupon != ''
@@ -326,38 +326,26 @@ const server = app.run(4600, async () => {
 
         socket.on('customer-cancel', async (message: string) => {
             const driverSubmit = JSON.parse(message) as User;
-            console.log(driverSubmit);
+            const _id = driverSubmit.user_information.phonenumber;
 
-            // const history_id = driverSubmit.history_id;
-            // const id = driverSubmit.user_id;
+            if (stateDriver[_id]) {
+                const history_id = stateDriver[_id]._id;
+                const history: any = await BookingHistory.findById(history_id).populate('driver');
 
-            // const driverInfor = await driverModel
-            //     .findOne({ phonenumber: driverSubmit.driver.phonenumber })
-            //     .select('_id');
+                if (history) {
+                    history.status = 'Đã hủy';
+                    await history.save();
 
-            // if (driverInfor) {
-            //     const history = await BookingHistory.findById(history_id);
+                    stateDriver[_id].state = 'Đã hủy';
+                    await rabbitmq.publish('tracking', JSON.stringify(stateDriver[_id]));
 
-            //     if (history) {
-            //         history.status = 'Đã hủy';
+                    delete stateDriver[_id];
 
-            //         await history.save();
+                    const driver_id = history.driver.phonenumber;
 
-            //         const customerInfo = customerList[id]?.infor;
-            //         const customer_id = customerInfo.user_information.phonenumber;
-
-            //         if (stateDriver[customer_id]) {
-            //             stateDriver[customer_id].state = 'Đã hủy';
-            //         }
-
-            //         await rabbitmq.publish('tracking', JSON.stringify(stateDriver[customer_id]));
-            //         if (stateDriver[customer_id]) {
-            //             delete stateDriver[customer_id];
-            //         }
-            //     }
-            // }
-
-            // customerList[id]?.socket?.emit('cancel driver', JSON.stringify(driverSubmit.driver));
+                    rideService.observers.find((value) => value.socket.phonenumber == driver_id)?.socket?.emit('customer-cancel', 'cancel');
+                }
+            }
         });
 
         socket.on('disconnect', () => {
