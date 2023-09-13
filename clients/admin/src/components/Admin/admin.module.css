@@ -276,7 +276,7 @@ input::placeholder {
     gap: 1rem;
     font-weight: 600;
     color: black;
-    width: 20rem;
+    width: 15rem;
     background: #FFEEEA;
     padding: 0;
 }
@@ -298,7 +298,7 @@ input::placeholder {
     font-size: 1.5rem;
     font-weight: 500;
     color: #3C3C3C;
-    width: 20rem;
+    width: 15rem;
   }
   
   .dropdown-content-table div:hover {
@@ -325,7 +325,7 @@ input::placeholder {
     width: 28rem;
 }
 .email{
-    width: 30rem;
+    width: 35rem;
 }
 .phone{
     width: 13rem;
@@ -365,10 +365,10 @@ input::placeholder {
     align-items: center;
 }
 .role-body{
-    width: 20rem
+    width: 15rem
 }
 .email-body{
-    width: 30rem;
+    width: 35rem;
 }
 .phone-body{
     width: 13rem;

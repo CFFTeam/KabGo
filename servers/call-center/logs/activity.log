@@ -9554,3 +9554,13 @@
 [API.Call Center][Tue, 12 Sep 2023 23:10:04 GMT] calculated price s1:  11.000đ 
 [API.Call Center][Tue, 12 Sep 2023 23:12:20 GMT] Data sent from client-s1:  [object Object] 
 [API.Call Center][Tue, 12 Sep 2023 23:12:20 GMT] existed Booking:   
+[API.Call Center][Wed, 13 Sep 2023 07:40:42 GMT] Setting up request middleware... 
+[API.Call Center][Wed, 13 Sep 2023 07:40:42 GMT] Server is starting... 
+[API.Call Center][Wed, 13 Sep 2023 07:40:42 GMT] Server is running on port 4500 
+[API.Call Center][Wed, 13 Sep 2023 07:40:42 GMT] Could not connect to the rabbit mq Error: Socket closed abruptly during opening handshake 
+[API.Call Center][Wed, 13 Sep 2023 07:40:42 GMT] Connected to database successfully 
+[API.Call Center][Wed, 13 Sep 2023 07:41:32 GMT] Setting up request middleware... 
+[API.Call Center][Wed, 13 Sep 2023 07:41:32 GMT] Server is starting... 
+[API.Call Center][Wed, 13 Sep 2023 07:41:32 GMT] Server is running on port 4500 
+[API.Call Center][Wed, 13 Sep 2023 07:41:32 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Wed, 13 Sep 2023 07:41:33 GMT] Connected to database successfully 

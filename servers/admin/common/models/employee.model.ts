@@ -4,7 +4,7 @@ export interface Employee {
 	_id?: string;
 	name?: string;
 	email: string;
-	phonenumber?: string;
+	phoneNumber?: string;
     dob?: string;
 	address: string;
 	role?: string;
@@ -16,7 +16,7 @@ export interface Employee {
 const employeeSchema = new mongoose.Schema<Employee>({
 	name: { type: String },
 	email: { type: String },
-	phonenumber: { type: String },
+	phoneNumber: { type: String },
 	dob: { type: String },
     address: { type: String },
 	role: { type: String },

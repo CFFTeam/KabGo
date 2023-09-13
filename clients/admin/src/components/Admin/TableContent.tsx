@@ -89,7 +89,7 @@ const Table: React.FC = () => {
     name: string;
     role: string;
     email: string;
-    phonenumber: string;
+    phoneNumber: string;
     active: string;
     lock: boolean;
   } 
@@ -174,7 +174,7 @@ const Table: React.FC = () => {
               </div>
               <div className={styles["role-body"]}>{data.role}</div>
               <div className={styles["email-body"]}>{data.email}</div>
-              <div className={styles["phone-body"]}>{data.phonenumber}</div>
+              <div className={styles["phone-body"]}>{data.phoneNumber}</div>
               <div className={styles["time-body"]}>{data.active}</div>
               <div
                 className={`${styles["button-container-body"]} ${

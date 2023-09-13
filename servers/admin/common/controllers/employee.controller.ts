@@ -32,7 +32,7 @@ class EmployeeController implements Controller {
             const createAccountData = {
                 name: req.body.name,
                 email: req.body.email,
-                phonenumber: req.body.phone,
+                phoneNumber: req.body.phone,
                 dob: '10/10/2002',
                 address: req.body.address,
                 role: req.body.role,

@@ -11,7 +11,7 @@ process.on('uncaughtException', (err: Error) => {
     console.error(err.name, err.message, err.stack);
 
     setTimeout(() => { 
-        process.exit(1);
+        process.exit(1)
     }, 3000);
 });
 
