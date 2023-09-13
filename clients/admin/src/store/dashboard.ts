@@ -94,25 +94,25 @@ const initialDashboardState: InitialDashboardState = {
     tasklistChild: [
       {
         name: "Thống kê doanh thu",
-        date: "02 / 07 - 22h30",
+        date: "02 / 10 - 22h30",
         img: Purple,
         check: false,
       },
       {
         name: "Thêm task mới",
-        date: "03 / 07 - 23h59",
+        date: "03 / 10 - 23h59",
         img: Green,
         check: false,
       },
       {
         name: "Kiểm tra hóa đơn",
-        date: "04 / 07 - 23h59",
+        date: "04 / 10 - 23h59",
         img: Yellow,
         check: false,
       },
       {
         name: "Thống kê số giờ làm việc",
-        date: "05 / 07 - 23h59",
+        date: "05 / 10 - 23h59",
         img: Red,
         check: false,
       },

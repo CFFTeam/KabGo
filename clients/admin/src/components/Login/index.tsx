@@ -114,7 +114,7 @@ const Login: React.FC = () => {
           <input
             id="password"
             ref={passwordRef}
-            type="email"
+            type="password"
             className={styles["input-self"]}
             placeholder="Nhập mật khẩu"
           />

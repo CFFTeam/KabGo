@@ -29,7 +29,7 @@ const Table: React.FC = () => {
     getDatabyApi();
   }, []);
 
-  const [filterData, setFilterData] = useState<number>(0);
+  const [filterData, setFilterData] = useState<number>(-1);
 
   const getDatabyApi = async () => {
     axios.get(`${process.env.REACT_APP_API_URI}/driver`).then((res) => {
@@ -136,7 +136,7 @@ const Table: React.FC = () => {
           ) : (
             <div className={styles["each-filter-result-container"]}>
               <div className={styles["each-filter-result-title"]}>
-                {filterData} Dịch vụ
+              Số lượng xe: {filterData}
               </div>
               <CancelIcon
                 className={styles["each-filter-result-icon"]}
