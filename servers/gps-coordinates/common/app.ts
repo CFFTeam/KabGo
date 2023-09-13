@@ -54,18 +54,18 @@ class Application {
 
         this.app.use(
             morgan(
-                `${chalk.blue(
-                    `[${process.env.APP_NAME}]`
-                )}${chalk.yellow('[:date]')} ${chalk.green(
+                `${chalk.blue(`[${process.env.APP_NAME}]`)}${chalk.yellow('[:date]')} ${chalk.green(
                     ':method'
                 )} ${chalk.cyan(':status')} ${chalk.white(':url')} :res[content-length] - :response-time ms`
             )
         );
 
-        this.app.use(morgan(`[${process.env.APP_NAME}][:date] :method :status :url :res[content-length] - :response-time ms`, {
-            stream: new Logger('./logs/access.log').createWritableStream(),
-        }));
-        
+        this.app.use(
+            morgan(`[${process.env.APP_NAME}][:date] :method :status :url :res[content-length] - :response-time ms`, {
+                stream: new Logger('./logs/access.log').createWritableStream(),
+            })
+        );
+
         this.controllers.forEach((controller) => this.app.use(controller.path, controller.router));
 
         this.app.get('/status', (req, res) => {

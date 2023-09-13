@@ -54,7 +54,7 @@ class _ChooseDeparturePanelState extends ConsumerState<LocationPickerPanel> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Chọn trên bảng đồ',
+                'Chọn trên bản đồ',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(
