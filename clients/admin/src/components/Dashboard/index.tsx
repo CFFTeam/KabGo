@@ -15,7 +15,6 @@ const Dashboard: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    //axios.get<datatype>(...)
     axios
       .get(`${process.env.REACT_APP_API_URI}/dashboard`)
       .then((res) => {

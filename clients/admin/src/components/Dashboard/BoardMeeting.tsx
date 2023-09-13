@@ -17,7 +17,7 @@ const BoardMeeting: React.FC = () => {
       </div>
       <div className={styles["boardmeeting-time"]}>
         <span className={styles["boardmeeting-time-bold"]}>8h30 AM </span> - T.6
-        Ngày 14 tháng 07
+        Ngày 14 tháng 10
       </div>
       <div className={styles["boardmeeting-active"]}>
         <BoardMeetingActive />

@@ -9302,6 +9302,7 @@
 [API.Call Center][Tue, 12 Sep 2023 20:44:25 GMT] Server is running on port 4500 
 [API.Call Center][Tue, 12 Sep 2023 20:44:25 GMT] Could not connect to the rabbit mq Error: connect ECONNREFUSED 192.168.2.180:5672 
 [API.Call Center][Tue, 12 Sep 2023 20:44:25 GMT] Connected to database successfully 
+<<<<<<< HEAD
 [API.Call Center][Tue, 12 Sep 2023 21:57:20 GMT] Setting up request middleware... 
 [API.Call Center][Tue, 12 Sep 2023 21:57:20 GMT] Server is starting... 
 [API.Call Center][Tue, 12 Sep 2023 21:57:20 GMT] Server is running on port 4500 
@@ -9317,3 +9318,267 @@
 [API.Call Center][Wed, 13 Sep 2023 10:12:31 GMT] Server is running on port 4500 
 [API.Call Center][Wed, 13 Sep 2023 10:12:32 GMT] Connected to database successfully 
 [API.Call Center][Wed, 13 Sep 2023 10:13:46 GMT] Could not connect to the rabbit mq Error: connect ECONNREFUSED 192.168.2.180:5672 
+=======
+[API.Call Center][Tue, 12 Sep 2023 21:49:36 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 21:49:36 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 21:49:36 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 21:49:36 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 21:49:36 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 22:27:08 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 22:27:08 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 22:27:08 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 22:27:08 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 22:27:09 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 22:49:10 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:49:10 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:49:10 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:49:10 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:49:10 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:49:10 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:49:10 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:49:10 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:49:10 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:49:10 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:49:10 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:49:11 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:49:11 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:49:11 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:49:11 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:49:11 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:49:11 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:49:11 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:49:11 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:49:11 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:50:07 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:50:07 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:50:07 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:50:07 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:50:07 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:50:07 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:50:07 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:50:07 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:50:07 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:50:07 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:50:08 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:50:08 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:50:08 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:50:08 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:50:08 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:50:08 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:50:08 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:50:08 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:50:08 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:50:08 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:50:46 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:50:47 GMT] existed Booking:   
+[API.Call Center][Tue, 12 Sep 2023 22:52:43 GMT] Setting up request middleware... 
+[API.Call Center][Tue, 12 Sep 2023 22:52:43 GMT] Server is starting... 
+[API.Call Center][Tue, 12 Sep 2023 22:52:43 GMT] Server is running on port 4500 
+[API.Call Center][Tue, 12 Sep 2023 22:52:43 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Tue, 12 Sep 2023 22:52:43 GMT] Connected to database successfully 
+[API.Call Center][Tue, 12 Sep 2023 22:53:01 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:53:01 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:53:01 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 22:53:01 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:53:10 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:53:10 GMT] existed Booking:  {
+  original: {
+    address: '227 Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6823262,
+    latitude: 10.7625216
+  },
+  destination: {
+    address: 'Chuk Tea & Coffee, Đường An Dương Vương, phường 3, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6775209,
+    latitude: 10.7586445
+  },
+  _id: new ObjectId("6500eb461de2f9f5dedf6aa7"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '0,9 km',
+  duration: '3 phút',
+  time: 2023-09-13T05:50:46.773Z,
+  frequency: 1,
+  price: '6.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  createdAt: 2023-09-12T22:51:30.649Z,
+  updatedAt: 2023-09-12T22:51:30.649Z,
+  __v: 0
+} 
+[API.Call Center][Tue, 12 Sep 2023 22:53:10 GMT] calculated price s1:  6.000đ 
+[API.Call Center][Tue, 12 Sep 2023 22:53:48 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 22:53:48 GMT] existed Booking:  {
+  original: {
+    address: '227 Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6823262,
+    latitude: 10.7625216
+  },
+  destination: {
+    address: 'Chuk Tea & Coffee, Đường An Dương Vương, phường 3, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6775209,
+    latitude: 10.7586445
+  },
+  _id: new ObjectId("6500eb461de2f9f5dedf6aa7"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '0,9 km',
+  duration: '3 phút',
+  time: 2023-09-13T05:50:46.773Z,
+  frequency: 1,
+  price: '6.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  createdAt: 2023-09-12T22:51:30.649Z,
+  updatedAt: 2023-09-12T22:51:30.649Z,
+  __v: 0
+},{
+  original: {
+    address: '227 Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6823262,
+    latitude: 10.7625216
+  },
+  destination: {
+    address: 'Chuk Tea & Coffee, Đường An Dương Vương, phường 3, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6775209,
+    latitude: 10.7586445
+  },
+  _id: new ObjectId("6500ebd60ec0d76b82e5815d"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '0,9 km',
+  duration: '3 phút',
+  time: 2023-09-13T05:53:10.563Z,
+  frequency: 2,
+  price: '6.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  createdAt: 2023-09-12T22:53:10.956Z,
+  updatedAt: 2023-09-12T22:53:10.956Z,
+  __v: 0
+} 
+[API.Call Center][Tue, 12 Sep 2023 22:53:48 GMT] calculated price s1:  6.000đ 
+[API.Call Center][Tue, 12 Sep 2023 23:08:19 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:08:19 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:08:19 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:08:20 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:08:20 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:08:20 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:08:20 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:08:20 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:08:20 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:08:21 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:08:21 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:08:21 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:08:21 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:08:21 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:08:21 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:08:21 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:08:21 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:08:21 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:08:21 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:08:21 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:09:52 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:09:52 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:09:52 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:09:52 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:09:52 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:09:52 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:09:52 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:09:52 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:09:53 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:09:53 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:09:53 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:09:53 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:09:53 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:09:53 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:09:53 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:09:53 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:09:53 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:09:53 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:09:54 GMT] get most recent bookings function triggered 
+[API.Call Center][Tue, 12 Sep 2023 23:09:54 GMT] phone_number sent from call-center s1 client:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:10:04 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:10:04 GMT] existed Booking:  {
+  original: {
+    address: '227 Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6823262,
+    latitude: 10.7625216
+  },
+  destination: {
+    address: 'Chuk Tea & Coffee, Đường An Dương Vương, phường 3, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6775209,
+    latitude: 10.7586445
+  },
+  _id: new ObjectId("6500eb461de2f9f5dedf6aa7"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb41948c50e1091b202a2a"),
+  distance: '0,9 km',
+  duration: '3 phút',
+  time: 2023-09-13T05:50:46.773Z,
+  frequency: 1,
+  price: '6.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  createdAt: 2023-09-12T22:51:30.649Z,
+  updatedAt: 2023-09-12T22:51:30.649Z,
+  __v: 0
+},{
+  original: {
+    address: '227 Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6823262,
+    latitude: 10.7625216
+  },
+  destination: {
+    address: 'Chuk Tea & Coffee, Đường An Dương Vương, phường 3, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6775209,
+    latitude: 10.7586445
+  },
+  _id: new ObjectId("6500ebd60ec0d76b82e5815d"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '0,9 km',
+  duration: '3 phút',
+  time: 2023-09-13T05:53:10.563Z,
+  frequency: 2,
+  price: '6.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  createdAt: 2023-09-12T22:53:10.956Z,
+  updatedAt: 2023-09-12T22:53:10.956Z,
+  __v: 0
+},{
+  original: {
+    address: '227 Đường Nguyễn Văn Cừ, phường 4, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6823262,
+    latitude: 10.7625216
+  },
+  destination: {
+    address: 'Chuk Tea & Coffee, Đường An Dương Vương, phường 3, Quận 5, Thành phố Hồ Chí Minh',
+    longitude: 106.6775209,
+    latitude: 10.7586445
+  },
+  _id: new ObjectId("6500ebfc0ec0d76b82e58163"),
+  customer: new ObjectId("64f98d4f2153d64ebde11ba2"),
+  related_employee: new ObjectId("64fb7cf00e722136232ccb56"),
+  distance: '0,9 km',
+  duration: '3 phút',
+  time: 2023-09-13T05:53:48.470Z,
+  frequency: 3,
+  price: '6.000đ',
+  vehicle: new ObjectId("64e73bd0943e0646963ade6d"),
+  createdAt: 2023-09-12T22:53:48.763Z,
+  updatedAt: 2023-09-12T22:53:53.912Z,
+  __v: 0,
+  driver: new ObjectId("64f9c1a2aefcf6ae37673e75"),
+  status: 'Đang tiến hành'
+} 
+[API.Call Center][Tue, 12 Sep 2023 23:10:04 GMT] calculated price s1:  11.000đ 
+[API.Call Center][Tue, 12 Sep 2023 23:12:20 GMT] Data sent from client-s1:  [object Object] 
+[API.Call Center][Tue, 12 Sep 2023 23:12:20 GMT] existed Booking:   
+[API.Call Center][Wed, 13 Sep 2023 07:40:42 GMT] Setting up request middleware... 
+[API.Call Center][Wed, 13 Sep 2023 07:40:42 GMT] Server is starting... 
+[API.Call Center][Wed, 13 Sep 2023 07:40:42 GMT] Server is running on port 4500 
+[API.Call Center][Wed, 13 Sep 2023 07:40:42 GMT] Could not connect to the rabbit mq Error: Socket closed abruptly during opening handshake 
+[API.Call Center][Wed, 13 Sep 2023 07:40:42 GMT] Connected to database successfully 
+[API.Call Center][Wed, 13 Sep 2023 07:41:32 GMT] Setting up request middleware... 
+[API.Call Center][Wed, 13 Sep 2023 07:41:32 GMT] Server is starting... 
+[API.Call Center][Wed, 13 Sep 2023 07:41:32 GMT] Server is running on port 4500 
+[API.Call Center][Wed, 13 Sep 2023 07:41:32 GMT] Connected to the rabbit mq successfully 
+[API.Call Center][Wed, 13 Sep 2023 07:41:33 GMT] Connected to database successfully 
+>>>>>>> master
